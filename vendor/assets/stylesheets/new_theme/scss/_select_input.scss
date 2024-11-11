@@ -1,0 +1,87 @@
+@import "./component";
+
+.custom-select {
+  position: relative;
+}
+
+.custom-select select {
+  display: none; /*hide original SELECT element:*/
+}
+
+.select-selected {
+  background-color: #1b1b1b;
+}
+
+/*style the arrow inside the select element:*/
+// .select-selected:after {
+//     position: absolute;
+//     content: '';
+//     top: 50%;
+//     right: 10px;
+//     width: 0;
+//     height: 0;
+//     border: 6px solid transparent;
+//     border-color: #fff transparent transparent transparent;
+//     transform: translateY(-50%);
+// }
+.select-selected:after {
+  position: absolute;
+  content: '';
+  top: 30%;
+  right: 10px;
+  height: 20px;
+  width: 20px;
+  background-image: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTYiIGhlaWdodD0iMTAiIHZpZXdCb3g9IjAgMCAxNiAxMCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTAuMDAwMTk1OTczIDguOTE3OTNDLTAuMDA0MTg0NDEgOS4xMjczMSAwLjA2NDk2NzcgOS4zMzI3MSAwLjE5ODA4NCA5LjUwNTcyQzAuMzMxMTk5IDkuNjc4NzMgMC41MjE2OTcgOS44MTA4IDAuNzQzMjE1IDkuODgzNjRDMC45NjQ3MzMgOS45NTY0OCAxLjIwNjMyIDkuOTY2NDkgMS40MzQ1NCA5LjkxMjNDMS42NjI3NiA5Ljg1ODEgMS44NjYzNCA5Ljc0MjM4IDIuMDE3MDkgOS41ODExM0w3Ljk3NzQ4IDMuNDEwM0wxMy45Mzc5IDkuNTg0OTVDMTQuMDMwNiA5LjY5Nzc1IDE0LjE0ODggOS43OTIyOSAxNC4yODQ5IDkuODYyNThDMTQuNDIxIDkuOTMyODggMTQuNTcyIDkuOTc3NDIgMTQuNzI4NSA5Ljk5MzM4QzE0Ljg4NDkgMTAuMDA5MyAxNS4wNDM0IDkuOTk2MzggMTUuMTk0IDkuOTU1MzJDMTUuMzQ0NSA5LjkxNDI2IDE1LjQ4MzggOS44NDU5OCAxNS42MDMxIDkuNzU0ODFDMTUuNzIyMyA5LjY2MzYzIDE1LjgxOSA5LjU1MTU0IDE1Ljg4NjkgOS40MjU1OUMxNS45NTQ5IDkuMjk5NjUgMTUuOTkyNiA5LjE2MjU5IDE1Ljk5NzggOS4wMjMwN0MxNi4wMDI5IDguODgzNTUgMTUuOTc1NCA4Ljc0NDU5IDE1LjkxNjkgOC42MTQ5N0MxNS44NTg1IDguNDg1MzUgMTUuNzcwMyA4LjM2Nzg4IDE1LjY1OCA4LjI2OTk3TDguODUwNDYgMS4yMTEwNUM4Ljc0MzQ4IDEuMTAwMDQgOC42MTA2MSAxLjAxMDkgOC40NjEwMiAwLjk0OTc4MkM4LjMxMTQyIDAuODg4NjYxIDguMTQ4NjUgMC44NTcwMSA3Ljk4MzkzIDAuODU3MDFDNy44MTkyIDAuODU3MDEgNy42NTY0NCAwLjg4ODY2MSA3LjUwNjg0IDAuOTQ5NzgyQzcuMzU3MjUgMS4wMTA5IDcuMjI0MzggMS4xMDAwNCA3LjExNzM5IDEuMjExMDVMMC4yODgzMjQgOC4yNjk5N0MwLjEwODY0NSA4LjQ0ODg1IDAuMDA2NTI3NzkgOC42Nzg1IDAuMDAwMTk1OTczIDguOTE3OTNaIiBmaWxsPSIjN0Q3RDdEIi8+Cjwvc3ZnPgo=');
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+/*point the arrow upwards when the select box is open (active):*/
+.select-selected.select-arrow-active:after {
+  transform-origin: center;
+  transform: rotate(180deg);
+}
+
+/*style the items (options), including the selected item:*/
+.select-items div {
+  color: #5d5d5d;
+  padding: 8px 16px;
+  cursor: pointer;
+  user-select: none;
+  border-radius: 8px;
+  font-family: 'charlie text light';
+  font-weight: 500;
+}
+
+.select-selected {
+  width: 100%;
+  background-color: transparent;
+  outline: none;
+  box-shadow: none;
+  border: none;
+  font-family: 'charlie text light';
+  font-weight: 600;
+  resize: none;
+  color: #fff;
+}
+
+/*style items (options):*/
+.select-items {
+  position: absolute;
+  background-color: #282828;
+  top: 100%;
+  left: 0;
+  right: 0;
+  z-index: 99;
+  border-radius: 8px;
+}
+
+/*hide the items when the select box is closed:*/
+.select-hide {
+  display: none;
+}
+
+.select-items div:hover,
+.same-as-selected {
+  background-color: rgba(0, 0, 0, 0.1);
+}

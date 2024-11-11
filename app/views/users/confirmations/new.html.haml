@@ -1,0 +1,18 @@
+.card
+  .card-body
+    .app-brand.justify-content-center
+      %a.app-brand-link.gap-2{ href: "index.html" }
+        .app-brand-logo.demo
+          %img.h-25px.h-lg-35px{ alt: "Logo", src: image_url('media/logos/default-dark.svg') }
+    %h4.mb-2= t('devise.confirmations.welcome')
+    %p.mb-4= t('devise.confirmations.confirm_content')
+    = form_for(resource, as: resource_name, url: confirmation_path(resource_name), html: { method: :post, class: 'mb-3' }) do |f|
+      .mb-3
+        %label.form-label.required{ for: "email" }= t('devise.confirmations.email')
+        = f.email_field :email, value: (resource.pending_reconfirmation? ? resource.unconfirmed_email : resource.email),autofocus: true, autocomplete: "email", class: "form-control", placeholder: "Enter your email", type: "text"
+        = print_error(resource.errors, :email)
+      .mb-3
+        %button.btn.btn-primary.d-grid.w-100{ type: "submit" }= t('devise.confirmations.resend_link')
+    %p.text-center
+      = link_to new_session_path(resource_name) do
+        %span= t('devise.confirmations.sign_in')

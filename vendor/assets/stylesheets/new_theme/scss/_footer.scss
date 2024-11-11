@@ -1,0 +1,240 @@
+@import "./component";
+
+.footer {
+  padding: 100px 0 42px;
+
+  @include desktop {
+    padding: 100px 0 40px;
+  }
+
+  .footer_top {
+    .footer_info {
+      .footer_logo {
+        width: 224px;
+
+        @include tablet {
+          width: 156px;
+        }
+      }
+
+      .footer_desc {
+        color: $white;
+        font-size: 20px;
+        line-height: 30px;
+        font-family: $font_charlie_text_light;
+        padding: 30px 0;
+
+        @include tablet {
+          padding: 30px 0 10px;
+          font-size: 18px;
+        }
+      }
+
+      .footer_social {
+        gap: 16px;
+
+        @include desktop {
+          padding-bottom: 30px;
+        }
+
+        @include tablet {
+          gap: 8px;
+          padding-bottom: 0;
+        }
+
+        @include phone_big {
+          padding-bottom: 0;
+        }
+
+        li {
+          a {
+            width: 38px;
+            height: 38px;
+            border: 1px solid $gray-5d;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            line-height: 38px;
+
+            @include tablet {
+              width: 34px;
+              height: 34px;
+            }
+          }
+        }
+      }
+    }
+
+    .footer_title {
+      font-size: 22px;
+      line-height: 34px;
+      color: $white;
+      font-family: $font_charlie_text_semibold;
+      padding-bottom: 32px;
+
+      @include tablet {
+        padding-bottom: 20px;
+        font-size: 20px;
+        line-height: 30px;
+        padding-top: 30px;
+      }
+
+      @include phone_big {
+        padding-top: 30px;
+      }
+    }
+
+    .footer_menu {
+      li {
+        a {
+          color: $gray-5d;
+          font-size: 20px;
+          font-family: $font_charlie_text_light;
+          line-height: 30px;
+          position: relative;
+          padding-left: 24px;
+          transition: 0.5s all ease;
+
+          @include tablet {
+            font-size: 18px;
+            line-height: 28px;
+          }
+
+          &::before {
+            content: '';
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            border-top: 3px solid $gray-5d;
+            border-right: 3px solid $gray-5d;
+            transform: translateY(-50%) rotate(45deg);
+            top: 50%;
+            left: 0;
+            transition: 0.5s all ease;
+          }
+
+          &:hover {
+            color: $white;
+
+            &::before {
+              content: '';
+              border-top: 3px solid $white;
+              border-right: 3px solid $white;
+            }
+          }
+        }
+
+        &:not(:last-child) {
+          padding-bottom: 8px;
+        }
+      }
+    }
+
+    .footer_req_desc {
+      color: $gray-5d;
+      font-size: 20px;
+      line-height: 33px;
+      font-family: $font_charlie_text_light;
+
+      @include tablet {
+        padding-top: 25px;
+        font-size: 18px;
+        line-height: 27px;
+      }
+
+      @include phone_big {
+        padding-top: 10px;
+      }
+    }
+
+    .request_mail {
+      .request_btn {
+        background-color: $primary;
+        color: $white;
+        border-radius: 50px 50px;
+        padding: 16px 24px;
+        text-transform: capitalize;
+        transition: 0.3s all;
+        font-family: $font_charlie_text_semibold;
+        font-size: 20px;
+        margin-top: 17px;
+        text-align: center;
+
+        @include tablet {
+          display: block;
+        }
+
+        &:hover {
+          background-color: $white;
+          color: $primary;
+        }
+      }
+    }
+
+    .bor_right {
+      position: relative;
+
+      &::after {
+        content: '';
+        height: 235px;
+        width: 3px;
+        background-color: $primary;
+        display: block;
+        position: absolute;
+        left: -40px;
+        top: 75px;
+
+        @include desktop_big {
+          left: -25px;
+        }
+
+        @include tablet {
+          left: -75px;
+          margin-left: 40px;
+          top: 55px;
+          height: 160px;
+        }
+
+        @include phone_big {
+          top: 70px;
+          height: 150px;
+        }
+      }
+    }
+  }
+
+  .footer_copyright {
+    padding-top: 60px;
+
+    .title {
+      font-size: 20px;
+      line-height: 43px;
+      font-family: $font_charlie_text_semibold;
+      color: $white;
+      opacity: 60%;
+
+      @include tablet {
+        font-size: 18px;
+        line-height: 27px;
+      }
+    }
+
+    .back_top {
+      width: 50px;
+      height: 50px;
+      border-radius: 10px;
+      border: 1px solid #313131;
+      background-color: #1a1a1a;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+
+      @include tablet {
+        width: 40px;
+        height: 40px;
+      }
+    }
+  }
+}

@@ -1,0 +1,12 @@
+//= require 'jquery3'
+//= require 'jquery_ujs'
+//= require 'new_theme/popper'
+//= require 'new_theme/bootstrap'
+//= require 'new_theme/perfect-scrollbar'
+//= require 'new_theme/menu'
+//= require 'new_theme/apexcharts'
+//= require 'pages/main'
+//= require 'pages/dashboards-analytics'
+//= require 'new_theme/select2'
+//= require cocoon
+//= require 'new_theme/pickr.min'

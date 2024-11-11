@@ -1,0 +1,52 @@
+.card
+  .card-body
+    .app-brand.justify-content-center
+      %a.app-brand-link.gap-2{ href: 'index.html' }
+        .app-brand-logo.demo
+          %img.h-25px.h-lg-35px{ alt: 'Logo', src: image_url('media/logos/default-dark.svg') }
+    %h4.mb-2= t('devise.registrations.welcome')
+    %p.mb-4= t('devise.registrations.manage_jira')
+    = form_for(resource, as: resource_name, url: registration_path(resource_name), html: { class: 'mb-3' }) do |f|
+      .mb-3
+        %label.form-label.required{ for: 'username' }= t('devise.registrations.company_name')
+        = text_field_tag :company_name, params[:company_name], autofocus: true, class: 'form-control', placeholder: 'Enter your company name', required: true, type: 'text'
+        = print_error(resource.errors, :company_name)
+      .mb-3
+        %label.form-label.required{ for: 'email' }= t('devise.registrations.email')
+        = f.email_field :email, autofocus: true, autocomplete: 'email', class: 'form-control', placeholder: 'Enter your email', type: 'text'
+        = print_error(resource.errors, :email)
+      .mb-3.form-password-toggle
+        %label.form-label.required{ for: 'password' }= t('devise.registrations.password')
+        .input-group.input-group-merge
+          = f.password_field :password, autocomplete: 'new-password', class: 'form-control', required: true, placeholder: '············'
+          %span.input-group-text.cursor-pointer
+            %i.bx.bx-hide
+        = print_error(resource.errors, :password)
+      .mb-3.form-password-toggle
+        %label.form-label.required{ for: 'password_confirmation' }= t('devise.registrations.password_confirmation')
+        .input-group.input-group-merge
+          = f.password_field :password_confirmation, autocomplete: 'new-password', class: 'form-control', required: true, placeholder: '············'
+          %span.input-group-text.cursor-pointer
+            %i.bx.bx-hide
+        %span.error.mt-2.text-danger#password-error
+        = print_error(resource.errors, :password_confirmation)
+      %button.btn.btn-primary.d-grid.w-100
+        = t('devise.registrations.sign_up')
+    %p.text-center
+      %span= t('devise.registrations.already_account')
+      %a{ href: new_user_session_path }
+        %span= t('devise.registrations.sign_in')
+
+- content_for :js_code do
+  :javascript
+    $("#user_password_confirmation").on("keyup", function () {
+      var password = $("#user_password").val();
+      var confirmPassword = $(this).val();
+
+      if (password === confirmPassword) {
+        $("#password-error").html("")
+      } else {
+        $("#password-error").html("doesn't match Password").css("color", "red");
+        $("#required-error").hide();
+      }
+    });

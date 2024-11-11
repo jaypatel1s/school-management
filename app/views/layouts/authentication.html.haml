@@ -1,0 +1,33 @@
+!!!
+%html.light-style.customizer-hide{ dir: "ltr", lang: "en" }
+  %head
+    %meta{ content: "text/html; charset=UTF-8", "http-equiv": "Content-Type" }/
+    %meta{ charset: "utf-8" }/
+    %meta{ content: "width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0", name: "viewport" }/
+    %title Atkot
+    %meta{ content: "", name: "description" }/
+    %link{ href: "#{image_path('favicon.ico')}", rel: "icon", type: "image/x-icon" }/
+    / Fonts
+    %link{ href: "https://fonts.googleapis.com", rel: "preconnect" }/
+    %link{ crossorigin: "", href: "https://fonts.gstatic.com", rel: "preconnect" }/
+    %link{ href: "https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap", rel: "stylesheet" }/
+
+    = csrf_meta_tags
+    = csp_meta_tag
+
+    = stylesheet_link_tag "authentication", media: 'all', 'data-turbolinks-track': 'reload'
+    = javascript_include_tag "authentication", 'data-turbolinks-track': 'reload'
+  %body.bg-home
+    / Content
+    .container-xxl
+      .authentication-wrapper.authentication-basic.container-p-y
+        .authentication-inner
+          .bs-toast.toast.toast-placement-ex.m-2.fade.top-0.end-0.show{ "aria-atomic": "true", "aria-live": "assertive", "data-bs-delay": "2000", role: "alert", style: 'display: none' }
+            .toast-header.pb-0
+              %button.btn-close{ "aria-label": "Close", "data-bs-dismiss": "toast", type: "button" }
+            .toast-body
+          = yield
+    = javascript_include_tag "authentication_footer", 'data-turbolinks-track': 'reload'
+    = yield :js_file
+    = yield :js_code
+    = render 'common/notification'

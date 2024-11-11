@@ -1,0 +1,25 @@
+.card
+  .card-body
+    .app-brand.justify-content-center
+      %a.app-brand-link.gap-2{ href: 'index.html' }
+        .app-brand-logo.demo
+          %img.h-25px.h-lg-35px{ alt: 'Logo', src: image_url('logo.png') }
+    %h4.mb-2= t('devise.sessions.welcome')
+    %p.mb-4= t('devise.sessions.manage_jira')
+    = form_for(resource, as: resource_name, url: session_path(resource_name), html: { class: 'mb-3' }) do |f|
+      .mb-3
+        %label.form-label.required{ for: 'email' }= t('devise.sessions.email')
+        = f.email_field :email, autofocus: true, class: 'form-control', required: true, placeholder: 'Enter your email'
+      .mb-3.form-password-toggle
+        %label.form-label.required{ for: 'password' }= t('devise.sessions.password')
+        .input-group.input-group-merge
+          = f.password_field :password, autocomplete: 'new-password', class: 'form-control', required: true, placeholder: '············'
+          %span.input-group-text.cursor-pointer
+            %i.bx.bx-hide
+      .mb-3
+        %button.btn.btn-primary.d-grid.w-100{ type: 'submit' }= t('devise.sessions.sign_in')
+      .d-flex.justify-content-between
+        = link_to new_confirmation_path(resource_name) do
+          %small= t('devise.sessions.resend_verification')
+        = link_to new_password_path(resource_name) do
+          %small= t('devise.sessions.forget_password')

@@ -1,0 +1,30 @@
+- content_for :js_code do
+  :javascript
+    const wizardNumbered = document.querySelector(".wizard-numbered");
+    const numberedStepper = new Stepper(wizardNumbered, { linear: false });
+
+    if (typeof wizardNumbered !== undefined && wizardNumbered !== null) {
+      const wizardNumberedBtnNextList = [].slice.call(wizardNumbered.querySelectorAll('.btn-next')),
+        wizardNumberedBtnPrevList = [].slice.call(wizardNumbered.querySelectorAll('.btn-prev')),
+        wizardNumberedBtnSubmit = wizardNumbered.querySelector('.btn-submit');
+
+      if (wizardNumberedBtnNextList) {
+        wizardNumberedBtnNextList.forEach(wizardNumberedBtnNext => {
+          wizardNumberedBtnNext.addEventListener('click', event => {
+            numberedStepper.next();
+            $('.step.active .step-trigger').removeAttr('disabled')
+          });
+        });
+      }
+      if (wizardNumberedBtnPrevList) {
+        wizardNumberedBtnPrevList.forEach(wizardNumberedBtnPrev => {
+          wizardNumberedBtnPrev.addEventListener('click', event => {
+            numberedStepper.previous();
+          });
+        });
+      }
+      if (wizardNumberedBtnSubmit) {
+        wizardNumberedBtnSubmit.addEventListener('click', event => {
+        });
+      }
+    }

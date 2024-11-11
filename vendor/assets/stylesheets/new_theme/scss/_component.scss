@@ -1,0 +1,257 @@
+$primary: #e90064;
+$white: #fff;
+$black: #000;
+$gray: #302733;
+$light-gray: #595b62;
+$gray-0d: #0d0d0d;
+$gray-5d: #5d5d5d;
+$blue: #000229;
+$gray-19: #191919;
+$light-pink: #17000a;
+$white-cd: #cdcdcd;
+$lightpurple_gradient_color: #b340ff;
+$lightpink_gradient_color: #d35bff;
+$pink_gradient_color: #d4159d;
+$darkpurple_gradient_color: #8f20ff;
+$fw_400: 400;
+$fw_500: 500;
+$fw_600: 600;
+$fw_700: 700;
+$fw_800: 800;
+$fw_900: 900;
+$font_charlie_display_bold: 'charlie display bold';
+$font_charlie_text_light: 'charlie text light';
+$font_charlie_text_semibold: 'charlie text semibold';
+$font_charlie_text_medium: 'charlie text medium';
+
+@font-face {
+  font-family: "charlie display bold";
+  font-weight: 700;
+  src: font-url('charlie/charlie_display_bold.ttf') format('truetype');
+}
+@font-face {
+  font-family: "charlie text medium";
+  font-weight: 400;
+  src: font-url('charlie/charlie_text_medium.ttf') format('truetype');
+}
+@font-face {
+  font-family: "charlie text light";
+  font-weight: 500;
+  src: font-url('charlie/charlie_text_light.ttf') format('truetype');
+}
+@font-face {
+  font-family: "charlie text semibold";
+  font-weight: 700;
+  src: font-url('charlie/charlie_text_semibold.ttf') format('truetype');
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+ul,
+li,
+a {
+    padding: 0px;
+    margin: 0px;
+}
+
+ul li {
+    list-style-type: none;
+}
+
+a {
+    text-decoration: none;
+}
+
+body {
+    background-color: $black;
+    font-size: 16px;
+    line-height: 28px;
+    font-family: $font_charlie_display_bold;
+    color: $gray-5d;
+}
+
+.img-fluid {
+    max-width: 100%;
+    height: auto;
+}
+
+@mixin desktop_big {
+    @media (max-width: 1399.98px) {
+        @content;
+    }
+}
+@mixin desktop {
+    @media (max-width: 1199.98px) {
+        @content;
+    }
+}
+@mixin tablet {
+    @media (max-width: 991.98px) {
+        @content;
+    }
+}
+@mixin phone_big {
+    @media (max-width: 767.98px) {
+        @content;
+    }
+}
+@mixin phone {
+    @media (max-width: 575px) {
+        @content;
+    }
+}
+.ms_30 {
+    margin-left: 30px;
+    @include desktop {
+        margin-left: 20px;
+    }
+    @include phone_big {
+        margin-left: 10px;
+    }
+}
+.me_30 {
+    margin-right: 30px;
+    @include desktop {
+        margin-right: 20px;
+    }
+    @include phone_big {
+        margin-right: 10px;
+    }
+}
+.pt_80 {
+    padding-top: 80px;
+    @include tablet {
+        margin-bottom: 60px;
+    }
+}
+.mb_180 {
+    margin-bottom: 180px;
+    @include desktop {
+        margin-bottom: 140px;
+    }
+    @include tablet {
+        margin-bottom: 100px;
+    }
+    @include phone_big {
+        margin-bottom: 80px;
+    }
+}
+
+h1.main_title {
+    font-size: 61px;
+    font-family: $font_charlie_display_bold;
+    line-height: 70px;
+    @include desktop {
+        font-size: 50px;
+        line-height: 65px;
+    }
+    @include tablet {
+        font-size: 44px;
+        line-height: 60px;
+    }
+    @include phone_big {
+        font-size: 32px;
+        line-height: 50px;
+    }
+    @include phone {
+        font-size: 28px;
+        line-height: 42px;
+    }
+}
+
+h2.title {
+    font-size: 49px;
+    font-family: $font_charlie_display_bold;
+    line-height: 76px;
+    @include desktop {
+        font-size: 40px;
+        line-height: 60px;
+    }
+    @include tablet {
+        font-size: 44px;
+        line-height: 60px;
+    }
+    @include phone_big {
+        font-size: 32px;
+        line-height: 50px;
+    }
+    @include phone {
+        font-size: 30px;
+        line-height: 45px;
+    }
+}
+h3.title {
+    font-size: 47px;
+    font-family: $font_charlie_display_bold;
+    line-height: 60px;
+    @include desktop {
+        font-size: 43px;
+        line-height: 57px;
+    }
+    @include tablet {
+        font-size: 38px;
+        line-height: 55px;
+    }
+    @include phone_big {
+        font-size: 30px;
+        line-height: 43px;
+    }
+    @include phone {
+        font-size: 24px;
+        line-height: 36px;
+    }
+}
+h4.title {
+    font-size: 32px;
+    font-family: $font_charlie_text_semibold;
+    line-height: 50px;
+    @include tablet {
+        font-size: 30px;
+        line-height: 48px;
+    }
+    @include phone_big {
+        font-size: 22px;
+        line-height: 26px;
+    }
+}
+h5.title {
+    font-size: 21px;
+    font-family: $font_charlie_text_semibold;
+    line-height: 40px;
+}
+h6.sub_title {
+    font-size: 19px;
+    font-family: $font_charlie_text_light;
+    line-height: 30px;
+    @include phone_big {
+        font-size: 18px;
+        line-height: 25px;
+    }
+}
+
+p.desc {
+    font-size: 23px;
+    font-family: $font_charlie_text_light;
+    line-height: 36px;
+    @include desktop {
+        font-size: 22px;
+        line-height: 34px;
+    }
+    @include tablet {
+        font-size: 20px;
+        line-height: 30px;
+    }
+    @include phone_big {
+        font-size: 18px;
+        line-height: 27px;
+    }
+    @include phone {
+        font-size: 16px;
+        line-height: 24px;
+    }
+}

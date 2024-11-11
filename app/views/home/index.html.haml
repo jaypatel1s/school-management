@@ -1,0 +1,347 @@
+/ Header section
+%header.header-section
+  .container
+    .row
+      .col-lg-3.col-md-3
+        .site-logo
+          %img{ alt: "", src: image_url('logo.png') }/
+        .nav-switch
+          %i.fa.fa-bars
+      .col-lg-9.col-md-9
+        %a.site-btn.header-btn{href: new_user_session_url} Login
+        %nav.main-menu
+          %ul
+            %li
+              %a{href: "index.html"} Home
+            %li
+              %a{href: "#"} About us
+            %li
+              %a{href: "courses.html"} Courses
+            %li
+              %a{href: "blog.html"} News
+            %li
+              %a{href: "contact.html"} Contact
+/ Header section end
+/ Hero section
+%section.hero-section.set-bg{"data-setbg" => image_url("bg.jpg")}
+  .container
+    .hero-text.text-white
+      %h2 Get The Best Free Online Courses
+      %p
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec malesuada lorem maximus mauris scelerisque, at rutrum nulla
+        %br/
+        dictum. Ut ac ligula sapien. Suspendisse cursus faucibus finibus.
+    .row
+      .col-lg-10.offset-lg-1
+        %form.intro-newslatter
+          %input{placeholder: "Name", type: "text"}/
+          %input.last-s{placeholder: "E-mail", type: "text"}/
+          %button.site-btn Sign Up Now
+/ Hero section end
+/ categories section
+%section.categories-section.spad
+  .container
+    .section-title
+      %h2 Our Course Categories
+      %p Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec malesuada lorem maximus mauris scelerisque, at rutrum nulla dictum. Ut ac ligula sapien. Suspendisse cursus faucibus finibus.
+    .row
+      / categorie
+      .col-lg-4.col-md-6
+        .categorie-item
+          .ci-thumb.set-bg{"data-setbg" => image_url("categories/1.jpg")}
+          .ci-text
+            %h5 IT Development
+            %p Lorem ipsum dolor sit amet, consectetur
+            %span 120 Courses
+      / categorie
+      .col-lg-4.col-md-6
+        .categorie-item
+          .ci-thumb.set-bg{"data-setbg" => image_url("categories/2.jpg")}
+          .ci-text
+            %h5 Web Design
+            %p Lorem ipsum dolor sit amet, consectetur
+            %span 70 Courses
+      / categorie
+      .col-lg-4.col-md-6
+        .categorie-item
+          .ci-thumb.set-bg{"data-setbg" => image_url("categories/3.jpg")}
+          .ci-text
+            %h5 Illustration &amp; Drawing
+            %p Lorem ipsum dolor sit amet, consectetur
+            %span 55 Courses
+      / categorie
+      .col-lg-4.col-md-6
+        .categorie-item
+          .ci-thumb.set-bg{"data-setbg" => image_url("categories/4.jpg")}
+          .ci-text
+            %h5 Social Media
+            %p Lorem ipsum dolor sit amet, consectetur
+            %span 40 Courses
+      / categorie
+      .col-lg-4.col-md-6
+        .categorie-item
+          .ci-thumb.set-bg{"data-setbg" => image_url("categories/5.jpg")}
+          .ci-text
+            %h5 Photoshop
+            %p Lorem ipsum dolor sit amet, consectetur
+            %span 220 Courses
+      / categorie
+      .col-lg-4.col-md-6
+        .categorie-item
+          .ci-thumb.set-bg{"data-setbg" => image_url("categories/6.jpg")}
+          .ci-text
+            %h5 Cryptocurrencies
+            %p Lorem ipsum dolor sit amet, consectetur
+            %span 25 Courses
+/ categories section end
+/ search section
+%section.search-section
+  .container
+    .search-warp
+      .section-title.text-white
+        %h2 Search your course
+      .row
+        .col-md-10.offset-md-1
+          / search form
+          %form.course-search-form
+            %input{placeholder: "Course", type: "text"}/
+            %input.last-m{placeholder: "Category", type: "text"}/
+            %button.site-btn Search Couse
+/ search section end
+/ course section
+%section.course-section.spad
+  .container
+    .section-title.mb-0
+      %h2 Featured Courses
+      %p Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec malesuada lorem maximus mauris scelerisque, at rutrum nulla dictum. Ut ac ligula sapien. Suspendisse cursus faucibus finibus.
+  .course-warp
+    %ul.course-filter.controls
+      %li.control.active{"data-filter" => "all"} All
+      %li.control{"data-filter" => ".finance"} Finance
+      %li.control{"data-filter" => ".design"} Design
+      %li.control{"data-filter" => ".web"} Web Development
+      %li.control{"data-filter" => ".photo"} Photography
+    .row.course-items-area
+      / course
+      .mix.col-lg-3.col-md-4.col-sm-6.finance
+        .course-item
+          .course-thumb.set-bg{"data-setbg" => image_url("courses/1.jpg")}
+            .price Price: $15
+          .course-info
+            .course-text
+              %h5 Art &amp; Crafts
+              %p Lorem ipsum dolor sit amet, consectetur
+              .students 120 Students
+            .course-author
+              .ca-pic.set-bg{"data-setbg" =>image_url("authors/1.jpg")}
+              %p
+                William Parker,
+                %span Developer
+      / course
+      .mix.col-lg-3.col-md-4.col-sm-6.design
+        .course-item
+          .course-thumb.set-bg{"data-setbg" => image_url("courses/2.jpg")}
+            .price Price: $15
+          .course-info
+            .course-text
+              %h5 IT Development
+              %p Lorem ipsum dolor sit amet, consectetur
+              .students 120 Students
+            .course-author
+              .ca-pic.set-bg{"data-setbg" => image_url("authors/2.jpg")}
+              %p
+                William Parker,
+                %span Developer
+      / course
+      .mix.col-lg-3.col-md-4.col-sm-6.web
+        .course-item
+          .course-thumb.set-bg{"data-setbg" => image_url("courses/3.jpg")}
+            .price Price: $15
+          .course-info
+            .course-text
+              %h5 Graphic Design
+              %p Lorem ipsum dolor sit amet, consectetur
+              .students 120 Students
+            .course-author
+              .ca-pic.set-bg{"data-setbg" => image_url("authors/3.jpg")}
+              %p
+                William Parker,
+                %span Developer
+      / course
+      .mix.col-lg-3.col-md-4.col-sm-6.photo
+        .course-item
+          .course-thumb.set-bg{"data-setbg" => image_url("courses/4.jpg")}
+            .price Price: $15
+          .course-info
+            .course-text
+              %h5 IT Development
+              %p Lorem ipsum dolor sit amet, consectetur
+              .students 120 Students
+            .course-author
+              .ca-pic.set-bg{"data-setbg" => image_url("authors/4.jpg")}
+              %p
+                William Parker,
+                %span Developer
+      / course
+      .mix.col-lg-3.col-md-4.col-sm-6.finance
+        .course-item
+          .course-thumb.set-bg{"data-setbg" => image_url("courses/5.jpg")}
+            .price Price: $15
+          .course-info
+            .course-text
+              %h5 IT Development
+              %p Lorem ipsum dolor sit amet, consectetur
+              .students 120 Students
+            .course-author
+              .ca-pic.set-bg{"data-setbg" => image_url("authors/5.jpg")}
+              %p
+                William Parker,
+                %span Developer
+      / course
+      .mix.col-lg-3.col-md-4.col-sm-6.design
+        .course-item
+          .course-thumb.set-bg{"data-setbg" => image_url("courses/6.jpg")}
+            .price Price: $15
+          .course-info
+            .course-text
+              %h5 Socia Media
+              %p Lorem ipsum dolor sit amet, consectetur
+              .students 120 Students
+            .course-author
+              .ca-pic.set-bg{"data-setbg" => image_url("authors/6.jpg")}
+              %p
+                William Parker,
+                %span Developer
+      / course
+      .mix.col-lg-3.col-md-4.col-sm-6.web
+        .course-item
+          .course-thumb.set-bg{"data-setbg" => image_url("courses/7.jpg")}
+            .price Price: $15
+          .course-info
+            .course-text
+              %h5 IT Development
+              %p Lorem ipsum dolor sit amet, consectetur
+              .students 120 Students
+            .course-author
+              .ca-pic.set-bg{"data-setbg" => image_url("authors/7.jpg")}
+              %p
+                William Parker,
+                %span Developer
+      / course
+      .mix.col-lg-3.col-md-4.col-sm-6.photo
+        .course-item
+          .course-thumb.set-bg{"data-setbg" => image_url("courses/8.jpg")}
+            .price Price: $15
+          .course-info
+            .course-text
+              %h5 HTML 5
+              %p Lorem ipsum dolor sit amet, consectetur
+              .students 120 Students
+            .course-author
+              .ca-pic.set-bg{"data-setbg" => image_url("authors/8.jpg")}
+              %p
+                William Parker,
+                %span Developer
+/ course section end
+/ signup section
+%section.signup-section.spad
+  .signup-bg.set-bg{"data-setbg" => image_url("signup-bg.jpg")}
+  .container-fluid
+    .row
+      .col-lg-6
+        .signup-warp
+          .section-title.text-white.text-left
+            %h2 Sign up to became a teacher
+            %p Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec malesuada lorem maximus mauris scelerisque, at rutrum nulla dictum. Ut ac ligula sapien. Suspendisse cursus faucibus finibus.
+          / signup form
+          %form.signup-form
+            %input{placeholder: "Your Name", type: "text"}/
+            %input{placeholder: "Your E-mail", type: "text"}/
+            %input{placeholder: "Your Phone", type: "text"}/
+            %label.file-up-btn{for: "v-upload"} Upload Course
+            %input#v-upload{type: "file"}/
+            %button.site-btn Search Couse
+/ signup section end
+/ banner section
+%section.banner-section.spad
+  .container
+    .section-title.mb-0.pb-2
+      %h2 Join Our Community Now!
+      %p Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec malesuada lorem maximus mauris scelerisque, at rutrum nulla dictum. Ut ac ligula sapien. Suspendisse cursus faucibus finibus.
+    .text-center.pt-5
+      %a.site-btn{href: "#"} Register Now
+/ banner section end
+/ footer section
+%footer.footer-section.spad.pb-0
+  .footer-top
+    .footer-warp
+      .row
+        .widget-item
+          %h4 Contact Info
+          %ul.contact-list
+            %li
+              1481 Creekside Lane
+              = succeed "Avila" do
+                %br/
+            %li +53 345 7953 32453
+            %li yourmail@gmail.com
+        .widget-item
+          %h4 Engeneering
+          %ul
+            %li
+              %a{href: ""} Applied Studies
+            %li
+              %a{href: ""} Computer Engeneering
+            %li
+              %a{href: ""} Software Engeneering
+            %li
+              %a{href: ""} Informational Engeneering
+            %li
+              %a{href: ""} System Engeneering
+        .widget-item
+          %h4 Graphic Design
+          %ul
+            %li
+              %a{href: ""} Applied Studies
+            %li
+              %a{href: ""} Computer Engeneering
+            %li
+              %a{href: ""} Software Engeneering
+            %li
+              %a{href: ""} Informational Engeneering
+            %li
+              %a{href: ""} System Engeneering
+        .widget-item
+          %h4 Development
+          %ul
+            %li
+              %a{href: ""} Applied Studies
+            %li
+              %a{href: ""} Computer Engeneering
+            %li
+              %a{href: ""} Software Engeneering
+            %li
+              %a{href: ""} Informational Engeneering
+            %li
+              %a{href: ""} System Engeneering
+        .widget-item
+          %h4 Newsletter
+          %form.footer-newslatter
+            %input{placeholder: "E-mail", type: "email"}/
+            %button.site-btn Subscribe
+            %p *We don’t spam
+  .footer-bottom
+    .footer-warp
+      %ul.footer-menu
+        %li
+          %a{href: "#"} Terms &amp; Conditions
+        %li
+          %a{href: "#"} Register
+        %li
+          %a{href: "#"} Privacy
+      .copyright
+        / Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0.
+        Copyright ©
+        :javascript
+          document.write(new Date().getFullYear());
+        All rights reserved to jay

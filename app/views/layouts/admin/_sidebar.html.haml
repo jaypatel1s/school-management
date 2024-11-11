@@ -1,0 +1,169 @@
+%aside.layout-menu.menu-vertical.menu.bg-menu-theme#layout-menu
+  .app-brand.demo
+    %a.app-brand-link{ href: jira_root_path }
+      .admin-app-brand-logo.demo
+        %img.h-25px.h-lg-35px{ alt: 'Logo', src: image_url('media/logos/default-dark.svg') }
+    %a.layout-menu-toggle.menu-link.text-large.ms-auto.d-block.d-xl-none{ :href => 'javascript:void(0);' }
+      %i.bx.bx-chevron-left.bx-sm.align-middle
+  .menu-inner-shadow
+  %ul.menu-inner.py-1
+    - if current_site.present?
+      %li.menu-item{ class: menu_active_class('dashboard') }
+        %a.menu-link{ href: jira_root_path }
+          %i.menu-icon.tf-icons.bx.bx-home-circle
+          %div{ 'data-i18n': 'Analytics' }= t('layouts.sidebar.dashboard')
+    - else
+      %li.menu-item{ class: menu_active_class('dashboard') }
+        %a.menu-link{ href: new_jira_site_path }
+          %i.menu-icon.tf-icons.bx.bx-home-circle
+          %div{ 'data-i18n': 'Analytics' }= t('layouts.sidebar.dashboard')
+    - if current_site.present?
+      %li.menu-item.menu-header.small.py-0.px-3{ class: sub_menu_active_class(%w[jira/projects jira/filters jira/boards]) }
+        %a.menu-link.menu-toggle.m-0{ href: '#' }
+          %i.menu-icon.tf-icons.bx.bx-layer
+          .small.menu-header-text= t('layouts.sidebar.modules')
+        %ul.menu-sub
+          %li.menu-item{ class: menu_active_class('jira/projects') }
+            %a.menu-link{ href: jira_site_projects_path(site_slug: current_site.slug) }
+              %div{ 'data-i18n': 'Basic' }= t('layouts.sidebar.projects')
+          %li.menu-item{ class: menu_active_class('jira/filters') }
+            %a.menu-link{ href: jira_site_filters_path(site_slug: current_site.slug) }
+              %div{ 'data-i18n': 'Basic' }= t('layouts.sidebar.filters')
+          %li.menu-item{ class: menu_active_class('jira/boards') }
+            %a.menu-link{ href: jira_site_boards_path(site_slug: current_site.slug) }
+              %div{ 'data-i18n': 'Basic' }= t('layouts.sidebar.boards')
+      %li.menu-item.menu-header.small.py-0.px-3{ class: sub_menu_active_class(%w[jira/issues/issue_types jira/issues/issue_type_schemes]) }
+        %a.menu-link.menu-toggle.m-0{ href: '#' }
+          %i.menu-icon.tf-icons.bx.bx-select-multiple
+          .small.menu-header-text= t('layouts.sidebar.issue_types')
+        %ul.menu-sub
+          %li.menu-item{ class: menu_active_class('jira/issues/issue_types') }
+            %a.menu-link{ href: jira_site_issues_issue_types_path(site_slug: current_site.slug) }
+              %div{ 'data-i18n': 'Basic' }= t('layouts.sidebar.issue_types')
+          %li.menu-item{ class: menu_active_class('jira/issues/issue_type_schemes') }
+            %a.menu-link{ href: jira_site_issues_issue_type_schemes_path(site_slug: current_site.slug) }
+              %div{ 'data-i18n': 'Account' }= t('layouts.sidebar.issue_type_schemes')
+      %li.menu-item.menu-header.small.py-0.px-3{ class: sub_menu_active_class(%w[jira/issues/screens jira/issues/screen_schemes jira/issues/issue_type_screen_schemes]) }
+        %a.menu-link.menu-toggle.m-0{ href: '#' }
+          %i.menu-icon.tf-icons.bx.bx-fullscreen
+          .small.menu-header-text= t('layouts.sidebar.screens')
+        %ul.menu-sub
+          %li.menu-item{ class: menu_active_class('jira/issues/screens') }
+            %a.menu-link{ href: jira_site_issues_screens_path(site_slug: current_site.slug) }
+              %div{ 'data-i18n': 'Account' }= t('layouts.sidebar.screens')
+          %li.menu-item{ class: menu_active_class('jira/issues/screen_schemes') }
+            %a.menu-link{ href: jira_site_issues_screen_schemes_path(site_slug: current_site.slug) }
+              %div{ 'data-i18n': 'Account' }= t('layouts.sidebar.screen_schemes')
+          %li.menu-item{ class: menu_active_class('jira/issues/issue_type_screen_schemes') }
+            %a.menu-link{ href: jira_site_issues_issue_type_screen_schemes_path(site_slug: current_site.slug) }
+              %div{ 'data-i18n': 'Account' }= t('layouts.sidebar.issue_type_screen_schemes')
+      %li.menu-item.menu-header.small.py-0.px-3{ class: sub_menu_active_class(%w[jira/issues/custom_fields jira/issues/field_configurations jira/issues/field_configuration_schemes]) }
+        %a.menu-link.menu-toggle.m-0{ href: '#' }
+          %i.menu-icon.tf-icons.bx.bx-cog
+          .small.menu-header-text= t('layouts.sidebar.fields')
+        %ul.menu-sub
+          %li.menu-item{ class: menu_active_class('jira/issues/custom_fields') }
+            %a.menu-link{ href: jira_site_issues_custom_fields_path(site_slug: current_site.slug) }
+              %div{ 'data-i18n': 'Basic' }= t('layouts.sidebar.custom_fields')
+          %li.menu-item{ class: menu_active_class('jira/issues/field_configurations') }
+            %a.menu-link{ href: jira_site_issues_field_configurations_path(site_slug: current_site.slug) }
+              %div{ 'data-i18n': 'Basic' }= t('layouts.sidebar.field_configurations')
+          %li.menu-item{ class: menu_active_class('jira/issues/field_configuration_schemes') }
+            %a.menu-link{ href: jira_site_issues_field_configuration_schemes_path(site_slug: current_site.slug) }
+              %div{ 'data-i18n': 'Account' }= t('layouts.sidebar.field_configuration_schemes')
+      %li.menu-item.menu-header.small.py-0.px-3{ class: sub_menu_active_class(%w[jira/issues/priorities jira/issues/priority_schemes]) }
+        %a.menu-link.menu-toggle.m-0{ href: '#' }
+          %i.menu-icon.tf-icons.bx.bx-sort-up
+          .small.menu-header-text= t('layouts.sidebar.priorities')
+        %ul.menu-sub
+          %li.menu-item{ class: menu_active_class('jira/issues/priorities') }
+            %a.menu-link{ href: jira_site_issues_priorities_path(site_slug: current_site.slug) }
+              %div{ 'data-i18n': 'Basic' }= t('layouts.sidebar.priorities')
+          %li.menu-item{ class: menu_active_class('jira/issues/priority_schemes') }
+            %a.menu-link{ href: jira_site_issues_priority_schemes_path(site_slug: current_site.slug) }
+              %div{ 'data-i18n': 'Basic' }= t('layouts.sidebar.priority_schemes')
+      %li.menu-item.menu-header.small.py-0.px-3{ class: sub_menu_active_class(%w[jira/issues/workflows jira/issues/workflow_schemes]) }
+        %a.menu-link.menu-toggle.m-0{ href: '#' }
+          %i.menu-icon.tf-icons.bx.bx-briefcase-alt-2
+          .small.menu-header-text= t('layouts.sidebar.workflow')
+        %ul.menu-sub
+          %li.menu-item{ class: menu_active_class('jira/issues/workflows') }
+            %a.menu-link{ href: jira_site_issues_workflows_path(site_slug: current_site.slug) }
+              %div{ 'data-i18n': 'Account' }= t('layouts.sidebar.workflow')
+          %li.menu-item{ class: menu_active_class('jira/issues/workflow_schemes') }
+            %a.menu-link{ href: jira_site_issues_workflow_schemes_path(site_slug: current_site.slug) }
+              %div{ 'data-i18n': 'Account' }= t('layouts.sidebar.workflow_schemes')
+      %li.menu-item.menu-header.small.py-0.px-3{ class: sub_menu_active_class(%w[jira/issues/statuses
+      jira/issues/resolutions jira/issues/issue_security_schemes jira/issues/issue_security_levels jira/issues/issue_security_members jira/issues/issue_attributes/permission_schemes jira/issues/notification_schemes]) }
+        %a.menu-link.menu-toggle.m-0{ href: '#' }
+          %i.menu-icon.tf-icons.bx.bx-shield-quarter
+          .small.menu-header-text= t('layouts.sidebar.issue_attributes')
+        %ul.menu-sub
+          %li.menu-item{ class: menu_active_class('jira/issues/statuses') }
+            %a.menu-link{ href: jira_site_issues_statuses_path(site_slug: current_site.slug) }
+              %div{ 'data-i18n': 'Account' }= t('layouts.sidebar.status')
+          %li.menu-item{ class: menu_active_class('jira/issues/resolutions') }
+            %a.menu-link{ href: jira_site_issues_resolutions_path(site_slug: current_site.slug) }
+              %div{ 'data-i18n': 'Account' }= t('layouts.sidebar.resolution')
+          %li.menu-item{ class: menu_active_class('jira/issues/issue_security_schemes') }
+            %a.menu-link{ href: jira_site_issues_issue_security_schemes_path(site_slug: current_site.slug) }
+              %div{ 'data-i18n': 'Account' }= t('layouts.sidebar.issue_security_schemes')
+          %li.menu-item{ class: menu_active_class('jira/issues/issue_attributes/permission_schemes') }
+            %a.menu-link{ href: jira_site_issues_issue_attributes_permission_schemes_path(site_slug: current_site.slug) }
+              %div{ 'data-i18n': 'Account' }= t('layouts.sidebar.permission_schemes')
+          %li.menu-item{ class: menu_active_class('jira/issues/notification_schemes') }
+            %a.menu-link{ href: jira_site_issues_notification_schemes_path(site_slug: current_site.slug) }
+              %div{ 'data-i18n': 'Account' }= t('layouts.sidebar.notification_schemes')
+      %li.menu-item.menu-header.small.py-0.px-3{ class: sub_menu_active_class(%w[jira/project_leads jira/project_categories jira/site_bearer_tokens]) }
+        %a.menu-link.menu-toggle.m-0{ href: '#' }
+          %i.menu-icon.tf-icons.bx.bx-carousel
+          .small.menu-header-text= t('layouts.sidebar.master')
+        %ul.menu-sub
+          %li.menu-item{ class: menu_active_class('jira/project_leads') }
+            %a.menu-link{ href: jira_site_project_leads_path(site_slug: current_site.slug) }
+              %div{ 'data-i18n': 'Basic' }= t('layouts.sidebar.project_leads')
+          %li.menu-item{ class: menu_active_class('jira/project_categories') }
+            %a.menu-link{ href: jira_site_project_categories_path(site_slug: current_site.slug) }
+              %div{ 'data-i18n': 'Basic' }= t('layouts.sidebar.project_categories')
+          %li.menu-item{ class: menu_active_class('jira/site_bearer_tokens') }
+            %a.menu-link{ href: jira_site_site_bearer_tokens_path(site_slug: current_site.slug) }
+              %div{ 'data-i18n': 'Basic' }= t('layouts.sidebar.site_bearer_token')
+      %li.menu-item.menu-header.small.py-0.px-3{ class: sub_menu_active_class(%w[jira/settings/events jira/settings/application_roles jira/settings/group_user_pickers jira/settings/permissions jira/settings/project_roles]) }
+        %a.menu-link.menu-toggle.m-0{ href: '#' }
+          %i.menu-icon.tf-icons.bx.bx-shield-quarter
+          .small.menu-header-text= t('layouts.sidebar.system')
+        %ul.menu-sub
+          %li.menu-item{ class: menu_active_class('jira/settings/events') }
+            %a.menu-link{ href: jira_site_settings_events_path(site_slug: current_site.slug) }
+              %div{ 'data-i18n': 'Account' }= t('layouts.sidebar.events')
+          %li.menu-item{ class: menu_active_class('jira/settings/application_roles') }
+            %a.menu-link{ href: jira_site_settings_application_roles_path(site_slug: current_site.slug) }
+              %div{ 'data-i18n': 'Account' }= t('layouts.sidebar.application_roles')
+          %li.menu-item{ class: menu_active_class('jira/settings/group_user_pickers') }
+            %a.menu-link{ href: jira_site_settings_group_user_pickers_path(site_slug: current_site.slug) }
+              %div{ 'data-i18n': 'Account' }= t('layouts.sidebar.group_and_user_pickers')
+          %li.menu-item{ class: menu_active_class('jira/settings/permissions') }
+            %a.menu-link{ href: jira_site_settings_permissions_path(site_slug: current_site.slug) }
+              %div{ 'data-i18n': 'Account' }= t('layouts.sidebar.permissions')
+          %li.menu-item{ class: menu_active_class('jira/settings/project_roles') }
+            %a.menu-link{ href: jira_site_settings_project_roles_path(site_slug: current_site.slug) }
+              %div{ 'data-i18n': 'Account' }= t('layouts.sidebar.project_roles')
+      %li.menu-item.menu-header.small.py-0.px-3{ class: sub_menu_active_class(%w[jira/compare jira/list_compare]) }
+        %a.menu-link.menu-toggle.m-0{ href: '#' }
+          %i.menu-icon.tf-icons.tf-icons.bx.bx-git-compare
+          .small.menu-header-text= t('layouts.sidebar.compare')
+        %ul.menu-sub
+          %li.menu-item{ class: menu_active_class('jira/compare', 'index') }
+            %a.menu-link{ href: jira_compare_path }
+              %div{ 'data-i18n': 'Account' }= t('layouts.sidebar.compare')
+          %li.menu-item{ class: menu_active_class('jira/compare', 'list') }
+            %a.menu-link{ href: jira_list_compare_path }
+              %div{ 'data-i18n': 'Account' }= t('layouts.sidebar.list_compare')
+      %li.menu-item{ class: menu_active_class('jira/error_logs') }
+        %a.menu-link{ href: jira_error_logs_path }
+          %i.menu-icon.tf-icons.bx.bx-error
+          %div{ 'data-i18n': 'Account' }= t('layouts.sidebar.errors')
+      %li.menu-item{ class: menu_active_class('jira/clean_sites') }
+        %a.menu-link{ href: jira_site_clean_sites_path(site_slug: current_site.slug) }
+          %i.menu-icon.tf-icons.bx.bx-trash
+          %div{ 'data-i18n': 'Account' }= t('layouts.sidebar.clean_sites')

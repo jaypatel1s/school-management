@@ -1,0 +1,112 @@
+= form_with url: transition_rule_keys_jira_site_issues_workflow_workflow_transitions_path(current_site.slug), method: :get, local: true,  html: { style: 'display: flex;' } do |f|
+  .modal#addsitemodal{ tabindex: "-1" }
+    .modal-dialog.modal-dialog-centered
+      .modal-content
+        .modal-header
+          %h5.modal-title#modal-center-title= t('issues.workflow_transitions.table.add_rule')
+          %button.btn-close{ 'aria-label': 'Close', 'data-bs-dismiss': 'modal', type: 'button' }
+        .modal-body
+          = f.hidden_field 'workflow_status_slug', value: @workflow_status&.slug
+          = f.hidden_field 'slug', value: @workflow_transition&.slug
+          .div
+            .div.mb-2
+              %label.form-label.required= t('issues.workflow_transitions.table.workflow_rule_type')
+              = select_tag 'workflow_rule_type', options_for_select(WorkflowRuleType.all.map { |p| [p.name.titleize, p.value] }, selected: nil), { prompt: 'Select Rule', class: 'form-select', required: true }
+            .div
+              %label.form-label.required= t('issues.workflow_transitions.table.worklow_rule_transition')
+              = select_tag 'workflow_rule_type_transition', options_for_select([]), { prompt: 'Select Workflow Rule Transition', class: 'form-select', required: true }
+        .modal-footer
+          %button.btn.btn-secondary{ 'data-bs-dismiss': 'modal', type: 'button' }= t('issues.workflow_transitions.table.cancel')
+          %button.btn.btn-primary.disabled{ type: 'button', id: 'selectButton' }= t('issues.workflow_transitions.table.select')
+= form_with url: '', method: :post, local: true, id: 'moduleSelectBtnForm', html: { style: 'display: flex;' } do |f|
+  .modal#addsitemodal1{ tabindex: "-1" }
+    .modal-dialog.modal-dialog-centered
+      .modal-content
+        .modal-header
+          %h5.modal-title#modal-center1-title Add rule to "#{ @workflow_transition.name }" transition
+          %button.btn-close{ 'aria-label': 'Close', 'data-bs-dismiss': 'modal', type: 'button' }
+        .modal-body
+          = f.hidden_field 'workflow_status_slug', value: @workflow_status&.slug
+          = f.hidden_field 'slug', value: @workflow_transition&.slug
+          #workflow-rule-transition
+          .form-group
+            %label.form-label.regex-id.d-none= t('issues.workflow_transitions.table.regex')
+            = text_field_tag 'workflow_transition_validator_custom_field[reg_exp]', nil, placeholder: 'Enter regex',  class: 'form-control d-none regex-id', disabled: true
+          .form-group
+            %label.form-label.date-id.d-none= t('issues.workflow_transitions.table.for_this_field')
+            = select_tag 'workflow_transition_validator_custom_field[date_field_one]', options_for_select(current_site.custom_fields.where(schema_type: ['date', 'datetime']).all.map { |p| [p.name, p.reference_id] }),  prompt: 'Choose a field',
+            class: 'form-select d-none date-id mb-3', disabled: true
+          .form-group
+            %label.form-label.condition-id.d-none= t('issues.workflow_transitions.table.condition_select')
+            = select_tag 'workflow_transition_validator_custom_field[condition_select]', options_for_select(custom_field_condition_select_options),  prompt: 'Choose a field', class: 'form-select d-none mt-2 condition-id', disabled: true
+          .form-group
+            %label.form-label.date_field_two.d-none= t('issues.workflow_transitions.table.this_field')
+            = select_tag 'workflow_transition_validator_custom_field[date_field_two]', options_for_select(current_site.custom_fields.where(schema_type: ['date', 'datetime']).all.map { |p| [p.name, p.reference_id] }),  prompt: 'Choose a field',
+            class: 'form-select mt-2 d-none date_field_two', disabled: true
+          .form-group
+            %label.form-label.d-none.field-id= t('issues.workflow_transitions.table.priority')
+            = select_tag 'workflow_transition_perform_action_update_issue[value]', options_for_select(current_site.priorities.all.map { |p| [p.name, p.reference_id] }),  prompt: 'Choose priority', class: 'form-select d-none field-id', disabled: true
+          .form-group
+            %label.form-label.d-none.resolution-id= t('issues.workflow_transitions.table.resolution')
+            = select_tag 'workflow_transition_perform_action_update_issue[value]', options_for_select(current_site.resolutions.all.map { |p| [p.name, p.reference_id] }),  prompt: 'Choose resolution', class: 'form-select d-none resolution-id', disabled: true
+          .form-group
+            %label.form-label.d-none.approver-id= t('issues.workflow_transitions.table.approver')
+            = select_tag 'workflow_transition_perform_action_update_issue[value]', options_for_select(current_site.jira_users.where(account_type: ['customer', 'atlassian']).all.map { |p| [p.name, p.account_id] }),  prompt: 'Choose a person',
+            class: 'form-select approver-id d-none', disabled: true
+            = text_field_tag 'workflow_transition_perform_action_update_issue[value]', nil, placeholder: 'Enter text here',  class: 'form-control d-none mb-3 text-id', disabled: true
+          .form-group
+            %label.form-label.d-none.group-id= t('issues.workflow_transitions.table.exclude_these_group_from_validation')
+            = select_tag 'workflow_transition_validator_custom_field[group_id]', options_for_select(current_site.group_user_pickers.all.map { |p| [p.name, p.id] }), { prompt: 'Choose an option', class: 'form-select mb-3 d-none group-id' ,disabled: true }
+            %label.form-label.d-none.group-id= t('issues.workflow_transitions.table.error_message')
+            = text_field_tag 'workflow_transition_validator_custom_field[error_message]', nil, placeholder: '',  class: 'form-control d-none group-id', disabled: true
+        .modal-footer
+          %button.btn.btn-secondary{ 'data-bs-dismiss': 'modal', type: 'button' }= t('issues.compares.table.cancel')
+          %button.btn.btn-primary.compareBtn{ type: 'submit' }= t('issues.workflow_transition.table.save')
+- content_for :css_code do
+  :css
+    .arrow {
+      font-size: 18px;
+      color: #999;
+      font-weight: bold;
+    }
+
+- content_for :js_code do
+  :javascript
+    $('#workflow_rule_type').change(function(){
+      workflow_rule_key = $(this).val();
+      $.ajax({
+        url: '#{transition_rule_keys_jira_site_issues_workflow_workflow_transitions_path}', type: 'GET',
+        dataType: 'script',
+        data: {'workflow_rule_key': workflow_rule_key},
+      });
+    });
+
+    $('#workflow_rule_type_transition').change(function(){
+      $("#selectButton").removeClass("disabled")
+    })
+
+    $('#selectButton').on('click', function() {
+      workflow_rule_transitions = $('#workflow_rule_type_transition').val();
+      workflow_rule_key = $('#workflow_rule_type').val();
+      workflow_status = $('#workflow_status_slug').val();
+      workflow_transition_slug = $('#slug').val();
+      $.ajax({
+        url: '#{workflow_rule_transitions_jira_site_issues_workflow_workflow_transitions_path}', type: 'GET',
+        dataType: 'script',
+        data: {'workflow_rule_transitions': workflow_rule_transitions, 'workflow_status_slug': workflow_status, 'workflow_transition_slug': workflow_transition_slug},
+        success: function(data){
+          $('#addsitemodal').modal('hide');
+          $('#addsitemodal1').modal('show');
+          if (workflow_rule_key == 'validate_details'){
+            $('#moduleSelectBtnForm').attr('action',
+            "#{add_workflow_validations_jira_site_issues_workflow_workflow_transition_workflow_transition_validators_path(workflow_transition_slug: params[:workflow_transition_slug])}");
+          } else if (workflow_rule_key == 'restrict_transition'){
+            $('#moduleSelectBtnForm').attr('action',
+             "#{add_workflow_restrictions_jira_site_issues_workflow_workflow_transition_workflow_transition_restrictions_path(workflow_transition_slug: params[:workflow_transition_slug])}");
+          } else {
+            $('#moduleSelectBtnForm').attr('action',
+             "#{add_workflow_perform_actions_jira_site_issues_workflow_workflow_transition_workflow_transition_perform_actions_path(workflow_transition_slug: params[:workflow_transition_slug])}");
+          }
+        }
+      });
+    });

@@ -1,0 +1,25 @@
+!!!
+%html
+  %head
+    %meta{ content: 'text/html; charset=UTF-8', 'http-equiv': 'Content-Type' }
+    %meta{ charset: 'utf-8' }
+    %meta{ content: 'width=device-width, initial-scale=1, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no', name: 'viewport' }
+    %meta{ content: 'IE=edge', 'http-equiv': 'X-UA-Compatible' }
+    %link{ href: image_path('favicon.ico'), rel: "shortcut icon", type: "image/x-icon" }
+    %title SchoolManagementSystem
+
+    = csrf_meta_tags
+    = csp_meta_tag
+
+    = stylesheet_link_tag 'application', media: 'all'
+  %body
+    = yield
+
+    = yield :css_file
+    = yield :css_code
+
+    = javascript_include_tag 'application'
+
+    = yield :js_file
+    = yield :js_code
+    = render 'common/notification'
