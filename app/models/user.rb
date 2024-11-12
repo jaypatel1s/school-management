@@ -4,8 +4,12 @@ class User < ApplicationRecord
   belongs_to :college
   enum role: { principal: 0, teacher: 1, student: 2 }
 
-  def admin?
-    %w[principal teacher].include?(role)
+  def principal?
+    %w[principal].include?(role)
+  end
+
+  def teacher?
+    %w[teacher].include?(role)
   end
 
   def user?

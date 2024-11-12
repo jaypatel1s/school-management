@@ -1,2 +1,4 @@
-- if current_user.admin?
+- if current_user.principal?
   = render 'shared/teacher'
+- if current_user.teacher?
+  = render 'shared/student'

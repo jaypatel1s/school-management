@@ -11,7 +11,7 @@ ActiveAdmin.register User do
   #
   # permit_params do
   #   permitted = [:college_id, :email, :encrypted_password, :name, :role, :contact_no, :description, :reset_password_token, :reset_password_sent_at, :remember_created_at, :sign_in_count, :current_sign_in_at, :last_sign_in_at, :current_sign_in_ip, :last_sign_in_ip, :confirmation_token, :confirmed_at, :confirmation_sent_at, :unconfirmed_email, :failed_attempts, :unlock_token, :locked_at]
-  #   permitted << :other if params[:action] == 'create' && current_user.admin?
+  #   permitted << :other if params[:action] == 'create' && current_user.principal?
   #   permitted
   # end
   form do |f|

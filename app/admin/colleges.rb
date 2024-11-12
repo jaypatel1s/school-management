@@ -11,7 +11,7 @@ ActiveAdmin.register College do
   #
   # permit_params do
   #   permitted = [:name, :address, :landmark, :pincode, :state, :city, :country]
-  #   permitted << :other if params[:action] == 'create' && current_user.admin?
+  #   permitted << :other if params[:action] == 'create' && current_user.principal?
   #   permitted
   # end
   form do |f|

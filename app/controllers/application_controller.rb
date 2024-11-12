@@ -2,7 +2,7 @@ class ApplicationController < ActionController::Base
   include ApplicationConcern
 
   def authenticate_admin!
-    return if current_user.present? && current_user.admin?
+    return if current_user.present? && current_user.principal?
 
     unauthenticate_response
   end

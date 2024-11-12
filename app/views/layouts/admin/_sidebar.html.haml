@@ -7,7 +7,7 @@
       %i.bx.bx-chevron-left.bx-sm.align-middle
   .menu-inner-shadow
   %ul.menu-inner.py-1
-    - if current_user.admin?
+    - if current_user.principal? || current_user.teacher?
       %li.menu-item{ class: menu_active_class('dashboard') }
         %a.menu-link{ href: authenticated_user_path }
           %i.menu-icon.tf-icons.bx.bx-home-circle
