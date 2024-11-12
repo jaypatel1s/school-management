@@ -15,4 +15,16 @@ module ApplicationHelper
     end
     is_active
   end
+
+  def error?(obj, field)
+    'has-danger' if obj[field].present?
+  end
+
+  def print_error(obj, field)
+    return if obj[field].blank?
+
+    content_tag(:label, id: 'required-error', class: 'error mt-2 text-danger') do
+      safe_join(obj[field].uniq, ', ')
+    end
+  end
 end
