@@ -8,6 +8,7 @@ class CreateColleges < ActiveRecord::Migration[7.0]
       t.string :state
       t.string :city
       t.string :country
+      t.string :slug, limit: 255, null: false
 
       t.timestamps
     end

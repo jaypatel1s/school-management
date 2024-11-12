@@ -1,78 +1,78 @@
-%nav.layout-navbar.container-xxl.navbar.navbar-expand-xl.navbar-detached.align-items-center.bg-navbar-theme#layout-navbar
-  .layout-menu-toggle.navbar-nav.align-items-xl-center.me-3.me-xl-0.d-xl-none
-    %a.nav-item.nav-link.px-0.me-xl-4{ :href => 'javascript:void(0)' }
-      %i.bx.bx-menu.bx-sm
-  .navbar-nav-right.d-flex.align-items-center#navbar-collapse
-    .navbar-nav.align-items-center
-      .nav-item.d-flex.align-items-center
-        - if current_site.present?
-          = form_with url: update_session_jira_sites_path, method: :put, local: true, class: 'form site_selection_form', html: { style: 'display: flex;' } do |f|
-            = f.select 'site_slug', current_company.sites.map { |p| [p.domain, p.slug, { 'data-img_src': p.site_logo.present? ? url_for(p.site_logo) : image_url('media/avatars/default_site.png') }] }, { selected: current_site.slug }, class: 'form-control site_selection'
+-# %nav.layout-navbar.container-xxl.navbar.navbar-expand-xl.navbar-detached.align-items-center.bg-navbar-theme#layout-navbar
+-#   .layout-menu-toggle.navbar-nav.align-items-xl-center.me-3.me-xl-0.d-xl-none
+-#     %a.nav-item.nav-link.px-0.me-xl-4{ :href => 'javascript:void(0)' }
+-#       %i.bx.bx-menu.bx-sm
+-#   .navbar-nav-right.d-flex.align-items-center#navbar-collapse
+-#     .navbar-nav.align-items-center
+-#       .nav-item.d-flex.align-items-center
+-#         - if current_site.present?
+-#           = form_with url: update_session_jira_sites_path, method: :put, local: true, class: 'form site_selection_form', html: { style: 'display: flex;' } do |f|
+-#             = f.select 'site_slug', current_company.sites.map { |p| [p.domain, p.slug, { 'data-img_src': p.site_logo.present? ? url_for(p.site_logo) : image_url('media/avatars/default_site.png') }] }, { selected: current_site.slug }, class: 'form-control site_selection'
 
-    %ul.navbar-nav.flex-row.align-items-center.ms-auto
-      %li.nav-item.navbar-dropdown.dropdown-user.dropdown
-        %a.nav-link.dropdown-toggle.hide-arrow{ 'data-bs-toggle' => 'dropdown', :href => 'javascript:void(0);' }
-          .avatar.avatar-online
-            - img = current_user.photo.present? ? current_user.photo : 'media/avatars/user-avatar.png'
-            = image_tag url_for(img), class: 'w-px-40 rounded-circle'
-        %ul.dropdown-menu.dropdown-menu-end
-          %li
-            %a.dropdown-item{ href: '#' }
-              .d-flex
-                .flex-shrink-0.me-3
-                  .avatar.avatar-online
-                    = image_tag url_for(img), class: 'w-px-40 rounded-circle'
-                .flex-grow-1
-                  %span.fw-semibold.d-block= full_name
-                  %small.text-muted= current_user.email
-          %li
-            .dropdown-divider
-          %li
-            %a.dropdown-item{ href: edit_profile_index_path }
-              %i.bx.bx-user.me-2
-              %span.align-middle= t('layouts.header.profiles')
-          %li
-            %a.dropdown-item{ href: jira_sites_path }
-              %i.bx.bx-sitemap.me-2
-              %span.align-middle= t('layouts.header.sites')
-          %li
-            %a.dropdown-item{ href: list_of_deleted_site_jira_sites_path }
-              %i.bx.bx-trash.me-2
-              %span.align-middle= t('layouts.header.list_of_deleted_site')
-          - if current_user.role == 'Admin'
-            %li
-              %a.dropdown-item{ href: edit_companies_path }
-                %i.bx.bx-cog.me-2
-                %span.align-middle= t('layouts.header.settings')
-          %li
-            .dropdown-divider
-          %li
-            = link_to destroy_user_session_path, method: :delete, class: 'dropdown-item' do
-              %i.bx.bx-power-off.me-2
-              %span.align-middle= t('layouts.header.sign_out')
-- content_for :js_code do
-  :javascript
-    function custom_template(obj) {
-      var data = $(obj.element).data();
-      var text = $(obj.element).text();
-      if (data && data['img_src']) {
-        img_src = data['img_src'];
-        template = $('<div><img src="' + img_src + '"/><p class="m-0">' + text + '</p></div>');
-        return template;
-      }
-    }
-    var options = {
-      templateSelection: custom_template,
-      templateResult: custom_template,
-      dropdownAutoWidth: true,
-      width: 'auto',
-      minimumResultsForSearch: -1,
-    };
+-#     %ul.navbar-nav.flex-row.align-items-center.ms-auto
+-#       %li.nav-item.navbar-dropdown.dropdown-user.dropdown
+-#         %a.nav-link.dropdown-toggle.hide-arrow{ 'data-bs-toggle' => 'dropdown', :href => 'javascript:void(0);' }
+-#           .avatar.avatar-online
+-#             - img = current_user.photo.present? ? current_user.photo : 'media/avatars/user-avatar.png'
+-#             = image_tag url_for(img), class: 'w-px-40 rounded-circle'
+-#         %ul.dropdown-menu.dropdown-menu-end
+-#           %li
+-#             %a.dropdown-item{ href: '#' }
+-#               .d-flex
+-#                 .flex-shrink-0.me-3
+-#                   .avatar.avatar-online
+-#                     = image_tag url_for(img), class: 'w-px-40 rounded-circle'
+-#                 .flex-grow-1
+-#                   %span.fw-semibold.d-block= full_name
+-#                   %small.text-muted= current_user.email
+-#           %li
+-#             .dropdown-divider
+-#           %li
+-#             %a.dropdown-item{ href: edit_profile_index_path }
+-#               %i.bx.bx-user.me-2
+-#               %span.align-middle= t('layouts.header.profiles')
+-#           %li
+-#             %a.dropdown-item{ href: jira_sites_path }
+-#               %i.bx.bx-sitemap.me-2
+-#               %span.align-middle= t('layouts.header.sites')
+-#           %li
+-#             %a.dropdown-item{ href: list_of_deleted_site_jira_sites_path }
+-#               %i.bx.bx-trash.me-2
+-#               %span.align-middle= t('layouts.header.list_of_deleted_site')
+-#           - if current_user.role == 'Admin'
+-#             %li
+-#               %a.dropdown-item{ href: edit_companies_path }
+-#                 %i.bx.bx-cog.me-2
+-#                 %span.align-middle= t('layouts.header.settings')
+-#           %li
+-#             .dropdown-divider
+-#           %li
+-#             = link_to destroy_user_session_path, method: :delete, class: 'dropdown-item' do
+-#               %i.bx.bx-power-off.me-2
+-#               %span.align-middle= t('layouts.header.sign_out')
+-# - content_for :js_code do
+-#   :javascript
+-#     function custom_template(obj) {
+-#       var data = $(obj.element).data();
+-#       var text = $(obj.element).text();
+-#       if (data && data['img_src']) {
+-#         img_src = data['img_src'];
+-#         template = $('<div><img src="' + img_src + '"/><p class="m-0">' + text + '</p></div>');
+-#         return template;
+-#       }
+-#     }
+-#     var options = {
+-#       templateSelection: custom_template,
+-#       templateResult: custom_template,
+-#       dropdownAutoWidth: true,
+-#       width: 'auto',
+-#       minimumResultsForSearch: -1,
+-#     };
 
-    $('#site_slug').select2(options);
+-#     $('#site_slug').select2(options);
 
-    $(document).ready(function() {
-      $('.site_selection').change(function() {
-          $('.site_selection_form').submit();
-      });
-    });
+-#     $(document).ready(function() {
+-#       $('.site_selection').change(function() {
+-#           $('.site_selection_form').submit();
+-#       });
+-#     });

@@ -1,6 +1,5 @@
 # frozen_string_literal: true
 Rails.application.routes.draw do
-  # frozen_string_literal: true
   def draw(file)
     instance_eval(File.read(Rails.root.join("config/routes/#{file}.rb")))
   end

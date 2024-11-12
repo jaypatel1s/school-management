@@ -1,4 +1,4 @@
   draw :authentication
-  # draw :jira
+  draw :jira
   draw :profile
   draw :companies

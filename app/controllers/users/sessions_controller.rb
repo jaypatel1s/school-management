@@ -7,22 +7,16 @@ module Users
     before_action :destroy_site_session, only: :destroy
 
     def create
-      resource = User.find_for_database_authentication(email: user_params[:email])
+      resource = User.find_for_database_authentication(
+        email: user_params[:email]
+      )
       if resource&.valid_password?(user_params[:password])
         sign_in :user, resource
-        flash[:success] = t(
-          'devise.sessions.signed_in_successfully'
-        )
-        if resource&.sites.present?
-          redirect_to jira_root_path
-        else
-          redirect_to new_jira_site_path
-        end
+        flash[:success] = 'Login successfully.'
+        redirect_to authenticated_user_path(resource)
       else
-        flash[:alert] = t(
-          'devise.sessions.invalid_credentials'
-        )
-        redirect_to new_user_session_path
+        flash[:alert] = 'Invalid Credentials.'
+        redirect_to root_path
       end
     end
 
