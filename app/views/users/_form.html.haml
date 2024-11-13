@@ -1,4 +1,4 @@
-= form_with model: @user, local: true, html: { multipart: true }, class: 'form' do |f|
+= form_with model: [:school, user], local: true, html: { multipart: true }, url: url, class: 'form' do |f|
   .row
     .col-md-6.mb-3
       %label.form-label.required
@@ -15,16 +15,17 @@
         = t('issues.users.table.role') # Label for Role
       = f.select :role, User.roles.keys.map { |role| [t("roles.#{role}"), role] }, {}, class: "form-control #{error?(@user.errors, :role)}"
       = print_error(@user.errors, :role)
-  .row
-    .col-md-6.mb-3
-      %label.form-label.required
-        = t('issues.users.table.password')
-      = f.password_field :password, class: "form-control #{error?(@user.errors, :password)}", value: f.object.password, placeholder: 'Password', required: true
-      = print_error(@user.errors, :name)
-    .col-md-6.mb-3
-      %label.form-label= t('issues.users.table.password_confirmation')
-      = f.password_field :password_confirmation, class: "form-control #{error?(@user.errors, :password_confirmation)}", value:  f.object.password_confirmation, placeholder: 'Password Confirmation'
-      = print_error(@user.errors, :password_confirmation)
+  - if action_name != 'edit'
+    .row
+      .col-md-6.mb-3
+        %label.form-label.required
+          = t('issues.users.table.password')
+        = f.password_field :password, class: "form-control #{error?(@user.errors, :password)}", value: f.object.password, placeholder: 'Password', required: true
+        = print_error(@user.errors, :name)
+      .col-md-6.mb-3
+        %label.form-label= t('issues.users.table.password_confirmation')
+        = f.password_field :password_confirmation, class: "form-control #{error?(@user.errors, :password_confirmation)}", value:  f.object.password_confirmation, placeholder: 'Password Confirmation'
+        = print_error(@user.errors, :password_confirmation)
 
   .col-12.d-flex.justify-content-between
     %button.btn.btn-primary{ type: 'submit', data: { confirm: 'Do you want to save the changes?' } }

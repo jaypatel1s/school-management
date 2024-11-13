@@ -47,7 +47,7 @@ class UsersController < BaseController
   private
 
   def set_user
-    @user = User.find_by(id: params[:id])
+    @user = User.find_by(slug: params[:slug])
     return if @user.present?
 
     flash[:notice] = 'User Not Found'

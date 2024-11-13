@@ -1,4 +1,4 @@
   draw :authentication
-  draw :jira
+  draw :school
   draw :profile
   draw :companies

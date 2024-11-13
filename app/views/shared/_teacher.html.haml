@@ -29,14 +29,22 @@
                 %th= t('issues.status.table.type')
                 %th.text-end= t('issues.status.table.actions')
             %tbody.table-border-bottom-0
-              - @users.each do |status|
+              - @users.each do |user|
                 %tr
                   %td.text-start
-                    %strong.long-txt= status.name
-                  %td.long-txt= status.role
-                  %td.long-txt= status.email
+                    %strong.long-txt= user.name
+                  %td.long-txt= user.role
+                  %td.long-txt= user.email
                   %td
                     .text-end.d-flex.align-items-center.justify-content-end
+                      %a.btn.btn-warning.btn-icon.btn-sm.me-1{
+                      href: edit_user_path(user.slug), 'data-bs-html': 'true', 'data-bs-offset': '0,4', 'data-bs-original-title': '<span>Edit</span>', 'data-bs-placement': 'bottom', 'data-bs-toggle': 'tooltip', title: '', type: 'button' }
+                        %i.bx.bx-pencil
+                      = link_to user_path(user.slug),
+                      { class: 'btn btn-danger btn-icon btn-sm me-1', 'data-bs-html': 'true', 'data-bs-offset': '0,4', 'data-bs-original-title': '<span>Delete</span>', 'data-bs-placement': 'bottom', 'data-confirm': "You won't be able to revert this!",
+                      'data-bs-toggle': 'tooltip', title: '', type: 'button', method: :delete } do
+                        %i.bx.bx-trash
+
                     -#   = link_to revisions_jira_site_issues_status_path(current_site.slug,
                     -#   status.slug), { class: 'btn btn-info btn-icon btn-sm me-1', 'data-bs-html': 'true', 'data-bs-offset': '0,4', 'data-bs-original-title': '<span>Audit</span>', 'data-bs-placement': 'bottom', 'data-bs-toggle': 'tooltip', title: '', type: 'button' } do
                     -#     %i.bx.bx-git-branch
@@ -46,10 +54,6 @@
                     -#   = link_to jira_site_issues_status_path(current_site.slug,
                     -#   status.slug), { class: 'btn btn-primary btn-icon btn-sm me-1', 'data-bs-html': 'true', 'data-bs-offset': '0,4', 'data-bs-original-title': '<span>Show</span>', 'data-bs-placement': 'bottom', 'data-bs-toggle': 'tooltip', title: '', type: 'button' } do
                     -#     %i.bx.bx-show
-                    -#   = link_to jira_site_issues_status_path(current_site.slug, status.slug),
-                    -#   { class: 'btn btn-danger btn-icon btn-sm me-1', 'data-bs-html': 'true', 'data-bs-offset': '0,4', 'data-bs-original-title': '<span>Delete</span>', 'data-bs-placement': 'bottom', 'data-confirm': "You won't be able to revert this!",
-                    -#   'data-bs-toggle': 'tooltip', title: '', type: 'button', method: :delete } do
-                    -#     %i.bx.bx-trash
         -# .d-flex.flex-stack.flex-wrap.justify-content-between.align-items-center.px-4.pt-3.pb-3
         -#   .last-sync
         -#     %div

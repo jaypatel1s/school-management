@@ -44,6 +44,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_11_11_092203) do
     t.bigint "college_id", null: false
     t.bigint "subject_id", null: false
     t.string "name"
+    t.string "slug", limit: 255, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["college_id"], name: "index_classrooms_on_college_id"
@@ -67,6 +68,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_11_11_092203) do
     t.bigint "college_id", null: false
     t.string "name"
     t.string "description"
+    t.string "slug", limit: 255, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["college_id"], name: "index_subjects_on_college_id"
@@ -80,6 +82,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_11_11_092203) do
     t.integer "role", default: 0
     t.integer "contact_no"
     t.text "description"
+    t.string "slug", limit: 255, null: false
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"

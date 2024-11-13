@@ -11,6 +11,7 @@ class DeviseCreateUsers < ActiveRecord::Migration[7.0]
       t.integer :role, default: 0
       t.integer :contact_no
       t.text :description
+      t.string :slug, limit: 255, null: false
 
       ## Recoverable
       t.string   :reset_password_token
