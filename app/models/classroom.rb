@@ -1,9 +1,11 @@
+# frozen_string_literal: true
+
+# :nodoc:
 class Classroom < ApplicationRecord
   include Sluggable
 
   belongs_to :college
-  has_many :classroom_subjects
-  has_many :subjects, through: :classroom_subjects
-  has_many :teacher_classrooms
-  has_many :teachers, through: :teacher_classrooms, source: :user
+
+  has_many :teacher_classrooms, dependent: :destroy
+  has_many :teacher_subjects, through: :teacher_classrooms
 end

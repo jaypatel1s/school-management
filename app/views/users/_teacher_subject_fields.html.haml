@@ -10,3 +10,11 @@
         %br
       = link_to_remove_association raw("<i class='bx bx-trash py-1'></i>"), f, class: 'btn btn-sm btn-danger', data: { toggle: 'tooltip', placement: 'left' }, title: 'Delete information'
       = print_error(f.object.errors, :value)
+
+  .row
+    .mb-3
+      .nested_forms#teacher_classrooms
+        = f.fields_for :teacher_classrooms do |information|
+          = render 'teacher_classroom_fields', f: information
+        .links.mt-2
+          = link_to_add_association raw("<i class='bx bx-plus'></i> Add Classroom"), f, :teacher_classrooms, class: 'btn btn-sm btn-info', data: { toggle: 'tooltip', placement: 'left' }, title: 'Add Classroom'

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class College < ApplicationRecord
   include Sluggable
   # Include default devise modules. Others available are:
@@ -5,5 +7,6 @@ class College < ApplicationRecord
   has_many :users, dependent: :destroy
   has_many :subjects, dependent: :destroy
   has_many :classrooms, dependent: :destroy
-
+  has_many :teacher_classrooms, dependent: :destroy
+  has_many :teacher_subjects, dependent: :destroy
 end

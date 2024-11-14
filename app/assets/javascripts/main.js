@@ -36,7 +36,6 @@ $(window).on("load", function () {
 		Background Set
 	--------------------*/
   $(".set-bg").each(function () {
-    debugger;
     var bg = $(this).data("setbg");
     $(this).css("background-image", "url(" + bg + ")");
   });

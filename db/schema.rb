@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_11_14_055830) do
+ActiveRecord::Schema[7.0].define(version: 2024_11_14_094634) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -38,15 +38,6 @@ ActiveRecord::Schema[7.0].define(version: 2024_11_14_055830) do
     t.datetime "updated_at", null: false
     t.index ["email"], name: "index_admin_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_admin_users_on_reset_password_token", unique: true
-  end
-
-  create_table "classroom_subjects", force: :cascade do |t|
-    t.bigint "classroom_id", null: false
-    t.bigint "subject_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["classroom_id"], name: "index_classroom_subjects_on_classroom_id"
-    t.index ["subject_id"], name: "index_classroom_subjects_on_subject_id"
   end
 
   create_table "classrooms", force: :cascade do |t|
@@ -82,21 +73,25 @@ ActiveRecord::Schema[7.0].define(version: 2024_11_14_055830) do
   end
 
   create_table "teacher_classrooms", force: :cascade do |t|
+    t.bigint "college_id", null: false
     t.bigint "user_id", null: false
     t.bigint "classroom_id", null: false
-    t.bigint "subject_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "teacher_subject_id", null: false
     t.index ["classroom_id"], name: "index_teacher_classrooms_on_classroom_id"
-    t.index ["subject_id"], name: "index_teacher_classrooms_on_subject_id"
+    t.index ["college_id"], name: "index_teacher_classrooms_on_college_id"
+    t.index ["teacher_subject_id"], name: "index_teacher_classrooms_on_teacher_subject_id"
     t.index ["user_id"], name: "index_teacher_classrooms_on_user_id"
   end
 
   create_table "teacher_subjects", force: :cascade do |t|
+    t.bigint "college_id", null: false
     t.bigint "user_id", null: false
     t.bigint "subject_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["college_id"], name: "index_teacher_subjects_on_college_id"
     t.index ["subject_id"], name: "index_teacher_subjects_on_subject_id"
     t.index ["user_id"], name: "index_teacher_subjects_on_user_id"
   end
@@ -134,13 +129,13 @@ ActiveRecord::Schema[7.0].define(version: 2024_11_14_055830) do
     t.index ["unlock_token"], name: "index_users_on_unlock_token", unique: true
   end
 
-  add_foreign_key "classroom_subjects", "classrooms"
-  add_foreign_key "classroom_subjects", "subjects"
   add_foreign_key "classrooms", "colleges"
   add_foreign_key "subjects", "colleges"
   add_foreign_key "teacher_classrooms", "classrooms"
-  add_foreign_key "teacher_classrooms", "subjects"
+  add_foreign_key "teacher_classrooms", "colleges"
+  add_foreign_key "teacher_classrooms", "teacher_subjects"
   add_foreign_key "teacher_classrooms", "users"
+  add_foreign_key "teacher_subjects", "colleges"
   add_foreign_key "teacher_subjects", "subjects"
   add_foreign_key "teacher_subjects", "users"
   add_foreign_key "users", "colleges"
