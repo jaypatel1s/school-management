@@ -1,0 +1,12 @@
+.nested-fields
+  .row
+    .col-md-10.form-group
+      %label.form-label.required
+        = t('issues.classrooms.table.subject')
+      = f.select :classroom_id, Classroom.all.map { |classroom| [classroom.name, classroom.id] }, {prompt: 'Select Subject' }, class: "form-control #{error?(@subject.errors, :role)}"
+      = print_error(@subject.errors, :classroom_id)
+    .col-md-2.delete
+      %label.col-form-label.d-none.d-md-block
+        %br
+      = link_to_remove_association raw("<i class='bx bx-trash py-1'></i>"), f, class: 'btn btn-sm btn-danger', data: { toggle: 'tooltip', placement: 'left' }, title: 'Delete information'
+      = print_error(f.object.errors, :value)

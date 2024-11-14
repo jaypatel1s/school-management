@@ -7,4 +7,4 @@
 #   Character.create(name: "Luke", movie: movies.first)
 AdminUser.create!(email: 'admin@example.com', password: 'password', password_confirmation: 'password')
 college = College.create!(name: 'First')
-User.create!(college_id: college.id, email: 'jay@softices.in', password: '123456', password_confirmation: '123456', role: 'principal', name: 'Jay')
+User.create!(college_id: college.id, email: 'jay@softices.in', password: '123456', password_confirmation: '123456', role: 'principal', name: 'Jay', confirmed_at: Time.now)

@@ -1,4 +1,4 @@
-class SubjectssController < BaseController
+class SubjectsController < BaseController
   before_action :set_subject, only: %i[show edit update destroy]
 
   def index
@@ -53,7 +53,7 @@ class SubjectssController < BaseController
 
   def subject_params
     params.require(:subject).permit(
-      :name, :college_id, :description
+      :name, :college_id, :description, classroom_subjects_attributes: %i[id classroom_id _destroy]
     )
   end
 end

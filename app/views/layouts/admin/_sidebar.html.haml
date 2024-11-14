@@ -16,6 +16,15 @@
         %a.menu-link{ href: users_path }
           %i.menu-icon.tf-icons.bx.bx-home-circle
           %div{ 'data-i18n': 'Analytics' }= t('layouts.sidebar.teachers')
+      %li.menu-item{ class: menu_active_class('classrooms') }
+        %a.menu-link{ href: classrooms_path }
+          %i.menu-icon.tf-icons.bx.bx-home-circle
+          %div{ 'data-i18n': 'Analytics' }= t('layouts.sidebar.classrooms')
+      %li.menu-item{ class: menu_active_class('subjects') }
+        %a.menu-link{ href: subjects_path }
+          %i.menu-icon.tf-icons.bx.bx-home-circle
+          %div{ 'data-i18n': 'Analytics' }= t('layouts.sidebar.subjects')
+
     -# - else
     -#   %li.menu-item{ class: menu_active_class('dashboard') }
     -#     %a.menu-link{ href: new_jira_site_path }

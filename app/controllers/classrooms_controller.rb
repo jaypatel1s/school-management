@@ -53,7 +53,7 @@ class ClassroomsController < BaseController
 
   def classroom_params
     params.require(:classroom).permit(
-      :name, :college_id, :subject_id
+      :name, :college_id
     )
   end
 end
