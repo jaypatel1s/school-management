@@ -2,7 +2,8 @@
   %h4.fw-bold.py-0.m-0
     = t('issues.status.table.classrooms')
   %div
-    %a.btn.btn-sm.btn-primary{ href: new_classroom_path }= t('issues.status.table.create')
+    - if can_access?(:classrooms, :new)
+      %a.btn.btn-sm.btn-primary{ href: new_classroom_path }= t('issues.status.table.create')
 -# .row
 -#   .col-md-12
 -#     .card.mb-4
