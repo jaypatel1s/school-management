@@ -1,0 +1,37 @@
+require:
+  - rubocop-capybara
+  - rubocop-performance
+  - rubocop-rails
+  - rubocop-rspec
+AllCops:
+  NewCops: enable
+  TargetRubyVersion: 3.2.0
+  Exclude:
+    - '**/bin/*'
+    - '**/db/schema.rb'
+    - '**/db/migrate/*'
+    - '**/config/initializers/*'
+    - '**/vendor/bundle/**/*'
+    - '**/spec/**/*'
+    - '**/lib/tasks/import_database.rake'
+Layout/LineLength:
+  Max: 120
+Metrics/ClassLength:
+  Max: 300
+Metrics/ModuleLength:
+  Max: 150
+Metrics/AbcSize:
+  Max: 50
+Metrics/CyclomaticComplexity:
+  Max: 20
+Metrics/PerceivedComplexity:
+  Max: 20
+Metrics/MethodLength:
+  Max: 25
+Metrics/BlockLength:
+  Max: 35
+  Exclude:
+    - '**/config/routes.rb'
+    - '**/config/routes/*'
+    - '**/config/environments/*'
+    - '**/config/initializers/*'

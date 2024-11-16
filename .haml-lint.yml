@@ -1,0 +1,15 @@
+linters:
+  LineLength:
+    max: 300
+  ViewLength:
+    max: 2000
+  InstanceVariables:
+    enabled: false
+  InlineStyles:
+    enabled: false
+  ConsecutiveSilentScripts:
+    enabled: false
+  RuboCop:
+    enabled: false
+  IdNames:
+    enabled: false

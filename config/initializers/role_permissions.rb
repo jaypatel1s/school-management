@@ -1,15 +1,16 @@
 ROLE_PERMISSIONS = {
   principal: {
     dashboard: %i[index],
-    users: %i[index new create edit update destroy],
-    classrooms: %i[new create edit update destroy],
-    subjects: %i[new create edit update destroy],
+    users: %i[index new create edit update show destroy],
+    classrooms: %i[index new create edit update destroy],
+    subjects: %i[index new create edit update destroy],
     marksheets: %i[index show]
   },
   teacher: {
     dashboard: %i[index],
+    users: %i[index new create edit update show destroy],
     classrooms: %i[index],
-    subjects: %i[index show edit update], # No 'new' permission for teacher
+    subjects: %i[index],
     marksheets: %i[new create index show]
   },
   student: {

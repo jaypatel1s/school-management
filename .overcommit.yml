@@ -1,0 +1,64 @@
+PreCommit:
+  ForbiddenBranches:
+    required: true
+    enabled: true
+    branch_patterns: ['master', 'staging']
+  TrailingWhitespace:
+    required: true
+    enabled: true
+    description: 'Check Code with any whitespace'
+    required_executable: 'grep'
+    flags: ['-IHn', "[ \t]$"]
+    include: '**/*.rb'
+  RuboCop:
+    required: true
+    enabled: true
+    description: 'Code analyze and formatter'
+    on_warn: fail
+    problem_on_unmodified_line: warn
+  Brakeman:
+    required: true
+    enabled: true
+    description: 'Check applications for security vulnerabilities'
+    on_warn: fail
+  Fasterer:
+    required: true
+    enabled: true
+    description: 'Check Ruby code and make your Rubies go faster'
+    on_warn: warn
+    exclude:
+      - 'vendor/**/*.rb'
+      - 'db/schema.rb'
+  # Reek:
+  #   enabled: true
+  #   description: 'Check Code smell detector for Ruby'
+  #   on_warn: warn
+  HamlLint:
+    enabled: true
+    description: 'Check HAML files clean and readable'
+    on_warn: fail
+  ScssLint:
+    enabled: true
+    description: 'Check SCSS files clean and readable'
+    on_warn: warn
+    problem_on_unmodified_line: warn
+  RailsSchemaUpToDate:
+    enabled: true
+    description: 'Check Migration schema up to date'
+    on_warn: fail
+  HardTabs:
+    enabled: true
+    description: 'Check Hard tabs used into file'
+    on_warn: fail
+CommitMsg:
+  EmptyMessage:
+    enabled: true
+    description: 'Check for empty commit message'
+    quiet: true
+  TrailingPeriod:
+    enabled: true
+    description: 'Check for trailing periods in subject'
+  MessageFormat:
+    enabled: true
+    description: 'Check for Commit message format'
+    pattern: '[Feature|Task|Change|Bug|Support] #\d+ .+'
