@@ -12,11 +12,12 @@ class UsersController < BaseController
              end
   end
 
+  def show; end
+
   def new
     @user = User.new
   end
 
-  def show; end
   def edit; end
 
   def create
@@ -58,21 +59,22 @@ class UsersController < BaseController
   end
 
   def user_params
-    base_params = params.require(:user).permit(
+    params.require(:user).permit(
       :name, :email, :role, :college_id, :password, :password_confirmation,
       teacher_subjects_attributes: [:id, :college_id, :subject_id, :_destroy,
-                                    { teacher_classrooms_attributes: %i[id college_id subject_id classroom_id _destroy] }]
+                                    { teacher_classrooms_attributes: %i[id college_id subject_id
+                                                                        classroom_id _destroy] }]
     )
-    if base_params['teacher_subjects_attributes'].present?
-      base_params['teacher_subjects_attributes'].each_value do |value|
-        if value['teacher_classrooms_attributes'].present?
-          value['teacher_classrooms_attributes'].each_value do |field_value|
-            modify_params(field_value)
-          end
-        end
-        modify_params(value)
-      end
-    end
-    base_params
+    # if base_params['teacher_subjects_attributes'].present?
+    #   base_params['teacher_subjects_attributes'].each_value do |value|
+    #     if value['teacher_classrooms_attributes'].present?
+    #       value['teacher_classrooms_attributes'].each_value do |field_value|
+    #         modify_params(field_value)
+    #       end
+    #     end
+    #     modify_params(value)
+    #   end
+    # end
+    # base_params
   end
 end
