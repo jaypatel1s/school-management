@@ -7,6 +7,9 @@ class UsersController < BaseController
   def index
     @users = if current_user.principal?
                User.all
+             elsif current_user.teacher? && current_user.teacher_subjects.empty?
+               flash[:alert] = 'Please complete your profile setup.'
+               redirect_to profile_setup_user_path(current_user.id)
              else
                User.where(role: 'student')
              end
@@ -34,12 +37,20 @@ class UsersController < BaseController
 
   def update
     if @user.update(user_params)
-      flash[:success] = 'User Updated Successfully.'
+
+      if params['user']['teacher_subjects_attributes'].present? && current_user.role == 'teacher'
+        ApproveTeacherJob.set(wait: 5.minutes).perform_later(current_user)
+      end
+      flash[:success] = 'User Updated Successfully. Please check after 5 minutes'
       redirect_to users_path
     else
       flash[:alert] = @user.errors.full_messages
       render :edit
     end
+  end
+
+  def profile_setup
+    @user = current_user
   end
 
   def destroy
@@ -59,22 +70,22 @@ class UsersController < BaseController
   end
 
   def user_params
-    params.require(:user).permit(
+    base_params = params.require(:user).permit(
       :name, :email, :role, :college_id, :password, :password_confirmation,
       teacher_subjects_attributes: [:id, :college_id, :subject_id, :_destroy,
                                     { teacher_classrooms_attributes: %i[id college_id subject_id
                                                                         classroom_id _destroy] }]
     )
-    # if base_params['teacher_subjects_attributes'].present?
-    #   base_params['teacher_subjects_attributes'].each_value do |value|
-    #     if value['teacher_classrooms_attributes'].present?
-    #       value['teacher_classrooms_attributes'].each_value do |field_value|
-    #         modify_params(field_value)
-    #       end
-    #     end
-    #     modify_params(value)
-    #   end
-    # end
-    # base_params
+    if base_params['teacher_subjects_attributes'].present?
+      base_params['teacher_subjects_attributes'].each_value do |value|
+        if value['teacher_classrooms_attributes'].present?
+          value['teacher_classrooms_attributes'].each_value do |field_value|
+            modify_params(field_value)
+          end
+        end
+        modify_params(value)
+      end
+    end
+    base_params
   end
 end

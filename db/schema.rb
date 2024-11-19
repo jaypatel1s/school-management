@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_11_14_094634) do
+ActiveRecord::Schema[7.0].define(version: 2024_11_18_052732) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -79,6 +79,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_11_14_094634) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "teacher_subject_id", null: false
+    t.boolean "approved", default: false
     t.index ["classroom_id"], name: "index_teacher_classrooms_on_classroom_id"
     t.index ["college_id"], name: "index_teacher_classrooms_on_college_id"
     t.index ["teacher_subject_id"], name: "index_teacher_classrooms_on_teacher_subject_id"
@@ -91,6 +92,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_11_14_094634) do
     t.bigint "subject_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "approved", default: false
     t.index ["college_id"], name: "index_teacher_subjects_on_college_id"
     t.index ["subject_id"], name: "index_teacher_subjects_on_subject_id"
     t.index ["user_id"], name: "index_teacher_subjects_on_user_id"

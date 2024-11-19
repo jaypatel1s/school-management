@@ -7,6 +7,10 @@ devise_scope :user do
   end
 end
 resources :users, param: :slug do
+  member do
+    get :profile_setup
+    post :update_profile
+  end
   resources :teacher_subjects
 end
 
