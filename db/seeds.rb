@@ -5,7 +5,9 @@
 #
 #   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
 #   Character.create(name: "Luke", movie: movies.first)
-admin_user = AdminUser.find_or_initialize_by(email: 'admin@example.com', password: 'password', password_confirmation: 'password')
+admin_user = AdminUser.find_or_initialize_by(email: 'admin@example.com')
+admin_user.password = 'password'  # This will set the password_digest field automatically
+admin_user.password_confirmation = 'password'
 admin_user.save!
 college = College.find_or_initialize_by(name: 'First')
 college.save!  # Save the College if it's new
