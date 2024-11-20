@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_11_18_052732) do
+ActiveRecord::Schema[7.0].define(version: 2024_11_20_100438) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -40,6 +40,16 @@ ActiveRecord::Schema[7.0].define(version: 2024_11_18_052732) do
     t.index ["reset_password_token"], name: "index_admin_users_on_reset_password_token", unique: true
   end
 
+  create_table "attendances", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "session_id", null: false
+    t.integer "status", default: 0
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["session_id"], name: "index_attendances_on_session_id"
+    t.index ["user_id"], name: "index_attendances_on_user_id"
+  end
+
   create_table "classrooms", force: :cascade do |t|
     t.bigint "college_id", null: false
     t.string "name"
@@ -60,6 +70,14 @@ ActiveRecord::Schema[7.0].define(version: 2024_11_18_052732) do
     t.string "slug", limit: 255, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "sessions", force: :cascade do |t|
+    t.bigint "classroom_id", null: false
+    t.datetime "date"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["classroom_id"], name: "index_sessions_on_classroom_id"
   end
 
   create_table "subjects", force: :cascade do |t|
@@ -131,7 +149,10 @@ ActiveRecord::Schema[7.0].define(version: 2024_11_18_052732) do
     t.index ["unlock_token"], name: "index_users_on_unlock_token", unique: true
   end
 
+  add_foreign_key "attendances", "sessions"
+  add_foreign_key "attendances", "users"
   add_foreign_key "classrooms", "colleges"
+  add_foreign_key "sessions", "classrooms"
   add_foreign_key "subjects", "colleges"
   add_foreign_key "teacher_classrooms", "classrooms"
   add_foreign_key "teacher_classrooms", "colleges"
