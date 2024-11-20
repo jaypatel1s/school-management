@@ -1,10 +1,10 @@
--# %nav.layout-navbar.container-xxl.navbar.navbar-expand-xl.navbar-detached.align-items-center.bg-navbar-theme#layout-navbar
--#   .layout-menu-toggle.navbar-nav.align-items-xl-center.me-3.me-xl-0.d-xl-none
--#     %a.nav-item.nav-link.px-0.me-xl-4{ :href => 'javascript:void(0)' }
--#       %i.bx.bx-menu.bx-sm
--#   .navbar-nav-right.d-flex.align-items-center#navbar-collapse
--#     .navbar-nav.align-items-center
--#       .nav-item.d-flex.align-items-center
+%nav.layout-navbar.container-xxl.navbar.navbar-expand-xl.navbar-detached.align-items-center.bg-navbar-theme#layout-navbar
+  .layout-menu-toggle.navbar-nav.align-items-xl-center.me-3.me-xl-0.d-xl-none
+    %a.nav-item.nav-link.px-0.me-xl-4{ :href => 'javascript:void(0)' }
+      %i.bx.bx-menu.bx-sm
+  .navbar-nav-right.d-flex.align-items-center#navbar-collapse
+    .navbar-nav.align-items-center
+      .nav-item.d-flex.align-items-center
 -#         - if current_site.present?
 -#           = form_with url: update_session_jira_sites_path, method: :put, local: true, class: 'form site_selection_form', html: { style: 'display: flex;' } do |f|
 -#             = f.select 'site_slug', current_company.sites.map { |p| [p.domain, p.slug, { 'data-img_src': p.site_logo.present? ? url_for(p.site_logo) : image_url('media/avatars/default_site.png') }] }, { selected: current_site.slug }, class: 'form-control site_selection'
