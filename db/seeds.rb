@@ -5,6 +5,9 @@
 #
 #   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
 #   Character.create(name: "Luke", movie: movies.first)
-AdminUser.create!(email: 'admin@example.com', password: 'password', password_confirmation: 'password')
-college = College.create!(name: 'First')
-User.create!(college_id: college.id, email: 'jay@softices.in', password: '123456', password_confirmation: '123456', role: 'principal', name: 'Jay', confirmed_at: Time.now)
+admin_user = AdminUser.find_or_initialize_by(email: 'admin@example.com', password: 'password', password_confirmation: 'password')
+admin.save!
+college = College.find_or_initialize_by(name: 'First')
+college.save!  # Save the College if it's new
+user = User.find_or_initialize_by(college_id: college.id, email: 'jay@softices.in', password: '123456', password_confirmation: '123456', role: 'principal', name: 'Jay', confirmed_at: Time.now)
+user.save!  # Save the User if it's new or updated
