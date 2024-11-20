@@ -1,2 +1,2 @@
-RAILS_ENV=production bin/rails server -p 3000
+bin/rails server -p 3000
 
