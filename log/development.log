@@ -1767,3 +1767,66 @@ Processing by Admin::CollegesController#new as HTML
 Completed 200 OK in 54ms (Views: 24.1ms | ActiveRecord: 9.6ms | Allocations: 26886)
 
 
+Started GET "/" for ::1 at 2024-11-20 13:34:35 +0530
+  [1m[36mActiveRecord::SchemaMigration Pluck (1.8ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by HomeController#index as HTML
+  Rendering layout layouts/application.html.haml
+  Rendering home/index.html.haml within layouts/application
+  Rendered home/index.html.haml within layouts/application (Duration: 90.0ms | Allocations: 118948)
+  Rendered common/_notification.html.haml (Duration: 3.6ms | Allocations: 3435)
+  Rendered layout layouts/application.html.haml (Duration: 106.3ms | Allocations: 132170)
+Completed 200 OK in 118ms (Views: 110.0ms | ActiveRecord: 0.0ms | Allocations: 135533)
+
+
+Started GET "/signin" for ::1 at 2024-11-20 13:34:36 +0530
+Processing by Users::SessionsController#new as HTML
+  Rendering layout layouts/authentication.html.haml
+  Rendering users/sessions/new.html.haml within layouts/authentication
+  Rendered users/sessions/new.html.haml within layouts/authentication (Duration: 24.7ms | Allocations: 15233)
+  Rendered common/_notification.html.haml (Duration: 0.1ms | Allocations: 34)
+  Rendered layout layouts/authentication.html.haml (Duration: 45.4ms | Allocations: 33579)
+Completed 200 OK in 91ms (Views: 46.8ms | ActiveRecord: 12.6ms | Allocations: 49543)
+
+
+Started GET "/car_advisory_background.jpg" for ::1 at 2024-11-20 13:34:36 +0530
+Started GET "/" for ::1 at 2024-11-20 13:34:37 +0530
+Processing by HomeController#index as HTML
+  Rendering layout layouts/application.html.haml
+  Rendering home/index.html.haml within layouts/application
+  Rendered home/index.html.haml within layouts/application (Duration: 1.0ms | Allocations: 701)
+  Rendered common/_notification.html.haml (Duration: 0.1ms | Allocations: 33)
+  Rendered layout layouts/application.html.haml (Duration: 2.4ms | Allocations: 1190)
+Completed 200 OK in 3ms (Views: 3.0ms | ActiveRecord: 0.0ms | Allocations: 1442)
+
+
+Started POST "/signin" for ::1 at 2024-11-20 13:34:42 +0530
+Processing by Users::SessionsController#create as HTML
+  Parameters: {"authenticity_token"=>"[FILTERED]", "user"=>{"email"=>"jay@softices.in", "password"=>"[FILTERED]"}}
+  [1m[36mUser Load (3.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["email", "jay@softices.in"], ["LIMIT", 1]]
+  ↳ app/controllers/users/sessions_controller.rb:10:in `create'
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/users/sessions_controller.rb:14:in `create'
+  [1m[36mUser Update (1.5ms)[0m  [1m[33mUPDATE "users" SET "sign_in_count" = $1, "current_sign_in_at" = $2, "last_sign_in_at" = $3, "updated_at" = $4 WHERE "users"."id" = $5[0m  [["sign_in_count", 8], ["current_sign_in_at", "2024-11-20 08:04:43.271161"], ["last_sign_in_at", "2024-11-18 03:14:23.377558"], ["updated_at", "2024-11-20 08:04:43.272004"], ["id", 1]]
+  ↳ app/controllers/users/sessions_controller.rb:14:in `create'
+  [1m[36mTRANSACTION (3.2ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/users/sessions_controller.rb:14:in `create'
+Redirected to http://localhost:3001/
+Completed 302 Found in 348ms (ActiveRecord: 9.3ms | Allocations: 7379)
+
+
+Started GET "/" for ::1 at 2024-11-20 13:34:43 +0530
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+Processing by DashboardController#index as HTML
+  Rendering layout layouts/admin.html.haml
+  Rendering dashboard/index.html.haml within layouts/admin
+  [1m[36mCollege Load (0.8ms)[0m  [1m[34mSELECT "colleges".* FROM "colleges" WHERE "colleges"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/dashboard/index.html.haml:10
+  Rendered dashboard/index.html.haml within layouts/admin (Duration: 38.9ms | Allocations: 13520)
+  Rendered layouts/admin/_sidebar.html.haml (Duration: 16.8ms | Allocations: 18903)
+  Rendered layouts/admin/_nav.html.haml (Duration: 9.5ms | Allocations: 9566)
+  Rendered layouts/admin/_footer.html.haml (Duration: 3.6ms | Allocations: 2934)
+  Rendered common/_notification.html.haml (Duration: 0.1ms | Allocations: 32)
+  Rendered layout layouts/admin.html.haml (Duration: 98.4ms | Allocations: 72846)
+Completed 200 OK in 102ms (Views: 96.3ms | ActiveRecord: 4.6ms | Allocations: 73535)
+
+
