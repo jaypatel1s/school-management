@@ -15,4 +15,8 @@ resources :users, param: :slug do
 end
 
 resources :subjects, param: :slug
-resources :classrooms, param: :slug
+resources :classrooms, param: :slug do
+  resources :sessions, param: :slug do
+    resources :attendances, param: :slug, only: [:index, :update]
+  end
+end

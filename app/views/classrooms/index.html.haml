@@ -33,6 +33,10 @@
                       - if can_access?(:classrooms, :show)
                         = link_to classroom_path(classroom.slug), { class: 'btn btn-primary btn-icon btn-sm me-1', 'data-bs-html': 'true', 'data-bs-offset': '0,4', 'data-bs-original-title': '<span>Show</span>', 'data-bs-placement': 'bottom', 'data-bs-toggle': 'tooltip', title: '', type: 'button' } do
                           %i.bx.bx-show
+                      - if can_access?(:sessions, :index)
+                        = link_to classroom_sessions_path(classroom_slug: classroom.slug), { class: '', 'data-bs-html': 'true', 'data-bs-offset': '0,4', 'data-bs-original-title': '<span>Show</span>', 'data-bs-placement': 'bottom', 'data-bs-toggle': 'tooltip', title: '', type: 'button' } do
+                          = 'Session'
+
       - else
         .col-12
           .card

@@ -9,4 +9,6 @@ class College < ApplicationRecord
   has_many :classrooms, dependent: :destroy
   has_many :teacher_classrooms, dependent: :destroy
   has_many :teacher_subjects, dependent: :destroy
+  has_many :sessions, dependent: :destroy
+  has_many :attendances, dependent: :destroy
 end

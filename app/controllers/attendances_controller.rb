@@ -1,4 +1,4 @@
-class AttendancesController < ApplicationController
+class AttendancesController < BaseController
   def index
   end
 

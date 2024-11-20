@@ -41,11 +41,14 @@ ActiveRecord::Schema[7.0].define(version: 2024_11_20_100438) do
   end
 
   create_table "attendances", force: :cascade do |t|
+    t.bigint "college_id", null: false
     t.bigint "user_id", null: false
     t.bigint "session_id", null: false
     t.integer "status", default: 0
+    t.string "slug", limit: 255, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["college_id"], name: "index_attendances_on_college_id"
     t.index ["session_id"], name: "index_attendances_on_session_id"
     t.index ["user_id"], name: "index_attendances_on_user_id"
   end
@@ -73,11 +76,14 @@ ActiveRecord::Schema[7.0].define(version: 2024_11_20_100438) do
   end
 
   create_table "sessions", force: :cascade do |t|
+    t.bigint "college_id", null: false
     t.bigint "classroom_id", null: false
     t.datetime "date"
+    t.string "slug", limit: 255, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["classroom_id"], name: "index_sessions_on_classroom_id"
+    t.index ["college_id"], name: "index_sessions_on_college_id"
   end
 
   create_table "subjects", force: :cascade do |t|
@@ -149,10 +155,12 @@ ActiveRecord::Schema[7.0].define(version: 2024_11_20_100438) do
     t.index ["unlock_token"], name: "index_users_on_unlock_token", unique: true
   end
 
+  add_foreign_key "attendances", "colleges"
   add_foreign_key "attendances", "sessions"
   add_foreign_key "attendances", "users"
   add_foreign_key "classrooms", "colleges"
   add_foreign_key "sessions", "classrooms"
+  add_foreign_key "sessions", "colleges"
   add_foreign_key "subjects", "colleges"
   add_foreign_key "teacher_classrooms", "classrooms"
   add_foreign_key "teacher_classrooms", "colleges"

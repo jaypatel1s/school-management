@@ -1,4 +1,7 @@
 class Attendance < ApplicationRecord
+  include Sluggable
+
+  belongs_to :college
   belongs_to :user
   belongs_to :session
 
