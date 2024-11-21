@@ -6,12 +6,12 @@ class UsersController < BaseController
 
   def index
     @users = if current_user.principal?
-               User.all
+               User.where(role: 'teacher', college_id: current_user.college_id)
              elsif current_user.teacher? && current_user.teacher_subjects.empty?
                flash[:alert] = 'Please complete your profile setup.'
                redirect_to profile_setup_user_path(current_user.id)
              else
-               User.where(role: 'student')
+               User.where(role: 'student', college_id: current_user.college_id)
              end
   end
 
