@@ -2,11 +2,11 @@ class ClassroomsController < BaseController
   before_action :set_classroom, only: %i[show edit update destroy]
 
   def index
-    @classrooms = current_user.classrooms.all
+    @classrooms = Classroom.where(college_id: current_user.college_id)
   end
 
   def new
-    @classroom = current_user.classroom.new
+    @classroom = Classroom.new
   end
 
   def show; end
