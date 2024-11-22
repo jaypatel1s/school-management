@@ -17,7 +17,7 @@ class SubjectsController < BaseController
     @subject = current_college.subjects.new(subject_params)
     if @subject.save
       flash[:success] = 'Subject Created Successfully'
-      redirect_to subjects_path
+      redirect_to college_subjects_path(current_college.slug)
     else
       flash[:alert] = @subject.errors.full_messages
       render :new
@@ -27,7 +27,7 @@ class SubjectsController < BaseController
   def update
     if @subject.update(subject_params)
       flash[:success] = 'Subject Updated Successfully.'
-      redirect_to subjects_path
+      redirect_to college_subjects_path(current_college.slug)
     else
       flash[:alert] = @subject.errors.full_messages
       render :edit
@@ -37,7 +37,7 @@ class SubjectsController < BaseController
   def destroy
     @subject.destroy
     flash[:success] = 'Subject Deleted Successfully'
-    redirect_to subjects_path
+    redirect_to college_subjects_path(current_college.slug)
   end
 
   private
@@ -47,7 +47,7 @@ class SubjectsController < BaseController
     return if @subject.present?
 
     flash[:notice] = 'Subject Not Found'
-    redirect_to subjects_path
+    redirect_to college_subjects_path(current_college.slug)
   end
 
   def subject_params

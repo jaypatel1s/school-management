@@ -6,6 +6,7 @@ class User < ApplicationRecord
   has_many :teacher_subjects, dependent: :destroy
   has_many :subjects, through: :teacher_subjects
   has_many :teacher_classrooms, through: :teacher_subjects
+  has_many :attendances, dependent: :destroy  # A user (student) can have multiple attendance records
 
   accepts_nested_attributes_for :teacher_subjects, reject_if: :all_blank, allow_destroy: true
 
