@@ -10,7 +10,7 @@ class SessionsController < BaseController
   private
 
   def set_classroom
-    @classroom = Classroom.find_by(slug: params[:classroom_slug])
+    @classroom = current_college.classrooms.find_by(slug: params[:classroom_slug])
     return if @classroom.present?
 
     flash[:notice] = 'Classroom Not Found'

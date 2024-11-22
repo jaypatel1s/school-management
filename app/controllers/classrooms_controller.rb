@@ -17,7 +17,7 @@ class ClassroomsController < BaseController
     @classroom = current_college.classrooms.new(classroom_params)
     if @classroom.save
       flash[:success] = 'Classroom Created Successfully'
-      redirect_to classrooms_path
+      redirect_to college_classrooms_path(current_college.slug)
     else
       flash[:alert] = @classroom.errors.full_messages
       render :new
@@ -27,7 +27,7 @@ class ClassroomsController < BaseController
   def update
     if @classroom.update(classroom_params)
       flash[:success] = 'Classroom Updated Successfully.'
-      redirect_to classrooms_path
+      redirect_to college_classrooms_path(current_college.slug)
     else
       flash[:alert] = @classroom.errors.full_messages
       render :edit
@@ -37,7 +37,7 @@ class ClassroomsController < BaseController
   def destroy
     @classroom.destroy
     flash[:success] = 'Classroom Deleted Successfully'
-    redirect_to classrooms_path
+    redirect_to college_classrooms_path(current_college.slug)
   end
 
   private
@@ -47,7 +47,7 @@ class ClassroomsController < BaseController
     return if @classroom.present?
 
     flash[:notice] = 'Classroom Not Found'
-    redirect_to classrooms_path
+    redirect_to college_classrooms_path(current_college.slug)
   end
 
   def classroom_params

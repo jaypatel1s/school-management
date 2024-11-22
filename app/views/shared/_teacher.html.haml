@@ -3,7 +3,7 @@
     = t('issues.status.table.teachers')
   %div
     - if can_access?(:users, :new)
-      %a.btn.btn-sm.btn-primary{ href: new_user_path }= t('issues.status.table.create')
+      %a.btn.btn-sm.btn-primary{ href: new_college_user_path }= t('issues.status.table.create')
 .row
   .col-12
     .card
@@ -27,15 +27,15 @@
                     .text-end.d-flex.align-items-center.justify-content-end
                       - if can_access?(:users, :edit)
                         %a.btn.btn-warning.btn-icon.btn-sm.me-1{
-                        href: edit_user_path(user.slug), 'data-bs-html': 'true', 'data-bs-offset': '0,4', 'data-bs-original-title': '<span>Edit</span>', 'data-bs-placement': 'bottom', 'data-bs-toggle': 'tooltip', title: '', type: 'button' }
+                        href: edit_college_user_path(current_college.slug, user.slug), 'data-bs-html': 'true', 'data-bs-offset': '0,4', 'data-bs-original-title': '<span>Edit</span>', 'data-bs-placement': 'bottom', 'data-bs-toggle': 'tooltip', title: '', type: 'button' }
                           %i.bx.bx-pencil
                       - if can_access?(:users, :destroy)
-                        = link_to user_path(user.slug),
+                        = link_to college_user_path(current_college.slug, user.slug),
                         { class: 'btn btn-danger btn-icon btn-sm me-1', 'data-bs-html': 'true', 'data-bs-offset': '0,4', 'data-bs-original-title': '<span>Delete</span>', 'data-bs-placement': 'bottom', 'data-confirm': "You won't be able to revert this!",
                         'data-bs-toggle': 'tooltip', title: '', type: 'button', method: :delete } do
                           %i.bx.bx-trash
                       - if can_access?(:users, :show)
-                        = link_to user_path(user.slug), { class: 'btn btn-primary btn-icon btn-sm me-1', 'data-bs-html': 'true', 'data-bs-offset': '0,4', 'data-bs-original-title': '<span>Show</span>', 'data-bs-placement': 'bottom', 'data-bs-toggle': 'tooltip', title: '', type: 'button' } do
+                        = link_to college_user_path(current_college.slug, user.slug), { class: 'btn btn-primary btn-icon btn-sm me-1', 'data-bs-html': 'true', 'data-bs-offset': '0,4', 'data-bs-original-title': '<span>Show</span>', 'data-bs-placement': 'bottom', 'data-bs-toggle': 'tooltip', title: '', type: 'button' } do
                           %i.bx.bx-show
       - else
         .col-12

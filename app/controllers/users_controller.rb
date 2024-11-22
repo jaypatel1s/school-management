@@ -27,7 +27,7 @@ class UsersController < BaseController
     @user = current_college.users.new(user_params)
     if @user.save
       flash[:success] = 'User Created Successfully'
-      redirect_to users_path
+      redirect_to college_users_path(current_college.slug)
     else
       flash[:alert] = @user.errors.full_messages
       render :new
@@ -41,7 +41,7 @@ class UsersController < BaseController
         ApproveTeacherJob.set(wait: 5.minutes).perform_later(current_user)
       end
       flash[:success] = 'User Updated Successfully. Please check after 5 minutes'
-      redirect_to users_path
+      redirect_to college_users_path(current_college.slug)
     else
       flash[:alert] = @user.errors.full_messages
       render :edit
@@ -55,7 +55,7 @@ class UsersController < BaseController
   def destroy
     @user.destroy
     flash[:success] = 'User Deleted Successfully'
-    redirect_to users_path
+    redirect_to college_users_path(current_college.slug)
   end
 
   private
@@ -65,7 +65,7 @@ class UsersController < BaseController
     return if @user.present?
 
     flash[:notice] = 'User Not Found'
-    redirect_to users_path
+    redirect_to college_users_path(current_college.slug)
   end
 
   def user_params
