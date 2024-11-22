@@ -4,23 +4,23 @@
   %div
     - if can_access?(:users, :new)
       %a.btn.btn-sm.btn-primary{ href: new_college_user_path }= t('issues.status.table.create')
-.row
-  .col-md-12
-    .card.mb-4
-      .card-body
-        = form_tag users_path, method: :get do |f|
-          .main-div.d-flex.justify-content-between.align-items-center
-            .sub-div
-              = text_field_tag :search, params[:search], placeholder: 'Search', class: 'form-control form-field'
-            .sub-div
-              = select_tag :subject_id, options_for_select(@subject_id, params[:subject_id] ), prompt: t('all'), class: 'form-select'
-            .sub-div
-              = select_tag :classroom_id, options_for_select(@classroom_id, params[:classroom_id] ), prompt: t('all'), class: 'form-select'
-            .sub-div.d-flex.align-items-center.justify-content-end
-              %button.btn.btn-primary.btn-icon.btn-sm.me-1{ type: 'submit', 'data-bs-html': 'true', 'data-bs-offset': '0,4', 'data-bs-original-title': '<span>Next</span>', 'data-bs-placement': 'bottom', 'data-bs-toggle': 'tooltip', title: '' }
-                %i.bx.bx-search
-              %a.btn.btn-warning.btn-icon.btn-sm.me-1{ href: users_path, type: 'submit', 'data-bs-html': 'true', 'data-bs-offset': '0,4', 'data-bs-original-title': '<span>Clear</span>', 'data-bs-placement': 'bottom', 'data-bs-toggle': 'tooltip', title: '' }
-                %i.bx.bx-refresh
+-# .row
+-#   .col-md-12
+-#     .card.mb-4
+-#       .card-body
+-#         = form_tag college_users_path, method: :get do |f|
+-#           .main-div.d-flex.justify-content-between.align-items-center
+-#             .sub-div
+-#               = text_field_tag :search, params[:search], placeholder: 'Search', class: 'form-control form-field'
+-#             .sub-div
+-#               = select_tag :subject_id, options_for_select(@subject_id, params[:subject_id] ), prompt: t('all'), class: 'form-select'
+-#             .sub-div
+-#               = select_tag :classroom_id, options_for_select(@classroom_id, params[:classroom_id] ), prompt: t('all'), class: 'form-select'
+-#             .sub-div.d-flex.align-items-center.justify-content-end
+-#               %button.btn.btn-primary.btn-icon.btn-sm.me-1{ type: 'submit', 'data-bs-html': 'true', 'data-bs-offset': '0,4', 'data-bs-original-title': '<span>Next</span>', 'data-bs-placement': 'bottom', 'data-bs-toggle': 'tooltip', title: '' }
+-#                 %i.bx.bx-search
+-#               %a.btn.btn-warning.btn-icon.btn-sm.me-1{ href: users_path, type: 'submit', 'data-bs-html': 'true', 'data-bs-offset': '0,4', 'data-bs-original-title': '<span>Clear</span>', 'data-bs-placement': 'bottom', 'data-bs-toggle': 'tooltip', title: '' }
+-#                 %i.bx.bx-refresh
 .row
   .col-12
     .card

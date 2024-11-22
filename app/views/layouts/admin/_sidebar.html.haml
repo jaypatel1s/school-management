@@ -16,12 +16,12 @@
     - if can_access?(:users, :index)
       - if current_user.principal?
         %li.menu-item{ class: menu_active_class('users') }
-          %a.menu-link{ href: users_path }
+          %a.menu-link{ href: college_users_path(college_slug: current_college.slug) }
             %i.menu-icon.tf-icons.bx.bx-user
             %div{ 'data-i18n': 'Users' }= t('layouts.sidebar.teachers')
       - elsif current_user.teacher?
         %li.menu-item{ class: menu_active_class('users') }
-          %a.menu-link{ href: users_path }
+          %a.menu-link{ href: college_users_path(college_slug: current_college.slug) }
             %i.menu-icon.tf-icons.bx.bx-user
             %div{ 'data-i18n': 'Users' }= t('layouts.sidebar.users')
       - else

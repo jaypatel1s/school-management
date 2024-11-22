@@ -10,4 +10,4 @@
   .col-md-12
     .card.mb-4
       .card-body
-        = render 'form', user: @user, url: user_path(@user.slug)
+        = render 'form', user: @user, url: college_user_path(college_slug: current_college.slug, @user.slug)
