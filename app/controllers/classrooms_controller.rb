@@ -2,11 +2,11 @@ class ClassroomsController < BaseController
   before_action :set_classroom, only: %i[show edit update destroy]
 
   def index
-    @classrooms = Classroom.all
+    @classrooms = current_college.classrooms
   end
 
   def new
-    @classroom = Classroom.new
+    @classroom = current_college.classrooms.new
   end
 
   def show; end
@@ -14,8 +14,7 @@ class ClassroomsController < BaseController
   def edit; end
 
   def create
-    @classroom = Classroom.new(classroom_params)
-    @classroom.college_id = current_user.college_id
+    @classroom = current_college.classrooms.new(classroom_params)
     if @classroom.save
       flash[:success] = 'Classroom Created Successfully'
       redirect_to classrooms_path
@@ -44,7 +43,7 @@ class ClassroomsController < BaseController
   private
 
   def set_classroom
-    @classroom = Classroom.find_by(slug: params[:slug])
+    @classroom = current_college.classrooms.find_by(slug: params[:slug])
     return if @classroom.present?
 
     flash[:notice] = 'Classroom Not Found'

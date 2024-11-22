@@ -1,10 +1,19 @@
 class ApplicationController < ActionController::Base
   include ApplicationConcern
+  helper_method :current_college
 
   def authenticate_admin!
     return if current_user.present? && current_user.principal?
 
     unauthenticate_response
+  end
+
+  def set_current_college
+    @current_college =  current_user.college
+  end
+
+  def current_college
+    @current_college
   end
 
   def authenticate_user!

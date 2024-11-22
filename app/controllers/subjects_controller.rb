@@ -2,11 +2,11 @@ class SubjectsController < BaseController
   before_action :set_subject, only: %i[show edit update destroy]
 
   def index
-    @subjects = Subject.all
+    @subjects = current_college.subjects
   end
 
   def new
-    @subject = Subject.new
+    @subject = current_college.subjects.new
   end
 
   def show; end
@@ -14,8 +14,7 @@ class SubjectsController < BaseController
   def edit; end
 
   def create
-    @subject = Subject.new(subject_params)
-    @subject.college_id = current_user.college_id
+    @subject = current_college.subjects.new(subject_params)
     if @subject.save
       flash[:success] = 'Subject Created Successfully'
       redirect_to subjects_path
@@ -44,7 +43,7 @@ class SubjectsController < BaseController
   private
 
   def set_subject
-    @subject = Subject.find_by(slug: params[:slug])
+    @subject = current_college.subjects.find_by(slug: params[:slug])
     return if @subject.present?
 
     flash[:notice] = 'Subject Not Found'

@@ -3,7 +3,7 @@
     .col-md-10.form-group
       %label.form-label.required
         = t('issues.classrooms.table.classroom')
-      = f.select :classroom_id, Classroom.all.map { |classroom| [classroom.name, classroom.id] }, {prompt: 'Select Classroom' }, class: "form-control #{error?(@user.errors, :classroom_id)}"
+      = f.select :classroom_id, current_college.classrooms.all.map { |classroom| [classroom.name, classroom.id] }, {prompt: 'Select Classroom' }, class: "form-control #{error?(@user.errors, :classroom_id)}"
       = print_error(@user.errors, :subject_id)
     .col-md-2.delete
       %label.col-form-label.d-none.d-md-block

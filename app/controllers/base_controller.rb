@@ -2,6 +2,8 @@ class BaseController < ApplicationController
   layout 'admin'
   before_action :authenticate_user!
   before_action :authorize_action!
+  before_action :set_current_college
+
 
   def authorize_action!
     user_role = current_user.role.to_sym

@@ -6,26 +6,25 @@ class UsersController < BaseController
 
   def index
     @users = if current_user.principal?
-               User.all
+               current_college.users.where(role: 'teacher')
              elsif current_user.teacher? && current_user.teacher_subjects.empty?
                flash[:alert] = 'Please complete your profile setup.'
                redirect_to profile_setup_user_path(current_user.id)
              else
-               User.where(role: 'student')
+              current_college.users.where(role: 'student')
              end
   end
 
   def show; end
 
   def new
-    @user = User.new
+    @user = current_college.users.new
   end
 
   def edit; end
 
   def create
-    @user = User.new(user_params)
-    @user.college_id = current_user.college_id
+    @user = current_college.users.new(user_params)
     if @user.save
       flash[:success] = 'User Created Successfully'
       redirect_to users_path
@@ -62,7 +61,7 @@ class UsersController < BaseController
   private
 
   def set_user
-    @user = User.find_by(slug: params[:slug])
+    @user = current_college.users.find_by(slug: params[:slug])
     return if @user.present?
 
     flash[:notice] = 'User Not Found'
