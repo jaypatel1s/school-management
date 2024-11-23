@@ -2,10 +2,7 @@
   .card-body
     .app-brand.justify-content-center
       %a.app-brand-link.gap-2{ href: 'index.html' }
-        .app-brand-logo.demo
-          %img.h-25px.h-lg-35px{ alt: 'Logo', src: image_url('logo.png') }
-    %h4.mb-2= t('devise.sessions.welcome')
-    %p.mb-4= t('devise.sessions.manage_jira')
+    %h4.mb-2= t('devise.sessions.welcome_to_school_management_system')
     = form_for(resource, as: resource_name, url: session_path(resource_name), html: { class: 'mb-3' }) do |f|
       .mb-3
         %label.form-label.required{ for: 'email' }= t('devise.sessions.email')
