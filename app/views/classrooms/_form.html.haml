@@ -5,7 +5,6 @@
         = t('issues.classrooms.table.name')
       = f.text_field :name, class: "form-control #{error?(@classroom.errors, :name)}", value: f.object.name, placeholder: 'Name', required: true
       = print_error(@classroom.errors, :name)
-
   .col-12.d-flex.justify-content-between
     %button.btn.btn-primary{ type: 'submit', data: { confirm: 'Do you want to save the changes?' } }
       = t('issues.classrooms.table.save')

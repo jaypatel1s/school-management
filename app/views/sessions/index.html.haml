@@ -1,21 +1,9 @@
 .d-flex.justify-content-between.align-items-center.mb-4
   %h4.fw-bold.py-0.m-0
     = t('issues.status.table.sessions')
-  %div
-    %a.btn.btn-sm.btn-primary{ href: new_classroom_session_path(classroom_slug: @classroom.slug) }= t('issues.status.table.create')
--# .row
--#   .col-md-12
--#     .card.mb-4
--#       .card-body
--#         = form_tag jira_site_issues_statuses_path(current_site.slug), method: :get do |f|
--#           .main-div.d-flex.justify-content-between.align-items-center
--#             .sub-div
--#               = text_field_tag :search, params[:search], placeholder: 'Search', class: 'form-control form-field'
--#             .sub-div.d-flex.align-items-center.justify-content-end
--#               %button.btn.btn-primary.btn-icon.btn-sm.me-1{ type: 'submit', 'data-bs-html': 'true', 'data-bs-offset': '0,4', 'data-bs-original-title': '<span>Next</span>', 'data-bs-placement': 'bottom', 'data-bs-toggle': 'tooltip', title: '' }
--#                 %i.bx.bx-search
--#               %a.btn.btn-warning.btn-icon.btn-sm.me-1{ href: jira_site_issues_statuses_path, type: 'submit', 'data-bs-html': 'true', 'data-bs-offset': '0,4', 'data-bs-original-title': '<span>Clear</span>', 'data-bs-placement': 'bottom', 'data-bs-toggle': 'tooltip', title: '' }
--#                 %i.bx.bx-refresh
+  - if can_access?(:users, :new)
+    %div
+      %a.btn.btn-sm.btn-primary{ href: new_college_classroom_session_path(classroom_slug: @classroom.slug) }= t('issues.status.table.create')
 .row
   .col-12
     .card
@@ -24,32 +12,26 @@
           %table.table.table-striped
             %thead
               %tr
+                %th.text-start= t('issues.status.table.name')
+                %th.text-start= t('issues.status.table.classroom')
                 %th.text-start= t('issues.status.table.date')
                 %th.text-end= t('issues.status.table.actions')
             %tbody.table-border-bottom-0
               - @sessions.each do |session|
                 %tr
                   %td.text-start
-                    %strong.long-txt= session.date
+                    %strong.long-txt= session.name
+                  %td= session.classroom.name
+                  %td= session.date
                   %td
                     .text-end.d-flex.align-items-center.justify-content-end
                       %a.btn.btn-warning.btn-icon.btn-sm.me-1{
-                      href: edit_subject_path(subject.slug), 'data-bs-html': 'true', 'data-bs-offset': '0,4', 'data-bs-original-title': '<span>Edit</span>', 'data-bs-placement': 'bottom', 'data-bs-toggle': 'tooltip', title: '', type: 'button' }
+                      href: edit_college_classroom_session_path(current_college.slug, slug: session.slug), 'data-bs-html': 'true', 'data-bs-offset': '0,4', 'data-bs-original-title': '<span>Edit</span>', 'data-bs-placement': 'bottom', 'data-bs-toggle': 'tooltip', title: '', type: 'button' }
                         %i.bx.bx-pencil
-                      = link_to subject_path(subject.slug),
+                      = link_to college_classroom_session_path(current_college.slug, slug: session.slug),
                       { class: 'btn btn-danger btn-icon btn-sm me-1', 'data-bs-html': 'true', 'data-bs-offset': '0,4', 'data-bs-original-title': '<span>Delete</span>', 'data-bs-placement': 'bottom', 'data-confirm': "You won't be able to revert this!",
                       'data-bs-toggle': 'tooltip', title: '', type: 'button', method: :delete } do
                         %i.bx.bx-trash
-
-                    -#   = link_to revisions_jira_site_issues_status_path(current_site.slug,
-                    -#   status.slug), { class: 'btn btn-info btn-icon btn-sm me-1', 'data-bs-html': 'true', 'data-bs-offset': '0,4', 'data-bs-original-title': '<span>Audit</span>', 'data-bs-placement': 'bottom', 'data-bs-toggle': 'tooltip', title: '', type: 'button' } do
-                    -#     %i.bx.bx-git-branch
-                    -#   %a.btn.btn-warning.btn-icon.btn-sm.me-1{
-                    -#   href: edit_jira_site_issues_status_path(current_site.slug, status.slug), 'data-bs-html': 'true', 'data-bs-offset': '0,4', 'data-bs-original-title': '<span>Edit</span>', 'data-bs-placement': 'bottom', 'data-bs-toggle': 'tooltip', title: '', type: 'button' }
-                    -#     %i.bx.bx-pencil
-                    -#   = link_to jira_site_issues_status_path(current_site.slug,
-                    -#   status.slug), { class: 'btn btn-primary btn-icon btn-sm me-1', 'data-bs-html': 'true', 'data-bs-offset': '0,4', 'data-bs-original-title': '<span>Show</span>', 'data-bs-placement': 'bottom', 'data-bs-toggle': 'tooltip', title: '', type: 'button' } do
-                    -#     %i.bx.bx-show
         -# .d-flex.flex-stack.flex-wrap.justify-content-between.align-items-center.px-4.pt-3.pb-3
         -#   .last-sync
         -#     %div

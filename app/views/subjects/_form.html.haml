@@ -13,13 +13,6 @@
       = f.text_area :description, class: 'form-control', data: { id: 'dynamic-textarea' },
       value: f.object.description, placeholder: 'Description'
       = print_error(@subject.errors, :description)
-  -# .row
-  -#   .mb-3
-  -#     .nested_forms#classroom_subjects
-  -#       = f.fields_for :classroom_subjects do |information|
-  -#         = render 'classroom_subject_fields', f: information
-  -#       .links.mt-2
-  -#         = link_to_add_association raw("<i class='bx bx-plus'></i> Add Classroom"), f, :classroom_subjects, class: 'btn btn-sm btn-info', data: { toggle: 'tooltip', placement: 'left' }, title: 'Add Classroom'
   .col-12.d-flex.justify-content-between
     %button.btn.btn-primary{ type: 'submit', data: { confirm: 'Do you want to save the changes?' } }
       = t('issues.subjects.table.save')
