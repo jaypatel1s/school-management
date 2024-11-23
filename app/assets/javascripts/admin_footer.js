@@ -9,4 +9,4 @@
 //= require 'pages/dashboards-analytics'
 //= require 'new_theme/select2'
 //= require cocoon
-//= require 'new_theme/pickr.min'
+//= require 'new_theme/flatpickr'

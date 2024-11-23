@@ -2,7 +2,7 @@
   %div
     %h4.fw-bold.py-0.m-0
       %span.text-muted.fw-light= 'Session /'
-      = t('issues.resolutions.table.new')
+      = t('issues.resolutions.table.edit')
   %div
     %a.btn.btn-sm.btn-primary{ href: college_classroom_sessions_path(current_college.slug, classroom_slug: @classroom.slug), 'data-bs-html': 'true', 'data-bs-offset': '0,4', 'data-bs-original-title': '<span>Back</span>', 'data-bs-placement': 'bottom', 'data-bs-toggle': 'tooltip', type: 'button' }
       %i.bx.bx-chevron-left
@@ -10,4 +10,4 @@
   .col-md-12
     .card.mb-4
       .card-body
-        = render 'form', session: @session, classroom: @classroom, url: college_classroom_sessions_path(current_college.slug, classroom_slug: @classroom.slug)
+        = render 'form', session: @session, classroom: @classroom, url: college_classroom_session_path(current_college.slug, classroom_slug: @classroom.slug,slug: @session.slug)
