@@ -8,12 +8,11 @@ ROLE_PERMISSIONS = {
     marksheets: %i[index show]
   },
   teacher: {
-    users: %i[index],
     dashboard: %i[index],
     users: %i[index new create edit update show destroy profile_setup],
     classrooms: %i[index],
     subjects: %i[index],
-    sessions: %i[index],
+    sessions: %i[index new create edit update destroy],
     marksheets: %i[new create index show]
   },
   student: {

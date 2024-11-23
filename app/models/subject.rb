@@ -2,7 +2,6 @@ class Subject < ApplicationRecord
   include Sluggable
 
   belongs_to :college
-
   has_many :teacher_subjects, dependent: :destroy
   has_many :users, through: :teacher_subjects
 

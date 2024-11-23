@@ -2,8 +2,15 @@ class ClassroomsController < BaseController
   before_action :set_classroom, only: %i[show edit update destroy]
 
   def index
-    @classrooms = current_college.classrooms
-  end
+    if current_user.teacher?
+      # Fetch classrooms assigned to the current teacher
+      @classrooms = Classroom.joins(teacher_classrooms: :teacher_subject)
+                             .where(teacher_classrooms: { teacher_subjects: { user_id: current_user.id } }).distinct
+    else
+      # Default behavior for principals and other roles
+      @classrooms = current_college.classrooms
+    end
+  end  
 
   def new
     @classroom = current_college.classrooms.new

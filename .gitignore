@@ -1,6 +1,8 @@
 *.gem
 *.rbc
 /.config
+/public
+/log/development.log
 /coverage/
 /InstalledFiles
 /pkg/
