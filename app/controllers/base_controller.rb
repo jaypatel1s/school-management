@@ -15,8 +15,8 @@ class BaseController < ApplicationController
     end
   end
 
-  def modify_params(params)
-    additional_params = { college_id: current_user.college_id, user_id: current_user.id }
+  def modify_params(params, user)
+    additional_params = { college_id: current_user.college_id, user_id: user.id }
     params.merge!(additional_params)
   end
 end

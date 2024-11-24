@@ -1,5 +1,4 @@
 class TeacherMailer < ApplicationMailer
-  default from: 'no-reply@school.com'
 
   def profile_approved(user)
     @teacher = user # Pass the user object

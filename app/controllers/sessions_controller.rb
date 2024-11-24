@@ -3,11 +3,11 @@ class SessionsController < BaseController
   before_action :set_session, only: %i[show edit update destroy]
 
   def index
-    @sessions = current_college.sessions
+    @sessions = @classroom.sessions
   end
 
   def new
-    @session = current_college.sessions.new
+    @session = @classroom.sessions.new
   end
 
   def show; end
@@ -15,7 +15,8 @@ class SessionsController < BaseController
   def edit; end
 
   def create
-    @session = current_college.sessions.new(session_params)
+    @session = @classroom.sessions.new(session_params)
+    @session.college_id = current_college.id
     if @session.save
       flash[:success] = 'Session Created Successfully'
       redirect_to college_classroom_sessions_path(current_college.slug, classroom_slug: @classroom.slug)

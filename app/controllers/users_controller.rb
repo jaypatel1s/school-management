@@ -76,13 +76,14 @@ class UsersController < BaseController
                                                                         classroom_id _destroy] }]
     )
     if base_params['teacher_subjects_attributes'].present?
+      @user = current_college.users.find_by(slug: params[:slug])
       base_params['teacher_subjects_attributes'].each_value do |value|
         if value['teacher_classrooms_attributes'].present?
           value['teacher_classrooms_attributes'].each_value do |field_value|
-            modify_params(field_value)
+            modify_params(field_value, @user)
           end
         end
-        modify_params(value)
+        modify_params(value, @user)
       end
     end
     base_params
