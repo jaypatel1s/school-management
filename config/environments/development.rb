@@ -72,6 +72,8 @@ Rails.application.configure do
   #   authentication: Rails.application.credentials.dig(:smtp, :authentication),
   #   enable_starttls_auto: Rails.application.credentials.dig(:smtp, :enable_starttls_auto),
   #   }
+  config.hosts << /.*\.ngrok\.io$/
+  config.hosts << 'app.app.localhost'
 
   # Raises error for missing translations.
   # config.i18n.raise_on_missing_translations = true
