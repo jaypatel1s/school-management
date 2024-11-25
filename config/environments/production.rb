@@ -93,7 +93,7 @@ Rails.application.configure do
   config.active_record.dump_schema_after_migration = false
   config.action_mailer.perform_deliveries = true
   config.action_mailer.asset_host = ENV['SMTP_ASSET_HOST']
-  config.action_mailer.default_url_options = { :host =>  ENV['HOST'], protocol: 'https' }
+  config.action_mailer.default_url_options = { host:  ENV['HOST'], protocol: 'https' }
   config.action_mailer.default charset: 'utf-8'
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
@@ -103,6 +103,8 @@ Rails.application.configure do
     user_name: ENV['SMTP_USER'],
     password: ENV['SMTP_PASSWORD'],
     authentication: :plain,
-    enable_starttls_auto: true
+    enable_starttls_auto: true,
+    ssl: true,
+    tls: true
   }
 end
