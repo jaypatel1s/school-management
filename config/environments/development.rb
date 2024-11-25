@@ -61,7 +61,6 @@ Rails.application.configure do
 
   # Suppress logger output for asset requests.
   config.assets.quiet = true
-  config.action_mailer.default charset: 'utf-8'
   config.action_mailer.asset_host = ENV['SMTP_ASSET_HOST']
   config.action_mailer.default_url_options = { host:  ENV['HOST'], protocol: 'https' }
   config.action_mailer.default charset: 'utf-8'
