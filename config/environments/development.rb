@@ -72,10 +72,11 @@ Rails.application.configure do
     user_name: ENV['SMTP_USER'],
     password: ENV['SMTP_PASSWORD'],
     authentication: :plain,
-    enable_starttls_auto: true,
-    ssl: true,
-    tls: true
+    enable_starttls_auto: true
   }
+  config.hosts << 'app.app.localhost'
+  config.hosts << /.*\.ngrok\.io$/
+
   # Raises error for missing translations.
   # config.i18n.raise_on_missing_translations = true
 
