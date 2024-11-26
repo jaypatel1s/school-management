@@ -29,13 +29,6 @@
           %a.menu-link{ href: "#" }
             %i.menu-icon.tf-icons.bx.bx-user
             %div{ 'data-i18n': 'Users' }= t('layouts.sidebar.profile')
-
-    - if can_access?(:classrooms, :index)
-      %li.menu-item{ class: menu_active_class('classrooms') }
-        %a.menu-link{ href: college_classrooms_path(college_slug: current_college.slug) }
-          %i.menu-icon.tf-icons.bx.bx-building
-          %div{ 'data-i18n': 'Classrooms' }= t('layouts.sidebar.classrooms')
-
     - if can_access?(:subjects, :index)
       %li.menu-item{ class: menu_active_class('subjects') }
         %a.menu-link{ href: college_subjects_path(college_slug: current_college.slug) }

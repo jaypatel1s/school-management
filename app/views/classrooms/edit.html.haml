@@ -4,10 +4,10 @@
       %span.text-muted.fw-light= 'Classroom /'
       = t('issues.resolutions.table.edit')
   %div
-    %a.btn.btn-sm.btn-primary{ href: college_classrooms_path(current_college.slug), 'data-bs-html': 'true', 'data-bs-offset': '0,4', 'data-bs-original-title': '<span>Back</span>', 'data-bs-placement': 'bottom', 'data-bs-toggle': 'tooltip', type: 'button' }
+    %a.btn.btn-sm.btn-primary{ href: college_subject_classrooms_path(current_college.slug), 'data-bs-html': 'true', 'data-bs-offset': '0,4', 'data-bs-original-title': '<span>Back</span>', 'data-bs-placement': 'bottom', 'data-bs-toggle': 'tooltip', type: 'button' }
       %i.bx.bx-chevron-left
 .row
   .col-md-12
     .card.mb-4
       .card-body
-        = render 'form', classroom: @classroom, url: college_classroom_path(current_college.slug, @classroom.slug)
+        = render 'form', classroom: @classroom, url: college_subject_classroom_path(current_college.slug, @classroom.slug, subject_slug: @subject.slug)

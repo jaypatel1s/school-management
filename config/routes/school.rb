@@ -15,10 +15,11 @@ resources :colleges, param: :slug do
     end
     resources :teacher_subjects
   end
-  resources :subjects, param: :slug 
-  resources :classrooms, param: :slug do
-    resources :sessions, param: :slug do
-      resources :attendances, param: :slug, only: [:index, :update]
+  resources :subjects, param: :slug do
+    resources :classrooms, param: :slug do
+      resources :sessions, param: :slug do
+        resources :attendances, param: :slug, only: [:index, :update]
+      end
     end
   end
 end

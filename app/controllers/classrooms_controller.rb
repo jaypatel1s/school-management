@@ -1,19 +1,13 @@
 class ClassroomsController < BaseController
+  before_action :set_subject
   before_action :set_classroom, only: %i[show edit update destroy]
 
   def index
-    if current_user.teacher?
-      # Fetch classrooms assigned to the current teacher
-      @classrooms = Classroom.joins(teacher_classrooms: :teacher_subject)
-                             .where(teacher_classrooms: { teacher_subjects: { user_id: current_user.id } }).distinct
-    else
-      # Default behavior for principals and other roles
-      @classrooms = current_college.classrooms
-    end
-  end  
+    @classrooms =  @subject.classrooms
+  end
 
   def new
-    @classroom = current_college.classrooms.new
+    @classroom = @subject.classrooms.new
   end
 
   def show; end
@@ -21,10 +15,11 @@ class ClassroomsController < BaseController
   def edit; end
 
   def create
-    @classroom = current_college.classrooms.new(classroom_params)
+    @classroom = @subject.classrooms.new(classroom_params)
+    @classroom.college_id = current_college.id
     if @classroom.save
       flash[:success] = 'Classroom Created Successfully'
-      redirect_to college_classrooms_path(current_college.slug)
+      redirect_to college_subject_classrooms_path(current_college.slug)
     else
       flash[:alert] = @classroom.errors.full_messages
       render :new
@@ -34,7 +29,7 @@ class ClassroomsController < BaseController
   def update
     if @classroom.update(classroom_params)
       flash[:success] = 'Classroom Updated Successfully.'
-      redirect_to college_classrooms_path(current_college.slug)
+      redirect_to college_subject_classrooms_path(current_college.slug)
     else
       flash[:alert] = @classroom.errors.full_messages
       render :edit
@@ -44,22 +39,30 @@ class ClassroomsController < BaseController
   def destroy
     @classroom.destroy
     flash[:success] = 'Classroom Deleted Successfully'
-    redirect_to college_classrooms_path(current_college.slug)
+    redirect_to college_subject_classrooms_path(current_college.slug)
   end
 
   private
 
   def set_classroom
-    @classroom = current_college.classrooms.find_by(slug: params[:slug])
+    @classroom = @subject.classrooms.find_by(slug: params[:slug])
     return if @classroom.present?
 
     flash[:notice] = 'Classroom Not Found'
-    redirect_to college_classrooms_path(current_college.slug)
+    redirect_to college_subject_classrooms_path(current_college.slug)
+  end
+
+  def set_subject
+    @subject = current_college.subjects.find_by(slug: params[:subject_slug])
+    return if @subject.present?
+
+    flash[:notice] = 'Subject Not Found'
+    redirect_to college_subject_classrooms_path(current_college.slug)
   end
 
   def classroom_params
     params.require(:classroom).permit(
-      :name, :college_id
+      :name, :college_id, :subject_id
     )
   end
 end

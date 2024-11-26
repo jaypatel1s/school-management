@@ -3,7 +3,11 @@
     = t('issues.status.table.classrooms')
   %div
     - if can_access?(:classrooms, :new)
-      %a.btn.btn-sm.btn-primary{ href: new_college_classroom_path(current_college.slug) }= t('issues.status.table.create')
+      %a.btn.btn-sm.btn-primary{ href: new_college_subject_classroom_path(current_college.slug) }= t('issues.status.table.create')
+    - if can_access?(:subjects, :index)
+      %a.btn.btn-sm.btn-primary{ href: college_subjects_path(college_slug: current_college.slug), 'data-bs-html': 'true', 'data-bs-offset': '0,4', 'data-bs-original-title': '<span>Back</span>', 'data-bs-placement': 'bottom', 'data-bs-toggle': 'tooltip', type: 'button' }
+        %i.bx.bx-chevron-left
+
 .row
   .col-12
     .card
@@ -23,19 +27,20 @@
                     .text-end.d-flex.align-items-center.justify-content-end
                       - if can_access?(:classrooms, :edit)
                         %a.btn.btn-warning.btn-icon.btn-sm.me-1{
-                        href: edit_college_classroom_path(current_college.slug, classroom.slug), 'data-bs-html': 'true', 'data-bs-offset': '0,4', 'data-bs-original-title': '<span>Edit</span>', 'data-bs-placement': 'bottom', 'data-bs-toggle': 'tooltip', title: '', type: 'button' }
+                        href: edit_college_subject_classroom_path(current_college.slug,
+                        slug: classroom.slug), 'data-bs-html': 'true', 'data-bs-offset': '0,4', 'data-bs-original-title': '<span>Edit</span>', 'data-bs-placement': 'bottom', 'data-bs-toggle': 'tooltip', title: '', type: 'button' }
                           %i.bx.bx-pencil
                       - if can_access?(:classrooms, :destroy)
-                        = link_to  college_classroom_path(current_college.slug, classroom.slug),
+                        = link_to college_subject_classroom_path(current_college.slug,slug: classroom.slug),
                         { class: 'btn btn-danger btn-icon btn-sm me-1', 'data-bs-html': 'true', 'data-bs-offset': '0,4', 'data-bs-original-title': '<span>Delete</span>', 'data-bs-placement': 'bottom', 'data-confirm': "You won't be able to revert this!",
                         'data-bs-toggle': 'tooltip', title: '', type: 'button', method: :delete } do
                           %i.bx.bx-trash
                       - if can_access?(:classrooms, :show)
-                        = link_to college_classroom_path(current_college.slug, classroom.slug), { class: 'btn btn-primary btn-icon btn-sm me-1', 'data-bs-html': 'true', 'data-bs-offset': '0,4', 'data-bs-original-title': '<span>Show</span>', 'data-bs-placement': 'bottom', 'data-bs-toggle': 'tooltip', title: '', type: 'button' } do
+                        = link_to college_subject_classroom_path(current_college.slug, slug: classroom.slug), { class: 'btn btn-primary btn-icon btn-sm me-1', 'data-bs-html': 'true', 'data-bs-offset': '0,4', 'data-bs-original-title': '<span>Show</span>', 'data-bs-placement': 'bottom', 'data-bs-toggle': 'tooltip', title: '', type: 'button' } do
                           %i.bx.bx-show
-                      - if can_access?(:sessions, :index)
-                        = link_to college_classroom_sessions_path(current_college.slug, classroom_slug: classroom.slug), { class: '', 'data-bs-html': 'true', 'data-bs-offset': '0,4', 'data-bs-original-title': '<span>Show</span>', 'data-bs-placement': 'bottom', 'data-bs-toggle': 'tooltip', title: '', type: 'button' } do
-                          = 'Session'
+                      -# - if can_access?(:sessions, :index)
+                      -#   = link_to college_classroom_sessions_path(current_college.slug, classroom_slug: classroom.slug), { class: '', 'data-bs-html': 'true', 'data-bs-offset': '0,4', 'data-bs-original-title': '<span>Show</span>', 'data-bs-placement': 'bottom', 'data-bs-toggle': 'tooltip', title: '', type: 'button' } do
+                      -#     = 'Session'
 
       - else
         .col-12

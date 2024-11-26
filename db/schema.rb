@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_11_23_130156) do
+ActiveRecord::Schema[7.0].define(version: 2024_11_26_092238) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -59,7 +59,9 @@ ActiveRecord::Schema[7.0].define(version: 2024_11_23_130156) do
     t.string "slug", limit: 255, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "subject_id", null: false
     t.index ["college_id"], name: "index_classrooms_on_college_id"
+    t.index ["subject_id"], name: "index_classrooms_on_subject_id"
   end
 
   create_table "colleges", force: :cascade do |t|
@@ -160,6 +162,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_11_23_130156) do
   add_foreign_key "attendances", "sessions"
   add_foreign_key "attendances", "users"
   add_foreign_key "classrooms", "colleges"
+  add_foreign_key "classrooms", "subjects"
   add_foreign_key "sessions", "classrooms"
   add_foreign_key "sessions", "colleges"
   add_foreign_key "subjects", "colleges"
