@@ -3,12 +3,9 @@ class User < ApplicationRecord
   devise :database_authenticatable,
          :recoverable, :rememberable, :validatable, :confirmable, :timeoutable, :trackable
   belongs_to :college
-  has_many :teacher_subjects, dependent: :destroy
-  has_many :subjects, through: :teacher_subjects
-  has_many :teacher_classrooms, through: :teacher_subjects
-  has_many :attendances, dependent: :destroy  # A user (student) can have multiple attendance records
-
-  accepts_nested_attributes_for :teacher_subjects, reject_if: :all_blank, allow_destroy: true
+  has_many :departments, foreign_key: :head_id
+  has_many :courses, foreign_key: :teacher_id
+  # has_many :attendances, dependent: :destroy
 
   enum role: { principal: 0, teacher: 1, student: 2 }
 

@@ -13,13 +13,8 @@ resources :colleges, param: :slug do
       get :profile_setup
       post :update_profile
     end
-    resources :teacher_subjects
   end
-  resources :subjects, param: :slug do
-    resources :classrooms, param: :slug do
-      resources :sessions, param: :slug do
-        resources :attendances, param: :slug, only: [:index, :update]
-      end
-    end
+  resources :departments, param: :slug do
+    resources :courses, param: :slug
   end
 end

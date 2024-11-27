@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 Rails.application.routes.draw do
-  get 'attendances/index'
-  get 'attendances/update'
   def draw(file)
     instance_eval(File.read(Rails.root.join("config/routes/#{file}.rb")))
   end

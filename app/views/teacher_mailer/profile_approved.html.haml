@@ -5,19 +5,6 @@
 
 %p
   We are pleased to inform you that your profile has been approved. You can now access all the features available to teachers.
-
-- if @teacher_subjects.present?
-  - @teacher_subjects.each do |teacher_subject|
-    %p
-      Subject:
-      %strong= teacher_subject.subject.name
-    - teacher_subject.teacher_classrooms.each do |teacher_classroom|
-      %p
-        Classroom:
-        %strong= teacher_classroom.classroom.name
-- else
-  %p No subjects or classrooms found for this teacher.
-
 %p
   Thank you for being part of our school community.
 

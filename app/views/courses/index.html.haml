@@ -1,0 +1,50 @@
+.d-flex.justify-content-between.align-items-center.mb-4
+  %h4.fw-bold.py-0.m-0
+    = t('issues.status.table.courses')
+  %div
+    - if can_access?(:courses, :new)
+      %a.btn.btn-sm.btn-primary{ href: new_college_department_course_path(current_college.slug) }= t('issues.status.table.create')
+    - if can_access?(:departments, :index)
+      %a.btn.btn-sm.btn-primary{ href: college_departments_path(college_slug: current_college.slug), 'data-bs-html': 'true', 'data-bs-offset': '0,4', 'data-bs-original-title': '<span>Back</span>', 'data-bs-placement': 'bottom', 'data-bs-toggle': 'tooltip', type: 'button' }
+        %i.bx.bx-chevron-left
+.row
+  .col-12
+    .card
+      - if @courses.present?
+        .table-responsive.text-nowrap.pb-0.border-bottom
+          %table.table.table-striped
+            %thead
+              %tr
+                %th.text-start= t('issues.status.table.name')
+                %th.text-end= t('issues.status.table.actions')
+            %tbody.table-border-bottom-0
+              - @courses.each do |course|
+                %tr
+                  %td.text-start
+                    %strong.long-txt= course.name
+                  %td
+                    .text-end.d-flex.align-items-center.justify-content-end
+                      - if can_access?(:courses, :edit)
+                        %a.btn.btn-warning.btn-icon.btn-sm.me-1{
+                        href: edit_college_department_course_path(current_college.slug,
+                        slug: course.slug), 'data-bs-html': 'true', 'data-bs-offset': '0,4', 'data-bs-original-title': '<span>Edit</span>', 'data-bs-placement': 'bottom', 'data-bs-toggle': 'tooltip', title: '', type: 'button' }
+                          %i.bx.bx-pencil
+                      - if can_access?(:courses, :destroy)
+                        = link_to college_department_course_path(current_college.slug,slug: course.slug),
+                        { class: 'btn btn-danger btn-icon btn-sm me-1', 'data-bs-html': 'true', 'data-bs-offset': '0,4', 'data-bs-original-title': '<span>Delete</span>', 'data-bs-placement': 'bottom', 'data-confirm': "You won't be able to revert this!",
+                        'data-bs-toggle': 'tooltip', title: '', type: 'button', method: :delete } do
+                          %i.bx.bx-trash
+                      - if can_access?(:courses, :show)
+                        = link_to college_department_course_path(current_college.slug, slug: course.slug), { class: 'btn btn-primary btn-icon btn-sm me-1', 'data-bs-html': 'true', 'data-bs-offset': '0,4', 'data-bs-original-title': '<span>Show</span>', 'data-bs-placement': 'bottom', 'data-bs-toggle': 'tooltip', title: '', type: 'button' } do
+                          %i.bx.bx-show
+                      -# - if can_access?(:sessions, :index)
+                      -#   = link_to college_course_sessions_path(current_college.slug, course_slug: course.slug), { class: '', 'data-bs-html': 'true', 'data-bs-offset': '0,4', 'data-bs-original-title': '<span>Show</span>', 'data-bs-placement': 'bottom', 'data-bs-toggle': 'tooltip', title: '', type: 'button' } do
+                      -#     = 'Session'
+
+      - else
+        .col-12
+          .card
+            .card-body
+              %h4.text-center.mb-0.d-flex.align-items-center.justify-content-center
+                %i.bx.bx-error-circle.pe-2.data-icon
+                = t('issues.status.table.no_data_found')

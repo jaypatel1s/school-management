@@ -26,15 +26,6 @@
         %label.form-label= t('issues.users.table.password_confirmation')
         = f.password_field :password_confirmation, class: "form-control #{error?(@user.errors, :password_confirmation)}", value:  f.object.password_confirmation, placeholder: 'Password Confirmation'
         = print_error(@user.errors, :password_confirmation)
-
-  - if action_name == 'edit' || action_name == 'profile_setup'
-    .row
-      .mb-3
-        .nested_forms#teacher_subjects
-          = f.fields_for :teacher_subjects do |information|
-            = render 'teacher_subject_fields', f: information
-          .links.mt-2
-            = link_to_add_association raw("<i class='bx bx-plus'></i> Add Subject"), f, :teacher_subjects, class: 'btn btn-sm btn-info', data: { toggle: 'tooltip', placement: 'left' }, title: 'Add Subject'
-  .col-12.d-flex.justify-content-between
+          .col-12.d-flex.justify-content-between
     %button.btn.btn-primary{ type: 'submit', data: { confirm: 'Do you want to save the changes?' } }
       = t('issues.users.table.save')

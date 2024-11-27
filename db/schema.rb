@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_11_26_092238) do
+ActiveRecord::Schema[7.0].define(version: 2024_11_27_054252) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -75,6 +75,32 @@ ActiveRecord::Schema[7.0].define(version: 2024_11_26_092238) do
     t.string "slug", limit: 255, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "courses", force: :cascade do |t|
+    t.bigint "college_id", null: false
+    t.bigint "department_id", null: false
+    t.bigint "teacher_id", null: false
+    t.string "name"
+    t.text "description"
+    t.integer "credits"
+    t.string "slug", limit: 255, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["college_id"], name: "index_courses_on_college_id"
+    t.index ["department_id"], name: "index_courses_on_department_id"
+    t.index ["teacher_id"], name: "index_courses_on_teacher_id"
+  end
+
+  create_table "departments", force: :cascade do |t|
+    t.bigint "college_id", null: false
+    t.bigint "head_id", null: false
+    t.string "name"
+    t.string "slug", limit: 255, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["college_id"], name: "index_departments_on_college_id"
+    t.index ["head_id"], name: "index_departments_on_head_id"
   end
 
   create_table "sessions", force: :cascade do |t|
@@ -163,6 +189,11 @@ ActiveRecord::Schema[7.0].define(version: 2024_11_26_092238) do
   add_foreign_key "attendances", "users"
   add_foreign_key "classrooms", "colleges"
   add_foreign_key "classrooms", "subjects"
+  add_foreign_key "courses", "colleges"
+  add_foreign_key "courses", "departments"
+  add_foreign_key "courses", "users", column: "teacher_id"
+  add_foreign_key "departments", "colleges"
+  add_foreign_key "departments", "users", column: "head_id"
   add_foreign_key "sessions", "classrooms"
   add_foreign_key "sessions", "colleges"
   add_foreign_key "subjects", "colleges"
