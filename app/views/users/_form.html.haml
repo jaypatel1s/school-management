@@ -26,6 +26,6 @@
         %label.form-label= t('issues.users.table.password_confirmation')
         = f.password_field :password_confirmation, class: "form-control #{error?(@user.errors, :password_confirmation)}", value:  f.object.password_confirmation, placeholder: 'Password Confirmation'
         = print_error(@user.errors, :password_confirmation)
-          .col-12.d-flex.justify-content-between
+  .col-12.d-flex.justify-content-between
     %button.btn.btn-primary{ type: 'submit', data: { confirm: 'Do you want to save the changes?' } }
       = t('issues.users.table.save')

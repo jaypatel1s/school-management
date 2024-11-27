@@ -1,4 +1,4 @@
-constraints subdomain: 'app' do
+constraints subdomain: ENV['BASE_URL'] do
   draw :authentication
   draw :school
   draw :profile
