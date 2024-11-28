@@ -28,6 +28,32 @@ module Users
       root_url(subdomain: false)
     end
 
+    def webauthn_login
+      options = WebAuthn::Credential.options_for_get
+      render json: options
+    end
+
+    def verify_webauthn_login
+      credential = WebAuthn::Credential.from_get(params.require(:webauthn_credential))
+      user_handle = credential.response.user_handle
+      user = User.find_by!(id: user_handle)
+      webauthn_credential = user.webauthn_credentials.find_by!(external_id: credential.id)
+
+      begin
+        credential.verify(
+          params[:challenge],
+          public_key: webauthn_credential.public_key,
+          sign_count: webauthn_credential.sign_count
+        )
+
+        webauthn_credential.update!(sign_count: credential.sign_count)
+        sign_in(user)
+        render json: { success: true }
+      rescue StandardError => e
+        render json: { success: false, error: e.message }
+      end
+    end
+
     protected
 
     def user_params

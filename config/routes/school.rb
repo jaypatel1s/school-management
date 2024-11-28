@@ -10,6 +10,8 @@ end
 resources :colleges, param: :slug do
   resources :users, param: :slug do
     member do
+      get :new_webauthn_registration
+      post :create_webauthn_registration
       get :profile_setup
       post :update_profile
     end

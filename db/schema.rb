@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_11_27_054252) do
+ActiveRecord::Schema[7.0].define(version: 2024_11_28_103143) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -184,6 +184,18 @@ ActiveRecord::Schema[7.0].define(version: 2024_11_27_054252) do
     t.index ["unlock_token"], name: "index_users_on_unlock_token", unique: true
   end
 
+  create_table "web_authn_credentials", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.string "external_id"
+    t.string "unique"
+    t.string "true"
+    t.string "public_key"
+    t.integer "sign_count"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_web_authn_credentials_on_user_id"
+  end
+
   add_foreign_key "attendances", "colleges"
   add_foreign_key "attendances", "sessions"
   add_foreign_key "attendances", "users"
@@ -205,4 +217,5 @@ ActiveRecord::Schema[7.0].define(version: 2024_11_27_054252) do
   add_foreign_key "teacher_subjects", "subjects"
   add_foreign_key "teacher_subjects", "users"
   add_foreign_key "users", "colleges"
+  add_foreign_key "web_authn_credentials", "users"
 end

@@ -19,6 +19,7 @@ gem 'puma', '~> 5.0'
 gem 'sass-rails', '>= 6'
 gem 'trix-rails', require: 'trix'
 gem 'uglifier', '>= 1.3.0'
+gem 'webauthn'
 
 gem 'activeadmin'
 gem 'arctic_admin'

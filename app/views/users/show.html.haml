@@ -1,29 +1,5 @@
-.card
-  .card-body
-    .app-brand.justify-content-center
-      %a.app-brand-link.gap-2{ href: 'index.html' }
-    %h4.mb-2= t('devise.sessions.welcome_to_school_management_system')
-    = form_for(resource, as: resource_name, url: session_path(resource_name), html: { class: 'mb-3' }) do |f|
-      .mb-3
-        %label.form-label.required{ for: 'email' }= t('devise.sessions.email')
-        = f.email_field :email, autofocus: true, class: 'form-control', required: true, placeholder: 'Enter your email'
-      .mb-3.form-password-toggle
-        %label.form-label.required{ for: 'password' }= t('devise.sessions.password')
-        .input-group.input-group-merge
-          = f.password_field :password, autocomplete: 'new-password', class: 'form-control', required: true, placeholder: '············'
-          %span.input-group-text.cursor-pointer
-            %i.bx.bx-hide
-      .mb-3
-        #webauthn-login
-          %button.btn.btn-primary.d-grid.w-100{ id: "login-button" } Login with Passkey
-        %button.btn.btn-primary.d-grid.w-100{ type: 'submit' }= t('devise.sessions.sign_in')
-      .d-flex.justify-content-between
-        = link_to new_confirmation_path(resource_name) do
-          %small= t('devise.sessions.resend_verification')
-        = link_to new_password_path(resource_name) do
-          %small= t('devise.sessions.forget_password')
-
-
+#webauthn-registration{ data: { customer_slug: @user.slug, college_slug: @current_college.slug } }
+  %button#register-button Register
 - content_for :js_code do
   :javascript
     $(document).ready(function() {
@@ -48,11 +24,16 @@
         const encoder = new TextEncoder();
         return encoder.encode(str).buffer;
       }
-      if ($('#webauthn-login').length) {
-        $('#login-button').on('click', async function() {
+      const webauthnRegistration = $('#webauthn-registration');
+      // Registration
+      if (webauthnRegistration.length) {
+        $('#register-button').on('click', async function() {
           try {
-            const response = await $.get('/webauthn_login');
+            const UserSlug = webauthnRegistration.data('customer-slug');
+            const collegeSlug = webauthnRegistration.data('college-slug');
+            const response = await $.get('/colleges/' + collegeSlug + '/users/' + UserSlug + '/new_webauthn_registration');
             const options = response;
+
             // Convert Base64Url encoded values to ArrayBuffer
             if (options.challenge) {
               options.challenge = base64UrlToArrayBuffer(options.challenge);
@@ -72,16 +53,12 @@
                 alg: param.alg
               }));
             }
-            const credential = await navigator.credentials.get({ publicKey: options });
+
+
+            const credential = await navigator.credentials.create({ publicKey: options });
 
             function bufferToBase64(buffer) {
-              let binary = '';
-              const bytes = new Uint8Array(buffer);
-              const len = bytes.byteLength;
-              for (let i = 0; i < len; i++) {
-                binary += String.fromCharCode(bytes[i]);
-              }
-              return window.btoa(binary);
+              return btoa(String.fromCharCode(...new Uint8Array(buffer)));
             }
 
             function transformBase64Url(base64) {
@@ -96,15 +73,12 @@
               rawId: bufferToBase64(credential.rawId),
               type: credential.type,
               response: {
-                authenticatorData: bufferToBase64(credential.response.authenticatorData),
-                clientDataJSON: bufferToBase64(credential.response.clientDataJSON),
-                signature: bufferToBase64(credential.response.signature),
-                userHandle: credential.response.userHandle ? bufferToBase64(credential.response.userHandle) : null,
-              },
+                attestationObject: bufferToBase64(credential.response.attestationObject),
+                clientDataJSON: bufferToBase64(credential.response.clientDataJSON)
+              }
             };
-
             const result = await $.ajax({
-              url: '/verify_webauthn_login',
+              url: '/colleges/'+ collegeSlug + '/users/' + UserSlug + '/create_webauthn_registration',
               type: 'POST',
               contentType: 'application/json',
               data: JSON.stringify({ webauthn_credential: serializedCredential, challenge: transformBase64Url(bufferToBase64(options.challenge))}),
@@ -112,12 +86,12 @@
             });
 
             if (result.success) {
-              alert('WebAuthn login successful!');
-              window.location.href = '/dashboard';
+              alert('WebAuthn registration successful!');
             } else {
-              alert('WebAuthn login failed: ' + result.error);
+              alert('WebAuthn registration failed: ' + result.error);
             }
           } catch (error) {
+            console.error('Error:', error); // Improved error handling
             alert('Error: ' + error.message);
           }
         });

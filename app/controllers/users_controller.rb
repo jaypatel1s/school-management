@@ -6,7 +6,7 @@ class UsersController < BaseController
 
   def index
     @users = if current_user.principal?
-               current_college.users.where(role: 'teacher')
+               current_college.users
               elsif current_user.teacher?
                 current_college.users.where(role: 'student')
               else
@@ -50,6 +50,27 @@ class UsersController < BaseController
   def profile_setup
     @user = current_user
   end
+
+  def new_webauthn_registration
+    options = WebAuthn::Credential.options_for_create(user: current_user.webauthn_user)
+    render json: options
+  end
+
+  def create_webauthn_registration
+    credential = WebAuthn::Credential.from_create(params.require(:webauthn_credential))
+    begin
+      credential.verify(params[:challenge])
+      current_user.webauthn_credentials.create!(
+        external_id: credential.id,
+        public_key: credential.public_key,
+        sign_count: credential.sign_count
+      )
+      render json: { success: true }
+    rescue StandardError => e
+      render json: { success: false, error: e.message }
+    end
+  end
+
 
   def destroy
     @user.destroy
