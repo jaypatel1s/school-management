@@ -83,7 +83,7 @@ module Users
 
       if authenticated && resource = warden.user(resource_name)
         set_flash_message(:alert, 'already_authenticated', scope: 'devise.failure')
-        redirect_to jira_root_path
+        redirect_to authenticated_user_path(resource)
       end
     end
   end
