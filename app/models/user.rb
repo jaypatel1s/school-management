@@ -1,7 +1,7 @@
 class User < ApplicationRecord
   include Sluggable
   devise :database_authenticatable,
-         :recoverable, :rememberable, :validatable, :confirmable, :timeoutable, :trackable
+         :recoverable, :rememberable, :validatable, :confirmable, :timeoutable, :trackable, :registerable
   belongs_to :college
   has_many :departments, foreign_key: :head_id
   has_many :courses, foreign_key: :teacher_id
