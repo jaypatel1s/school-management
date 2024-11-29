@@ -16,7 +16,7 @@ module Users
         redirect_to authenticated_user_path(resource)
       else
         flash[:alert] = 'Invalid Credentials.'
-        redirect_to root_path
+        redirect_to new_user_session_path
       end
     end
 

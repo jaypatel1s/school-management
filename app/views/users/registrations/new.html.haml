@@ -3,16 +3,17 @@
     .app-brand.justify-content-center
       %a.app-brand-link.gap-2{ href: 'index.html' }
         .app-brand-logo.demo
-          %img.h-25px.h-lg-35px{ alt: 'Logo', src: image_url('media/logos/default-dark.svg') }
+
     %h4.mb-2= t('devise.registrations.welcome')
     %p.mb-4= t('devise.registrations.manage_jira')
     = form_for(resource, as: resource_name, url: registration_path(resource_name), html: { class: 'mb-3' }) do |f|
       .mb-3
-        %label.form-label.required{ for: 'username' }= t('devise.registrations.company_name')
-        = select_tag :college_id, options_for_select(College.all.map { |college| [college.name, college.id] }, params[:college_id]), 
-          class: 'form-control', required: true, prompt: 'Select your company name'
-'
-        = print_error(resource.errors, :company_name)
+        %label.form-label.required{ for: 'username' }= 'College'
+        = select_tag :college_id, options_for_select(College.all.map { |college| [college.name, college.id] }, params[:college_id]),
+          class: 'form-select', required: true, prompt: 'Select your College'
+      .mb-3
+        %label.form-label.required{ for: 'name' }= 'Name'
+        = f.text_field :name, autofocus: true, class: 'form-control', required: true, placeholder: 'Enter your name'
       .mb-3
         %label.form-label.required{ for: 'email' }= t('devise.registrations.email')
         = f.email_field :email, autofocus: true, autocomplete: 'email', class: 'form-control', placeholder: 'Enter your email', type: 'text'
