@@ -115,6 +115,19 @@ ActiveRecord::Schema[7.0].define(version: 2024_11_28_103143) do
     t.index ["college_id"], name: "index_sessions_on_college_id"
   end
 
+  create_table "fee_structures", force: :cascade do |t|
+    t.string "name"
+    t.bigint "college_id", null: false
+    t.bigint "classroom_id", null: false
+    t.decimal "tuition_fee"
+    t.decimal "other_expense"
+    t.decimal "total_fee"
+    t.string "slug", limit: 255, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["classroom_id"], name: "index_fee_structures_on_classroom_id"
+    t.index ["college_id"], name: "index_fee_structures_on_college_id"
+  end
   create_table "subjects", force: :cascade do |t|
     t.bigint "college_id", null: false
     t.string "name"
@@ -199,23 +212,15 @@ ActiveRecord::Schema[7.0].define(version: 2024_11_28_103143) do
   add_foreign_key "attendances", "colleges"
   add_foreign_key "attendances", "sessions"
   add_foreign_key "attendances", "users"
-  add_foreign_key "classrooms", "colleges"
-  add_foreign_key "classrooms", "subjects"
   add_foreign_key "courses", "colleges"
   add_foreign_key "courses", "departments"
   add_foreign_key "courses", "users", column: "teacher_id"
   add_foreign_key "departments", "colleges"
   add_foreign_key "departments", "users", column: "head_id"
+  add_foreign_key "fee_structures", "classrooms"
+  add_foreign_key "fee_structures", "colleges"
   add_foreign_key "sessions", "classrooms"
   add_foreign_key "sessions", "colleges"
-  add_foreign_key "subjects", "colleges"
-  add_foreign_key "teacher_classrooms", "classrooms"
-  add_foreign_key "teacher_classrooms", "colleges"
-  add_foreign_key "teacher_classrooms", "teacher_subjects"
-  add_foreign_key "teacher_classrooms", "users"
-  add_foreign_key "teacher_subjects", "colleges"
-  add_foreign_key "teacher_subjects", "subjects"
-  add_foreign_key "teacher_subjects", "users"
   add_foreign_key "users", "colleges"
   add_foreign_key "web_authn_credentials", "users"
 end
