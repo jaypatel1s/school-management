@@ -5,9 +5,11 @@ ROLE_PERMISSIONS = {
     courses: %i[index new create edit update destroy],
     sessions: %i[index],
     departments: %i[index new create edit update destroy],
+    fee_structures: %i[index new create edit update destroy],
     marksheets: %i[index show]
   },
   teacher: {
+    users: %i[index],
     dashboard: %i[index],
     users: %i[index new create edit update show destroy profile_setup],
     classrooms: %i[index],
