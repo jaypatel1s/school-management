@@ -15,6 +15,9 @@ resources :colleges, param: :slug do
     end
   end
   resources :departments, param: :slug do
-    resources :courses, param: :slug
+    resources :courses, param: :slug do
+      resources :fees, param: :slug
+    end
   end
+  resources :fee_types, param: :slug
 end

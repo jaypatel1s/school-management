@@ -7,6 +7,9 @@ class User < ApplicationRecord
   has_many :courses, foreign_key: :teacher_id
   # has_many :attendances, dependent: :destroy
 
+  has_many :course_enrollments
+  has_many :enrolled_courses, through: :course_enrollments, source: :course
+
   enum role: { principal: 0, teacher: 1, student: 2 }
 
   def principal?
