@@ -11,7 +11,7 @@ Rails.application.configure do
   # and those relying on copy on write to perform better.
   # Rake tasks automatically ignore this option for performance.
   config.eager_load = true
-  config.hosts << '54.167.122.206'
+  config.hosts << Rails.application.credentials.dig(:app_host_url)
 
   # Full error reports are disabled and caching is turned on.
   config.consider_all_requests_local       = false
