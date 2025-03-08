@@ -61,16 +61,16 @@ Rails.application.configure do
 
   # Suppress logger output for asset requests.
   config.assets.quiet = true
-  config.action_mailer.asset_host = ENV['SMTP_ASSET_HOST']
-  config.action_mailer.default_url_options = { host:  'app', protocol: 'https' }
+  config.action_mailer.asset_host = Rails.application.credentials.dig(:smtp, :smtp_host)
+  config.action_mailer.default_url_options = { host:  Rails.application.credentials.dig(:smtp, :smtp_host), protocol: 'https' }
   config.action_mailer.default charset: 'utf-8'
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
-    address: ENV['SMTP_ADDRESS'],
-    port: ENV['SMTP_PORT'],
-    domain: ENV['SMTP_DOMAIN'],
-    user_name: ENV['SMTP_USER'],
-    password: ENV['SMTP_PASSWORD'],
+    address: Rails.application.credentials.dig(:smtp, :smtp_address),
+    port: Rails.application.credentials.dig(:smtp, :smtp_port),
+    domain: Rails.application.credentials.dig(:smtp, :smtp_domain),
+    user_name: Rails.application.credentials.dig(:smtp, :smtp_username),
+    password: Rails.application.credentials.dig(:smtp, :smtp_password),
     authentication: :plain,
     enable_starttls_auto: true
   }
