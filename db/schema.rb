@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_11_28_103143) do
+ActiveRecord::Schema[7.0].define(version: 2025_02_08_142942) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -59,9 +59,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_11_28_103143) do
     t.string "slug", limit: 255, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "subject_id", null: false
     t.index ["college_id"], name: "index_classrooms_on_college_id"
-    t.index ["subject_id"], name: "index_classrooms_on_subject_id"
   end
 
   create_table "colleges", force: :cascade do |t|
@@ -75,6 +73,16 @@ ActiveRecord::Schema[7.0].define(version: 2024_11_28_103143) do
     t.string "slug", limit: 255, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "course_enrollments", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "course_id", null: false
+    t.integer "status"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["course_id"], name: "index_course_enrollments_on_course_id"
+    t.index ["user_id"], name: "index_course_enrollments_on_user_id"
   end
 
   create_table "courses", force: :cascade do |t|
@@ -103,15 +111,37 @@ ActiveRecord::Schema[7.0].define(version: 2024_11_28_103143) do
     t.index ["head_id"], name: "index_departments_on_head_id"
   end
 
+  create_table "fee_types", force: :cascade do |t|
+    t.bigint "college_id", null: false
+    t.string "name"
+    t.string "slug", limit: 255, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["college_id"], name: "index_fee_types_on_college_id"
+  end
+
+  create_table "fees", force: :cascade do |t|
+    t.bigint "college_id", null: false
+    t.bigint "department_id", null: false
+    t.bigint "course_id", null: false
+    t.string "name"
+    t.string "slug", limit: 255, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "fee_type_id", null: false
+    t.index ["college_id"], name: "index_fees_on_college_id"
+    t.index ["course_id"], name: "index_fees_on_course_id"
+    t.index ["department_id"], name: "index_fees_on_department_id"
+    t.index ["fee_type_id"], name: "index_fees_on_fee_type_id"
+  end
+
   create_table "sessions", force: :cascade do |t|
     t.bigint "college_id", null: false
-    t.bigint "classroom_id", null: false
     t.datetime "date"
     t.string "slug", limit: 255, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "name"
-    t.index ["classroom_id"], name: "index_sessions_on_classroom_id"
     t.index ["college_id"], name: "index_sessions_on_college_id"
   end
 
@@ -136,32 +166,6 @@ ActiveRecord::Schema[7.0].define(version: 2024_11_28_103143) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["college_id"], name: "index_subjects_on_college_id"
-  end
-
-  create_table "teacher_classrooms", force: :cascade do |t|
-    t.bigint "college_id", null: false
-    t.bigint "user_id", null: false
-    t.bigint "classroom_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.bigint "teacher_subject_id", null: false
-    t.boolean "approved", default: false
-    t.index ["classroom_id"], name: "index_teacher_classrooms_on_classroom_id"
-    t.index ["college_id"], name: "index_teacher_classrooms_on_college_id"
-    t.index ["teacher_subject_id"], name: "index_teacher_classrooms_on_teacher_subject_id"
-    t.index ["user_id"], name: "index_teacher_classrooms_on_user_id"
-  end
-
-  create_table "teacher_subjects", force: :cascade do |t|
-    t.bigint "college_id", null: false
-    t.bigint "user_id", null: false
-    t.bigint "subject_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.boolean "approved", default: false
-    t.index ["college_id"], name: "index_teacher_subjects_on_college_id"
-    t.index ["subject_id"], name: "index_teacher_subjects_on_subject_id"
-    t.index ["user_id"], name: "index_teacher_subjects_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -212,15 +216,21 @@ ActiveRecord::Schema[7.0].define(version: 2024_11_28_103143) do
   add_foreign_key "attendances", "colleges"
   add_foreign_key "attendances", "sessions"
   add_foreign_key "attendances", "users"
+  add_foreign_key "classrooms", "colleges"
+  add_foreign_key "course_enrollments", "courses"
+  add_foreign_key "course_enrollments", "users"
   add_foreign_key "courses", "colleges"
   add_foreign_key "courses", "departments"
   add_foreign_key "courses", "users", column: "teacher_id"
   add_foreign_key "departments", "colleges"
   add_foreign_key "departments", "users", column: "head_id"
-  add_foreign_key "fee_structures", "classrooms"
-  add_foreign_key "fee_structures", "colleges"
-  add_foreign_key "sessions", "classrooms"
+  add_foreign_key "fee_types", "colleges"
+  add_foreign_key "fees", "colleges"
+  add_foreign_key "fees", "courses"
+  add_foreign_key "fees", "departments"
+  add_foreign_key "fees", "fee_types"
   add_foreign_key "sessions", "colleges"
+  add_foreign_key "subjects", "colleges"
   add_foreign_key "users", "colleges"
   add_foreign_key "web_authn_credentials", "users"
 end

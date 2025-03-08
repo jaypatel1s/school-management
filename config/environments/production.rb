@@ -11,7 +11,7 @@ Rails.application.configure do
   # and those relying on copy on write to perform better.
   # Rake tasks automatically ignore this option for performance.
   config.eager_load = true
-  config.hosts << 'school-management-production-56ed.up.railway.app'
+  config.hosts << "54.167.122.206"
 
   # Full error reports are disabled and caching is turned on.
   config.consider_all_requests_local       = false
@@ -92,16 +92,16 @@ Rails.application.configure do
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
   config.action_mailer.perform_deliveries = true
-  config.action_mailer.asset_host = ENV['SMTP_ASSET_HOST']
-  config.action_mailer.default_url_options = { host:  ENV['HOST'], protocol: 'https' }
+  config.action_mailer.asset_host = Rails.application.credentials.dig(:smtp, :smtp_host)
+  config.action_mailer.default_url_options = { host:  Rails.application.credentials.dig(:smtp, :smtp_host), protocol: 'http' }
   config.action_mailer.default charset: 'utf-8'
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
-    address: ENV['SMTP_ADDRESS'],
-    port: ENV['SMTP_PORT'],
-    domain: ENV['SMTP_DOMAIN'],
-    user_name: ENV['SMTP_USER'],
-    password: ENV['SMTP_PASSWORD'],
+    address: Rails.application.credentials.dig(:smtp, :smtp_address),
+    port: Rails.application.credentials.dig(:smtp, :smtp_port),
+    domain: Rails.application.credentials.dig(:smtp, :smtp_domain),
+    user_name: Rails.application.credentials.dig(:smtp, :smtp_username),
+    password: Rails.application.credentials.dig(:smtp, :smtp_password),
     authentication: :plain,
     enable_starttls_auto: true
   }

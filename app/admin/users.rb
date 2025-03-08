@@ -23,6 +23,7 @@ ActiveAdmin.register User do
       f.input :password
       f.input :password_confirmation
       f.input :role, as: :select
+      f.input :confirmed_at, as: :boolean, label: "Email Confirmed?"
     end
     f.actions
   end

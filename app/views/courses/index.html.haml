@@ -24,6 +24,10 @@
                     %strong.long-txt= course.name
                   %td
                     .text-end.d-flex.align-items-center.justify-content-end
+                      - if can_access?(:fees, :index)
+                        %a.btn.btn-info.btn-sm.me-1{
+                        href: college_department_course_fees_path(current_college.slug, department_slug: @department.slug, course_slug: course.slug), 'data-bs-html': 'true', 'data-bs-offset': '0,4', 'data-bs-original-title': '<span>Fees</span>', 'data-bs-placement': 'bottom', 'data-bs-toggle': 'tooltip', title: '', type: 'button' }
+                          = t('issues.issue_security_schemes.table.fees')
                       - if can_access?(:courses, :edit)
                         %a.btn.btn-warning.btn-icon.btn-sm.me-1{
                         href: edit_college_department_course_path(current_college.slug,

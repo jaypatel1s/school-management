@@ -1,6 +1,6 @@
 class CoursesController < BaseController
   before_action :set_department
-  before_action :set_courses, only: %i[show edit update destroy]
+  before_action :set_course, only: %i[show edit update destroy]
 
   def index
     @courses =  @department.courses
@@ -44,7 +44,7 @@ class CoursesController < BaseController
 
   private
 
-  def set_courses
+  def set_course
     @course = @department.courses.find_by(slug: params[:slug])
     return if @course.present?
 

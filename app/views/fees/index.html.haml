@@ -1,0 +1,29 @@
+.d-flex.justify-content-between.align-items-center.mb-4
+  %h4.fw-bold.py-0.m-0
+    = t('issues.status.table.fees')
+  %div
+    %a.btn.btn-sm.btn-primary{ href: new_college_department_course_fee_path(current_college.slug, department_slug: @department.slug, course_slug: @course.slug) }= t('issues.status.table.create')
+.row
+  .col-12
+    .card
+      - if @fee_types.present?
+        .table-responsive.text-nowrap.pb-0.border-bottom
+          %table.table.table-striped
+            %thead
+              %tr
+                %th.text-start= t('issues.status.table.name')
+                %th.text-end= t('issues.status.table.actions')
+            %tbody.table-border-bottom-0
+              - @fee_types.each do |fee_type|
+                %tr
+                  %td.text-start
+                    %strong.long-txt= fee_type.name
+                  %td
+                    .text-end.d-flex.align-items-center.justify-content-end
+                      %a.btn.btn-warning.btn-icon.btn-sm.me-1{
+                      href: edit_college_fee_type_path(current_college.slug, fee_type.slug), 'data-bs-html': 'true', 'data-bs-offset': '0,4', 'data-bs-original-title': '<span>Edit</span>', 'data-bs-placement': 'bottom', 'data-bs-toggle': 'tooltip', title: '', type: 'button' }
+                        %i.bx.bx-pencil
+                      = link_to college_fee_type_path(current_college.slug, fee_type.slug),
+                      { class: 'btn btn-danger btn-icon btn-sm me-1', 'data-bs-html': 'true', 'data-bs-offset': '0,4', 'data-bs-original-title': '<span>Delete</span>', 'data-bs-placement': 'bottom', 'data-confirm': "You won't be able to revert this!",
+                      'data-bs-toggle': 'tooltip', title: '', type: 'button', method: :delete } do
+                        %i.bx.bx-trash

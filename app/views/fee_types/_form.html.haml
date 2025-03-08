@@ -1,0 +1,11 @@
+= form_with model: [:school, fee_type], local: true, html: { multipart: true }, url: url, class: 'form' do |f|
+  .row
+    .col-md-6.mb-3
+      %label.form-label.required
+        = t('issues.fee_types.table.name')
+      = f.text_field :name, class: "form-control #{error?(@fee_type.errors, :name)}",
+      value: f.object.name, placeholder: 'Name', required: true
+      = print_error(@fee_type.errors, :name)
+  .col-12.d-flex.justify-content-between
+    %button.btn.btn-primary{ type: 'submit', data: { confirm: 'Do you want to save the changes?' } }
+      = t('issues.fee_types.table.save')

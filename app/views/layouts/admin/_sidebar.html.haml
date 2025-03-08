@@ -29,7 +29,7 @@
           %a.menu-link{ href: "#" }
             %i.menu-icon.tf-icons.bx.bx-user
             %div{ 'data-i18n': 'Users' }= t('layouts.sidebar.profile')
-      %li.menu-item.menu-header.small.py-0.px-3{ class: sub_menu_active_class(%w[users departments]) }
+      %li.menu-item.menu-header.small.py-0.px-3{ class: sub_menu_active_class(%w[users departments fee_types]) }
         %a.menu-link.menu-toggle.m-0{ href: '#' }
           %i.menu-icon.tf-icons.bx.bx-layer
           .small.menu-header-text= t('layouts.sidebar.head_of_college')
@@ -50,6 +50,11 @@
               %a.menu-link{ href: college_departments_path(college_slug: current_college.slug) }
                 %i.menu-icon.tf-icons.bx.bx-book
                 %div{ 'data-i18n': 'Subjects' }= t('layouts.sidebar.departments')
+          - if can_access?(:fee_types, :index)
+            %li.menu-item{ class: menu_active_class('fee_types') }
+              %a.menu-link{ href: college_fee_types_path(college_slug: current_college.slug) }
+                %i.menu-icon.tf-icons.bx.bx-book
+                %div{ 'data-i18n': 'Subjects' }= t('layouts.sidebar.fee_types')
 
     - if can_access?(:fee_structures, :index)
       %li.menu-item{ class: menu_active_class('fee_structures') }
