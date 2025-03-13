@@ -3,10 +3,10 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby '3.2.0'
+ruby '3.2.2'
 
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
-gem 'rails', '~> 7.0.4'
+gem "rails", "~> 7.1.3", ">= 7.1.3.4"
 
 gem 'bootsnap', require: false
 gem 'devise'
@@ -15,7 +15,7 @@ gem 'cocoon'
 gem 'jquery-rails'
 gem 'pg'
 gem 'pagy'
-gem 'puma', '~> 5.0'
+gem 'puma', '~> 6.0'
 gem 'sass-rails', '>= 6'
 gem 'trix-rails', require: 'trix'
 gem 'uglifier', '>= 1.3.0'
@@ -27,8 +27,13 @@ gem 'country_select'
 
 # Background job adapter
 gem 'sidekiq'
+gem "importmap-rails"
+gem "turbo-rails"
 
-gem 'paper_trail', '~> 14.0.0'
+# Hotwire's modest JavaScript framework [https://stimulus.hotwired.dev]
+gem "stimulus-rails"
+
+gem 'paper_trail'
 gem 'blamer'
 
 # Use Active Storage

@@ -1,0 +1,28 @@
+%nav#navbar.navbar.navbar-expand-lg.bg-white.bg-opacity-25.fixed-top
+  .container
+    %a.navbar-brand.me-xl-5.me-3{href: "#"}
+      = image_tag('logo.svg', alt: 'logo')
+    %button.navbar-toggler{"aria-controls" => "navbarSupportedContent", "aria-expanded" => "false", "aria-label" => "Toggle navigation", "data-bs-target" => "#navbarSupportedContent", "data-bs-toggle" => "collapse", type: "button"}
+      %span.navbar-toggler-icon
+    #navbarSupportedContent.collapse.navbar-collapse
+      %ul.navbar-nav.me-auto.mb-2.mb-lg-0
+        %li.nav-item
+          %a.nav-link.fs-16.fw-medium.text-body.hover.px-0.px-md-2.mx-1.mx-xl-0.px-xl-4.active{href: "#home"} Home
+        %li.nav-item
+          %a.nav-link.fs-16.fw-medium.text-body.hover.px-0.px-md-2.mx-1.mx-xl-0.px-xl-4{href: "#features"} Features
+        %li.nav-item
+          %a.nav-link.fs-16.fw-medium.text-body.hover.px-0.px-md-2.mx-1.mx-xl-0.px-xl-4{href: "#ourteam"} Our Team
+        %li.nav-item
+          %a.nav-link.fs-16.fw-medium.text-body.hover.px-0.px-md-2.mx-1.mx-xl-0.px-xl-4{href: "#fqss"} FAQ’s
+        %li.nav-item
+          %a.nav-link.fs-16.fw-medium.text-body.hover.px-0.px-md-2.mx-1.mx-xl-0.px-xl-4{href: "#contact"} Contact
+        %li.nav-item
+          %a.nav-link.fs-16.fw-medium.text-body.hover.px-0.px-md-2.mx-1.mx-xl-0.px-xl-4{href: "#admin"} Admin
+      .othres
+        = link_to new_user_session_path, class: "btn btn-outline-primary-div py-2 px-4 fw-medium fs-16 rounded-3" do
+          %i.ri-login-box-line.fs-18.position-relative.top-2
+          %span.ms-1 Login
+
+        = link_to '', class: "btn btn-primary-div py-2 px-4 fw-medium fs-16 text-white ms-3 rounded-3" do
+          %i.ri-user-line.fs-18
+          %span.ms-1 Register

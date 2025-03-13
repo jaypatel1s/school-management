@@ -1,0 +1,41 @@
+#offcanvasScrolling.offcanvas.offcanvas-end.bg-white{"aria-labelledby" => "offcanvasScrollingLabel", "data-bs-backdrop" => "true", "data-bs-scroll" => "true", style: "box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;", tabindex: "-1"}
+  .offcanvas-header.bg-body-bg.py-3.px-4
+    %h5#offcanvasScrollingLabel.offcanvas-title.fs-18 Theme Settings
+    %button.btn-close{"aria-label" => "Close", "data-bs-dismiss" => "offcanvas", type: "button"}
+  .offcanvas-body.p-4
+    .mb-4.pb-2
+      %h4.fs-15.fw-semibold.border-bottom.pb-2.mb-3 Container Style Fluid / Boxed
+      %button#boxed-style.boxed-style.settings-btn.fluid-boxed-btn
+        Click To
+        %span.fluid Fluid
+        %span.boxed Boxed
+    .mb-4.pb-2
+      %h4.fs-15.fw-semibold.border-bottom.pb-2.mb-3 Only Sidebar Light / Dark
+      %button#sidebar-light-dark.sidebar-light-dark.settings-btn.sidebar-dark-btn
+        Click To
+        %span.dark1 Dark
+        %span.light1 Light
+    .mb-4.pb-2
+      %h4.fs-15.fw-semibold.border-bottom.pb-2.mb-3 Only Header Light / Dark
+      %button#header-light-dark.header-light-dark.settings-btn.header-dark-btn
+        Click To
+        %span.dark2 Dark
+        %span.light2 Light
+    .mb-4.pb-2
+      %h4.fs-15.fw-semibold.border-bottom.pb-2.mb-3 Only Footer Light / Dark
+      %button#footer-light-dark.footer-light-dark.settings-btn.footer-dark-btn
+        Click To
+        %span.dark3 Dark
+        %span.light3 Light
+    .mb-4.pb-2
+      %h4.fs-15.fw-semibold.border-bottom.pb-2.mb-3 Card Style Radius / Square
+      %button#card-radius-square.card-radius-square.settings-btn.card-style-btn
+        Click To
+        %span.square Square
+        %span.radius Radius
+    .mb-4.pb-2
+      %h4.fs-15.fw-semibold.border-bottom.pb-2.mb-3 Card Style BG White / Gray
+      %button#card-bg.card-bg.settings-btn.card-bg-style-btn
+        Click To
+        %span.white White
+        %span.gray Gray

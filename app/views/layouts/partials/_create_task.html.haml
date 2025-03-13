@@ -1,0 +1,41 @@
+#offcanvasRight.offcanvas.offcanvas-end{"aria-labelledby" => "offcanvasRightLabel", tabindex: "-1"}
+  .offcanvas-header.border-bottom.p-4
+    %h5#offcanvasRightLabel.offcanvas-title.fs-18.mb-0 Create Task
+    %button.btn-close{"aria-label" => "Close", "data-bs-dismiss" => "offcanvas", type: "button"}
+  .offcanvas-body.p-4
+    %form
+      .form-group.mb-4
+        %label.label Task ID
+        %input.form-control.text-dark{placeholder: "Task ID", type: "text"}/
+      .form-group.mb-4
+        %label.label Task Title
+        %input.form-control.text-dark{placeholder: "Task Title", type: "text"}/
+      .form-group.mb-4
+        %label.label Assigned To
+        %input.form-control.text-dark{placeholder: "Assigned To", type: "text"}/
+      .form-group.mb-4
+        %label.label Due Date
+        %input.form-control.text-dark{type: "date"}/
+      .form-group.mb-4
+        %label.label Priority
+        %select.form-select.form-control.text-dark{"aria-label" => "Default select example"}
+          %option{selected: "selected"} High
+          %option{value: "1"} Low
+          %option{value: "2"} Medium
+      .form-group.mb-4
+        %label.label Status
+        %select.form-select.form-control.text-dark{"aria-label" => "Default select example"}
+          %option{selected: "selected"} Finished
+          %option{value: "1"} Pending
+          %option{value: "2"} In Progress
+          %option{value: "3"} Cancelled
+      .form-group.mb-4
+        %label.label Action
+        %select.form-select.form-control.text-dark{"aria-label" => "Default select example"}
+          %option{selected: "selected"} Yes
+          %option{value: "1"} No
+      .form-group.d-flex.gap-3
+        %button.btn.btn-primary.text-white.fw-semibold.py-2.px-2.px-sm-3
+          %span.py-sm-1.d-block
+            %i.ri-add-line.text-white
+            %span Create Task

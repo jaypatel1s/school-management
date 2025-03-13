@@ -1,97 +1,20 @@
 !!!
-%html{ dir: 'ltr', lang: 'en', class: "#{ params[:controller] == 'jira/compare' ? 'compare_tree_leftside' : 'light-style layout-menu-fixed' }" }
+%html
   %head
-    %meta{ content: 'text/html; charset=UTF-8', 'http-equiv': 'Content-Type' }
-    %meta{ charset: 'utf-8' }
-    %meta{ content: 'width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0', name: 'viewport' }
+    %meta{content: "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
     %title School Management System
-    %meta{ content: '', name: 'description' }
-    %link{ href: "#{image_path('favicon.ico') }", rel: 'icon', type: 'image/x-icon' }
-    %link{ href: 'https://fonts.googleapis.com', rel: 'preconnect' }
-    %link{ crossorigin: '', href: 'https://fonts.gstatic.com', rel: 'preconnect' }
-    %link{ href: 'https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap', rel: 'stylesheet' }
-
+    %meta{content: "width=device-width,initial-scale=1", name: "viewport"}/
     = csrf_meta_tags
     = csp_meta_tag
-
-    = stylesheet_link_tag 'admin', media: 'all', 'data-turbolinks-track': 'reload'
-    = javascript_include_tag 'admin', 'data-turbolinks-track': 'reload'
-  %body
-    .layout-wrapper.layout-content-navbar
-      .layout-container
-        = render 'layouts/admin/sidebar'
-        .layout-page
-          = render 'layouts/admin/nav'
-          .content-wrapper
-            .container-xxl.flex-grow-1.container-p-y
-              .bs-toast.toast.toast-placement-ex.m-2.fade.top-0.end-0.show{ "aria-atomic" => "true", "aria-live" => "assertive", "data-bs-delay" => "2000", :role => "alert", style: 'display: none' }
-                .toast-header.pb-0
-                  %button.btn-close{ "aria-label" => "Close", "data-bs-dismiss" => "toast", :type => "button" }
-                .toast-body
-              = yield
-            = render 'layouts/admin/footer'
-            .content-backdrop.fade
-      .layout-overlay.layout-menu-toggle
-
-    = yield :css_file
-    = yield :css_code
-
-    = javascript_include_tag 'admin_footer', 'data-turbolinks-track': 'reload'
-
-    = yield :js_file
-    = yield :js_code
-    = render 'common/notification'
-
-  .page-loader
-    .d-flex.w-100.h-100.flex-column
-      %span.spinner-border.text-primary{ role: "status" }
-      %p.text-center.mt-2 Loading...
-  :javascript
-    $(window).bind("pageshow", function(event) {
-      if (event.originalEvent.persisted) {
-        window.location.reload();
-      }
-    });
-
-    $(document).ready(function() {
-      $('[data-bs-toggle="tooltip"]').tooltip({
-        trigger: 'hover'
-      }).on('click', function() {
-        $(this).tooltip('dispose');
-      });
-
-      $(document).on('mouseover', '[data-bs-toggle="tooltip"]', function() {
-        if (!$(this).data('bs.tooltip')) {
-          $(this).tooltip({
-            trigger: 'hover'
-          }).tooltip('show');
-        }
-      });
-
-      $('.enabled').click(function() {
-        $('.btn-info').addClass('disabled');
-      });
-
-      var $menuicon = $("#layout-navbar .layout-menu-toggle");
-      var $sidebar = $(".menu-vertical");
-      var $menuarrow = $(".menu-vertical .layout-menu-toggle");
-      var $page = $(".layout-page");
-      var $layoutoverlay = $(".layout-overlay");
-
-      $menuicon.on("click", function() {
-        $("#layout-menu").css("margin-left", "0px");
-        $("html").addClass("layout-menu-expanded");
-      });
-
-      $menuarrow.on("click", function() {
-        $("#layout-menu").css("margin-left", "-260px");
-        $("html").removeClass("layout-menu-expanded");
-      });
-
-      $layoutoverlay.on("click", function(event) {
-        if (event.clientX >= 260) {
-          $("#layout-menu").css("margin-left", "-260px");
-          $("html").removeClass("layout-menu-expanded");
-        }
-      });
-    });
+    = stylesheet_link_tag "application", "data-turbo-track": "reload"
+    = render "/layouts/partials/javascripti_imports"
+  %body.boxed-size
+    = render "/layouts/partials/sidebar"
+    .container-fluid
+      .main-content.d-flex.flex-column
+        = render "/layouts/partials/navbar"
+        = yield
+        .flex-grow-1
+        = render "/layouts/partials/footer"
+        = render "/layouts/partials/create_task"
+        = render "/layouts/partials/settings"

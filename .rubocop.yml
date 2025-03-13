@@ -5,15 +5,15 @@ require:
   - rubocop-rspec
 AllCops:
   NewCops: enable
-  TargetRubyVersion: 3.2.0
+  TargetRubyVersion: 3.2.2
   Exclude:
-    - '**/bin/*'
-    - '**/db/schema.rb'
-    - '**/db/migrate/*'
-    - '**/config/initializers/*'
-    - '**/vendor/bundle/**/*'
-    - '**/spec/**/*'
-    - '**/lib/tasks/import_database.rake'
+    - "**/bin/*"
+    - "**/db/schema.rb"
+    - "**/db/migrate/*"
+    - "**/config/initializers/*"
+    - "**/vendor/bundle/**/*"
+    - "**/spec/**/*"
+    - "**/lib/tasks/import_database.rake"
 Layout/LineLength:
   Max: 120
 Metrics/ClassLength:
@@ -31,7 +31,7 @@ Metrics/MethodLength:
 Metrics/BlockLength:
   Max: 35
   Exclude:
-    - '**/config/routes.rb'
-    - '**/config/routes/*'
-    - '**/config/environments/*'
-    - '**/config/initializers/*'
+    - "**/config/routes.rb"
+    - "**/config/routes/*"
+    - "**/config/environments/*"
+    - "**/config/initializers/*"

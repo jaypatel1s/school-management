@@ -1,3 +1,4 @@
 class HomeController < ApplicationController
-  def index; end
+  layout "landing", only: [:index]
+  def landing; end
 end

@@ -1,0 +1,44 @@
+#sidebar-area.sidebar-area
+  .logo.position-relative
+    %a.d-block.text-decoration-none.position-relative{href: "/"}
+      = image_tag('logo-icon.png', alt: 'logo-icon')
+      %span.logo-text.fw-bold.text-dark Trezo
+    %button#sidebar-burger-menu.sidebar-burger-menu.bg-transparent.p-0.border-0.opacity-0.z-n1.position-absolute.top-50.end-0.translate-middle-y
+      %i{"data-feather" => "x"}
+  %aside#layout-menu.layout-menu.menu-vertical.menu.active
+    %ul.menu-inner
+      %li.menu-title.small.text-uppercase
+        %span.menu-title-text MAIN
+      %li.menu-item.open
+        %a.menu-link.menu-toggle.active{href: "javascript:void(0);"}
+          %span.material-symbols-outlined.menu-icon dashboard
+          %span.title Dashboard
+          %span.count 5
+-#         %ul.menu-sub
+-#           %li.menu-item
+-#             %a.menu-link{href: "/"}
+-#             = current_page?(root_path) ? 'active' : ''
+-#             "&gt;
+-#             eCommerce
+-#         %li.menu-item
+-#           %a.menu-link{href: "/crm"}
+-#           = current_page?(crm_path) ? 'active' : ''
+-#           "&gt;
+-#           CRM
+-#           %span.hot.tag Hot
+-#       %li.menu-item
+-#         %a.menu-link{href: "/project_management"}
+-#         = current_page?(project_management_path) ? 'active' : ''
+-#         "&gt;
+-#         Project Management
+-#     %li.menu-item.mb-0
+-#       %a.menu-link{href: "/lms"}
+-#       = current_page?(lms_path) ? 'active' : ''
+-#       "&gt;
+-#       LMS
+-#   %li.menu-item.mb-0
+-#     %a.menu-link{href: "/help_desk"}
+-#     = current_page?(help_desk_path) ? 'active' : ''
+-#     "&gt;
+-#     HelpDesk
+-#     %span.new.tag New

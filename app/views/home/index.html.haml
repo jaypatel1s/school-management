@@ -1,348 +1,496 @@
-/ Header section
-%header.header-section
-  .container
-    .row
-      .col-lg-3.col-md-3
-        .site-logo
-          %img{ alt: "", src: image_url('logo.png') }/
-        .nav-switch
-          %i.fa.fa-bars
-      .col-lg-9.col-md-9
-        %nav.main-menu
-          %ul
-            %li
-              %a{href: "index.html"} Home
-            %li
-              %a{href: "#"} About us
-            %li
-              %a{href: "courses.html"} Courses
-            %li
-              %a{href: "blog.html"} News
-            %li
-              %a{href: "contact.html"} Contact
-            %li
-              %a{href: new_user_session_url} Login
-/ Header section end
-/ Hero section
-%section.hero-section.set-bg{"data-setbg" => image_url("bg.jpg")}
-  .container
-    .hero-text.text-white
-      %h2 Get The Best Free Online Courses
-      %p
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec malesuada lorem maximus mauris scelerisque, at rutrum nulla
-        %br/
-        dictum. Ut ac ligula sapien. Suspendisse cursus faucibus finibus.
-    .row
-      .col-lg-10.offset-lg-1
-        %form.intro-newslatter
-          %input{placeholder: "Name", type: "text"}/
-          %input.last-s{placeholder: "E-mail", type: "text"}/
-          %button.site-btn Sign Up Now
-/ Hero section end
-/ categories section
-%section.categories-section.spad
+#home.banner-area.bg-img.pb-0
+  .container.position-relative.z-1
+    .banner-content.text-center.pb-75
+      %h1.fs-60.mb-3.pb-md-3 Insights On-the-Go: Access Your Dashboard Anywhere, Anytime
+      %p.fs-18.m-auto.mb-3.pb-md-3.mw-740 Our intuitive interface transforms complex data into actionable insights, empowering you to make informed decisions with confidence.
+      %a.btn.btn-primary.py-2.px-4.fs-16.fw-medium.rounded-3{href: "pricing-plan.html"}
+        %i.ri-user-line.fs-18
+        %span.ms-1 Get started - It is free
+    .banner-img-wrap.text-center
+      = image_tag('landing/banner-img.png', alt: 'banner')
+    = image_tag('landing/shape-3.png', alt: 'shape', class: "shape shape-7")
+    = image_tag('landing/shape-4.png', alt: 'shape', class: "shape shape-8")
+    = image_tag('landing/shape-5.png', alt: 'shape', class: "shape shape-9")
+    = image_tag('landing/shape-6.png', alt: 'shape', class: "shape shape-10")
+#features.key-features-area.pt-150.pb-125.position-relative.z-2
   .container
     .section-title
-      %h2 Our Course Categories
-      %p Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec malesuada lorem maximus mauris scelerisque, at rutrum nulla dictum. Ut ac ligula sapien. Suspendisse cursus faucibus finibus.
-    .row
-      / categorie
+      %span.top-title
+        %span Key Features
+      %h2 Discover What Sets Us Apart: Highlighted Dashboard Functions
+    .row.justify-content-center
       .col-lg-4.col-md-6
-        .categorie-item
-          .ci-thumb.set-bg{"data-setbg" => image_url("categories/1.jpg")}
-          .ci-text
-            %h5 IT Development
-            %p Lorem ipsum dolor sit amet, consectetur
-            %span 120 Courses
-      / categorie
+        .key-features-single-item
+          %i.material-symbols-outlined.wh-87.bg-primary.bg-opacity-25.d-inline-block.text-primary stacks
+          %h3 Real-Time Updates
+          %p Provide real-time updates and notifications to keep users informed about important events, changes, or updates within the system.
       .col-lg-4.col-md-6
-        .categorie-item
-          .ci-thumb.set-bg{"data-setbg" => image_url("categories/2.jpg")}
-          .ci-text
-            %h5 Web Design
-            %p Lorem ipsum dolor sit amet, consectetur
-            %span 70 Courses
-      / categorie
+        .key-features-single-item
+          %i.material-symbols-outlined.wh-87.bg-primary-div.bg-opacity-25.d-inline-block.text-primary-div frame_source
+          %h3 Quality Code
+          %p These features include adherence to coding standards, robust error handling mechanisms, efficient algorithms, scalability, maintainability, and readability.
       .col-lg-4.col-md-6
-        .categorie-item
-          .ci-thumb.set-bg{"data-setbg" => image_url("categories/3.jpg")}
-          .ci-text
-            %h5 Illustration &amp; Drawing
-            %p Lorem ipsum dolor sit amet, consectetur
-            %span 55 Courses
-      / categorie
-      .col-lg-4.col-md-6
-        .categorie-item
-          .ci-thumb.set-bg{"data-setbg" => image_url("categories/4.jpg")}
-          .ci-text
-            %h5 Social Media
-            %p Lorem ipsum dolor sit amet, consectetur
-            %span 40 Courses
-      / categorie
-      .col-lg-4.col-md-6
-        .categorie-item
-          .ci-thumb.set-bg{"data-setbg" => image_url("categories/5.jpg")}
-          .ci-text
-            %h5 Photoshop
-            %p Lorem ipsum dolor sit amet, consectetur
-            %span 220 Courses
-      / categorie
-      .col-lg-4.col-md-6
-        .categorie-item
-          .ci-thumb.set-bg{"data-setbg" => image_url("categories/6.jpg")}
-          .ci-text
-            %h5 Cryptocurrencies
-            %p Lorem ipsum dolor sit amet, consectetur
-            %span 25 Courses
-/ categories section end
-/ search section
-%section.search-section
+        .key-features-single-item
+          %i.material-symbols-outlined.wh-87.bg-danger.bg-opacity-25.d-inline-block.text-danger support_agent
+          %h3 24/7 Customer Support
+          %p Our 24/7 customer support is dedicated to providing round-the-clock assistance, ensuring that help is always available whenever our customers need it.
+.tailor-area.position-relative.z-1
   .container
-    .search-warp
-      .section-title.text-white
-        %h2 Search your course
-      .row
-        .col-md-10.offset-md-1
-          / search form
-          %form.course-search-form
-            %input{placeholder: "Course", type: "text"}/
-            %input.last-m{placeholder: "Category", type: "text"}/
-            %button.site-btn Search Couse
-/ search section end
-/ course section
-%section.course-section.spad
-  .container
-    .section-title.mb-0
-      %h2 Featured Courses
-      %p Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec malesuada lorem maximus mauris scelerisque, at rutrum nulla dictum. Ut ac ligula sapien. Suspendisse cursus faucibus finibus.
-  .course-warp
-    %ul.course-filter.controls
-      %li.control.active{"data-filter" => "all"} All
-      %li.control{"data-filter" => ".finance"} Finance
-      %li.control{"data-filter" => ".design"} Design
-      %li.control{"data-filter" => ".web"} Web Development
-      %li.control{"data-filter" => ".photo"} Photography
-    .row.course-items-area
-      / course
-      .mix.col-lg-3.col-md-4.col-sm-6.finance
-        .course-item
-          .course-thumb.set-bg{"data-setbg" => image_url("courses/1.jpg")}
-            .price Price: $15
-          .course-info
-            .course-text
-              %h5 Art &amp; Crafts
-              %p Lorem ipsum dolor sit amet, consectetur
-              .students 120 Students
-            .course-author
-              .ca-pic.set-bg{"data-setbg" =>image_url("authors/1.jpg")}
-              %p
-                William Parker,
-                %span Developer
-      / course
-      .mix.col-lg-3.col-md-4.col-sm-6.design
-        .course-item
-          .course-thumb.set-bg{"data-setbg" => image_url("courses/2.jpg")}
-            .price Price: $15
-          .course-info
-            .course-text
-              %h5 IT Development
-              %p Lorem ipsum dolor sit amet, consectetur
-              .students 120 Students
-            .course-author
-              .ca-pic.set-bg{"data-setbg" => image_url("authors/2.jpg")}
-              %p
-                William Parker,
-                %span Developer
-      / course
-      .mix.col-lg-3.col-md-4.col-sm-6.web
-        .course-item
-          .course-thumb.set-bg{"data-setbg" => image_url("courses/3.jpg")}
-            .price Price: $15
-          .course-info
-            .course-text
-              %h5 Graphic Design
-              %p Lorem ipsum dolor sit amet, consectetur
-              .students 120 Students
-            .course-author
-              .ca-pic.set-bg{"data-setbg" => image_url("authors/3.jpg")}
-              %p
-                William Parker,
-                %span Developer
-      / course
-      .mix.col-lg-3.col-md-4.col-sm-6.photo
-        .course-item
-          .course-thumb.set-bg{"data-setbg" => image_url("courses/4.jpg")}
-            .price Price: $15
-          .course-info
-            .course-text
-              %h5 IT Development
-              %p Lorem ipsum dolor sit amet, consectetur
-              .students 120 Students
-            .course-author
-              .ca-pic.set-bg{"data-setbg" => image_url("authors/4.jpg")}
-              %p
-                William Parker,
-                %span Developer
-      / course
-      .mix.col-lg-3.col-md-4.col-sm-6.finance
-        .course-item
-          .course-thumb.set-bg{"data-setbg" => image_url("courses/5.jpg")}
-            .price Price: $15
-          .course-info
-            .course-text
-              %h5 IT Development
-              %p Lorem ipsum dolor sit amet, consectetur
-              .students 120 Students
-            .course-author
-              .ca-pic.set-bg{"data-setbg" => image_url("authors/5.jpg")}
-              %p
-                William Parker,
-                %span Developer
-      / course
-      .mix.col-lg-3.col-md-4.col-sm-6.design
-        .course-item
-          .course-thumb.set-bg{"data-setbg" => image_url("courses/6.jpg")}
-            .price Price: $15
-          .course-info
-            .course-text
-              %h5 Socia Media
-              %p Lorem ipsum dolor sit amet, consectetur
-              .students 120 Students
-            .course-author
-              .ca-pic.set-bg{"data-setbg" => image_url("authors/6.jpg")}
-              %p
-                William Parker,
-                %span Developer
-      / course
-      .mix.col-lg-3.col-md-4.col-sm-6.web
-        .course-item
-          .course-thumb.set-bg{"data-setbg" => image_url("courses/7.jpg")}
-            .price Price: $15
-          .course-info
-            .course-text
-              %h5 IT Development
-              %p Lorem ipsum dolor sit amet, consectetur
-              .students 120 Students
-            .course-author
-              .ca-pic.set-bg{"data-setbg" => image_url("authors/7.jpg")}
-              %p
-                William Parker,
-                %span Developer
-      / course
-      .mix.col-lg-3.col-md-4.col-sm-6.photo
-        .course-item
-          .course-thumb.set-bg{"data-setbg" => image_url("courses/8.jpg")}
-            .price Price: $15
-          .course-info
-            .course-text
-              %h5 HTML 5
-              %p Lorem ipsum dolor sit amet, consectetur
-              .students 120 Students
-            .course-author
-              .ca-pic.set-bg{"data-setbg" => image_url("authors/8.jpg")}
-              %p
-                William Parker,
-                %span Developer
-/ course section end
-/ signup section
-%section.signup-section.spad
-  .signup-bg.set-bg{"data-setbg" => image_url("signup-bg.jpg")}
-  .container-fluid
-    .row
+    .row.align-items-center
       .col-lg-6
-        .signup-warp
-          .section-title.text-white.text-left
-            %h2 Sign up to became a teacher
-            %p Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec malesuada lorem maximus mauris scelerisque, at rutrum nulla dictum. Ut ac ligula sapien. Suspendisse cursus faucibus finibus.
-          / signup form
-          %form.signup-form
-            %input{placeholder: "Your Name", type: "text"}/
-            %input{placeholder: "Your E-mail", type: "text"}/
-            %input{placeholder: "Your Phone", type: "text"}/
-            %label.file-up-btn{for: "v-upload"} Upload Course
-            %input#v-upload{type: "file"}/
-            %button.site-btn Search Couse
-/ signup section end
-/ banner section
-%section.banner-section.spad
+        .tailor-img
+          = image_tag('landing/tailor-img.png', alt: 'tailor')
+      .col-lg-6
+        .tailor-content
+          %h2 Tailor Your Dashboard: Unleash the Power of Customizable Widgets
+          %ul.ps-0.mb-0.list-unstyled
+            %li
+              .d-flex
+                .flex-shrink-0
+                  %i.material-symbols-outlined.fs-20.text-primary done_outline
+                .flex-grow-1.ms-3
+                  %h3 Tailored Display
+                  %p Easily arrange, resize, and configure widgets to showcase the data most relevant to your workflow.
+            %li
+              .d-flex
+                .flex-shrink-0
+                  %i.material-symbols-outlined.fs-20.text-primary done_outline
+                .flex-grow-1.ms-3
+                  %h3 Personalized Insights
+                  %p Customize widget content and visualization options to match your specific preferences and priorities.
+            %li
+              .d-flex
+                .flex-shrink-0
+                  %i.material-symbols-outlined.fs-20.text-primary done_outline
+                .flex-grow-1.ms-3
+                  %h3 Flexibility and Versatility
+                  %p Adapt widgets to evolving business needs by adjusting layouts, styles, and data sources with ease.
+            %li
+              .d-flex
+                .flex-shrink-0
+                  %i.material-symbols-outlined.fs-20.text-primary done_outline
+                .flex-grow-1.ms-3
+                  %h3 Seamless Integration
+                  %p Integrate widgets seamlessly with other dashboard components and external systems for a cohesive user experience.
+  = image_tag('landing/shape-1.png', alt: 'shape',  class: "shape shape-1")
+  = image_tag('landing/shape-2.png', alt: 'shape',  class: "shape shape-2")
+#testimonials.testimonials-area.pt-150
   .container
-    .section-title.mb-0.pb-2
-      %h2 Join Our Community Now!
-      %p Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec malesuada lorem maximus mauris scelerisque, at rutrum nulla dictum. Ut ac ligula sapien. Suspendisse cursus faucibus finibus.
-    .text-center.pt-5
-      %a.site-btn{href: "#"} Register Now
-/ banner section end
-/ footer section
-%footer.footer-section.spad.pb-0
-  .footer-top
-    .footer-warp
-      .row
-        .widget-item
-          %h4 Contact Info
-          %ul.contact-list
+    .section-title.mw-630
+      %span.top-title
+        %span Testimonials
+      %h2 Inspiring Feedback: What Users Love About Trezo Dashboard
+    .masonrow
+      .item
+        .single-testimonials
+          %ul.reating.ps-0.list-unstyled
             %li
-              1481 Creekside Lane
-              = succeed "Avila" do
-                %br/
-            %li +53 345 7953 32453
-            %li yourmail@gmail.com
-        .widget-item
-          %h4 Engeneering
-          %ul
+              %i.ri-star-fill
             %li
-              %a{href: ""} Applied Studies
+              %i.ri-star-fill
             %li
-              %a{href: ""} Computer Engeneering
+              %i.ri-star-fill
             %li
-              %a{href: ""} Software Engeneering
+              %i.ri-star-fill
             %li
-              %a{href: ""} Informational Engeneering
+              %i.ri-star-fill
+          %p Trezo Dashboard Template has transformed how we manage our data. Its intuitive design and customizable features have streamlined our analytics process, enabling us to make informed decisions faster than ever before.
+          .d-flex.align-items-center.review-info
+            .review
+              = image_tag('landing/testimonial-1.jpg', alt: 'testimonial', class: "rounded-circle wh-50")
+            .ms-3
+              %h4 Sarah Thompson
+              %span Data Analyst
+      .item
+        .single-testimonials
+          %ul.reating.ps-0.list-unstyled
             %li
-              %a{href: ""} System Engeneering
-        .widget-item
-          %h4 Graphic Design
-          %ul
+              %i.ri-star-fill
             %li
-              %a{href: ""} Applied Studies
+              %i.ri-star-fill
             %li
-              %a{href: ""} Computer Engeneering
+              %i.ri-star-fill
             %li
-              %a{href: ""} Software Engeneering
+              %i.ri-star-fill
             %li
-              %a{href: ""} Informational Engeneering
+              %i.ri-star-half-fill
+          %p As a developer, I appreciate the flexibility and robustness of Trezo Dashboard Template. It offers a wide range of features that cater to our diverse needs, and its clean codebase has made customization a breeze. Highly recommended!
+          .d-flex.align-items-center.review-info
+            .review
+              = image_tag('landing/testimonial-2.jpg', alt: 'testimonial', class: "rounded-circle wh-50")
+            .ms-3
+              %h4 John Smith
+              %span Software Engineer
+      .item
+        .single-testimonials
+          %ul.reating.ps-0.list-unstyled
             %li
-              %a{href: ""} System Engeneering
-        .widget-item
-          %h4 Development
-          %ul
+              %i.ri-star-fill
             %li
-              %a{href: ""} Applied Studies
+              %i.ri-star-fill
             %li
-              %a{href: ""} Computer Engeneering
+              %i.ri-star-fill
             %li
-              %a{href: ""} Software Engeneering
+              %i.ri-star-fill
             %li
-              %a{href: ""} Informational Engeneering
+              %i.ri-star-line
+          %p Trezo Dashboard Template has been a lifesaver for our organization. It is helped us streamline our reporting processes and communicate insights effectively across departments. The time saved has allowed us to focus more on strategic initiatives.
+          .d-flex.align-items-center.review-info
+            .review
+              = image_tag('landing/testimonial-3.jpg', alt: 'testimonial', class: "rounded-circle wh-50")
+            .ms-3
+              %h4 Alex Rodriguez
+              %span Marketing Director
+      .item
+        .single-testimonials
+          %ul.reating.ps-0.list-unstyled
             %li
-              %a{href: ""} System Engeneering
-        .widget-item
-          %h4 Newsletter
-          %form.footer-newslatter
-            %input{placeholder: "E-mail", type: "email"}/
-            %button.site-btn Subscribe
-            %p *We don’t spam
-  .footer-bottom
-    .footer-warp
-      %ul.footer-menu
-        %li
-          %a{href: "#"} Terms &amp; Conditions
-        %li
-          %a{href: "#"} Register
-        %li
-          %a{href: "#"} Privacy
-      .copyright
-        / Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0.
-        Copyright ©
-        :javascript
-          document.write(new Date().getFullYear());
-        All rights reserved to jay
+              %i.ri-star-fill
+            %li
+              %i.ri-star-fill
+            %li
+              %i.ri-star-fill
+            %li
+              %i.ri-star-half-fill
+            %li
+              %i.ri-star-line
+          %p I can't recommend Trezo Dashboard Template enough. It's helped us gain a deeper understanding of our business metrics and identify areas for improvement. The responsive support team is an added bonus, always ready to assist whenever we need it.
+          .d-flex.align-items-center.review-info
+            .review
+              = image_tag('landing/testimonial-4.jpg', alt: 'testimonial', class: "rounded-circle wh-50")
+            .ms-3
+              %h4 Kevin Brown
+              %span Jessica Martinez
+      .item
+        .single-testimonials
+          %ul.reating.ps-0.list-unstyled
+            %li
+              %i.ri-star-fill
+            %li
+              %i.ri-star-fill
+            %li
+              %i.ri-star-fill
+            %li
+              %i.ri-star-fill
+            %li
+              %i.ri-star-fill
+          %p Using Trezo Dashboard Template has been a game-changer for our team. The ability to customize widgets to suit our specific needs has allowed us to gain deeper insights into our performance metrics and drive business growth.
+          .d-flex.align-items-center.review-info
+            .review
+              = image_tag('landing/testimonial-5.jpg', alt: 'testimonial', class: "rounded-circle wh-50")
+            .ms-3
+              %h4 Olivia Adams
+              %span Marketing Coordinator
+      .item
+        .single-testimonials
+          %ul.reating.ps-0.list-unstyled
+            %li
+              %i.ri-star-fill
+            %li
+              %i.ri-star-fill
+            %li
+              %i.ri-star-fill
+            %li
+              %i.ri-star-line
+            %li
+              %i.ri-star-line
+          %p As a startup, we needed a dashboard solution that was both powerful and cost-effective. Trezo Dashboard Template checked all the boxes for us. It is helped us stay agile and competitive in a fast-paced market.
+          .d-flex.align-items-center.review-info
+            .review
+              = image_tag('landing/testimonial-6.jpg', alt: 'testimonial', class: "rounded-circle wh-50")
+            .ms-3
+              %h4 Daniel Lee
+              %span Co-founder, StartupX
+#ourteam.our-team-area.pt-125.position-relative.z-1
+  .container
+    .d-flex.justify-content-between.align-items-center.flex-wrap.gap-3.mb-4.mb-lg-5
+      .section-title.ms-0.text-start.mw-630.mb-0
+        %span.top-title
+          %span Our Team
+        %h2 Introducing Our Exceptional Team. Meet the Minds Driving Our Success
+      .team-controller.d-flex.gap-3
+        .controller-icon.prev
+          %i.ri-arrow-left-line
+        .controller-icon.next
+          %i.ri-arrow-right-line
+    .swiper.team-slide
+      .swiper-wrapper
+        .swiper-slide
+          .our-team-single-item
+            .team-img
+              = image_tag('landing/team-1.jpg', alt: 'team')
+            .team-content.d-flex.justify-content-between.align-items-center
+              %div
+                %h3 Michael Johnson
+                %span CEO
+              %ul.ps-0.mb-0.list-unstyled.d-flex.flex-wrap.gap-3
+                %li
+                  %a.text-decoration-none.fs-20.text-primary{href: "https://www.facebook.com/", target: "_blank"}
+                    %i.ri-facebook-fill
+                %li
+                  %a.text-decoration-none.fs-20.text-primary{href: "https://www.twitter.com/", target: "_blank"}
+                    %i.ri-twitter-x-line
+                %li
+                  %a.text-decoration-none.fs-20.text-primary{href: "https://www.linkedin.com/", target: "_blank"}
+                    %i.ri-linkedin-fill
+        .swiper-slide
+          .our-team-single-item
+            .team-img
+              = image_tag('landing/team-2.jpg', alt: 'team')
+            .team-content.d-flex.justify-content-between.align-items-center
+              %div
+                %h3 Emily Davis
+                %span Project Manager
+              %ul.ps-0.mb-0.list-unstyled.d-flex.flex-wrap.gap-3
+                %li
+                  %a.text-decoration-none.fs-20.text-primary{href: "https://www.facebook.com/", target: "_blank"}
+                    %i.ri-facebook-fill
+                %li
+                  %a.text-decoration-none.fs-20.text-primary{href: "https://www.twitter.com/", target: "_blank"}
+                    %i.ri-twitter-x-line
+                %li
+                  %a.text-decoration-none.fs-20.text-primary{href: "https://www.linkedin.com/", target: "_blank"}
+                    %i.ri-linkedin-fill
+        .swiper-slide
+          .our-team-single-item
+            .team-img
+              = image_tag('landing/team-3.jpg', alt: 'team')
+            .team-content.d-flex.justify-content-between.align-items-center
+              %div
+                %h3 Daniel Lee
+                %span Sales Team Lead
+              %ul.ps-0.mb-0.list-unstyled.d-flex.flex-wrap.gap-3
+                %li
+                  %a.text-decoration-none.fs-20.text-primary{href: "https://www.facebook.com/", target: "_blank"}
+                    %i.ri-facebook-fill
+                %li
+                  %a.text-decoration-none.fs-20.text-primary{href: "https://www.twitter.com/", target: "_blank"}
+                    %i.ri-twitter-x-line
+                %li
+                  %a.text-decoration-none.fs-20.text-primary{href: "https://www.linkedin.com/", target: "_blank"}
+                    %i.ri-linkedin-fill
+        .swiper-slide
+          .our-team-single-item
+            .team-img
+              = image_tag('landing/team-1.jpg', alt: 'team')
+            .team-content.d-flex.justify-content-between.align-items-center
+              %div
+                %h3 Michael Johnson
+                %span CEO
+              %ul.ps-0.mb-0.list-unstyled.d-flex.flex-wrap.gap-3
+                %li
+                  %a.text-decoration-none.fs-20.text-primary{href: "https://www.facebook.com/", target: "_blank"}
+                    %i.ri-facebook-fill
+                %li
+                  %a.text-decoration-none.fs-20.text-primary{href: "https://www.twitter.com/", target: "_blank"}
+                    %i.ri-twitter-x-line
+                %li
+                  %a.text-decoration-none.fs-20.text-primary{href: "https://www.linkedin.com/", target: "_blank"}
+                    %i.ri-linkedin-fill
+        .swiper-slide
+          .our-team-single-item
+            .team-img
+              = image_tag('landing/team-2.jpg', alt: 'team')
+            .team-content.d-flex.justify-content-between.align-items-center
+              %div
+                %h3 Emily Davis
+                %span Project Manager
+              %ul.ps-0.mb-0.list-unstyled.d-flex.flex-wrap.gap-3
+                %li
+                  %a.text-decoration-none.fs-20.text-primary{href: "https://www.facebook.com/", target: "_blank"}
+                    %i.ri-facebook-fill
+                %li
+                  %a.text-decoration-none.fs-20.text-primary{href: "https://www.twitter.com/", target: "_blank"}
+                    %i.ri-twitter-x-line
+                %li
+                  %a.text-decoration-none.fs-20.text-primary{href: "https://www.linkedin.com/", target: "_blank"}
+                    %i.ri-linkedin-fill
+        .swiper-slide
+          .our-team-single-item
+            .team-img
+              = image_tag('landing/team-3.jpg', alt: 'team')
+            .team-content.d-flex.justify-content-between.align-items-center
+              %div
+                %h3 Daniel Lee
+                %span Sales Team Lead
+              %ul.ps-0.mb-0.list-unstyled.d-flex.flex-wrap.gap-3
+                %li
+                  %a.text-decoration-none.fs-20.text-primary{href: "https://www.facebook.com/", target: "_blank"}
+                    %i.ri-facebook-fill
+                %li
+                  %a.text-decoration-none.fs-20.text-primary{href: "https://www.twitter.com/", target: "_blank"}
+                    %i.ri-twitter-x-line
+                %li
+                  %a.text-decoration-none.fs-20.text-primary{href: "https://www.linkedin.com/", target: "_blank"}
+                    %i.ri-linkedin-fill
+  = image_tag('landing/shape-1.png', alt: 'team', class: "shape shape-3")
+  = image_tag('landing/shape-2.png', alt: 'team', class: "shape shape-4")
+#fqss.faq-arae.position-relative.z-1.pt-125
+  .container
+    .section-title.mw-630
+      %span.top-title
+        %span FAQ&#x2019;s
+      %h2 Inspiring Feedback: What Users Love About Trezo Dashboard
+    #accordionExample.accordion.faq-wrapper.mw-740.m-auto
+      .accordion-item.mb-3.border-0.bg-white
+        %h2.accordion-header
+          %button.accordion-button.text-secondary.bg-white{"aria-controls" => "collapseOne", "aria-expanded" => "true", "data-bs-target" => "#collapseOne", "data-bs-toggle" => "collapse", type: "button"}
+            What is Trezo?
+        #collapseOne.accordion-collapse.collapse.show{"data-bs-parent" => "#accordionExample"}
+          .accordion-body
+            %p Trezo is a comprehensive project management software designed to help teams streamline their workflow, collaborate effectively, and achieve project success.
+      .accordion-item.mb-3.border-0.bg-white
+        %h2.accordion-header
+          %button.accordion-button.text-secondary.bg-white.collapsed{"aria-controls" => "collapseTwo", "aria-expanded" => "false", "data-bs-target" => "#collapseTwo", "data-bs-toggle" => "collapse", type: "button"}
+            What features does Trezo offer?
+        #collapseTwo.accordion-collapse.collapse{"data-bs-parent" => "#accordionExample"}
+          .accordion-body
+            %p Trezo is a comprehensive project management software designed to help teams streamline their workflow, collaborate effectively, and achieve project success.
+      .accordion-item.mb-3.border-0.bg-white
+        %h2.accordion-header
+          %button.accordion-button.text-secondary.bg-white.collapsed{"aria-controls" => "collapseThree", "aria-expanded" => "false", "data-bs-target" => "#collapseThree", "data-bs-toggle" => "collapse", type: "button"}
+            How can Trezo benefit my team?
+        #collapseThree.accordion-collapse.collapse{"data-bs-parent" => "#accordionExample"}
+          .accordion-body
+            %p Trezo is a comprehensive project management software designed to help teams streamline their workflow, collaborate effectively, and achieve project success.
+      .accordion-item.mb-3.border-0.bg-white
+        %h2.accordion-header
+          %button.accordion-button.text-secondary.bg-white.collapsed{"aria-controls" => "collapseThree4", "aria-expanded" => "false", "data-bs-target" => "#collapseThree4", "data-bs-toggle" => "collapse", type: "button"}
+            Is Trezo suitable for small businesses?
+        #collapseThree4.accordion-collapse.collapse{"data-bs-parent" => "#accordionExample"}
+          .accordion-body
+            %p Trezo is a comprehensive project management software designed to help teams streamline their workflow, collaborate effectively, and achieve project success.
+      .accordion-item.mb-3.border-0.bg-white
+        %h2.accordion-header
+          %button.accordion-button.text-secondary.bg-white.collapsed{"aria-controls" => "collapseThree5", "aria-expanded" => "false", "data-bs-target" => "#collapseThree5", "data-bs-toggle" => "collapse", type: "button"}
+            Can I customize Trezo to fit my team is specific needs?
+        #collapseThree5.accordion-collapse.collapse{"data-bs-parent" => "#accordionExample"}
+          .accordion-body
+            %p Trezo is a comprehensive project management software designed to help teams streamline their workflow, collaborate effectively, and achieve project success.
+      .accordion-item.mb-3.border-0.bg-white
+        %h2.accordion-header
+          %button.accordion-button.text-secondary.bg-white.collapsed{"aria-controls" => "collapseThree6", "aria-expanded" => "false", "data-bs-target" => "#collapseThree6", "data-bs-toggle" => "collapse", type: "button"}
+            Is Trezo cloud-based or on-premises?
+        #collapseThree6.accordion-collapse.collapse{"data-bs-parent" => "#accordionExample"}
+          .accordion-body
+            %p Trezo is a comprehensive project management software designed to help teams streamline their workflow, collaborate effectively, and achieve project success.
+      .accordion-item.mb-0.border-0.bg-white
+        %h2.accordion-header
+          %button.accordion-button.text-secondary.bg-white.collapsed{"aria-controls" => "collapseThree7", "aria-expanded" => "false", "data-bs-target" => "#collapseThree7", "data-bs-toggle" => "collapse", type: "button"}
+            Does Trezo integrate with other tools?
+        #collapseThree7.accordion-collapse.collapse{"data-bs-parent" => "#accordionExample"}
+          .accordion-body
+            %p Trezo is a comprehensive project management software designed to help teams streamline their workflow, collaborate effectively, and achieve project success.
+#contact.contact-us-area.pt-150.position-relative.z-2
+  .container
+    .row.align-items-center
+      .col-lg-6
+        .contact-us-img.mb-4.mb-lg-0
+          = image_tag('landing/contact-us.jpg', alt: 'contact')
+      .col-lg-6
+        .contact-us-form.ms-xl-4
+          %span.top-title
+            %span Contact Us
+          %h2 Introducing Our Exceptional Team. Meet the Minds Driving Our Success
+          %form
+            .form-group.mb-4
+              %label.label.text-secondary Full Name
+              %input.form-control.bg-transparent.h-55{placeholder: "Your full name", type: "text"}
+              .form-group.mb-4
+                %label.label.text-secondary Email Address
+                %input.form-control.bg-transparent.h-55{placeholder: "Your email address", type: "email"}
+                .form-group.mb-4
+                  %label.label.text-secondary Phone Number
+                  %input.form-control.bg-transparent.h-55{placeholder: "Your phone number", type: "text"}
+                  .form-group.mb-4
+                    %label.label.text-secondary Subject
+                    %select.form-select.form-control.bg-transparent.h-55{"aria-label" => "Default select example"}
+                      %option Select your subject
+                      %option{value: "1"} Help Dask
+                      %option{value: "2"} LMS
+                      %option{value: "3"} CRM
+                  .form-group.mb-4
+                    %label.label.text-secondary Phone Number
+                    %textarea.form-control.bg-transparent{placeholder: "Write your message...", rows: "5"}
+                  .form-group.mb-0
+                    %button.btn.btn-primary.py-2.px-4.w-100{type: "submit"}
+                      %i.ri-refresh-line.fs-18.text-white.position-relative.top-1.me-1
+                      %span Send
+      #admin.unlock-area.ptb-150.position-relative.z-1
+        .container
+          .border-bottom.pb-150
+            .row
+              .unlock-content
+                %h2 Unlock a world of possibilities with Trezo Dashboard.
+                %p Experience the difference with Trezo Dashboard. Sign up for a free trial today and see how our intuitive platform can revolutionize your data analysis process.
+                %a.btn.btn-primary-div.py-2.px-4.fs-16.fw-medium.rounded-3.text-white{href: "pricing-plan.html"}
+                  %i.ri-user-line.fs-18
+                  %span.ms-1 Get started - It is free
+        = image_tag('landing/shape-1.png', alt: 'shape', class: "shape shape-5")
+        = image_tag('landing/shape-2.png', alt: 'shape', class: "shape shape-6")
+      .footers-area.pb-125.position-relative.z-2
+        .container
+          .row
+            .col-lg-3.col-sm-6
+              .footer-single-item.mb-4
+                %a.footer-logo.d-inline-block.mb-4{href: "#"}
+                  = image_tag('logo.svg', alt: 'logo')
+                %p.mb-4.pb-lg-2 With customizable dashboards tailored to your needs, collaborate effortlessly with your team and stay ahead with real-time updates.
+                %ul.ps-0.mb-0.list-unstyled.d-flex.flex-wrap.gap-3
+                  %li
+                    %a.text-decoration-none.fs-20.text-primary{href: "https://www.facebook.com/", target: "_blank"}
+                      %i.ri-facebook-fill
+                  %li
+                    %a.text-decoration-none.fs-20.text-primary{href: "https://www.twitter.com/", target: "_blank"}
+                      %i.ri-twitter-x-line
+                  %li
+                    %a.text-decoration-none.fs-20.text-primary{href: "https://www.linkedin.com/", target: "_blank"}
+                      %i.ri-linkedin-fill
+                  %li
+                    %a.text-decoration-none.fs-20.text-primary{href: "https://www.dribbble.com/", target: "_blank"}
+                      %i.ri-dribbble-line
+            .col-lg-3.col-sm-6
+              .footer-single-item.mb-4.ms-lg-5.ps-lg-5
+                %h3.mb-md-4.mb-3.fw-semibold Our Products
+                %ul.ps-0.mb-0.list-unstyled
+                  %li.mb-2.pb-1
+                    %a.text-decoration-none{href: "#"} Trezo Dashboard
+                  %li.mb-2.pb-1
+                    %a.text-decoration-none{href: "#"} Tagus Admin
+                  %li.mb-2.pb-1
+                    %a.text-decoration-none{href: "#"} eCademy LMS
+                  %li.mb-0
+                    %a.text-decoration-none{href: "#"} Admash Template
+            .col-lg-3.col-sm-6
+              .footer-single-item.mb-4.ms-lg-5.ps-lg-4
+                %h3.mb-md-4.mb-3.fw-semibold Quick Links
+                %ul.ps-0.mb-0.list-unstyled
+                  %li.mb-2.pb-1
+                    %a.text-decoration-none{href: "#"} Home
+                  %li.mb-2.pb-1
+                    %a.text-decoration-none{href: "#"} Features
+                  %li.mb-2.pb-1
+                    %a.text-decoration-none{href: "#"} Testimonials
+                  %li.mb-0
+                    %a.text-decoration-none{href: "#"} Our Team
+            .col-lg-3.col-sm-6
+              .footer-single-item.mb-4
+                %h3.mb-md-4.mb-3.fw-semibold Privacy Policy
+                %ul.ps-0.mb-0.list-unstyled
+                  %li.mb-2.pb-1
+                    %a.text-decoration-none{href: "#"} Terms  Conditions
+                  %li.mb-2.pb-1
+                    %a.text-decoration-none{href: "#"} Cookie Policy
+                  %li.mb-2.pb-1
+                    %a.text-decoration-none{href: "#"} Notice at Collection
+                  %li.mb-0
+                    %a.text-decoration-none{href: "#"} Privacy Policy
+      .copyright-area.bg-white.text-center.py-4
+        .container
+          %p.fs-14
+            \&#xA9;
+            %span.text-primary-div Trezo
+            is Proudly Owned by
+            %a.text-decoration-none.text-primary{href: "https://envytheme.com/", target: "_blank"} EnvyTheme
+      %button#backtotop{type: "button"}
+        %i.ri-arrow-up-s-line
