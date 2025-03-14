@@ -1,55 +1,58 @@
-.card
-  .card-body
-    .app-brand.justify-content-center
-      %a.app-brand-link.gap-2{ href: 'index.html' }
-        .app-brand-logo.demo
+.container
+  .main-content.d-flex.flex-column.p-0
+    .m-auto.m-1230
+      .row.align-items-center
+        .col-lg-6.d-none.d-lg-block
+          = image_tag('register.jpg', alt: 'register', class: "rounded-3")
+        .col-lg-6
+          .mw-480.ms-lg-auto
+            %a.d-inline-block.mb-4{href: "index.html"}
+              = image_tag('logo.svg', alt: 'register', class: "rounded-3 for-light-logo")
+              = image_tag('white-logo.svg', alt: 'register', class: "rounded-3 for-dark-logo")
+            %h3.fs-28.mb-2 Register to P.J School Dashboard
+            %p.fw-medium.fs-16.mb-4 Register with social account or enter your details
+            .row.justify-content-center
+              .col-lg-4.col-sm-4
+                %a.btn.btn-outline-secondary.bg-transparent.w-100.py-2.hover-bg.mb-4{href: "https://www.google.com/", style: "border-color: #D6DAE1;", target: "_blank"}
+                  = image_tag('google.svg', alt: 'google')
+              .col-lg-4.col-sm-4
+                %a.btn.btn-outline-secondary.bg-transparent.w-100.py-2.hover-bg.mb-4{href: "https://www.facebook.com/", style: "border-color: #D6DAE1;", target: "_blank"}
+                  = image_tag('facebook2.svg', alt: 'facebook2')
+              .col-lg-4.col-sm-4
+                %a.btn.btn-outline-secondary.bg-transparent.w-100.py-2.hover-bg.mb-4{href: "https://www.apple.com/", style: "border-color: #D6DAE1;", target: "_blank"}
+                  = image_tag('apple.svg', alt: 'apple')
+              = form_for(resource, as: resource_name, url: registration_path(resource_name), html: { class: 'mb-3' }) do |f|
+                .form-group.mb-3
+                  %label.label.text-secondary Select College
+                  = select_tag :college_id, options_for_select(College.all.map { |college| [college.name, college.id] }, params[:college_id]),
+                    class: 'form-select', required: true, prompt: 'Select your College'
+                .form-group.mb-3
+                  %label.label.text-secondary Name
+                  = f.text_field :name, autofocus: true, class: 'form-control', required: true, placeholder: 'Enter your name'
+                .form-group.mb-3
+                  %label.label.text-secondary Email Address
+                  = f.email_field :email, autofocus: true, autocomplete: 'email', class: 'form-control', placeholder: 'Enter your email', type: 'text'
+                  = print_error(resource.errors, :email)
+                .form-group.mb-3
+                  %label.label.text-secondary Password
+                  = f.password_field :password, autocomplete: 'new-password', class: 'form-control', required: true, placeholder: '············'
+                .form-group.mb-3
+                  %label.label.text-secondary Confirm Password
+                  = f.password_field :password_confirmation, autocomplete: 'new-password', class: 'form-control', required:   true, placeholder: '············'
 
-    %h4.mb-2= t('devise.registrations.welcome')
-    %p.mb-4= t('devise.registrations.manage_jira')
-    = form_for(resource, as: resource_name, url: registration_path(resource_name), html: { class: 'mb-3' }) do |f|
-      .mb-3
-        %label.form-label.required{ for: 'username' }= 'College'
-        = select_tag :college_id, options_for_select(College.all.map { |college| [college.name, college.id] }, params[:college_id]),
-          class: 'form-select', required: true, prompt: 'Select your College'
-      .mb-3
-        %label.form-label.required{ for: 'name' }= 'Name'
-        = f.text_field :name, autofocus: true, class: 'form-control', required: true, placeholder: 'Enter your name'
-      .mb-3
-        %label.form-label.required{ for: 'email' }= t('devise.registrations.email')
-        = f.email_field :email, autofocus: true, autocomplete: 'email', class: 'form-control', placeholder: 'Enter your email', type: 'text'
-        = print_error(resource.errors, :email)
-      .mb-3.form-password-toggle
-        %label.form-label.required{ for: 'password' }= t('devise.registrations.password')
-        .input-group.input-group-merge
-          = f.password_field :password, autocomplete: 'new-password', class: 'form-control', required: true, placeholder: '············'
-          %span.input-group-text.cursor-pointer
-            %i.bx.bx-hide
-        = print_error(resource.errors, :password)
-      .mb-3.form-password-toggle
-        %label.form-label.required{ for: 'password_confirmation' }= t('devise.registrations.password_confirmation')
-        .input-group.input-group-merge
-          = f.password_field :password_confirmation, autocomplete: 'new-password', class: 'form-control', required: true, placeholder: '············'
-          %span.input-group-text.cursor-pointer
-            %i.bx.bx-hide
-        %span.error.mt-2.text-danger#password-error
-        = print_error(resource.errors, :password_confirmation)
-      %button.btn.btn-primary.d-grid.w-100
-        = t('devise.registrations.sign_up')
-    %p.text-center
-      %span= t('devise.registrations.already_account')
-      %a{ href: new_user_session_path }
-        %span= t('devise.registrations.sign_in')
-
-- content_for :js_code do
-  :javascript
-    $("#user_password_confirmation").on("keyup", function () {
-      var password = $("#user_password").val();
-      var confirmPassword = $(this).val();
-
-      if (password === confirmPassword) {
-        $("#password-error").html("")
-      } else {
-        $("#password-error").html("doesn't match Password").css("color", "red");
-        $("#required-error").hide();
-      }
-    });
+                .form-group.mb-3
+                  %button.btn.btn-primary.fw-medium.py-2.px-3.w-100{type: "submit"}
+                    .d-flex.align-items-center.justify-content-center.py-1
+                      %i.material-symbols-outlined.text-white.fs-20.me-2 person_4
+                      %span Register
+                .form-group
+                  %p
+                    By confirming your email, you agree to our
+                    %a.fw-medium.text-decoration-none{href: "terms-conditions.html"} Terms of Service
+                    and that you have read and understood our
+                    = succeed "." do
+                      %a.fw-medium.text-decoration-none{href: "privacy-policy.html"} Privacy Policy
+                  %p
+                    Already have an account.
+                    = link_to '/signin', class: "fw-medium text-primary text-decoration-none" do
+                      Log In
