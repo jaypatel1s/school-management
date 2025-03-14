@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Trezo - Rails 7 Admin Dashboard Template</title>
+        <meta name="viewport" content="width=device-width,initial-scale=1">
+        <%= csrf_meta_tags %>
+        <%= csp_meta_tag %>
+
+        <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+        <%= render "/layouts/partials/javascripti_imports" %>
+    </head>
+
+    <body class="boxed-size bg-white">
+        <%= yield %>
+    </body>
+</html>

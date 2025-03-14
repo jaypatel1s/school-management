@@ -1,0 +1,2 @@
+module Pages::RangeSliderHelper
+end

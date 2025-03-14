@@ -1,0 +1,2 @@
+module Drive::ApplicationsHelper
+end

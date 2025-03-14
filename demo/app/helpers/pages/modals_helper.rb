@@ -1,0 +1,2 @@
+module Pages::ModalsHelper
+end

@@ -1,0 +1,2 @@
+module Email::DraftHelper
+end

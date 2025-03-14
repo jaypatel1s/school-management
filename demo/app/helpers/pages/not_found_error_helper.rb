@@ -1,0 +1,2 @@
+module Pages::NotFoundErrorHelper
+end

@@ -1,0 +1,2 @@
+module Pages::TabsHelper
+end

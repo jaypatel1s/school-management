@@ -1,0 +1,136 @@
+<div class="col-xl-4 col-lg-3 col-md-4">
+    <div class="card bg-white border-0 rounded-3 mb-4">
+        <div class="card-body p-4">
+            <form class="position-relative default-src-form mb-3 pb-1">
+                <input type="text" class="form-control rounded-1" placeholder="Search">
+                <i class="material-symbols-outlined position-absolute top-50 start-0 translate-middle-y fs-18">search</i>
+            </form>
+            <a href="/email/compose" class="btn btn-primary fs-16 fw-medium text-center d-block py-2 mb-4">
+                <div class="d-flex align-items-center justify-content-center py-lg-1">
+                    <i class="material-symbols-outlined fs-18 me-2">edit</i>
+                    <span>Compose</span>
+                </div>
+            </a>
+            
+            <ul class="ps-0 mb-4 list-unstyled">
+                <li class="mb-3">
+                    <a href="/email/inbox" class="d-flex align-items-center text-decoration-none">
+                        <i class="material-symbols-outlined fs-18 position-relative top-1 me-2 text-primary">inbox</i>
+                        <span class="fw-semibold text-primary">Inbox</span> 
+                    </a>
+                </li>
+                <li class="mb-3">
+                    <a href="/email/starred" class="d-flex align-items-center text-decoration-none">
+                        <i class="material-symbols-outlined fs-18 position-relative top-1 me-2">star_rate</i>
+                        <span class="fw-medium">Starred</span> 
+                    </a>
+                </li>
+                <li class="mb-3">
+                    <a href="/email/snoozed" class="d-flex align-items-center text-decoration-none">
+                        <i class="material-symbols-outlined fs-18 position-relative top-1 me-2">alarm</i>
+                        <span class="fw-medium">Snoozed</span> 
+                    </a>
+                </li>
+                <li class="mb-3">
+                    <a href="/email/sent_mail" class="d-flex align-items-center text-decoration-none">
+                        <i class="material-symbols-outlined fs-18 position-relative top-1 me-2">send</i>
+                        <span class="fw-medium">Sent</span> 
+                    </a>
+                </li>
+                <li class="mb-3">
+                    <a href="/email/draft" class="d-flex align-items-center text-decoration-none">
+                        <i class="material-symbols-outlined fs-18 position-relative top-1 me-2">draft</i>
+                        <span class="fw-medium">Drafts</span> 
+                    </a>
+                </li>
+                <li class="mb-3">
+                    <a href="/email/important" class="d-flex align-items-center text-decoration-none">
+                        <i class="material-symbols-outlined fs-18 position-relative top-1 me-2">bookmark</i>
+                        <span class="fw-medium">Important</span> 
+                    </a>
+                </li>
+                <li class="mb-3">
+                    <a href="/chat" class="d-flex align-items-center text-decoration-none">
+                        <i class="material-symbols-outlined fs-18 position-relative top-1 me-2">auto_read_pause</i>
+                        <span class="fw-medium">Chats</span> 
+                    </a>
+                </li>
+                <li class="mb-3">
+                    <a href="javascript:void(0);" class="d-flex align-items-center text-decoration-none">
+                        <i class="material-symbols-outlined fs-18 position-relative top-1 me-2">schedule_send</i>
+                        <span class="fw-medium">Scheduled</span> 
+                    </a>
+                </li>
+                <li class="mb-3">
+                    <a href="/email/inbox" class="d-flex align-items-center text-decoration-none">
+                        <i class="material-symbols-outlined fs-18 position-relative top-1 me-2">forward_to_inbox</i>
+                        <span class="fw-medium">All Mail</span> 
+                    </a>
+                </li>
+                <li class="mb-3">
+                    <a href="/email/spam" class="d-flex align-items-center text-decoration-none">
+                        <i class="material-symbols-outlined fs-18 position-relative top-1 me-2">live_help</i>
+                        <span class="fw-medium">Spam</span> 
+                    </a>
+                </li>
+                <li class="mb-3">
+                    <a href="/email/trash_email" class="d-flex align-items-center text-decoration-none">
+                        <i class="material-symbols-outlined fs-18 position-relative top-1 me-2">delete</i>
+                        <span class="fw-medium">Trash</span> 
+                    </a>
+                </li>
+                <li class="mb-3">
+                    <a href="javascript:void(0);" class="d-flex align-items-center text-decoration-none">
+                        <i class="material-symbols-outlined fs-18 position-relative top-1 me-2">account_circle</i>
+                        <span class="fw-medium">Personal</span> 
+                    </a>
+                </li>
+                <li class="mb-0">
+                    <a href="javascript:void(0);" class="d-flex align-items-center text-decoration-none">
+                        <i class="material-symbols-outlined fs-18 position-relative top-1 me-2">trip</i>
+                        <span class="fw-medium">Company</span> 
+                    </a>
+                </li>
+            </ul>
+
+            <button class="btn btn-outline-primary py-1 px-2 px-sm-4 fs-14 fw-medium rounded-3 hover-bg" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">
+                <span class="py-sm-1 d-block">
+                    <i class="ri-add-line d-none d-sm-inline-block"></i>
+                    <span>Add New Label</span>
+                </span>
+            </button>
+        </div>
+    </div>
+</div>
+
+<div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
+    <div class="offcanvas-header border-bottom p-4">
+        <h5 class="offcanvas-title fs-18 mb-0" id="offcanvasRightLabel">Add New Label</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body p-4">
+        <form>
+            <div class="form-group mb-4">
+                <label class="label">Label Name</label>
+                <input type="text" class="form-control text-dark" placeholder="Label Name">
+            </div>
+            <div class="form-group mb-4">
+                <label class="label">Select Icon</label>
+                <select class="form-select form-control text-dark" aria-label="Default select example">
+                    <option selected>Home Icon</option>
+                    <option value="1">Start Icon</option>
+                    <option value="2">Trash Icon</option>
+                </select>
+            </div>
+            
+            <div class="form-group d-flex gap-3">
+                <button class="btn btn-primary text-white fw-semibold py-2 px-2 px-sm-3">
+                    <span class="py-sm-1 d-block">
+                        <i class="ri-add-line text-white"></i>
+                        <span>Create Label</span>
+                    </span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

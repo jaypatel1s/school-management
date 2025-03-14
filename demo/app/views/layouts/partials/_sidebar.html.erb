@@ -1,0 +1,1015 @@
+<div class="sidebar-area" id="sidebar-area">
+    <div class="logo position-relative">
+        <a href="/" class="d-block text-decoration-none position-relative">
+            <%= image_tag('logo-icon.png', alt: 'logo-icon') %>
+
+            <span class="logo-text fw-bold text-dark">Trezo</span>
+        </a>
+        <button class="sidebar-burger-menu bg-transparent p-0 border-0 opacity-0 z-n1 position-absolute top-50 end-0 translate-middle-y" id="sidebar-burger-menu">
+            <i data-feather="x"></i>
+        </button>
+    </div>
+
+    <aside id="layout-menu" class="layout-menu menu-vertical menu active" data-simplebar>
+        <ul class="menu-inner">
+            <li class="menu-title small text-uppercase">
+                <span class="menu-title-text">MAIN</span>
+            </li>
+            <li class="menu-item open">
+                <a href="javascript:void(0);" class="menu-link menu-toggle active">
+                    <span class="material-symbols-outlined menu-icon">dashboard</span>
+                    <span class="title">Dashboard</span>
+                    <span class="count">5</span>
+                </a>
+        
+                <ul class="menu-sub">
+                    <li class="menu-item">
+                        <a href="/" class="menu-link  <%= current_page?(root_path) ? 'active' : '' %>">
+                            eCommerce
+                        </a>
+                    </li>
+                    <li class="menu-item">
+                        <a href="/crm" class="menu-link <%= current_page?(crm_path) ? 'active' : '' %>">
+                            CRM
+                            <span class="hot tag">Hot</span>
+                        </a>
+                    </li>
+                    <li class="menu-item">
+                        <a href="/project_management" class="menu-link <%= current_page?(project_management_path) ? 'active' : '' %>">
+                            Project Management
+                        </a>
+                    </li>
+                    <li class="menu-item mb-0">
+                        <a href="/lms" class="menu-link <%= current_page?(lms_path) ? 'active' : '' %>">
+                            LMS
+                        </a>
+                    </li>
+                    <li class="menu-item mb-0">
+                        <a href="/help_desk" class="menu-link <%= current_page?(help_desk_path) ? 'active' : '' %>">
+                            HelpDesk 
+                            <span class="new tag">New</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+
+            <li class="menu-item">
+                <a href="javascript:void(0);" class="menu-link menu-toggle active">
+                    <span class="material-symbols-outlined menu-icon">note_stack</span>
+                    <span class="title">Front Pages</span>
+                </a>
+                <ul class="menu-sub">
+                    <li class="menu-item">
+                        <a href="/landing" class="menu-link <%= current_page?(landing_path) ? 'active' : '' %>">
+                            Landing Page
+                        </a>
+                    </li>
+                    <li class="menu-item">
+                        <a href="/pricing" class="menu-link <%= current_page?(pricing_path) ? 'active' : '' %>">
+                            Pricing Plan
+                        </a>
+                    </li>
+                    <li class="menu-item">
+                        <a href="/faq" class="menu-link <%= current_page?(faq_path) ? 'active' : '' %>">
+                            FAQ
+                        </a>
+                    </li>
+                    <li class="menu-item">
+                        <a href="/timeline" class="menu-link <%= current_page?(timeline_path) ? 'active' : '' %>">
+                            Timeline
+                        </a>
+                    </li>
+                </ul>
+            </li>
+
+            <li class="menu-title small text-uppercase">
+                <span class="menu-title-text">APPS</span>
+            </li>
+
+            <li class="menu-item">
+                <a href="/calender" class="menu-link <%= current_page?(calender_path) ? 'active' : '' %>">
+                    <span class="material-symbols-outlined menu-icon">date_range</span>
+                    <span class="title">Calender</span>
+                </a>
+            </li>
+
+            <li class="menu-item">
+                <a href="/todo" class="menu-link <%= current_page?(todo_path) ? 'active' : '' %>">
+                    <span class="material-symbols-outlined menu-icon">format_list_bulleted</span>
+                    <span class="title">To Do List</span>
+                </a>
+            </li>
+
+            <li class="menu-item">
+                <a href="/contacts" class="menu-link <%= current_page?(contacts_path) ? 'active' : '' %>">
+                    <span class="material-symbols-outlined menu-icon">contact_page</span>
+                    <span class="title">Contacts</span>
+                </a>
+            </li>
+
+            <li class="menu-item">
+                <a href="/chat" class="menu-link <%= current_page?(chat_path) ? 'active' : '' %>">
+                    <span class="material-symbols-outlined menu-icon">chat</span>
+                    <span class="title">Chat</span>
+                </a>
+            </li>
+
+            <li class="menu-item">
+                <a href="javascript:void(0);" class="menu-link menu-toggle active">
+                    <span class="material-symbols-outlined menu-icon">mail</span>
+                    <span class="title">Email</span>
+                </a>
+                <ul class="menu-sub">
+                    <li class="menu-item">
+                        <a href="/email/inbox" class="menu-link <%= current_page?(email_inbox_path) ? 'active' : '' %>">
+                            Inbox
+                        </a>
+                    </li>
+                    <li class="menu-item">
+                        <a href="/email/compose" class="menu-link <%= current_page?(email_compose_path) ? 'active' : '' %>">
+                            Compose
+                        </a>
+                    </li>
+                    <li class="menu-item">
+                        <a href="/email/read-email" class="menu-link <%= current_page?(email_read_email_path) ? 'active' : '' %>">
+                            Read Email
+                        </a>
+                    </li>
+                    <li class="menu-item">
+                        <a href="/email/snoozed" class="menu-link <%= current_page?(email_snoozed_path) ? 'active' : '' %>">
+                            Snooozed
+                        </a>
+                    </li>
+                    <li class="menu-item">
+                        <a href="/email/draft" class="menu-link <%= current_page?(email_draft_path) ? 'active' : '' %>">
+                            Draft
+                        </a>
+                    </li>
+                    <li class="menu-item">
+                        <a href="/email/sent-mail" class="menu-link">
+                            Sent Mail
+                        </a>
+                    </li>
+                    <li class="menu-item">
+                        <a href="/email/trash-email" class="menu-link">
+                            Trash
+                        </a>
+                    </li>
+                    <li class="menu-item">
+                        <a href="/email/spam" class="menu-link">
+                            Spam
+                        </a>
+                    </li>
+                    <li class="menu-item">
+                        <a href="/email/starred" class="menu-link">
+                            Starred
+                        </a>
+                    </li>
+                    <li class="menu-item">
+                        <a href="/email/important" class="menu-link">
+                            Important
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            
+            <li class="menu-item">
+                <a href="/kanban" class="menu-link">
+                    <span class="material-symbols-outlined menu-icon">space_dashboard</span>
+                    <span class="title">Kanban Board</span>
+                </a>
+            </li>
+
+            <li class="menu-item">
+                <a href="javascript:void(0);" class="menu-link menu-toggle active">
+                    <span class="material-symbols-outlined menu-icon">folder</span>
+                    <span class="title">File Manager</span>
+                </a>
+                <ul class="menu-sub">
+                    <li class="menu-item">
+                        <a href="/drive/files" class="menu-link">
+                            My Drive
+                        </a>
+                    </li>
+                    <li class="menu-item">
+                        <a href="/drive/assets" class="menu-link">
+                            Assets
+                        </a>
+                    </li>
+                    <li class="menu-item">
+                        <a href="/drive/projects" class="menu-link">
+                            Projects
+                        </a>
+                    </li>
+                    <li class="menu-item">
+                        <a href="/drive/personal" class="menu-link">
+                            Personal
+                        </a>
+                    </li>
+                    <li class="menu-item">
+                        <a href="/drive/applications" class="menu-link">
+                            Applications
+                        </a>
+                    </li>
+                    <li class="menu-item">
+                        <a href="/drive/documents" class="menu-link">
+                            Documents
+                        </a>
+                    </li>
+                    <li class="menu-item">
+                        <a href="/drive/media" class="menu-link">
+                            Media
+                        </a>
+                    </li>
+                </ul>
+            </li>
+
+            <li class="menu-title small text-uppercase">
+                <span class="menu-title-text">PAGES</span>
+            </li>
+
+            <li class="menu-item">
+                <a href="javascript:void(0);" class="menu-link menu-toggle active">
+                    <span class="material-symbols-outlined menu-icon">shopping_cart</span>
+                    <span class="title">eCommerce</span>
+                </a>
+                <ul class="menu-sub">
+                    <li class="menu-item">
+                        <a href="/pages/products_grid" class="menu-link">
+                            Products Grid
+                        </a>
+                    </li>
+                    <li class="menu-item">
+                        <a href="/pages/products_list" class="menu-link">
+                            Products List
+                        </a>
+                    </li>
+                    <li class="menu-item">
+                        <a href="/pages/product_details" class="menu-link">
+                            Product Details
+                        </a>
+                    </li>
+                    <li class="menu-item">
+                        <a href="/pages/product_create" class="menu-link">
+                            Create Product
+                        </a>
+                    </li>
+                    <li class="menu-item">
+                        <a href="/pages/product_edit" class="menu-link">
+                            Edit Product
+                        </a>
+                    </li>
+                    <li class="menu-item">
+                        <a href="/pages/cart" class="menu-link">
+                            Cart
+                        </a>
+                    </li>
+                    <li class="menu-item">
+                        <a href="/pages/checkout" class="menu-link">
+                            Checkout
+                        </a>
+                    </li>
+                    <li class="menu-item">
+                        <a href="/pages/orders" class="menu-link">
+                            Orders
+                        </a>
+                    </li>
+                    <li class="menu-item">
+                        <a href="/pages/order_details" class="menu-link">
+                            Order Details
+                        </a>
+                    </li>
+                    <li class="menu-item">
+                        <a href="/pages/create_order" class="menu-link">
+                            Create Order
+                        </a>
+                    </li>
+                    <li class="menu-item">
+                        <a href="/pages/order_tracking" class="menu-link">
+                            Order Tracking
+                        </a>
+                    </li>
+                    <li class="menu-item">
+                        <a href="/pages/customers" class="menu-link">
+                            Customers
+                        </a>
+                    </li>
+                    <li class="menu-item">
+                        <a href="/pages/customer_details" class="menu-link">
+                            Customer Details
+                        </a>
+                    </li>
+                    <li class="menu-item">
+                        <a href="/pages/categories" class="menu-link">
+                            Categories
+                        </a>
+                    </li>
+                    <li class="menu-item">
+                        <a href="/pages/sellers" class="menu-link">
+                            Sellers
+                        </a>
+                    </li>
+                    <li class="menu-item">
+                        <a href="/pages/seller_details" class="menu-link">
+                            Seller Details
+                        </a>
+                    </li>
+                    <li class="menu-item">
+                        <a href="/pages/create_seller" class="menu-link">
+                            Create Seller
+                        </a>
+                    </li>
+                    <li class="menu-item">
+                        <a href="/pages/reviews" class="menu-link">
+                            Reviews
+                        </a>
+                    </li>
+                    <li class="menu-item">
+                        <a href="/pages/refunds" class="menu-link">
+                            Refunds
+                        </a>
+                    </li>
+                </ul>
+            </li>
+
+            <li class="menu-item">
+                <a href="javascript:void(0);" class="menu-link menu-toggle active">
+                    <span class="material-symbols-outlined menu-icon">handshake</span>
+                    <span class="title">CRM</span>
+                </a>
+                <ul class="menu-sub">
+                    <li class="menu-item">
+                        <a href="/contacts" class="menu-link">
+                            Contacts
+                        </a>
+                    </li>
+                    <li class="menu-item">
+                        <a href="/pages/customers" class="menu-link">
+                            Customers
+                        </a>
+                    </li>
+                    <li class="menu-item">
+                        <a href="/pages/leads" class="menu-link">
+                            Leads
+                        </a>
+                    </li>
+                    <li class="menu-item">
+                        <a href="/pages/deals" class="menu-link">
+                            Deals
+                        </a>
+                    </li>
+                </ul>
+            </li>
+
+            <li class="menu-item">
+                <a href="javascript:void(0);" class="menu-link menu-toggle active">
+                    <span class="material-symbols-outlined menu-icon">content_paste</span>
+                    <span class="title">Project Management</span>
+                </a>
+                <ul class="menu-sub">
+                    <li class="menu-item">
+                        <a href="/pages/project_overview" class="menu-link">
+                            Project Overview
+                        </a>
+                    </li>
+                    <li class="menu-item">
+                        <a href="/pages/project_list" class="menu-link">
+                            Project List
+                        </a>
+                    </li>
+                    <li class="menu-item">
+                        <a href="/pages/create_project" class="menu-link">
+                            Create Project
+                        </a>
+                    </li>
+                    <li class="menu-item">
+                        <a href="/pages/clients" class="menu-link">
+                            Clients
+                        </a>
+                    </li>
+                    <li class="menu-item">
+                        <a href="/pages/teams" class="menu-link">
+                            Teams
+                        </a>
+                    </li>
+                    <li class="menu-item">
+                        <a href="/kanban" class="menu-link">
+                            Kanvan Board
+                        </a>
+                    </li>
+                    <li class="menu-item">
+                        <a href="/pages/customers" class="menu-link">
+                            User
+                        </a>
+                    </li>
+                </ul>
+            </li>
+
+            <li class="menu-item">
+                <a href="javascript:void(0);" class="menu-link menu-toggle active">
+                    <span class="material-symbols-outlined menu-icon">auto_stories</span>
+                    <span class="title">LMS</span>
+                </a>
+                <ul class="menu-sub">
+                    <li class="menu-item">
+                        <a href="/pages/courses_list" class="menu-link">
+                            Courses List
+                        </a>
+                    </li>
+                    <li class="menu-item">
+                        <a href="/pages/course_details" class="menu-link">
+                            Course Details
+                        </a>
+                    </li>
+                    <li class="menu-item">
+                        <a href="/pages/lesson_preview" class="menu-link">
+                            Lesson Preview
+                        </a>
+                    </li>
+                    <li class="menu-item">
+                        <a href="/pages/create_course" class="menu-link">
+                            Create Course
+                        </a>
+                    </li>
+                    <li class="menu-item">
+                        <a href="/pages/edit_course" class="menu-link">
+                            Edit Course
+                        </a>
+                    </li>
+                    <li class="menu-item">
+                        <a href="/pages/instructors" class="menu-link">
+                            Instructors
+                        </a>
+                    </li>
+                </ul>
+            </li>
+
+            <li class="menu-item">
+                <a href="javascript:void(0);" class="menu-link menu-toggle active">
+                    <span class="material-symbols-outlined menu-icon">support</span>
+                    <span class="title">Help Desk</span>
+                </a>
+                <ul class="menu-sub">
+                    <li class="menu-item">
+                        <a href="/pages/tickets" class="menu-link">
+                            Tickets
+                        </a>
+                    </li>
+                    <li class="menu-item">
+                        <a href="/pages/ticket_details" class="menu-link">
+                            Ticket Details
+                        </a>
+                    </li>
+                    <li class="menu-item">
+                        <a href="/pages/agents" class="menu-link">
+                            Agents
+                        </a>
+                    </li>
+                    <li class="menu-item">
+                        <a href="/pages/reports" class="menu-link">
+                            Reports
+                        </a>
+                    </li>
+                </ul>
+            </li>
+
+            <li class="menu-item">
+                <a href="javascript:void(0);" class="menu-link menu-toggle active">
+                    <span class="material-symbols-outlined menu-icon">local_activity</span>
+                    <span class="title">Events</span>
+                </a>
+                <ul class="menu-sub">
+                    <li class="menu-item">
+                        <a href="/pages/events" class="menu-link <%= current_page?(pages_events_path) ? 'active' : '' %>">
+                            Events
+                        </a>
+                    </li>
+                    <li class="menu-item">
+                        <a href="/pages/events_list" class="menu-link <%= current_page?(pages_events_list_path) ? 'active' : '' %>">
+                            Events List
+                        </a>
+                    </li>
+                    <li class="menu-item">
+                        <a href="/pages/event_details" class="menu-link <%= current_page?(pages_event_details_path) ? 'active' : '' %>">
+                            Event Details
+                        </a>
+                    </li>
+                    <li class="menu-item">
+                        <a href="/pages/create_event" class="menu-link <%= current_page?(pages_create_event_path) ? 'active' : '' %>">
+                            Create An Event
+                        </a>
+                    </li>
+                    <li class="menu-item">
+                        <a href="/pages/edit_event" class="menu-link <%= current_page?(pages_edit_event_path) ? 'active' : '' %>">
+                            Edit An Event
+                        </a>
+                    </li>
+                </ul>
+            </li>
+
+            <li class="menu-item">
+                <a href="javascript:void(0);" class="menu-link menu-toggle active">
+                    <span class="material-symbols-outlined menu-icon">share</span>
+                    <span class="title">Social</span>
+                </a>
+                <ul class="menu-sub">
+                    <li class="menu-item">
+                        <a href="/pages/profile" class="menu-link <%= current_page?(pages_profile_path) ? 'active' : '' %>">
+                            Profile
+                        </a>
+                    </li>
+                    <li class="menu-item">
+                        <a href="/pages/settings" class="menu-link <%= current_page?(pages_settings_path) ? 'active' : '' %>">
+                            Settings
+                        </a>
+                    </li>
+                </ul>
+            </li>
+
+            <li class="menu-item">
+                <a href="javascript:void(0);" class="menu-link menu-toggle active">
+                    <span class="material-symbols-outlined menu-icon">content_paste</span>
+                    <span class="title">Invoice</span>
+                </a>
+                <ul class="menu-sub">
+                    <li class="menu-item">
+                        <a href="/pages/invoice_list" class="menu-link <%= current_page?(pages_invoice_list_path) ? 'active' : '' %>">
+                            Invoice List
+                        </a>
+                    </li>
+                    <li class="menu-item">
+                        <a href="/pages/invoice_details" class="menu-link <%= current_page?(pages_invoice_details_path) ? 'active' : '' %>">
+                            Invoice Details
+                        </a>
+                    </li>
+                    <li class="menu-item">
+                        <a href="/pages/create_invoice" class="menu-link <%= current_page?(pages_create_invoice_path) ? 'active' : '' %>">
+                            Create Invoice
+                        </a>
+                    </li>
+                    <li class="menu-item">
+                        <a href="/pages/edit_invoice" class="menu-link <%= current_page?(pages_edit_invoice_path) ? 'active' : '' %>">
+                            Edit Invoice
+                        </a>
+                    </li>
+                </ul>
+            </li>
+
+            <li class="menu-item">
+                <a href="javascript:void(0);" class="menu-link menu-toggle active">
+                    <span class="material-symbols-outlined menu-icon">group_add</span>
+                    <span class="title">Users</span>
+                </a>
+                <ul class="menu-sub">
+                    <li class="menu-item">
+                        <a href="/pages/team_members" class="menu-link <%= current_page?(pages_team_members_path) ? 'active' : '' %>">
+                            Team Members
+                        </a>
+                    </li>
+                    <li class="menu-item">
+                        <a href="/pages/users_list" class="menu-link <%= current_page?(pages_users_list_path) ? 'active' : '' %>">
+                            Users List
+                        </a>
+                    </li>
+                    <li class="menu-item">
+                        <a href="/pages/add_user" class="menu-link <%= current_page?(pages_add_user_path) ? 'active' : '' %>">
+                            Add User
+                        </a>
+                    </li>
+                </ul>
+            </li>
+
+            <li class="menu-item">
+                <a href="javascript:void(0);" class="menu-link menu-toggle active">
+                    <span class="material-symbols-outlined menu-icon">account_circle</span>
+                    <span class="title">Profile</span>
+                </a>
+                <ul class="menu-sub">
+                    <li class="menu-item">
+                        <a href="/pages/user_profile" class="menu-link <%= current_page?(pages_user_profile_path) ? 'active' : '' %>">
+                            User Profile
+                        </a>
+                    </li>
+                    <li class="menu-item">
+                        <a href="/pages/teams" class="menu-link <%= current_page?(pages_teams_path) ? 'active' : '' %>">
+                            Teams
+                        </a>
+                    </li>
+                    <li class="menu-item">
+                        <a href="/pages/my_projects" class="menu-link <%= current_page?(pages_my_projects_path) ? 'active' : '' %>">
+                            Projects
+                        </a>
+                    </li>
+                </ul>
+            </li>
+
+            <li class="menu-item">
+                <a href="/pages/starter" class="menu-link">
+                    <span class="material-symbols-outlined menu-icon <%= current_page?(pages_starter_path) ? 'active' : '' %>">star</span>
+                    <span class="title">Starter</span>
+                </a>
+            </li>
+
+            <li class="menu-title small text-uppercase">
+                <span class="menu-title-text">MODULES</span>
+            </li>
+
+            <li class="menu-item">
+                <a href="javascript:void(0);" class="menu-link menu-toggle active">
+                    <span class="material-symbols-outlined menu-icon">add_reaction</span>
+                    <span class="title">Icons</span>
+                </a>
+                <ul class="menu-sub">
+                    <li class="menu-item">
+                        <a href="/pages/material_icons" class="menu-link <%= current_page?(pages_material_icons_path) ? 'active' : '' %>">
+                            Material Icons
+                        </a>
+                    </li>
+                    <li class="menu-item">
+                        <a href="/pages/feathericon" class="menu-link <%= current_page?(pages_feathericon_path) ? 'active' : '' %>">
+                            Feathericon
+                        </a>
+                    </li>
+                    <li class="menu-item">
+                        <a href="/pages/remixicon" class="menu-link <%= current_page?(pages_remixicon_path) ? 'active' : '' %>">
+                            Remixicon
+                        </a>
+                    </li>
+                </ul>
+            </li>
+
+            <li class="menu-item">
+                <a href="javascript:void(0);" class="menu-link menu-toggle active">
+                    <span class="material-symbols-outlined menu-icon">gallery_thumbnail</span>
+                    <span class="title">UI Elements</span>
+                </a>
+                <ul class="menu-sub">
+                    <li class="menu-item">
+                        <a href="/pages/alerts" class="menu-link <%= current_page?(pages_alerts_path) ? 'active' : '' %>">
+                            Alerts
+                        </a>
+                    </li>
+                    <li class="menu-item">
+                        <a href="/pages/avatar" class="menu-link <%= current_page?(pages_avatar_path) ? 'active' : '' %>">
+                            Avatar
+                        </a>
+                    </li>
+                    <li class="menu-item">
+                        <a href="/pages/buttons" class="menu-link <%= current_page?(pages_buttons_path) ? 'active' : '' %>">
+                            Buttons
+                        </a>
+                    </li>
+                    <li class="menu-item">
+                        <a href="/pages/badges" class="menu-link <%= current_page?(pages_badges_path) ? 'active' : '' %>">
+                            Badges
+                        </a>
+                    </li>
+                    <li class="menu-item">
+                        <a href="/pages/cards" class="menu-link <%= current_page?(pages_cards_path) ? 'active' : '' %>">
+                            Cards
+                        </a>
+                    </li>
+                    <li class="menu-item">
+                        <a href="/pages/carousels" class="menu-link <%= current_page?(pages_carousels_path) ? 'active' : '' %>">
+                            Carousels
+                        </a>
+                    </li>
+                    <li class="menu-item">
+                        <a href="/pages/dropdowns" class="menu-link <%= current_page?(pages_dropdowns_path) ? 'active' : '' %>">
+                            Dropdowns
+                        </a>
+                    </li>
+                    <li class="menu-item">
+                        <a href="/pages/grids" class="menu-link <%= current_page?(pages_grids_path) ? 'active' : '' %>">
+                            Grids
+                        </a>
+                    </li>
+                    <li class="menu-item">
+                        <a href="/pages/images" class="menu-link <%= current_page?(pages_images_path) ? 'active' : '' %>">
+                            Images
+                        </a>
+                    </li>
+                    <li class="menu-item">
+                        <a href="/pages/list" class="menu-link <%= current_page?(pages_list_path) ? 'active' : '' %>">
+                            List
+                        </a>
+                    </li>
+                    <li class="menu-item">
+                        <a href="/pages/modals" class="menu-link <%= current_page?(pages_modals_path) ? 'active' : '' %>">
+                            Modals
+                        </a>
+                    </li>
+                    <li class="menu-item">
+                        <a href="/pages/navs" class="menu-link <%= current_page?(pages_navs_path) ? 'active' : '' %>">
+                            Navs
+                        </a>
+                    </li>
+                    <li class="menu-item">
+                        <a href="/pages/paginations" class="menu-link <%= current_page?(pages_paginations_path) ? 'active' : '' %>">
+                            Paginations
+                        </a>
+                    </li>
+                    <li class="menu-item">
+                        <a href="/pages/popover_tooltips" class="menu-link <%= current_page?(pages_popover_tooltips_path) ? 'active' : '' %>">
+                            Popover Tooltips
+                        </a>
+                    </li>
+                    <li class="menu-item">
+                        <a href="/pages/progess" class="menu-link <%= current_page?(pages_progess_path) ? 'active' : '' %>">
+                            Progess
+                        </a>
+                    </li>
+                    <li class="menu-item">
+                        <a href="/pages/spinners" class="menu-link <%= current_page?(pages_spinners_path) ? 'active' : '' %>">
+                            Spinners
+                        </a>
+                    </li>
+                    <li class="menu-item">
+                        <a href="/pages/tabs" class="menu-link <%= current_page?(pages_tabs_path) ? 'active' : '' %>">
+                            Tabs
+                        </a>
+                    </li>
+                    <li class="menu-item">
+                        <a href="/pages/accoridions" class="menu-link <%= current_page?(pages_accoridions_path) ? 'active' : '' %>">
+                            Accoridions
+                        </a>
+                    </li>
+                    <li class="menu-item">
+                        <a href="/pages/date_time_picker" class="menu-link <%= current_page?(pages_date_time_picker_path) ? 'active' : '' %>">
+                            Date/Time Picker
+                        </a>
+                    </li>
+                </ul>
+            </li>
+
+            <li class="menu-item">
+                <a href="javascript:void(0);" class="menu-link menu-toggle active">
+                    <span class="material-symbols-outlined menu-icon">table</span>
+                    <span class="title">Tables</span>
+                </a>
+                <ul class="menu-sub">
+                    <li class="menu-item">
+                        <a href="/pages/basic_table" class="menu-link <%= current_page?(pages_basic_table_path) ? 'active' : '' %>">
+                            Basic Table
+                        </a>
+                    </li>
+                    <li class="menu-item">
+                        <a href="/pages/data_tables" class="menu-link <%= current_page?(pages_data_tables_path) ? 'active' : '' %>">
+                            Data Table
+                        </a>
+                    </li>
+                </ul>
+            </li>
+
+            <li class="menu-item">
+                <a href="javascript:void(0);" class="menu-link menu-toggle active">
+                    <span class="material-symbols-outlined menu-icon">clarify</span>
+                    <span class="title">Forms</span>
+                </a>
+                <ul class="menu-sub">
+                    <li class="menu-item">
+                        <a href="/pages/basic_elements" class="menu-link <%= current_page?(pages_basic_elements_path) ? 'active' : '' %>">
+                            Basic Elements
+                        </a>
+                    </li>
+                    <li class="menu-item">
+                        <a href="/pages/advanced_elements" class="menu-link <%= current_page?(pages_advanced_elements_path) ? 'active' : '' %>">
+                            Advanced Elements
+                        </a>
+                    </li>
+                    <li class="menu-item">
+                        <a href="/pages/validation" class="menu-link <%= current_page?(pages_validation_path) ? 'active' : '' %>">
+                            Validation
+                        </a>
+                    </li>
+                    <li class="menu-item">
+                        <a href="/pages/wizard" class="menu-link <%= current_page?(pages_wizard_path) ? 'active' : '' %>">
+                            Wizard
+                        </a>
+                    </li>
+                    <li class="menu-item">
+                        <a href="/pages/editors" class="menu-link <%= current_page?(pages_editors_path) ? 'active' : '' %>">
+                            Editors
+                        </a>
+                    </li>
+                    <li class="menu-item">
+                        <a href="/pages/file_upload" class="menu-link <%= current_page?(pages_file_upload_path) ? 'active' : '' %>">
+                            File Upload
+                        </a>
+                    </li>
+                </ul>
+            </li>
+
+            <li class="menu-item">
+                <a href="/pages/apex_charts" class="menu-link <%= current_page?(pages_apex_charts_path) ? 'active' : '' %>">
+                    <span class="material-symbols-outlined menu-icon">donut_large</span>
+                    <span class="title">Apex Charts</span>
+                </a>
+            </li>
+
+            <li class="menu-item">
+                <a href="javascript:void(0);" class="menu-link menu-toggle active">
+                    <span class="material-symbols-outlined menu-icon">lock</span>
+                    <span class="title">Authentication</span>
+                </a>
+                <ul class="menu-sub">
+                    <li class="menu-item">
+                        <a href="/login" class="menu-link">
+                            Login
+                        </a>
+                    </li>
+                    <li class="menu-item">
+                        <a href="/register" class="menu-link">
+                            Register
+                        </a>
+                    </li>
+                    <li class="menu-item">
+                        <a href="/reset_password" class="menu-link">
+                            Reset Password
+                        </a>
+                    </li>
+                    <li class="menu-item">
+                        <a href="/forget_password" class="menu-link">
+                            Forget Password
+                        </a>
+                    </li>
+                    <li class="menu-item">
+                        <a href="/lock_screen" class="menu-link">
+                            Lock Screen
+                        </a>
+                    </li>
+                    <li class="menu-item">
+                        <a href="/logout" class="menu-link">
+                            Log Out
+                        </a>
+                    </li>
+                    <li class="menu-item">
+                        <a href="/confirm_mail" class="menu-link">
+                            Confirm Mail
+                        </a>
+                    </li>
+                </ul>
+            </li>
+
+            <li class="menu-item">
+                <a href="javascript:void(0);" class="menu-link menu-toggle active">
+                    <span class="material-symbols-outlined menu-icon">featured_video</span>
+                    <span class="title">Extra Pages</span>
+                </a>
+                <ul class="menu-sub">
+                    <li class="menu-item">
+                        <a href="/pages/animation" class="menu-link <%= current_page?(pages_animation_path) ? 'active' : '' %>">
+                            Animation
+                        </a>
+                    </li>
+                    <li class="menu-item">
+                        <a href="/pages/clip_board" class="menu-link <%= current_page?(pages_clip_board_path) ? 'active' : '' %>">
+                            Clip Board
+                        </a>
+                    </li>
+                    <li class="menu-item">
+                        <a href="/pages/drag_drop" class="menu-link <%= current_page?(pages_drag_drop_path) ? 'active' : '' %>">
+                            Drag & Drop
+                        </a>
+                    </li>
+                    <li class="menu-item">
+                        <a href="/pages/range_slider" class="menu-link <%= current_page?(pages_range_slider_path) ? 'active' : '' %>">
+                            Range Slider
+                        </a>
+                    </li>
+                    <li class="menu-item">
+                        <a href="/pages/ratings" class="menu-link <%= current_page?(pages_ratings_path) ? 'active' : '' %>">
+                            Ratings
+                        </a>
+                    </li>
+                    <li class="menu-item">
+                        <a href="/pages/toasts" class="menu-link <%= current_page?(pages_toasts_path) ? 'active' : '' %>">
+                            Toasts
+                        </a>
+                    </li>
+                    <li class="menu-item">
+                        <a href="/pages/check_radio" class="menu-link <%= current_page?(pages_check_radio_path) ? 'active' : '' %>">
+                            Check & Radio
+                        </a>
+                    </li>
+                    <li class="menu-item">
+                        <a href="/pages/select" class="menu-link <%= current_page?(pages_select_path) ? 'active' : '' %>">
+                            Select
+                        </a>
+                    </li>
+                    <li class="menu-item">
+                        <a href="/pages/scrollbar" class="menu-link <%= current_page?(pages_scrollbar_path) ? 'active' : '' %>">
+                            Scrollbar
+                        </a>
+                    </li>
+                    <li class="menu-item">
+                        <a href="/pages/typography" class="menu-link <%= current_page?(pages_typography_path) ? 'active' : '' %>">
+                            Typography
+                        </a>
+                    </li>
+                    <li class="menu-item">
+                        <a href="/pages/gallery" class="menu-link <%= current_page?(pages_gallery_path) ? 'active' : '' %>">
+                            Gallery
+                        </a>
+                    </li>
+                    <li class="menu-item">
+                        <a href="/pages/search" class="menu-link <%= current_page?(pages_search_path) ? 'active' : '' %>">
+                            Search
+                        </a>
+                    </li>
+                    <li class="menu-item">
+                        <a href="/pages/blank_page" class="menu-link <%= current_page?(pages_blank_page_path) ? 'active' : '' %>">
+                            Blank Page
+                        </a>
+                    </li>
+                </ul>
+            </li>
+
+            <li class="menu-item">
+                <a href="javascript:void(0);" class="menu-link menu-toggle active">
+                    <span class="material-symbols-outlined menu-icon">chat_error</span>
+                    <span class="title">Errors</span>
+                </a>
+                <ul class="menu-sub">
+                    <li class="menu-item">
+                        <a href="/pages/not_found_error" class="menu-link <%= current_page?(pages_not_found_error_path) ? 'active' : '' %>">
+                            404 Error Page
+                        </a>
+                    </li>
+                    <li class="menu-item">
+                        <a href="/pages/internal_error" class="menu-link <%= current_page?(pages_internal_error_path) ? 'active' : '' %>">
+                            Internal Error
+                        </a>
+                    </li>
+                </ul>
+            </li>
+
+            <li class="menu-item">
+                <a href="/pages/widgets" class="menu-link <%= current_page?(pages_widgets_path) ? 'active' : '' %>">
+                    <span class="material-symbols-outlined menu-icon">widgets</span>
+                    <span class="title">Widgets</span>
+                </a>
+            </li>
+
+            <li class="menu-item">
+                <a href="/pages/google_map" class="menu-link <%= current_page?(pages_google_map_path) ? 'active' : '' %>">
+                    <span class="material-symbols-outlined menu-icon">map</span>
+                    <span class="title">Google Map</span>
+                </a>
+            </li>
+
+            <li class="menu-item">
+                <a href="/pages/notification" class="menu-link <%= current_page?(pages_notification_path) ? 'active' : '' %>">
+                    <span class="material-symbols-outlined menu-icon">notifications</span>
+                    <span class="title">Notification</span>
+                </a>
+            </li>
+
+            <li class="menu-item">
+                <a href="/pages/users_list" class="menu-link <%= current_page?(pages_users_list_path) ? 'active' : '' %>">
+                    <span class="material-symbols-outlined menu-icon">group</span>
+                    <span class="title">Members</span>
+                </a>
+            </li>
+
+            <li class="menu-title small text-uppercase">
+                <span class="menu-title-text">OTHERS</span>
+            </li>
+
+            <li class="menu-item">
+                <a href="/my_profile" class="menu-link <%= current_page?(my_profile_path) ? 'active' : '' %>">
+                    <span class="material-symbols-outlined menu-icon">account_circle</span>
+                    <span class="title">My Profile</span>
+                </a>
+            </li>
+            
+            <li class="menu-item">
+                <a href="javascript:void(0);" class="menu-link menu-toggle active">
+                    <span class="material-symbols-outlined menu-icon">keyboard_arrow_down</span>
+                    <span class="title">Multi Level Menu</span>
+                </a>
+                <ul class="menu-sub">
+                    <li class="menu-item after-sub-menu">
+                        <a href="javascript:void(0);" class="menu-link menu-toggle">
+                            <span class="title">Level One</span>
+                        </a>
+                        <ul class="menu-sub">
+                            <li class="menu-item">
+                                <a href="#" class="menu-link">
+                                    Level Three
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+
+            <li class="menu-item">
+                <a href="/logout" class="menu-link logout">
+                    <span class="material-symbols-outlined menu-icon">logout</span>
+                    <span class="title">Logout</span>
+                </a>
+            </li>
+        </ul>
+    </aside>
+</div>

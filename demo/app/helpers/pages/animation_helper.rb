@@ -1,0 +1,2 @@
+module Pages::AnimationHelper
+end
