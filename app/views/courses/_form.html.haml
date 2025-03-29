@@ -1,9 +1,14 @@
-= form_with model: [:school, department, course], local: true, html: { multipart: true }, url: url, class: 'form' do |f|
+= form_with model: [:school, course], local: true, html: { multipart: true }, url: url, class: 'form' do |f|
   .row
-    .col-md-12.mb-3
+    .col-md-6.mb-3
       %label.form-label.required
-        = t('issues.courses.table.teacher')
+        Select Teacher
       = f.select :teacher_id, current_college.users.where(role: :teacher).map { |teacher| [teacher.name, teacher.id] }, { prompt: 'Select Teacher' }, include_blank: 'All', class: 'form-select'
+    .col-md-6.mb-3
+      %label.form-label.required
+        Select Department
+      = f.select :department_id, current_college.departments.map { |department| [department.name, department.id] }, { prompt: 'Select Department' }, include_blank: 'All', class: 'form-select'
+
   .row
     .col-md-6.mb-3
       %label.form-label.required

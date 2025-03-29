@@ -16,10 +16,12 @@ resources :colleges, param: :slug do
       post :update_profile
     end
   end
-  resources :departments, param: :slug do
-    resources :courses, param: :slug do
-      resources :fees, param: :slug
-    end
+  resources :departments, param: :slug
+  resources :courses, param: :slug
+  resources :sessions, param: :slug do
+    resources :attendances, param: :slug 
   end
+  resources :fees, param: :slug
+  
   resources :fee_types, param: :slug
 end
