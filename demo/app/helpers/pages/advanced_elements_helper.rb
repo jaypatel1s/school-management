@@ -1,2 +1,0 @@
-module Pages::AdvancedElementsHelper
-end

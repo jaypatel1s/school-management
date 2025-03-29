@@ -1,2 +1,0 @@
-module Pages::NotificationHelper
-end

@@ -1,2 +1,0 @@
-module Drive::MediaHelper
-end

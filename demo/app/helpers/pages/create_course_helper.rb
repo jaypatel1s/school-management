@@ -1,2 +1,0 @@
-module Pages::CreateCourseHelper
-end

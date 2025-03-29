@@ -1,2 +1,0 @@
-module Email::TrashEmailHelper
-end

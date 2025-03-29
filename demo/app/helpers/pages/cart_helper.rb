@@ -1,2 +1,0 @@
-module Pages::CartHelper
-end

@@ -1,2 +1,0 @@
-module Drive::DocumentsHelper
-end

@@ -1,2 +1,0 @@
-module Pages::SellerDetailsHelper
-end

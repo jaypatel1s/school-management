@@ -1,2 +1,0 @@
-module Drive::TrashHelper
-end
