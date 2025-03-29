@@ -1,0 +1,2 @@
+module Pages::GoogleMapHelper
+end

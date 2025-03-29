@@ -1,0 +1,2 @@
+module Pages::RemixiconHelper
+end

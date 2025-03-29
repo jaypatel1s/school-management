@@ -1,0 +1,2 @@
+module Email::SnoozedHelper
+end

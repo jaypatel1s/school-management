@@ -1,0 +1,2 @@
+module Pages::EditEventHelper
+end

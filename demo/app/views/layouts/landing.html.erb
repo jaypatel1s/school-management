@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Trezo - Rails 7 Admin Dashboard Template</title>
+        <meta name="viewport" content="width=device-width,initial-scale=1">
+        <%= csrf_meta_tags %>
+        <%= csp_meta_tag %>
+
+        <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+        <%= render "/layouts/partials/javascripti_imports" %>
+    </head>
+
+    <body data-bs-spy="scroll" data-bs-target="#navbar-example2" data-bs-root-margin="0px 0px -40%" data-bs-smooth-scroll="true" class="scrollspy-example" tabindex="0">
+        <%= render "/layouts/partials/landing_navbar" %>
+        <%= yield %>
+    </body>
+</html>

@@ -1,0 +1,2 @@
+module Pages::CardsHelper
+end

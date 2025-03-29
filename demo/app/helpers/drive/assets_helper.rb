@@ -1,0 +1,2 @@
+module Drive::AssetsHelper
+end

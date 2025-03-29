@@ -1,0 +1,2 @@
+module Pages::AccoridionsHelper
+end

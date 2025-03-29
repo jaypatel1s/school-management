@@ -1,0 +1,2 @@
+module Pages::WizardHelper
+end
