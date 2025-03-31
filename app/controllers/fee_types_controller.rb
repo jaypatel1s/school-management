@@ -1,3 +1,6 @@
+# frozen_string_literal: true
+
+# :nodoc:
 class FeeTypesController < BaseController
   before_action :set_fee_type, only: %i[show edit update destroy]
 
@@ -5,11 +8,11 @@ class FeeTypesController < BaseController
     @fee_types = current_college.fee_types
   end
 
+  def show; end
+
   def new
     @fee_type = current_college.fee_types.new
   end
-
-  def show; end
 
   def edit; end
 
@@ -23,8 +26,7 @@ class FeeTypesController < BaseController
       flash[:alert] = @fee_type.errors.full_messages
       render :new
     end
-  end  
-
+  end
 
   def update
     if @fee_type.update(fee_type_params)
@@ -47,8 +49,6 @@ class FeeTypesController < BaseController
   def fee_type_params
     params.require(:fee_type).permit(:name)
   end
-
-  private
 
   def set_fee_type
     @fee_type = current_college.fee_types.find_by(slug: params[:slug])

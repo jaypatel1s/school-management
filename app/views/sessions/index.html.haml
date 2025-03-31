@@ -1,9 +1,9 @@
 .d-flex.justify-content-between.align-items-center.mb-4
   %h4.fw-bold.py-0.m-0
     = t('issues.status.table.sessions')
-  - if can_access?(:users, :new)
+  - if can_access?(:sessions, :new)
     %div
-      %a.btn.btn-sm.btn-primary{ href: new_college_classroom_session_path(classroom_slug: @classroom.slug) }= t('issues.status.table.create')
+      %a.btn.btn-sm.btn-primary{ href: new_college_session_path(current_college.slug) }= t('issues.status.table.create')
 .row
   .col-12
     .card
@@ -21,24 +21,7 @@
                 %tr
                   %td.text-start
                     %strong.long-txt= session.name
-                  %td= session.classroom.name
                   %td= session.date
-                  %td
-                    .text-end.d-flex.align-items-center.justify-content-end
-                      %a.btn.btn-warning.btn-icon.btn-sm.me-1{
-                      href: edit_college_classroom_session_path(current_college.slug, slug: session.slug), 'data-bs-html': 'true', 'data-bs-offset': '0,4', 'data-bs-original-title': '<span>Edit</span>', 'data-bs-placement': 'bottom', 'data-bs-toggle': 'tooltip', title: '', type: 'button' }
-                        %i.bx.bx-pencil
-                      = link_to college_classroom_session_path(current_college.slug, slug: session.slug),
-                      { class: 'btn btn-danger btn-icon btn-sm me-1', 'data-bs-html': 'true', 'data-bs-offset': '0,4', 'data-bs-original-title': '<span>Delete</span>', 'data-bs-placement': 'bottom', 'data-confirm': "You won't be able to revert this!",
-                      'data-bs-toggle': 'tooltip', title: '', type: 'button', method: :delete } do
-                        %i.bx.bx-trash
-        -# .d-flex.flex-stack.flex-wrap.justify-content-between.align-items-center.px-4.pt-3.pb-3
-        -#   .last-sync
-        -#     %div
-        -#       %strong= t('issues.status.table.last_sync_at')
-        -#     %div
-        -#       %strong= datetime(@last_sync)
-        -#   = render partial: 'pagy/bootstrap_nav', locals: { pagy: @pagy }
       - else
         .col-12
           .card

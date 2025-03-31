@@ -1,3 +1,6 @@
+# frozen_string_literal: true
+
+# :nodoc:
 class ApplicationController < ActionController::Base
   include ApplicationConcern
   helper_method :current_college
@@ -9,12 +12,10 @@ class ApplicationController < ActionController::Base
   end
 
   def set_current_college
-    @current_college =  current_user.college
+    @current_college = current_user.college
   end
 
-  def current_college
-    @current_college
-  end
+  attr_reader :current_college
 
   def authenticate_user!
     return if current_user.present?

@@ -1,4 +1,4 @@
-= form_with model: [:school, classroom, session], local: true, html: { multipart: true }, url: url, class: 'form' do |f|
+= form_with model: [:school, session], local: true, html: { multipart: true }, url: url, class: 'form' do |f|
   = f.hidden_field :date, class: "form-control #{error?(@session.errors, :date)}"
   .row
     .col-md-6.mb-3
@@ -10,7 +10,7 @@
   .row
     .col-md-6.mb-3
       %label.form-label{for: "flatpickr-date"} Select Date
-      %input#flatpickr-date.form-control{placeholder: "YYYY-MM-DD HH:MM", type: "text", value: f.object.date.present? ? f.object.date.strftime("%Y-%m-%d %H:%M") : ''}/
+      %input.form-control#flatpickr-date{ placeholder: "YYYY-MM-DD HH:MM", type: "text", value: f.object.date.present? ? f.object.date.strftime("%Y-%m-%d %H:%M") : '' }/
     .col-md-6.mb-3
       %label.form-label.required
         = t('issues.sessions.table.classroom')
@@ -21,13 +21,13 @@
     %button.btn.btn-primary{ type: 'submit', data: { confirm: 'Do you want to save the changes?' } }
       = t('issues.sessions.table.save')
 
-- content_for :js_code do 
+- content_for :js_code do
   :javascript
     $(document).ready(function() {
       var flatpickrDate = $("#flatpickr-date");
       if (flatpickrDate.length) {
         flatpickrDate.flatpickr({
-          enableTime: true, 
+          enableTime: true,
           dateFormat: "Y-m-d H:i",
           mode: "single",
           minDate: "today",

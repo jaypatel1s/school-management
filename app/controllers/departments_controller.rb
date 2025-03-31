@@ -1,3 +1,6 @@
+# frozen_string_literal: true
+
+# :nodoc:
 class DepartmentsController < BaseController
   before_action :set_department, only: %i[show edit update destroy]
 
@@ -5,11 +8,11 @@ class DepartmentsController < BaseController
     @departments = current_college.departments
   end
 
+  def show; end
+
   def new
     @department = current_college.departments.new
   end
-
-  def show; end
 
   def edit; end
 

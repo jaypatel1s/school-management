@@ -1,16 +1,18 @@
+# frozen_string_literal: true
+
+# :nodoc:
 class FeeStructuresController < BaseController
   before_action :set_fee_structure, only: %i[show edit update destroy]
-
 
   def index
     @fee_structures = current_college.fee_structures
   end
 
+  def show; end
+
   def new
     @fee_structure = current_college.fee_structures.new
   end
-
-  def show; end
 
   def edit; end
 

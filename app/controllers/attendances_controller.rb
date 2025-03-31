@@ -1,7 +1,8 @@
-class AttendancesController < BaseController
-  def index
-  end
+# frozen_string_literal: true
 
-  def update
-  end
+# :nodoc:
+class AttendancesController < BaseController
+  def index; end
+
+  def update; end
 end

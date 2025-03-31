@@ -1,3 +1,6 @@
+# frozen_string_literal: true
+
+# :nodoc:
 class FeesController < BaseController
   before_action :set_department
   before_action :set_course
@@ -7,11 +10,11 @@ class FeesController < BaseController
     @fees = current_college.fees
   end
 
+  def show; end
+
   def new
     @fee = current_college.fees.new
   end
-
-  def show; end
 
   def edit; end
 
@@ -25,8 +28,7 @@ class FeesController < BaseController
       flash[:alert] = @fee.errors.full_messages
       render :new
     end
-  end  
-
+  end
 
   def update
     if @fee.update(fee_params)
@@ -58,7 +60,6 @@ class FeesController < BaseController
     redirect_to college_departments_path(current_college.slug)
   end
 
-
   def set_course
     @course = @department.courses.find_by(slug: params[:course_slug])
     return if @course.present?
@@ -66,7 +67,7 @@ class FeesController < BaseController
     flash[:notice] = 'Courses Not Found'
     redirect_to college_department_courses_path(current_college.slug)
   end
-  
+
   def set_fee
     @fee = current_college.fees.find_by(slug: params[:slug])
     return if @fee.present?
