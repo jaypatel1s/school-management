@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2025_03_13_163721) do
+ActiveRecord::Schema[7.1].define(version: 2025_04_03_153404) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -41,25 +41,16 @@ ActiveRecord::Schema[7.1].define(version: 2025_03_13_163721) do
   end
 
   create_table "attendances", force: :cascade do |t|
-    t.bigint "college_id", null: false
-    t.bigint "user_id", null: false
     t.bigint "session_id", null: false
-    t.integer "status", default: 0
-    t.string "slug", limit: 255, null: false
+    t.bigint "student_id", null: false
+    t.string "status"
+    t.datetime "marked_at"
+    t.string "ip_address"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["college_id"], name: "index_attendances_on_college_id"
+    t.index ["session_id", "student_id"], name: "index_attendances_on_session_id_and_student_id", unique: true
     t.index ["session_id"], name: "index_attendances_on_session_id"
-    t.index ["user_id"], name: "index_attendances_on_user_id"
-  end
-
-  create_table "classrooms", force: :cascade do |t|
-    t.bigint "college_id", null: false
-    t.string "name"
-    t.string "slug", limit: 255, null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["college_id"], name: "index_classrooms_on_college_id"
+    t.index ["student_id"], name: "index_attendances_on_student_id"
   end
 
   create_table "colleges", force: :cascade do |t|
@@ -136,36 +127,20 @@ ActiveRecord::Schema[7.1].define(version: 2025_03_13_163721) do
   end
 
   create_table "sessions", force: :cascade do |t|
-    t.bigint "college_id", null: false
-    t.datetime "date"
-    t.string "slug", limit: 255, null: false
+    t.string "name"
+    t.date "date"
+    t.time "start_time"
+    t.time "end_time"
+    t.string "qr_token"
+    t.string "location"
+    t.boolean "active", default: true
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "name"
+    t.bigint "course_id", null: false
+    t.bigint "college_id", null: false
     t.index ["college_id"], name: "index_sessions_on_college_id"
-  end
-
-  create_table "fee_structures", force: :cascade do |t|
-    t.string "name"
-    t.bigint "college_id", null: false
-    t.bigint "classroom_id", null: false
-    t.decimal "tuition_fee"
-    t.decimal "other_expense"
-    t.decimal "total_fee"
-    t.string "slug", limit: 255, null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["classroom_id"], name: "index_fee_structures_on_classroom_id"
-    t.index ["college_id"], name: "index_fee_structures_on_college_id"
-  end
-  create_table "subjects", force: :cascade do |t|
-    t.bigint "college_id", null: false
-    t.string "name"
-    t.string "description"
-    t.string "slug", limit: 255, null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["college_id"], name: "index_subjects_on_college_id"
+    t.index ["course_id"], name: "index_sessions_on_course_id"
+    t.index ["qr_token"], name: "index_sessions_on_qr_token", unique: true
   end
 
   create_table "users", force: :cascade do |t|
@@ -213,10 +188,8 @@ ActiveRecord::Schema[7.1].define(version: 2025_03_13_163721) do
     t.index ["user_id"], name: "index_web_authn_credentials_on_user_id"
   end
 
-  add_foreign_key "attendances", "colleges"
   add_foreign_key "attendances", "sessions"
-  add_foreign_key "attendances", "users"
-  add_foreign_key "classrooms", "colleges"
+  add_foreign_key "attendances", "users", column: "student_id"
   add_foreign_key "course_enrollments", "courses"
   add_foreign_key "course_enrollments", "users"
   add_foreign_key "courses", "colleges"
@@ -230,7 +203,7 @@ ActiveRecord::Schema[7.1].define(version: 2025_03_13_163721) do
   add_foreign_key "fees", "departments"
   add_foreign_key "fees", "fee_types"
   add_foreign_key "sessions", "colleges"
-  add_foreign_key "subjects", "colleges"
+  add_foreign_key "sessions", "courses"
   add_foreign_key "users", "colleges"
   add_foreign_key "web_authn_credentials", "users"
 end

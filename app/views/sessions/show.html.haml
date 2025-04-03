@@ -1,0 +1,12 @@
+/ app/views/sessions/show.html.erb
+%h1= @session.name
+%p
+  Date: #{@session.date}
+%p
+  Time: #{@session.start_time} to #{@session.end_time}
+%h2 Attendance QR Code
+= raw @svg
+%p
+  Share this URL for attendance: #{@session.qr_code_url}
+- if @session.attendances.any?
+  = link_to 'Download Attendance Report', report_attendance_path(session_id: @session.id), class: 'btn btn-primary'

@@ -2,7 +2,7 @@ ROLE_PERMISSIONS = {
   principal: {
     dashboard: %i[index],
     users: %i[index new create edit update show destroy new_webauthn_registration create_webauthn_registration],
-    sessions: %i[index],
+    sessions: %i[index new create edit update destroy],
     departments: %i[index new create edit update destroy],
     marksheets: %i[index show],
     fee_types: %i[index new create edit update show destroy],

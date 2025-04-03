@@ -1,11 +1,11 @@
 class Attendance < ApplicationRecord
   include Sluggable
 
-  # belongs_to :college
-  # belongs_to :user
-  # belongs_to :session
+  belongs_to :college
+  belongs_to :session
+  belongs_to :student, class_name: 'User'
 
-  # enum status: { present: 0, absent: 1, late: 2 }
-  # validates :status, presence: true
+  validates :student_id, uniqueness: { scope: :session_id }
+  enum status: { present: 0, absent: 1, late: 2 }
 
 end
