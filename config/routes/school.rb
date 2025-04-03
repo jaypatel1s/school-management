@@ -19,13 +19,9 @@ resources :colleges, param: :slug do
   resources :departments, param: :slug
   resources :courses, param: :slug
   resources :sessions, param: :slug do
-    member do
-      get 'qr_code'  # For displaying the QR code
-      get 'report'   # For downloading attendance report
-    end
-    resources :attendances, param: :slug, only: [:index, :new, :create] do
-      collection do
-        get 'mark'
+    resources :attendances, only: %i[index new create] do
+      member do
+        get 'report'
       end
     end
   end

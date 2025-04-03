@@ -43,11 +43,13 @@ ActiveRecord::Schema[7.1].define(version: 2025_04_03_153404) do
   create_table "attendances", force: :cascade do |t|
     t.bigint "session_id", null: false
     t.bigint "student_id", null: false
-    t.string "status"
     t.datetime "marked_at"
     t.string "ip_address"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "college_id", null: false
+    t.integer "status"
+    t.index ["college_id"], name: "index_attendances_on_college_id"
     t.index ["session_id", "student_id"], name: "index_attendances_on_session_id_and_student_id", unique: true
     t.index ["session_id"], name: "index_attendances_on_session_id"
     t.index ["student_id"], name: "index_attendances_on_student_id"
@@ -72,6 +74,8 @@ ActiveRecord::Schema[7.1].define(version: 2025_04_03_153404) do
     t.integer "status"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "college_id", null: false
+    t.index ["college_id"], name: "index_course_enrollments_on_college_id"
     t.index ["course_id"], name: "index_course_enrollments_on_course_id"
     t.index ["user_id"], name: "index_course_enrollments_on_user_id"
   end
@@ -138,6 +142,7 @@ ActiveRecord::Schema[7.1].define(version: 2025_04_03_153404) do
     t.datetime "updated_at", null: false
     t.bigint "course_id", null: false
     t.bigint "college_id", null: false
+    t.string "slug", limit: 255, null: false
     t.index ["college_id"], name: "index_sessions_on_college_id"
     t.index ["course_id"], name: "index_sessions_on_course_id"
     t.index ["qr_token"], name: "index_sessions_on_qr_token", unique: true
@@ -188,8 +193,10 @@ ActiveRecord::Schema[7.1].define(version: 2025_04_03_153404) do
     t.index ["user_id"], name: "index_web_authn_credentials_on_user_id"
   end
 
+  add_foreign_key "attendances", "colleges"
   add_foreign_key "attendances", "sessions"
   add_foreign_key "attendances", "users", column: "student_id"
+  add_foreign_key "course_enrollments", "colleges"
   add_foreign_key "course_enrollments", "courses"
   add_foreign_key "course_enrollments", "users"
   add_foreign_key "courses", "colleges"

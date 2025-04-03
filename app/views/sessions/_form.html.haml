@@ -13,9 +13,9 @@
       %input.form-control#flatpickr-date{ placeholder: "YYYY-MM-DD HH:MM", type: "text", value: f.object.date.present? ? f.object.date.strftime("%Y-%m-%d %H:%M") : '' }/
     .col-md-6.mb-3
       %label.form-label.required
-        = t('issues.sessions.table.classroom')
-      = f.select :classroom_id, current_college.classrooms.all.map { |classroom| [classroom.name, classroom.id] }, {prompt: 'Select Classroom' }, class: "form-control #{error?(@session.errors, :classroom_id)}"
-      = print_error(@session.errors, :classroom_id)
+        = t('issues.sessions.table.course')
+      = f.select :course_id, current_user.courses.all.map { |course| [course.name, course.id] }, {prompt: 'Select Course' }, class: "form-control #{error?(@session.errors, :course_id)}"
+      = print_error(@session.errors, :course_id)
 
   .col-12.d-flex.justify-content-between
     %button.btn.btn-primary{ type: 'submit', data: { confirm: 'Do you want to save the changes?' } }

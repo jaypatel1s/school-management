@@ -6,35 +6,35 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 ruby '3.2.2'
 
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
-gem "rails", "~> 7.1.3", ">= 7.1.3.4"
+gem 'rails', '~> 7.1.3', '>= 7.1.3.4'
 
+gem 'activeadmin'
+gem 'arctic_admin'
 gem 'bootsnap', require: false
+gem 'cocoon'
+gem 'country_select'
 gem 'devise'
 gem 'haml'
-gem 'cocoon'
 gem 'jquery-rails'
-gem 'pg'
 gem 'pagy'
+gem 'pg'
 gem 'puma', '~> 6.4'
+gem 'rqrcode'
 gem 'sass-rails', '>= 6'
 gem 'trix-rails', require: 'trix'
 gem 'uglifier', '>= 1.3.0'
 gem 'webauthn'
 
-gem 'activeadmin'
-gem 'arctic_admin'
-gem 'country_select'
-
 # Background job adapter
+gem 'importmap-rails'
 gem 'sidekiq'
-gem "importmap-rails"
-gem "turbo-rails"
+gem 'turbo-rails'
 
 # Hotwire's modest JavaScript framework [https://stimulus.hotwired.dev]
-gem "stimulus-rails"
+gem 'stimulus-rails'
 
-gem 'paper_trail'
 gem 'blamer'
+gem 'paper_trail'
 
 # Use Active Storage
 gem 'active_storage_validations'

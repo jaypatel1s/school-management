@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Course < ApplicationRecord
   include Sluggable
 
@@ -7,6 +9,7 @@ class Course < ApplicationRecord
   has_many :course_enrollments
   has_many :fees, dependent: :destroy
   has_many :fee_types, through: :fees
+  has_many :sessions, dependent: :destroy
   has_many :students, through: :course_enrollments, source: :user
 
   validates :name, presence: true

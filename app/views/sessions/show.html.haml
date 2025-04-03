@@ -1,12 +1,37 @@
-/ app/views/sessions/show.html.erb
-%h1= @session.name
-%p
-  Date: #{@session.date}
-%p
-  Time: #{@session.start_time} to #{@session.end_time}
-%h2 Attendance QR Code
-= raw @svg
-%p
-  Share this URL for attendance: #{@session.qr_code_url}
-- if @session.attendances.any?
-  = link_to 'Download Attendance Report', report_attendance_path(session_id: @session.id), class: 'btn btn-primary'
+.row
+  .col-md-6
+    .card.mb-4
+      .card-header
+        %h4.card-title Session Details
+      .card-body
+        %p
+          %strong Name:
+          = @session.name
+        %p
+          %strong Course:
+          = @session.course.name
+
+  .col-md-6
+    .card
+      .card-header
+        %h4.card-title Attendance QR Code
+      .card-body.text-center
+        .qr-code-container.mb-3
+          = raw @session.generate_qr_code
+        %p.text-muted
+          Scan this code within 10 minutes of session start
+          %br
+          or share this link:
+          %br
+          = link_to @session.qr_code_url, @session.qr_code_url, target: '_blank'
+
+- if can_access?(:attendances, :report)
+  %td
+    - if @session.attendances.any?
+      .row.mt-4
+        .col-12
+          .card
+            .card-header
+              %h4.card-title Attendance Report
+            .card-body
+              = link_to 'Download Report', report_college_session_attendance_path(current_college.slug, @session.slug, id: @session.attendances.first.id), class: 'btn btn-primary'

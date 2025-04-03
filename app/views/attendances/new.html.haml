@@ -1,0 +1,13 @@
+.d-flex.justify-content-between.align-items-center.mb-4
+  %div
+    %h4.fw-bold.py-0.m-0
+      %span.text-muted.fw-light= 'attendance /'
+      = t('issues.resolutions.table.new')
+  %div
+    %a.btn.btn-sm.btn-primary{ href: college_session_attendances_path(current_college.slug), 'data-bs-html': 'true', 'data-bs-offset': '0,4', 'data-bs-original-title': '<span>Back</span>', 'data-bs-placement': 'bottom', 'data-bs-toggle': 'tooltip', type: 'button' }
+      %i.bx.bx-chevron-left
+.row
+  .col-md-12
+    .card.mb-4
+      .card-body
+        = render 'form', attendance: @attendance, url: college_session_attendances_path(current_college.slug, qr_token: params[:qr_token], session_slug: @session.slug)

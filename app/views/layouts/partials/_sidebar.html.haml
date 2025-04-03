@@ -38,8 +38,8 @@
             %a.menu-link{ href: college_courses_path(college_slug: current_college.slug) }
               %span.material-symbols-outlined.menu-icon school
               %span.title Courses
-        - if can_access?(:sessions, :index)
-          %li.menu-item{ class: menu_active_class('sessions') }
-            %a.menu-link{ href: college_sessions_path(college_slug: current_college.slug) }
-              %span.material-symbols-outlined.menu-icon schedule
-              %span.title Sessions
+      - if can_access?(:sessions, :index)
+        %li.menu-item{ class: menu_active_class('sessions') }
+          %a.menu-link{ href: college_sessions_path(college_slug: current_college.slug) }
+            %span.material-symbols-outlined.menu-icon schedule
+            %span.title Sessions

@@ -2,7 +2,7 @@ ROLE_PERMISSIONS = {
   principal: {
     dashboard: %i[index],
     users: %i[index new create edit update show destroy new_webauthn_registration create_webauthn_registration],
-    sessions: %i[index new create edit update destroy],
+    sessions: %i[index show],
     departments: %i[index new create edit update destroy],
     marksheets: %i[index show],
     fee_types: %i[index new create edit update show destroy],
@@ -14,15 +14,14 @@ ROLE_PERMISSIONS = {
     users: %i[index new create edit update show destroy profile_setup],
     departments: %i[index show],
     courses: %i[index show],
-    classrooms: %i[index],
-    subjects: %i[index],
-    sessions: %i[index new create edit update destroy],
+    sessions: %i[index new create edit update destroy show],
+    attendances: %i[report],
     marksheets: %i[new create index show]
   },
   student: {
     dashboard: %i[index],
-    classrooms: %i[index show],
-    subjects: %i[index show],
-    marksheets: %i[index show]
+    marksheets: %i[index show],
+    sessions: %i[index show],
+    attendances: %i[new create]
   }
 }

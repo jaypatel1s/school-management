@@ -7,12 +7,19 @@ class SessionsController < BaseController
   def index
     @sessions = if current_user.principal?
                   current_college.sessions
-                else
+                elsif current_user.teacher?
                   current_user.sessions
+                else
+                  current_user.enrolled_sessions.includes(:course)
                 end
   end
 
-  def show; end
+  def show
+    respond_to do |format|
+      format.html
+      format.svg { render inline: @session.generate_qr_code }
+    end
+  end
 
   def new
     @session = current_college.sessions.new
@@ -22,6 +29,7 @@ class SessionsController < BaseController
 
   def create
     @session = current_college.sessions.new(session_params)
+    @session[:date] = Time.zone.now
     if @session.save
       flash[:success] = 'Session Created Successfully'
       redirect_to college_sessions_path(current_college.slug)
@@ -59,7 +67,7 @@ class SessionsController < BaseController
 
   def session_params
     params.require(:session).permit(
-      :name, :date, :college_id, :classroom_id
+      :name, :date, :college_id, :course_id
     )
   end
 end
