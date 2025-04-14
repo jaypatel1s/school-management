@@ -48,7 +48,7 @@
     .card-body.p-0
       .d-flex.justify-content-between.align-items-center.flex-wrap.gap-2.p-4
         %form.position-relative.table-src-form.me-0
-          %input.form-control{placeholder: "Search here", type: "text"}/
+          %input.form-control{ placeholder: "Search here", type: "text" }/
           %i.material-symbols-outlined.position-absolute.top-50.start-0.translate-middle-y search
         - if can_access?(:courses, :new)
           %a.btn.btn-outline-primary.py-1.px-2.px-sm-4.fs-14.fw-medium.rounded-3.hover-bg{ href: new_college_course_path(current_college.slug) }
@@ -58,8 +58,8 @@
           %table.table.align-middle
             %thead
               %tr
-                %th{scope: "col"} Name
-                %th{scope: "col"} Actions
+                %th{ scope: "col" } Name
+                %th{ scope: "col" } Actions
             %tbody
               - @courses.each do |course|
                 %tr

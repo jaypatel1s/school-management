@@ -1,0 +1,37 @@
+.main-content-container.overflow-hidden
+  .d-flex.justify-content-between.align-items-center.flex-wrap.gap-2.mb-4
+    %h3.mb-0 Course Enrollments
+  .card.bg-white.border-0.rounded-3.mb-4
+    .card-body.p-0
+      .d-flex.justify-content-between.align-items-center.flex-wrap.gap-2.p-4
+        %form.position-relative.table-src-form.me-0
+          %input.form-control{ placeholder: "Search here", type: "text" }/
+          %i.material-symbols-outlined.position-absolute.top-50.start-0.translate-middle-y search
+        - if can_access?(:course_enrollments, :new)
+          %a.btn.btn-outline-primary.py-1.px-2.px-sm-4.fs-14.fw-medium.rounded-3.hover-bg{ href: new_college_course_path(current_college.slug) }
+            %span.py-sm-1.d-block Create
+      .default-table-area.style-two.default-table-width
+        .table-responsive
+          %table.table.align-middle
+            %thead
+              %tr
+                %th{ scope: "col" } Name
+                %th{ scope: "col" } Actions
+            %tbody
+              - @course_enrollments.each do |course_enrollment|
+                %tr
+                  %td.text-body= course_enrollment.user.name
+                  %td.text-end
+                    .d-flex.align-items-center.gap-1
+                      %button.ps-0.border-0.bg-transparent.lh-1.position-relative.top-2
+                        %i.material-symbols-outlined.fs-16.text-primary visibility
+                      - if can_access?(:course_enrollments, :edit)
+                        %a.ps-0.border-0.bg-transparent.lh-1.position-relative.top-2{
+                        href: edit_college_course_path(current_college.slug, course_enrollment.slug), 'data-bs-html': 'true', 'data-bs-offset': '0,4', 'data-bs-original-title': '<span>Edit</span>', 'data-bs-placement': 'bottom', 'data-bs-toggle': 'tooltip', title: '', type: 'button' }
+                          %i.material-symbols-outlined.fs-16.text-body edit
+                      - if can_access?(:course_enrollments, :destroy)
+                        = link_to college_course_enrollment_path(current_college.slug, course_enrollment.slug),
+                          class: 'ps-0 border-0 bg-transparent lh-1 position-relative top-2',
+                          data: { turbo_method: :delete, turbo_confirm: "You won't be able to revert this!",
+                            bs: { html: 'true',  offset: '0,4', original_title: '<span>Delete</span>', placement: 'bottom', toggle: 'tooltip' } } do
+                          %i.material-symbols-outlined.fs-16.text-danger delete
