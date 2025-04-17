@@ -18,7 +18,6 @@ class DepartmentsController < BaseController
 
   def create
     @department = current_college.departments.new(department_params)
-    @department.head_id = current_user.id
     if @department.save
       flash[:success] = 'Department Created Successfully'
       redirect_to college_departments_path(current_college.slug)
