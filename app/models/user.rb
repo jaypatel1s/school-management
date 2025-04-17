@@ -9,16 +9,9 @@ class User < ApplicationRecord
   has_many :courses, foreign_key: :teacher_id, dependent: :destroy
   has_many :sessions, through: :courses
 
-  has_many :course_enrollments
-  has_many :enrolled_courses, through: :course_enrollments, source: :course
-  has_many :enrolled_sessions, through: :enrolled_courses, source: :sessions
-
-  has_many :taught_courses, class_name: 'Course', foreign_key: :teacher_id
-  has_many :taught_sessions, through: :taught_courses, source: :sessions
-
-  has_many :attendances, foreign_key: :student_id
-  has_many :attended_sessions, through: :attendances, source: :session
-  has_many :webauthn_credentials, class_name: 'WebAuthnCredential', dependent: :destroy
+  # has_many :attendances, foreign_key: :student_id
+  # has_many :attended_sessions, through: :attendances, source: :session
+  # has_many :webauthn_credentials, class_name: 'WebAuthnCredential', dependent: :destroy
 
   enum :role, { principal: 0, teacher: 1, student: 2 }
 
