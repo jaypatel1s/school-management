@@ -1,46 +1,3 @@
-.d-flex.justify-content-between.align-items-center.mb-4
-  %h4.fw-bold.py-0.m-0
-    = t('issues.status.table.courses')
-  %div
-    - if can_access?(:courses, :new)
-      %a.btn.btn-sm.btn-primary{ href: new_college_course_path(current_college.slug) }= t('issues.status.table.create')
-.row
-  .col-12
-    .card
-      - if @courses.present?
-        .table-responsive.text-nowrap.pb-0.border-bottom
-          %table.table.table-striped
-            %thead
-              %tr
-                %th.text-start= t('issues.status.table.name')
-                %th.text-end= t('issues.status.table.actions')
-            %tbody.table-border-bottom-0
-              - @courses.each do |course|
-                %tr
-                  %td.text-start
-                    %strong.long-txt= course.name
-                  %td
-                    .text-end.d-flex.align-items-center.justify-content-end
-                      - if can_access?(:courses, :edit)
-                        %a.btn.btn-warning.btn-icon.btn-sm.me-1{
-                        href: edit_college_course_path(current_college.slug, course.slug), 'data-bs-html': 'true', 'data-bs-offset': '0,4', 'data-bs-original-title': '<span>Edit</span>', 'data-bs-placement': 'bottom', 'data-bs-toggle': 'tooltip', title: '', type: 'button' }
-                          %i.bx.bx-pencil
-                      - if can_access?(:courses, :destroy)
-                        = link_to college_course_path(current_college.slug, course.slug),
-                          { class: 'btn btn-danger btn-icon btn-sm me-1', 'data-bs-html': 'true', 'data-bs-offset': '0,4', 'data-bs-original-title': '<span>Delete</span>', 'data-bs-placement': 'bottom', 'data-confirm': "You won't be able to revert this!",
-                          'data-bs-toggle': 'tooltip', title: '', type: 'button', method: :delete } do
-                          %span.material-symbols-outlined.menu-icon.text-white delete
-
-      - else
-        .col-12
-          .card
-            .card-body
-              %h4.text-center.mb-0.d-flex.align-items-center.justify-content-center
-                %i.bx.bx-error-circle.pe-2.data-icon
-                = t('issues.status.table.no_data_found')
-
-
-
 .main-content-container.overflow-hidden
   .d-flex.justify-content-between.align-items-center.flex-wrap.gap-2.mb-4
     %h3.mb-0 Courses
@@ -75,6 +32,6 @@
                       - if can_access?(:courses, :destroy)
                         = link_to college_course_path(current_college.slug, course.slug),
                           class: 'ps-0 border-0 bg-transparent lh-1 position-relative top-2',
-                          data: { turbo_method: :delete, turbo_confirm: "You won't be able to revert this!",
+                          data: { method: :delete, confirm: "You won't be able to revert this!",
                             bs: { html: 'true',  offset: '0,4', original_title: '<span>Delete</span>', placement: 'bottom', toggle: 'tooltip' } } do
                           %i.material-symbols-outlined.fs-16.text-danger delete
