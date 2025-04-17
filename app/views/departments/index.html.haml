@@ -13,7 +13,6 @@
             %thead
               %tr
                 %th.text-start= t('issues.status.table.name')
-                %th= 'Head'
                 - if can_access?(:departments, :edit)
                   %th.text-end= t('issues.status.table.actions')
             %tbody.table-border-bottom-0
@@ -21,8 +20,6 @@
                 %tr
                   %td.text-start
                     %strong.long-txt= department.name
-                  %td
-                    %strong.long-txt= department.head.name
                   - if can_access?(:departments, :edit)
                     %td
                       .text-end.d-flex.align-items-center.justify-content-end

@@ -26,12 +26,9 @@ gem 'uglifier', '>= 1.3.0'
 gem 'webauthn'
 
 # Background job adapter
-gem 'importmap-rails'
+# gem 'importmap-rails'
 gem 'sidekiq'
-gem 'turbo-rails'
 
-# Hotwire's modest JavaScript framework [https://stimulus.hotwired.dev]
-gem 'stimulus-rails'
 
 gem 'blamer'
 gem 'paper_trail'

@@ -12,7 +12,7 @@ ROLE_PERMISSIONS = {
   teacher: {
     dashboard: %i[index],
     users: %i[index new create edit update show destroy profile_setup],
-    departments: %i[index show],
+    departments: %i[index new create show],
     courses: %i[index show],
     sessions: %i[index new create edit update destroy show],
     attendances: %i[report],

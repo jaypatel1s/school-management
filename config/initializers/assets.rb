@@ -10,4 +10,4 @@ Rails.application.config.assets.version = "1.0"
 # Precompile additional assets.
 # application.js, application.css, and all non-JS/CSS in the app/assets
 # folder are already added.
-Rails.application.config.assets.precompile += %w( bootstrap.bundle.min.js sidebar-menu.js dragdrop.js rangeslider.min.js quill.min.js data-table.js prism.js clipboard.min.js feather.min.js simplebar.min.js apexcharts.min.js swiper_bundle.min.js fullcalendar.main.js apexcharts.js custom.js )
+# Rails.application.config.assets.precompile += %w( bootstrap.bundle.min.js sidebar-menu.js dragdrop.js rangeslider.min.js quill.min.js data-table.js prism.js clipboard.min.js feather.min.js simplebar.min.js apexcharts.min.js swiper_bundle.min.js fullcalendar.main.js apexcharts.js custom.js )
