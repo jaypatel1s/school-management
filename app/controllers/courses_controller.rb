@@ -59,7 +59,7 @@ class CoursesController < BaseController
 
   def courses_params
     params.require(:course).permit(
-      :name, :department_id, :teacher_id, :credits
+      :name, :department_id, :credits
     )
   end
 end
