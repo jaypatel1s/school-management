@@ -122,20 +122,21 @@ Rails.application.configure do
   # config.active_record.database_resolver_context = ActiveRecord::Middleware::DatabaseSelector::Resolver::Session
 
   config.action_mailer.default_url_options = {
-    host: Rails.application.credentials.dig(:smtp, :smtp_host),
+    host: Rails.application.credentials.dig(:email, :smtp_host),
     protocol: 'http'
   }
-  config.action_mailer.asset_host = "https://#{Rails.application.credentials.dig(:smtp, :smtp_host)}"
+  config.action_mailer.asset_host = "http://#{Rails.application.credentials.dig(:email, :smtp_host)}"
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
-    address: Rails.application.credentials.dig(:smtp, :smtp_address),
-    port: Rails.application.credentials.dig(:smtp, :smtp_port),
-    domain: Rails.application.credentials.dig(:smtp, :smtp_domain),
-    user_name: Rails.application.credentials.dig(:smtp, :smtp_username),
-    password: Rails.application.credentials.dig(:smtp, :smtp_password),
-    authentication: Rails.application.credentials.dig(:smtp, :smtp_authentication),
-    enable_starttls_auto: Rails.application.credentials.dig(:smtp, :smtp_enable_tls_auto),
-    ssl: Rails.application.credentials.dig(:smtp, :smtp_ssl),
-    tls: Rails.application.credentials.dig(:smtp, :smtp_tls)
+    address: Rails.application.credentials.dig(:email, :smtp_address),
+    port: Rails.application.credentials.dig(:email, :smtp_port),
+    domain: Rails.application.credentials.dig(:email, :smtp_domain),
+    user_name: Rails.application.credentials.dig(:email, :smtp_username),
+    password: Rails.application.credentials.dig(:email, :smtp_password),
+    authentication: Rails.application.credentials.dig(:email, :smtp_authentication),
+    enable_starttls_auto: Rails.application.credentials.dig(:email, :smtp_enable_tls_auto),
+    ssl: Rails.application.credentials.dig(:email, :smtp_ssl),
+    tls: Rails.application.credentials.dig(:email, :smtp_tls), 
+    openssl_verify_mode:Rails.application.credentials.dig(:email, :openssl_verify_mode)
   }
 end
