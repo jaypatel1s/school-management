@@ -17,6 +17,8 @@
 
 # Ignore Byebug command history file.
 .byebug_history
+config/database.yml
+config/credentials.yml.enc
 
 ## Specific to RubyMotion:
 .dat*
