@@ -3,7 +3,7 @@ class Department < ApplicationRecord
 
   belongs_to :college
   has_many :courses
-  has_one :teacher
+  has_one :teacher, dependent:  :destroy
 
   validates :name, presence: true
 end

@@ -5,11 +5,8 @@ class User < ApplicationRecord
   devise :database_authenticatable,
          :recoverable, :rememberable, :validatable, :confirmable, :timeoutable, :trackable, :registerable
   belongs_to :college
-  has_many :departments, foreign_key: :head_id, dependent: :destroy
-  has_many :courses, foreign_key: :teacher_id, dependent: :destroy
-  has_many :sessions, through: :courses
-  has_one :teacher
-  has_one :student
+  has_one :teacher, dependent: :destroy
+  has_one :student, dependent: :destroy
 
   # has_many :attendances, foreign_key: :student_id
   # has_many :attended_sessions, through: :attendances, source: :session
