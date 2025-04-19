@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2025_04_17_033120) do
+ActiveRecord::Schema[7.1].define(version: 2025_04_19_061952) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -145,7 +145,9 @@ ActiveRecord::Schema[7.1].define(version: 2025_04_17_033120) do
     t.integer "mobile_no"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "user_id", null: false
     t.index ["college_id"], name: "index_students_on_college_id"
+    t.index ["user_id"], name: "index_students_on_user_id"
   end
 
   create_table "teachers", force: :cascade do |t|
@@ -155,9 +157,11 @@ ActiveRecord::Schema[7.1].define(version: 2025_04_17_033120) do
     t.string "specialization"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "user_id", null: false
     t.index ["college_id"], name: "index_teachers_on_college_id"
     t.index ["course_id"], name: "index_teachers_on_course_id"
     t.index ["department_id"], name: "index_teachers_on_department_id"
+    t.index ["user_id"], name: "index_teachers_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -186,6 +190,7 @@ ActiveRecord::Schema[7.1].define(version: 2025_04_17_033120) do
     t.datetime "locked_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "profile_setup", default: false
     t.index ["college_id"], name: "index_users_on_college_id"
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
@@ -220,9 +225,11 @@ ActiveRecord::Schema[7.1].define(version: 2025_04_17_033120) do
   add_foreign_key "student_courses", "courses"
   add_foreign_key "student_courses", "students"
   add_foreign_key "students", "colleges"
+  add_foreign_key "students", "users"
   add_foreign_key "teachers", "colleges"
   add_foreign_key "teachers", "courses"
   add_foreign_key "teachers", "departments"
+  add_foreign_key "teachers", "users"
   add_foreign_key "users", "colleges"
   add_foreign_key "web_authn_credentials", "users"
 end

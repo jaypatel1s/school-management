@@ -29,12 +29,10 @@ module Users
     end
 
     def specific_dashboard_path(resource)
-      if resource.teacher?
-        dashboard_teacher_path
-      elsif resource.student?
-        dashboard_student_path
-      else
+      if resource.principal?
         authenticated_user_path
+      else
+        college_setup_path(resource.college.slug)
       end
     end
 

@@ -1,0 +1,15 @@
+= form_with model: @student, url: college_setup_path(params[:college_slug]), local: true, html: { multipart: true }, method: :post, class: 'form' do |f|
+  .form-group
+    = f.label :roll_number
+    = f.number_field :roll_number, class: "form-control"
+
+  .form-group
+    = f.label :mobile_no
+    = f.number_field :mobile_no, class: "form-control"
+
+  .form-group
+    = f.label :status
+    = f.select :status, Student.statuses.keys.map { |status| [status.titleize, status] }, class: "form-control"
+
+  .form-group
+    = f.submit "Save", class: "btn btn-primary"

@@ -43,4 +43,10 @@ class ApplicationController < ActionController::Base
       render js: "window.location = '/'"
     end
   end
+
+  def ensure_profile_setup
+    if user_signed_in? && !current_user.profile_setup?
+      redirect_to college_setup_path(current_college.slug)
+    end
+  end
 end

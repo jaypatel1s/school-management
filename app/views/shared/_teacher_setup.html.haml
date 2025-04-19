@@ -1,0 +1,9 @@
+= form_with model: @teacher, url: college_setup_path(params[:college_slug]), local: true, html: { multipart: true }, method: :post, class: 'form' do |f|
+
+  = f.label :department_id
+  = f.collection_select :department_id, Department.all, :id, :name
+
+  = f.label :course_id
+  = f.collection_select :course_id, Course.all, :id, :name
+
+  = f.submit "Save"

@@ -8,6 +8,10 @@ devise_scope :user do
 end
 
 resources :colleges, param: :slug do
+  get  'setup', to: 'setup#setup'
+  post 'setup', to: 'setup#create'
+
+  resources :setup, only: %i[setup]
   namespace :principal do
     resources :dashboard, only: [:index]
     resources :users, param: :slug 
@@ -28,6 +32,20 @@ resources :colleges, param: :slug do
     resources :courses, param: :slug, only: %i[index show]
     resources :sessions, param: :slug do
       resources :attendances, only: %i[index new create] do
+        member do
+          get 'report'
+        end
+      end
+    end
+  end
+
+  namespace :student do
+    resources :dashboard, only: [:index]
+    resources :users, param: :slug 
+    resources :departments, param: :slug
+    resources :courses, param: :slug
+    resources :sessions, param: :slug do
+      resources :attendances, only: %i[index show] do
         member do
           get 'report'
         end

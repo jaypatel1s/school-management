@@ -8,6 +8,8 @@ class User < ApplicationRecord
   has_many :departments, foreign_key: :head_id, dependent: :destroy
   has_many :courses, foreign_key: :teacher_id, dependent: :destroy
   has_many :sessions, through: :courses
+  has_one :teacher
+  has_one :student
 
   # has_many :attendances, foreign_key: :student_id
   # has_many :attended_sessions, through: :attendances, source: :session

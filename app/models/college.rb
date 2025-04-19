@@ -4,6 +4,8 @@ class College < ApplicationRecord
   include Sluggable
 
   has_many :users, dependent: :destroy
+  has_many :teachers, dependent: :destroy
+  has_many :students, dependent: :destroy
   has_many :departments, dependent: :destroy
   has_many :courses, dependent: :destroy
   has_many :fees, dependent: :destroy
