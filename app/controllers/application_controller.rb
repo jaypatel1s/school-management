@@ -12,8 +12,20 @@ class ApplicationController < ActionController::Base
   end
 
   def set_current_college
-    @current_college = current_user.college
+    if params[:college_slug] == current_user.college.slug
+      @current_college = College.find_by(slug: params[:college_slug])
+    elsif params[:session_slug] == current_user.college.slug
+      @current_college = College.find_by(slug: params[:session_slug])
+    else
+      @current_college = College.first
+    end
+  
+    return if @current_college.present?
+  
+    flash[:alert] = 'College not match with current user'
+    redirect_to authenticated_user_path(current_user)
   end
+  
 
   attr_reader :current_college
 

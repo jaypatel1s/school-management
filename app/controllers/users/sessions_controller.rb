@@ -13,7 +13,7 @@ module Users
       if resource&.valid_password?(user_params[:password])
         sign_in :user, resource
         flash[:success] = 'Login successfully.'
-        redirect_to authenticated_user_path(resource)
+        redirect_to specific_dashboard_path(resource)
       else
         flash[:alert] = 'Invalid Credentials.'
         redirect_to new_user_session_path
@@ -26,6 +26,16 @@ module Users
 
     def after_sign_out_path_for(resource_or_scope)
       root_url(subdomain: false)
+    end
+
+    def specific_dashboard_path(resource)
+      if resource.teacher?
+        dashboard_teacher_path
+      elsif resource.student?
+        dashboard_student_path
+      else
+        authenticated_user_path
+      end
     end
 
     def webauthn_login
