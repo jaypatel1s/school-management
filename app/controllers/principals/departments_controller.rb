@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 # :nodoc:
-module Principal
+module Principals
   class DepartmentsController < BaseController
     before_action :set_department, only: %i[show edit update destroy]
 
@@ -21,7 +21,7 @@ module Principal
       @department = current_college.departments.new(department_params)
       if @department.save
         flash[:success] = 'Department Created Successfully'
-        redirect_to college_principal_departments_path(current_college.slug)
+        redirect_to college_principals_departments_path(current_college.slug)
       else
         flash[:alert] = @department.errors.full_messages
         render :new
@@ -31,7 +31,7 @@ module Principal
     def update
       if @department.update(department_params)
         flash[:success] = 'Department Updated Successfully.'
-        redirect_to college_departments_path(current_college.slug)
+        redirect_to college_principals_departments_path(current_college.slug)
       else
         flash[:alert] = @department.errors.full_messages
         render :edit
@@ -41,7 +41,7 @@ module Principal
     def destroy
       @department.destroy
       flash[:success] = 'Department Deleted Successfully'
-      redirect_to college_principal_departments_path(current_college.slug)
+      redirect_to college_principals_departments_path(current_college.slug)
     end
 
     private
@@ -51,7 +51,7 @@ module Principal
       return if @department.present?
 
       flash[:notice] = 'Department Not Found'
-      redirect_to college_principal_departments_path(current_college.slug)
+      redirect_to college_principals_departments_path(current_college.slug)
     end
 
     def department_params
