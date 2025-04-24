@@ -10,8 +10,8 @@ end
 resources :colleges, param: :slug do
   get  'setup', to: 'setup#setup'
   post 'setup', to: 'setup#create'
+  get 'setup/department_courses/:department_id', to: 'setup#department_courses', as: :college_department_courses
 
-  resources :setup, only: %i[setup]
   namespace :principals do
     resources :dashboard, only: [:index]
     resources :users, param: :slug

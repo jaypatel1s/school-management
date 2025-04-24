@@ -24,6 +24,11 @@ class SetupController < ApplicationController
     end
   end
 
+  def department_courses
+    @courses = Course.where(department_id: params[:department_id])
+    render json: @courses
+  end  
+
   def create
     if current_user.teacher?
       @teacher = current_user.build_teacher(teacher_params)
