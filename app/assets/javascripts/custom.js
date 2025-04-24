@@ -294,15 +294,16 @@ document.addEventListener("turbo:load", () => {
 			function createTag(tagText) {
 				const tag = document.createElement("div");
 				tag.classList.add("tag");
-				tag.innerHTML = `${tagText} <span class="tag-close">&#10006;</span>`;
+				tag.textContent = tagText;
 
-				tag.querySelector(".tag-close").addEventListener(
-					"click",
-					function () {
-						tag.remove();
-					}
-				);
+				const closeButton = document.createElement("span");
+				closeButton.classList.add("tag-close");
+				closeButton.innerHTML = "&#10006;";
+				closeButton.addEventListener("click", function () {
+					tag.remove();
+				});
 
+				tag.appendChild(closeButton);
 				tagContainer.appendChild(tag);
 			}
 		});
