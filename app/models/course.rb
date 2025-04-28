@@ -5,6 +5,7 @@ class Course < ApplicationRecord
 
   belongs_to :college
   belongs_to :department
+  has_many :teachers, dependent: :destroy
   has_many :student_courses
   has_many :students, through: :student_courses
   has_many :course_enrollments

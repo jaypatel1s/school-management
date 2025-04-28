@@ -1,11 +1,19 @@
 = form_with model: [:school, department], local: true, html: { multipart: true }, url: url, class: 'form' do |f|
   .row
-    .col-md-6.mb-3
-      %label.form-label.required
-        = t('issues.departments.table.name')
-      = f.text_field :name, class: "form-control #{error?(@department.errors, :name)}",
-      value: f.object.name, placeholder: 'Name', required: true
-      = print_error(@department.errors, :name)
-  .col-12.d-flex.justify-content-between
-    %button.btn.btn-primary{ type: 'submit', data: { confirm: 'Do you want to save the changes?' } }
-      = t('issues.departments.table.save')
+    .col-xxl-12.col-lg-12
+      .card.bg-white.border-0.rounded-3.mb-4
+        .card-body.p-4
+          %h3.mb-3.mb-lg-4 Add A Department
+          %form
+            .row
+              .col-lg-6.col-sm-6
+                .form-group.mb-4
+                  %label.label.text-secondary.required= t('issues.departments.table.name')
+                  = f.text_field :name, class: "form-control #{error?(@department.errors, :name)}",
+                  value: f.object.name, placeholder: 'Name', required: true
+                  = print_error(@department.errors, :name)
+              .col-lg-12
+                .d-flex.flex-wrap.gap-3
+                  %button.btn.btn-primary.py-2.px-4.fw-medium.fs-16.text-white{ type: 'submit', data: { confirm: 'Do you want to save the changes?' } }
+                    %i.ri-add-line.text-white.fw-medium
+                    = t('issues.users.table.save')
