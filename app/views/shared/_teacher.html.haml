@@ -8,7 +8,7 @@
           %input.form-control{ placeholder: "Search here", type: "text" }/
           %i.material-symbols-outlined.position-absolute.top-50.start-0.translate-middle-y search
         - if can_access?(:users, :new)
-          %a.btn.btn-outline-primary.py-1.px-2.px-sm-4.fs-14.fw-medium.rounded-3.hover-bg{ href: new_college_principal_user_path }
+          %a.btn.btn-outline-primary.py-1.px-2.px-sm-4.fs-14.fw-medium.rounded-3.hover-bg{ href: new_college_principals_user_path }
             %span.py-sm-1.d-block= t('issues.status.table.create')
 
       .default-table-area.style-two.default-table-width
@@ -33,10 +33,10 @@
                           %i.material-symbols-outlined.fs-16.text-primary visibility
                         - if can_access?(:users, :edit)
                           %a.ps-0.border-0.bg-transparent.lh-1.position-relative.top-2{
-                          href: edit_college_principal_user_path(current_college.slug, user.slug), 'data-bs-html': 'true', 'data-bs-offset': '0,4', 'data-bs-original-title': '<span>Edit</span>', 'data-bs-placement': 'bottom', 'data-bs-toggle': 'tooltip', title: '', type: 'button' }
+                          href: edit_college_principals_user_path(current_college.slug, user.slug), 'data-bs-html': 'true', 'data-bs-offset': '0,4', 'data-bs-original-title': '<span>Edit</span>', 'data-bs-placement': 'bottom', 'data-bs-toggle': 'tooltip', title: '', type: 'button' }
                             %i.material-symbols-outlined.fs-16.text-body edit
                         - if can_access?(:users, :destroy)
-                          = link_to college_principal_user_path(current_college.slug, user.slug),
+                          = link_to college_principals_user_path(current_college.slug, user.slug),
                             class: 'ps-0 border-0 bg-transparent lh-1 position-relative top-2',
                             data: { method: :delete, confirm: "You won't be able to revert this!",
                               bs: { html: 'true',  offset: '0,4', original_title: '<span>Delete</span>', placement: 'bottom', toggle: 'tooltip' } } do

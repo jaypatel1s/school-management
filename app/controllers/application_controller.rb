@@ -3,13 +3,8 @@
 # :nodoc:
 class ApplicationController < ActionController::Base
   include ApplicationConcern
+
   helper_method :current_college
-
-  def authenticate_admin!
-    return if current_user.present? && current_user.principal?
-
-    unauthenticate_response
-  end
 
   def set_current_college
     if params[:college_slug] == current_user.college.slug
@@ -19,23 +14,28 @@ class ApplicationController < ActionController::Base
     else
       @current_college = College.first
     end
-  
     return if @current_college.present?
-  
+
     flash[:alert] = 'College not match with current user'
     redirect_to authenticated_user_path(current_user)
   end
-  
 
   attr_reader :current_college
 
   def authenticate_user!
     return if current_user.present?
 
-    unauthenticate_response
+    unauthenticated_response
   end
 
-  def unauthenticate_response
+  def authenticate_admin!
+    return if current_user.present? && current_user.principal?
+
+    unauthenticated_response
+  end
+
+
+  def unauthenticated_response
     if request.format == 'text/html'
       redirect_to(authenticated_user_path, alert: 'You are not authorized to access this page.')
     else

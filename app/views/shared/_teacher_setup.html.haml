@@ -1,9 +1,37 @@
 = form_with model: @teacher, url: college_setup_path(params[:college_slug]), local: true, html: { multipart: true }, method: :post, class: 'form' do |f|
 
   = f.label :department_id
-  = f.collection_select :department_id, Department.all, :id, :name
+  = f.select :department_id, Department.all.collect { |d| [d.name, d.id] }, { prompt: 'Select a department' }, { id: 'department-select' }
 
   = f.label :course_id
-  = f.collection_select :course_id, Course.all, :id, :name
+  = f.select :course_id, [], { prompt: 'Select a course' }, { id: 'course-select' }
 
   = f.submit "Save"
+
+- content_for :js_code do
+  :javascript
+    $(document).ready(function () {
+      var collegeSlug = "#{params[:college_slug]}"
+      $('#department-select').on('change', function () {
+        var deptId = $(this).val();
+
+        if (deptId) {
+          $.ajax({
+            url: '/colleges/' + collegeSlug + '/setup/department_courses/' + deptId,
+            type: 'GET',
+            dataType: 'json',
+            success: function (data) {
+              $('#course-select').empty();
+              $('#course-select').append('<option value="">Select a course</option>');
+
+              $.each(data, function (index, course) {
+                $('#course-select').append('<option value="' + course.id + '">' + course.name + '</option>');
+              });
+            }
+          });
+        } else {
+          $('#course-select').empty().append('<option value="">Select a course</option>');
+        }
+      });
+    });
+

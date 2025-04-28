@@ -10,12 +10,11 @@ class SetupController < ApplicationController
       else
         @teacher = @existing_teacher
       end
-    
+
       redirect_to authenticated_user_path if @existing_teacher.present?
     else
       @existing_student = current_user.student
 
-      # If no existing student profile, create a new one
       if @existing_student.nil?
         @student = current_user.build_student
       else
@@ -25,9 +24,13 @@ class SetupController < ApplicationController
     end
   end
 
+  def department_courses
+    @courses = Course.where(department_id: params[:department_id])
+    render json: @courses
+  end  
+
   def create
     if current_user.teacher?
-      # If no teacher profile exists, create a new one
       @teacher = current_user.build_teacher(teacher_params)
       @teacher.college_id = current_user.college_id
 
@@ -38,7 +41,6 @@ class SetupController < ApplicationController
         render :setup
       end
     else
-      # Student logic here
       @student = current_user.build_student(student_params)
       @student.college_id = current_user.college_id
       if @student.save

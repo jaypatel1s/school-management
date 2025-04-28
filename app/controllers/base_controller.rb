@@ -2,6 +2,8 @@
 
 # :nodoc:
 class BaseController < ApplicationController
+  include UserProfile
+
   layout 'admin'
   before_action :authenticate_user!
   before_action :authorize_action!
@@ -17,6 +19,4 @@ class BaseController < ApplicationController
 
     redirect_to root_path, alert: 'You do not have permission to perform this action.'
   end
-
-
 end

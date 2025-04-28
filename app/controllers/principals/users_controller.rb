@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 # :nodoc:
-module Principal
+module Principals
   class UsersController < BaseController
     before_action :set_user, only: %i[show edit update destroy]
 
@@ -21,7 +21,7 @@ module Principal
       @user = current_college.users.new(user_params)
       if @user.save
         flash[:success] = 'User Created Successfully'
-        redirect_to college_principal_users_path(current_college.slug)
+        redirect_to college_principals_users_path(current_college.slug)
       else
         flash[:alert] = @user.errors.full_messages
         render :new
@@ -35,7 +35,7 @@ module Principal
           ApproveTeacherJob.set(wait: 5.minutes).perform_later(current_user)
         end
         flash[:success] = 'User Updated Successfully. Please check after 5 minutes'
-        redirect_to college_principal_users_path(current_college.slug)
+        redirect_to college_principals_users_path(current_college.slug)
       else
         flash[:alert] = @user.errors.full_messages
         render :edit
@@ -70,7 +70,7 @@ module Principal
     def destroy
       @user.destroy
       flash[:success] = 'User Deleted Successfully'
-      redirect_to college_principal_users_path(current_college.slug)
+      redirect_to college_principals_users_path(current_college.slug)
     end
 
     private
@@ -80,7 +80,7 @@ module Principal
       return if @user.present?
 
       flash[:notice] = 'User Not Found'
-      redirect_to college_principal_users_path(current_college.slug)
+      redirect_to college_principals_users_path(current_college.slug)
     end
 
     def user_params

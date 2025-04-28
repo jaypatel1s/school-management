@@ -8,6 +8,8 @@
     = csp_meta_tag
     = stylesheet_link_tag "application", "data-turbo-track": "reload"
     = javascript_include_tag 'application'
+    = yield :css_code
+
   %body.boxed-size
     = render "/layouts/partials/sidebar"
     .container-fluid
@@ -16,5 +18,5 @@
         = yield
         .flex-grow-1
         = render "/layouts/partials/footer"
-        = render "/layouts/partials/create_task"
         = render "/layouts/partials/settings"
+    = yield :js_code
