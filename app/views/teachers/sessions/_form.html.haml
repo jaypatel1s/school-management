@@ -1,0 +1,20 @@
+= form_with model: [:school, session], local: true, html: { multipart: true }, url: url, class: 'form' do |f|
+  = f.hidden_field :date, class: "form-control #{error?(@session.errors, :date)}"
+  .row
+    .col-md-6.mb-3
+      %label.form-label.required
+        = t('issues.sessions.table.name')
+      = f.text_field :name, class: "form-control #{error?(@session.errors, :name)}",
+      value: f.object.name, placeholder: 'Name', required: true
+      = print_error(@session.errors, :name)
+  .row
+    .col-md-6.mb-3
+      .form-group.mb-0
+        %label.label Date Picker
+        .form-group.position-relative
+          = f.date_field :date, class: "form-control h-55 text-dark ps-5 h-58 #{error?(@session.errors, :date)}", required: true
+          %i.ri-calendar-line.position-absolute.top-50.translate-middle-y.fs-20.text-gray-light.ps-20
+
+  .col-12.d-flex.justify-content-between
+    %button.btn.btn-primary{ type: 'submit', data: { confirm: 'Do you want to save the changes?' } }
+      = t('issues.sessions.table.save')
