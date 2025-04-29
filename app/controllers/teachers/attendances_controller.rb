@@ -13,18 +13,17 @@ module Teachers
     def show; end
 
     def new
-      @attendance = @profile.attendances.new
+      @attendance = current_college.attendances.new
+      @student_courses = @profile.course.student_courses.includes(:student)
     end
 
     def edit; end
 
     def create
-      @attendance = @profile.attendances.new(attendance_params)
-      @attendance.college_id = @profile.college_id
+      @attendance = current_college.attendances.new(attendance_params)
       @attendance.department_id = @profile.department_id
-      @attendance.course_id = @profile.course_id
-      if @attendance.save
-        flash[:success] = 'attendance Created Successfully'
+      if @attendance.save!
+        flash[:success] = 'Attendance Created Successfully'
         redirect_to college_teachers_attendances_path(current_college.slug)
       else
         flash[:alert] = @attendance.errors.full_messages
@@ -34,7 +33,7 @@ module Teachers
 
     def update
       if @attendance.update(attendance_params)
-        flash[:success] = 'attendance Updated Successfully.'
+        flash[:success] = 'Attendance Updated Successfully.'
         redirect_to college_teachers_attendances_path(current_college.slug)
       else
         flash[:alert] = @attendance.errors.full_messages
@@ -44,7 +43,7 @@ module Teachers
 
     def destroy
       @attendance.destroy
-      flash[:success] = 'attendance Deleted Successfully'
+      flash[:success] = 'Attendance Deleted Successfully'
       redirect_to college_teachers_attendances_path(current_college.slug)
     end
 
@@ -54,12 +53,12 @@ module Teachers
       @attendance = current_college.attendances.find_by(slug: params[:slug])
       return if @attendance.present?
 
-      flash[:notice] = 'attendance Not Found'
-      redirect_to college_principals_attendances_path(current_college.slug)
+      flash[:notice] = 'Attendance Not Found'
+      redirect_to college_teachers_attendances_path(current_college.slug)
     end
 
     def attendance_params
-      params.require(:attendance).permit(:name, :date)
+      params.require(:attendance).permit(:student_id, :status, :session_id)
     end
   end
 end

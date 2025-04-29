@@ -6,15 +6,14 @@
       .default-table-area.style-two.default-table-width
         .table-responsive
           %table.table.align-middle
-            - if @departments.present?
+            - if @department.present?
               %thead
                 %tr
                   %th{ scope: "col" }= t('issues.status.table.name')
                   %th{ scope: "col" }= t('issues.status.table.actions')
               %tbody
-              - @departments.each do |department|
                 %tr
-                  %td.text-body= department.name
+                  %td.text-body= @department.name
             - else
               .col-12
                 .card

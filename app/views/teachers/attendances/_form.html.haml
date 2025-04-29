@@ -1,0 +1,29 @@
+= form_with(model: [:school, @attendance], local: true, html: { multipart: true }, url: url, class: 'form') do |f|
+  .row
+    .col-xxl-12.col-lg-12
+      .card.bg-white.border-0.rounded-3.mb-4
+        .card-body.p-4
+          %h3.mb-3.mb-lg-4 Mark Attendance
+          .row
+            .col-lg-6.col-sm-6
+              .form-group.mb-4
+                %label.label.text-secondary.required= 'Select Session'
+                = f.select :session_id, @profile.sessions.map { |s| [s.name, s.id] }, { prompt: 'Choose Session' }, class: 'form-control'
+          %table.table.table-bordered.mt-4
+            %thead
+              %tr
+                %th Student Name
+                %th Present
+                %th Absent
+            %tbody
+              - @profile.course.student_courses.each do |student_course|
+                .form-group
+                  = f.hidden_field "student_id", value: student_course.student.id
+                  = f.radio_button "status", "present", id: "present_#{student_course.student.id}"
+                  = f.label "present_#{student_course.student.id}", "Present for #{student_course.student.id}"
+
+          .col-lg-12
+            .d-flex.flex-wrap.gap-3
+              %button.btn.btn-primary.py-2.px-4.fw-medium.fs-16.text-white{ type: 'submit', data: { confirm: 'Do you want to save the changes?' } }
+                %i.ri-add-line.text-white.fw-medium
+                = t('issues.users.table.save')
