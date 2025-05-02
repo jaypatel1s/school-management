@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
-# :nodoc:
 module Principals
+  # :nodoc:
   class UsersController < BaseController
     before_action :set_user, only: %i[show edit update destroy]
 
@@ -30,16 +30,29 @@ module Principals
 
     def update
       if @user.update(user_params)
-
-        if params['user']['teacher_subjects_attributes'].present? && current_user.role == 'teacher'
-          ApproveTeacherJob.set(wait: 5.minutes).perform_later(current_user)
-        end
-        flash[:success] = 'User Updated Successfully. Please check after 5 minutes'
+        flash[:success] = 'User Updated Successfully'
         redirect_to college_principals_users_path(current_college.slug)
       else
         flash[:alert] = @user.errors.full_messages
         render :edit
       end
+    end
+
+    def import_users
+      file = params[:csv_file]
+
+      unless file&.content_type == 'text/csv' || File.extname(file.original_filename) == '.csv'
+        flash[:alert] = 'Only CSV files are allowed.'
+        redirect_to request.referer || root_path and return
+      end
+
+      temp_file = Rails.root.join('tmp', "import_users_#{SecureRandom.hex}.csv")
+      File.write(temp_file, file.read)
+
+      ImportUsersJob.perform_later(temp_file.to_s, current_college.id)
+
+      flash[:success] = 'CSV upload started. Users will be imported shortly.'
+      redirect_to college_principals_users_path(current_college.slug)
     end
 
     def profile_setup
@@ -65,7 +78,6 @@ module Principals
         render json: { success: false, error: e.message }
       end
     end
-
 
     def destroy
       @user.destroy
