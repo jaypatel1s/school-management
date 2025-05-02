@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # This file should contain all the record creation needed to seed the database with its default values.
 # The data can then be loaded with the bin/rails db:seed command (or created alongside the database with db:setup).
 #
@@ -10,12 +12,13 @@ unless AdminUser.any?
                     password_confirmation: 'password')
 end
 
-unless College.any?
-  college = College.create!(name: "XYZ College")
-end
+college = College.create!(name: 'XYZ College') unless College.any?
 
 unless User.any?
-  teacher1 = User.create!(name: "Professor Alice", email: "alice@college.com", role: :teacher, college: college, password: '123456', password_confirmation: '123456', confirmed_at: Time.now)
-  teacher2 = User.create!(name: "Professor Bob", email: "bob@college.com", role: :teacher, college: college, password: '123456', password_confirmation: '123456', confirmed_at: Time.now)
-  head_of_department = User.create!(name: "Dr. Smith", email: "smith@college.com", role: :principal, college: college, password: '123456', password_confirmation: '123456', confirmed_at: Time.now)
+  User.create!(name: 'Professor Alice', email: 'alice@college.com', role: :teacher, college: college,
+               password: '123456', password_confirmation: '123456', confirmed_at: Time.zone.now)
+  User.create!(name: 'Professor Bob', email: 'bob@college.com', role: :teacher, college: college,
+               password: '123456', password_confirmation: '123456', confirmed_at: Time.zone.now)
+  User.create!(name: 'Dr. Smith', email: 'smith@college.com', role: :principal, college: college,
+               password: '123456', password_confirmation: '123456', confirmed_at: Time.zone.now)
 end

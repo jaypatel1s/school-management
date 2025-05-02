@@ -13,6 +13,6 @@ class Course < ApplicationRecord
   has_many :sessions, dependent: :destroy
   has_many :students, through: :course_enrollments, source: :user
 
-  validates :name, presence: true
+  validates :name, presence: true, uniqueness: {scope: :college_id}
   validates :credits, presence: true
 end

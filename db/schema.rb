@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2025_04_17_033120) do
+ActiveRecord::Schema[7.1].define(version: 2025_04_29_062643) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -41,14 +41,15 @@ ActiveRecord::Schema[7.1].define(version: 2025_04_17_033120) do
   end
 
   create_table "attendances", force: :cascade do |t|
+    t.bigint "college_id", null: false
+    t.bigint "department_id", null: false
     t.bigint "session_id", null: false
-    t.datetime "marked_at"
-    t.string "ip_address"
+    t.bigint "student_id", null: false
+    t.integer "status", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "college_id", null: false
-    t.integer "status"
     t.index ["college_id"], name: "index_attendances_on_college_id"
+    t.index ["department_id"], name: "index_attendances_on_department_id"
     t.index ["session_id"], name: "index_attendances_on_session_id"
   end
 
@@ -112,21 +113,54 @@ ActiveRecord::Schema[7.1].define(version: 2025_04_17_033120) do
   end
 
   create_table "sessions", force: :cascade do |t|
-    t.string "name"
-    t.date "date"
-    t.time "start_time"
-    t.time "end_time"
-    t.string "qr_token"
-    t.string "location"
-    t.boolean "active", default: true
+    t.bigint "college_id", null: false
+    t.bigint "department_id", null: false
+    t.bigint "course_id", null: false
+    t.bigint "teacher_id", null: false
+    t.datetime "date", null: false
+    t.string "name", null: false
+    t.string "slug", limit: 255, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "course_id", null: false
-    t.bigint "college_id", null: false
-    t.string "slug", limit: 255, null: false
     t.index ["college_id"], name: "index_sessions_on_college_id"
     t.index ["course_id"], name: "index_sessions_on_course_id"
-    t.index ["qr_token"], name: "index_sessions_on_qr_token", unique: true
+    t.index ["department_id"], name: "index_sessions_on_department_id"
+    t.index ["teacher_id"], name: "index_sessions_on_teacher_id"
+  end
+
+  create_table "student_courses", force: :cascade do |t|
+    t.bigint "student_id", null: false
+    t.bigint "course_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["course_id"], name: "index_student_courses_on_course_id"
+    t.index ["student_id"], name: "index_student_courses_on_student_id"
+  end
+
+  create_table "students", force: :cascade do |t|
+    t.bigint "college_id", null: false
+    t.integer "status"
+    t.integer "roll_number"
+    t.integer "mobile_no"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "user_id", null: false
+    t.index ["college_id"], name: "index_students_on_college_id"
+    t.index ["user_id"], name: "index_students_on_user_id"
+  end
+
+  create_table "teachers", force: :cascade do |t|
+    t.bigint "college_id", null: false
+    t.bigint "department_id", null: false
+    t.bigint "course_id", null: false
+    t.string "specialization"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "user_id", null: false
+    t.index ["college_id"], name: "index_teachers_on_college_id"
+    t.index ["course_id"], name: "index_teachers_on_course_id"
+    t.index ["department_id"], name: "index_teachers_on_department_id"
+    t.index ["user_id"], name: "index_teachers_on_user_id"
   end
 
   create_table "student_courses", force: :cascade do |t|
@@ -186,6 +220,7 @@ ActiveRecord::Schema[7.1].define(version: 2025_04_17_033120) do
     t.datetime "locked_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "profile_setup", default: false
     t.index ["college_id"], name: "index_users_on_college_id"
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
@@ -206,7 +241,9 @@ ActiveRecord::Schema[7.1].define(version: 2025_04_17_033120) do
   end
 
   add_foreign_key "attendances", "colleges"
+  add_foreign_key "attendances", "departments"
   add_foreign_key "attendances", "sessions"
+  add_foreign_key "attendances", "students"
   add_foreign_key "courses", "colleges"
   add_foreign_key "courses", "departments"
   add_foreign_key "departments", "colleges"
@@ -217,12 +254,16 @@ ActiveRecord::Schema[7.1].define(version: 2025_04_17_033120) do
   add_foreign_key "fees", "fee_types"
   add_foreign_key "sessions", "colleges"
   add_foreign_key "sessions", "courses"
+  add_foreign_key "sessions", "departments"
+  add_foreign_key "sessions", "teachers"
   add_foreign_key "student_courses", "courses"
   add_foreign_key "student_courses", "students"
   add_foreign_key "students", "colleges"
+  add_foreign_key "students", "users"
   add_foreign_key "teachers", "colleges"
   add_foreign_key "teachers", "courses"
   add_foreign_key "teachers", "departments"
+  add_foreign_key "teachers", "users"
   add_foreign_key "users", "colleges"
   add_foreign_key "web_authn_credentials", "users"
 end

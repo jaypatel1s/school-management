@@ -12,34 +12,24 @@
           %a.menu-link{ href: authenticated_user_path }
             %span.material-symbols-outlined.menu-icon dashboard
             %span.title Dashboard
-      - if can_access?(:users, :index)
-        - if current_user.principal?
+      -if current_user.profile_setup?
+        - if can_access?(:users, :index)
           %li.menu-item{ class: menu_active_class('users') }
-            %a.menu-link{ href: college_users_path(college_slug: current_college.slug) }
-              %span.material-symbols-outlined.menu-icon person
-              %span.title Teacher
-        - elsif current_user.teacher?
-          %li.menu-item{ class: menu_active_class('users') }
-            %a.menu-link{ href: college_users_path(college_slug: current_college.slug) }
-              %span.material-symbols-outlined.menu-icon person
-              %span.title Users
-        - else
-          %li.menu-item{ class: menu_active_class('users') }
-            %a.menu-link{ href: college_users_path(college_slug: current_college.slug) }
+            %a.menu-link{ href: send("college_#{current_user.role}s_users_path", college_slug: current_college.slug) }
               %span.material-symbols-outlined.menu-icon person
               %span.title Users
         - if can_access?(:departments, :index)
           %li.menu-item{ class: menu_active_class('departments') }
-            %a.menu-link{ href: college_departments_path(college_slug: current_college.slug) }
+            %a.menu-link{ href: send("college_#{current_user.role}s_departments_path", college_slug: current_college.slug) }
               %span.material-symbols-outlined.menu-icon settings
               %span.title Departments
         - if can_access?(:courses, :index)
           %li.menu-item{ class: menu_active_class('courses') }
-            %a.menu-link{ href: college_courses_path(college_slug: current_college.slug) }
+            %a.menu-link{ href: send("college_#{current_user.role}s_courses_path", college_slug: current_college.slug) }
               %span.material-symbols-outlined.menu-icon school
               %span.title Courses
-      - if can_access?(:sessions, :index)
-        %li.menu-item{ class: menu_active_class('sessions') }
-          %a.menu-link{ href: college_sessions_path(college_slug: current_college.slug) }
-            %span.material-symbols-outlined.menu-icon schedule
-            %span.title Sessions
+        - if can_access?(:sessions, :index)
+          %li.menu-item{ class: menu_active_class('sessions') }
+            %a.menu-link{ href: send("college_#{current_user.role}s_sessions_path", college_slug: current_college.slug) }
+              %span.material-symbols-outlined.menu-icon schedule
+              %span.title Sessions

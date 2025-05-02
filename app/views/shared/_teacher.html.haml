@@ -1,63 +1,43 @@
-.d-flex.justify-content-between.align-items-center.mb-4
-  %h4.fw-bold.py-0.m-0
-    = t('issues.status.table.teachers')
-  %div
-    - if can_access?(:users, :new)
-      %a.btn.btn-sm.btn-primary{ href: new_college_user_path }= t('issues.status.table.create')
--# .row
--#   .col-md-12
--#     .card.mb-4
--#       .card-body
--#         = form_tag college_users_path, method: :get do |f|
--#           .main-div.d-flex.justify-content-between.align-items-center
--#             .sub-div
--#               = text_field_tag :search, params[:search], placeholder: 'Search', class: 'form-control form-field'
--#             .sub-div
--#               = select_tag :subject_id, options_for_select(@subject_id, params[:subject_id] ), prompt: t('all'), class: 'form-select'
--#             .sub-div
--#               = select_tag :classroom_id, options_for_select(@classroom_id, params[:classroom_id] ), prompt: t('all'), class: 'form-select'
--#             .sub-div.d-flex.align-items-center.justify-content-end
--#               %button.btn.btn-primary.btn-icon.btn-sm.me-1{ type: 'submit', 'data-bs-html': 'true', 'data-bs-offset': '0,4', 'data-bs-original-title': '<span>Next</span>', 'data-bs-placement': 'bottom', 'data-bs-toggle': 'tooltip', title: '' }
--#                 %i.bx.bx-search
--#               %a.btn.btn-warning.btn-icon.btn-sm.me-1{ href: users_path, type: 'submit', 'data-bs-html': 'true', 'data-bs-offset': '0,4', 'data-bs-original-title': '<span>Clear</span>', 'data-bs-placement': 'bottom', 'data-bs-toggle': 'tooltip', title: '' }
--#                 %i.bx.bx-refresh
-.row
-  .col-12
-    .card
-      - if @users.present?
-        .table-responsive.text-nowrap.pb-0.border-bottom
-          %table.table.table-striped
-            %thead
-              %tr
-                %th.text-start= t('issues.status.table.name')
-                %th= t('issues.status.table.category')
-                %th= t('issues.status.table.type')
-                %th.text-end= t('issues.status.table.actions')
-            %tbody.table-border-bottom-0
-              - @users.each do |user|
+.main-content-container.overflow-hidden
+  .d-flex.justify-content-between.align-items-center.flex-wrap.gap-2.mb-4
+    %h3.mb-0= t('issues.status.table.teachers')
+  .card.bg-white.border-0.rounded-3.mb-4
+    .card-body.p-0
+      .d-flex.justify-content-between.align-items-center.flex-wrap.gap-2.p-4
+        %form.position-relative.table-src-form.me-0
+          %input.form-control{ placeholder: "Search here", type: "text" }/
+          %i.material-symbols-outlined.position-absolute.top-50.start-0.translate-middle-y search
+        - if can_access?(:users, :new)
+          %a.btn.btn-outline-primary.py-1.px-2.px-sm-4.fs-14.fw-medium.rounded-3.hover-bg{ href: new_college_principals_user_path }
+            %span.py-sm-1.d-block= t('issues.status.table.create')
+
+      .default-table-area.style-two.default-table-width
+        .table-responsive
+          - if @users.present?
+            %table.table.align-middle
+              %thead
                 %tr
-                  %td.text-start
-                    %strong.long-txt= user.name
-                  %td.long-txt= user.role
-                  %td.long-txt= user.email
-                  %td
-                    .text-end.d-flex.align-items-center.justify-content-end
-                      - if can_access?(:users, :edit)
-                        %a.btn.btn-warning.btn-icon.btn-sm.me-1{
-                        href: edit_college_user_path(current_college.slug, user.slug), 'data-bs-html': 'true', 'data-bs-offset': '0,4', 'data-bs-original-title': '<span>Edit</span>', 'data-bs-placement': 'bottom', 'data-bs-toggle': 'tooltip', title: '', type: 'button' }
-                          %i.bx.bx-pencil
-                      - if can_access?(:users, :destroy)
-                        = link_to college_user_path(current_college.slug, user.slug),
-                        { class: 'btn btn-danger btn-icon btn-sm me-1', 'data-bs-html': 'true', 'data-bs-offset': '0,4', 'data-bs-original-title': '<span>Delete</span>', 'data-bs-placement': 'bottom', 'data-confirm': "You won't be able to revert this!",
-                        'data-bs-toggle': 'tooltip', title: '', type: 'button', method: :delete } do
-                          %i.bx.bx-trash
-                      - if can_access?(:users, :show)
-                        = link_to college_user_path(current_college.slug, user.slug), { class: 'btn btn-primary btn-icon btn-sm me-1', 'data-bs-html': 'true', 'data-bs-offset': '0,4', 'data-bs-original-title': '<span>Show</span>', 'data-bs-placement': 'bottom', 'data-bs-toggle': 'tooltip', title: '', type: 'button' } do
-                          %i.bx.bx-show
-      - else
-        .col-12
-          .card
-            .card-body
-              %h4.text-center.mb-0.d-flex.align-items-center.justify-content-center
-                %i.bx.bx-error-circle.pe-2.data-icon
-                = t('issues.status.table.no_data_found')
+                  %th{ scope: "col" }= t('issues.status.table.name')
+                  %th{ scope: "col" }= t('issues.status.table.category')
+                  %th{ scope: "col" }= t('issues.status.table.type')
+                  %th{ scope: "col" }= t('issues.status.table.actions')
+              %tbody
+                - @users.each do |user|
+                  %tr
+                    %td.text-body= user.name
+                    %td.text-body= user.role
+                    %td.text-body= user.email
+                    %td.text-end
+                      .d-flex.align-items-center.gap-1
+                        %button.ps-0.border-0.bg-transparent.lh-1.position-relative.top-2
+                          %i.material-symbols-outlined.fs-16.text-primary visibility
+                        - if can_access?(:users, :edit)
+                          %a.ps-0.border-0.bg-transparent.lh-1.position-relative.top-2{
+                          href: edit_college_principals_user_path(current_college.slug, user.slug), 'data-bs-html': 'true', 'data-bs-offset': '0,4', 'data-bs-original-title': '<span>Edit</span>', 'data-bs-placement': 'bottom', 'data-bs-toggle': 'tooltip', title: '', type: 'button' }
+                            %i.material-symbols-outlined.fs-16.text-body edit
+                        - if can_access?(:users, :destroy)
+                          = link_to college_principals_user_path(current_college.slug, user.slug),
+                            class: 'ps-0 border-0 bg-transparent lh-1 position-relative top-2',
+                            data: { method: :delete, confirm: "You won't be able to revert this!",
+                              bs: { html: 'true',  offset: '0,4', original_title: '<span>Delete</span>', placement: 'bottom', toggle: 'tooltip' } } do
+                            %i.material-symbols-outlined.fs-16.text-danger delete
