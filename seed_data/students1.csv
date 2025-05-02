@@ -1,0 +1,21 @@
+name,email,password,password_confirmation,role
+Student 1,student1@example.com,password1,password1,student
+Student 2,student2@example.com,password2,password2,student
+Student 3,student3@example.com,password3,password3,student
+Student 4,student4@example.com,password4,password4,student
+Student 5,student5@example.com,password5,password5,student
+Student 6,student6@example.com,password6,password6,student
+Student 7,student7@example.com,password7,password7,student
+Student 8,student8@example.com,password8,password8,student
+Student 9,student9@example.com,password9,password9,student
+Student 10,student10@example.com,password10,password10,student
+Student 11,student11@example.com,password11,password11,student
+Student 12,student12@example.com,password12,password12,student
+Student 13,student13@example.com,password13,password13,student
+Student 14,student14@example.com,password14,password14,student
+Student 15,student15@example.com,password15,password15,student
+Student 16,student16@example.com,password16,password16,student
+Student 17,student17@example.com,password17,password17,student
+Student 18,student18@example.com,password18,password18,student
+Student 19,student19@example.com,password19,password19,student
+Student 20,student20@example.com,password20,password20,student

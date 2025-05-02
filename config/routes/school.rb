@@ -14,7 +14,11 @@ resources :colleges, param: :slug do
 
   namespace :principals do
     resources :dashboard, only: [:index]
-    resources :users, param: :slug
+    resources :users, param: :slug do
+      collection do
+        post :import_users
+      end
+    end
     resources :departments, param: :slug
     resources :courses, param: :slug
     resources :sessions, param: :slug do

@@ -1,6 +1,9 @@
 .main-content-container.overflow-hidden
   .d-flex.justify-content-between.align-items-center.flex-wrap.gap-2.mb-4
     %h3.mb-0= t('issues.status.table.teachers')
+    = form_with(url: import_users_college_principals_users_path(current_college.slug), method: :post, local: true, html: { multipart: true, class: 'd-flex align-items-center gap-2' }) do |f|
+      = f.file_field :csv_file, class: 'form-control', id: 'file-upload', accept: '.csv'
+      = f.submit 'Upload', class: 'btn btn-primary btn-sm'
   .card.bg-white.border-0.rounded-3.mb-4
     .card-body.p-0
       .d-flex.justify-content-between.align-items-center.flex-wrap.gap-2.p-4
@@ -10,7 +13,6 @@
         - if can_access?(:users, :new)
           %a.btn.btn-outline-primary.py-1.px-2.px-sm-4.fs-14.fw-medium.rounded-3.hover-bg{ href: new_college_principals_user_path }
             %span.py-sm-1.d-block= t('issues.status.table.create')
-
       .default-table-area.style-two.default-table-width
         .table-responsive
           - if @users.present?
