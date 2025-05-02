@@ -1,0 +1,41 @@
+%h1 CSV File Management
+%ul
+  %li= link_to 'Export CSV', export_csv_college_principals_csv_files_path(current_college.slug)
+  %li= link_to 'Add CSV', new_college_principals_csv_file_path(current_college.slug)
+  %li= link_to 'Import CSV', '#', onclick: 'showImportForm()'
+%h3 Existing CSV Files
+%ul
+  - @csv_files.each do |csv_file|
+    %li
+      = csv_file.name
+      \- #{csv_file.email} - #{csv_file.role}
+#import_form{ style: "display: none;" }
+  = form_with url: import_csv_college_principals_csv_files_path(current_college.slug), local: true do |f|
+    = f.label :import_type, 'Select Import Type'
+    = f.radio_button :import_type, 'server', id: 'import_server'
+    Server
+    = f.radio_button :import_type, 'local', id: 'import_local'
+    Local File
+
+    .file-upload-field{ style: "display: none;" }
+      = f.file_field :csv_file, accept: '.csv'
+
+    = f.submit 'Import CSV'
+- content_for :js_code do
+  :javascript
+    function showImportForm() {
+      document.getElementById("import_form").style.display = "block";
+    }
+
+    $(document).ready(function () {
+      $('input[name="import_type"]').on('change', function () {
+        if ($('#import_local').is(':checked')) {
+          $('.file-upload-field').show();
+        } else {
+          $('.file-upload-field').hide();
+        }
+      });
+
+      // Initialize state on page load
+      $('input[name="import_type"]:checked').trigger('change');
+    });
