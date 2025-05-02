@@ -27,10 +27,11 @@ gem 'webauthn'
 
 # Background job adapter
 # gem 'importmap-rails'
+gem 'activerecord-import'
 gem 'sidekiq'
 
-
 gem 'blamer'
+gem 'csv'
 gem 'paper_trail'
 
 # Use Active Storage
