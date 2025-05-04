@@ -3,4 +3,5 @@ class Teacher < ApplicationRecord
   belongs_to :department
   belongs_to :course
   belongs_to :user
+  has_many :assignments
 end

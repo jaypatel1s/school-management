@@ -16,7 +16,8 @@ ROLE_PERMISSIONS = {
     courses: %i[index show],
     sessions: %i[index new create edit update destroy show],
     attendances: %i[report],
-    marksheets: %i[new create index show]
+    marksheets: %i[new create index show],
+    assignments: %i[index new create edit update show destroy]
   },
   student: {
     dashboard: %i[index],

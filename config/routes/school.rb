@@ -30,6 +30,7 @@ resources :colleges, param: :slug do
     resources :users, param: :slug, only: %i[index show]
     resources :departments, param: :slug, only: %i[index show]
     resources :courses, param: :slug, only: %i[index show]
+    resources :assignments, param: :slug
     resources :sessions, param: :slug do
       resources :attendances, only: %i[index new create] do
         member do

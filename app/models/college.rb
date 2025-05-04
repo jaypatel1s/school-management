@@ -12,4 +12,5 @@ class College < ApplicationRecord
   has_many :fee_types, dependent: :destroy
   has_many :sessions, dependent: :destroy
   has_many :attendances, dependent: :destroy
+  has_many :assignments
 end
