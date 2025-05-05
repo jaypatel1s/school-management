@@ -13,7 +13,11 @@
               %tr
                 %th{ scope: "col" } Title
                 %th{ scope: "col" } Description
+                %th{ scope: "col" } File Link
             %tbody
               %tr
                 %td.text-body= @assignment.name
                 %td.text-body= @assignment.description
+                %td
+                  = link_to rails_blob_path(@assignment.file), target: "_blank" do
+                    %i.material-symbols-outlined.fs-30 picture_as_pdf

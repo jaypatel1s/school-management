@@ -5,11 +5,11 @@ module Teachers
   class AssignmentsController < BaseController
     before_action :set_assignment, only: %i[show edit update destroy]
     def index
-      @assignments = current_college.assignments
+      @assignments = @profile.assignments
     end
 
     def new
-      @assignment = current_college.assignments.new
+      @assignment = @profile.assignments.new
     end
 
 

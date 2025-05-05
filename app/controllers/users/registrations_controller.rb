@@ -26,7 +26,7 @@ module Users
     def registration_params
       params.require(:user).permit(
         :first_name, :middle_name, :last_name, :college_id, :name,
-        :email, :password, :company_name, :password_confirmation
+        :email, :password, :password_confirmation
       )
     end
   end

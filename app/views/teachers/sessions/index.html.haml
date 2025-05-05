@@ -1,0 +1,45 @@
+.main-content-container.overflow-hidden
+  .d-flex.justify-content-between.align-items-center.flex-wrap.gap-2.mb-4
+    %h3.mb-0= t('issues.status.table.sessions')
+  .card.bg-white.border-0.rounded-3.mb-4
+    .card-body.p-0
+      .d-flex.justify-content-between.align-items-center.flex-wrap.gap-2.p-4
+        %form.position-relative.table-src-form.me-0
+          %input.form-control{ placeholder: "Search here", type: "text" }/
+          %i.material-symbols-outlined.position-absolute.top-50.start-0.translate-middle-y search
+        - if can_access?(:sessions, :new)
+          %a.btn.btn-outline-primary.py-1.px-2.px-sm-4.fs-14.fw-medium.rounded-3.hover-bg{ href: new_college_teachers_session_path(current_college.slug) }
+            %span.py-sm-1.d-block= t('issues.status.table.create')
+      .default-table-area.style-two.default-table-width
+        .table-responsive
+          %table.table.align-middle
+            - if @sessions.present?
+              %thead
+                %tr
+                  %th{ scope: "col" }= t('issues.status.table.name')
+                  %th{ scope: "col" }= t('issues.status.table.actions')
+              %tbody
+              - @sessions.each do |session|
+                %tr
+                  %td.text-body= session.name
+                  %td.text-end
+                    .d-flex.align-items-center.gap-1
+                      %button.ps-0.border-0.bg-transparent.lh-1.position-relative.top-2
+                        %i.material-symbols-outlined.fs-16.text-primary visibility
+                      - if can_access?(:sessions, :edit)
+                        %a.ps-0.border-0.bg-transparent.lh-1.position-relative.top-2{
+                        href: edit_college_teachers_session_path(current_college.slug, session.slug), 'data-bs-html': 'true', 'data-bs-offset': '0,4', 'data-bs-original-title': '<span>Edit</span>', 'data-bs-placement': 'bottom', 'data-bs-toggle': 'tooltip', title: '', type: 'button' }
+                          %i.material-symbols-outlined.fs-16.text-body edit
+                      - if can_access?(:sessions, :destroy)
+                        = link_to college_teachers_session_path(current_college.slug, session.slug),
+                          class: 'ps-0 border-0 bg-transparent lh-1 position-relative top-2',
+                          data: { method: :delete, confirm: "You won't be able to revert this!",
+                            bs: { html: 'true',  offset: '0,4', original_title: '<span>Delete</span>', placement: 'bottom', toggle: 'tooltip' } } do
+                          %i.material-symbols-outlined.fs-16.text-danger delete
+            - else
+              .col-12
+                .card
+                  .card-body
+                    %h4.text-center.mb-0.d-flex.align-items-center.justify-content-center
+                      %i.bx.bx-error-circle.pe-2.data-icon
+                      = t('issues.status.table.no_data_found')

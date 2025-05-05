@@ -1,23 +1,24 @@
-.d-flex.justify-content-between.align-items-center.mb-4
-  %h4.fw-bold.py-0.m-0
-    = t('issues.status.table.departments')
-.row
-  .col-12
-    .card
-      - if @department.present?
-        .table-responsive.text-nowrap.pb-0.border-bottom
-          %table.table.table-striped
-            %thead
-              %tr
-                %th.text-start= t('issues.status.table.name')
-            %tbody.table-border-bottom-0
-              %tr
-                %td.text-start
-                  %strong.long-txt= @department.name
-      - else
-        .col-12
-          .card
-            .card-body
-              %h4.text-center.mb-0.d-flex.align-items-center.justify-content-center
-                %i.bx.bx-error-circle.pe-2.data-icon
-                = t('issues.status.table.no_data_found')
+.main-content-container.overflow-hidden
+  .d-flex.justify-content-between.align-items-center.flex-wrap.gap-2.mb-4
+    %h3.mb-0= t('issues.status.table.departments')
+  .card.bg-white.border-0.rounded-3.mb-4
+    .card-body.p-0
+      .default-table-area.style-two.default-table-width
+        .table-responsive
+          %table.table.align-middle
+            - if @departments.present?
+              %thead
+                %tr
+                  %th{ scope: "col" }= t('issues.status.table.name')
+                  %th{ scope: "col" }= t('issues.status.table.actions')
+              %tbody
+              - @departments.each do |department|
+                %tr
+                  %td.text-body= department.name
+            - else
+              .col-12
+                .card
+                  .card-body
+                    %h4.text-center.mb-0.d-flex.align-items-center.justify-content-center
+                      %i.bx.bx-error-circle.pe-2.data-icon
+                      = t('issues.status.table.no_data_found')

@@ -1,16 +1,19 @@
 # frozen_string_literal: true
 
+# :nodoc:
 class Session < ApplicationRecord
   include Sluggable
 
   belongs_to :college
+  belongs_to :department
   belongs_to :course
-  has_many :attendances
-  has_many :students, through: :attendances, class_name: 'User'
+  belongs_to :teacher
 
-  validates :date, presence: true
+  has_many :attendances, dependent: :destroy
 
-  before_create :generate_qr_token
+  validates :name, :date, presence: true
+
+  # before_create :generate_qr_token
 
   def generate_qr_token
     self.qr_token = SecureRandom.urlsafe_base64(16)

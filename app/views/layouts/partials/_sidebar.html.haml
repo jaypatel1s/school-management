@@ -36,5 +36,5 @@
         - if can_access?(:assignments, :index)
           %li.menu-item{ class: menu_active_class('assignments') }
             %a.menu-link{ href: send("college_#{current_user.role}s_assignments_path", college_slug: current_college.slug) }
-              %span.material-symbols-outlined.menu-icon schedule
+              %span.material-symbols-outlined.menu-icon assignment
               %span.title Assignments
