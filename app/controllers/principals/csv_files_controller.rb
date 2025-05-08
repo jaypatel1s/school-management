@@ -56,16 +56,18 @@ module Principals
         end
       end
 
-      # Save the generated file temporarily for 30 minutes
       temp_file = Tempfile.new(['csv_export', '.csv'])
       temp_file.write(csv_data)
       temp_file.rewind
 
-      # Send the generated file
-      send_data temp_file.read, filename: "#{current_college.name}-users.csv", type: 'text/csv',
-                                disposition: 'attachment'
+      # Save the file in public directory (adjust path as needed)
+      generated_file_path = Rails.public_path.join('uploads', 'csv_export', "#{current_college.name}-users.csv")
+      File.write(generated_file_path, temp_file.read)
 
-      # Automatically delete the temporary file after 30 minutes
+      # Send the file path to JavaScript
+      render json: { generated_csv_url: "/uploads/csv_export/#{current_college.name}-users.csv" }
+
+      # Clean up temp file
       temp_file.close
       temp_file.unlink
     end

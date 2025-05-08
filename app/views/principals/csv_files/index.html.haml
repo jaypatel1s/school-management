@@ -9,6 +9,7 @@
     %li
       = csv_file.name
       \- #{csv_file.email} - #{csv_file.role}
+
 #import_form{ style: "display: none;" }
   = form_with url: import_csv_college_principals_csv_files_path(current_college.slug), local: true do |f|
     = f.label :import_type, 'Select Import Type'
@@ -21,6 +22,10 @@
       = f.file_field :csv_file, accept: '.csv'
 
     = f.submit 'Import CSV'
+
+#generated_csv_link{ style: "display: none;" }
+  %a{ href: "#", id: "csv_link", target: "_blank" } Download CSV
+
 - content_for :js_code do
   :javascript
     function showImportForm() {
@@ -28,6 +33,7 @@
     }
 
     $(document).ready(function () {
+      var collegeSlug = "#{current_college.slug}";
       $('input[name="import_type"]').on('change', function () {
         if ($('#import_local').is(':checked')) {
           $('.file-upload-field').show();
@@ -36,6 +42,28 @@
         }
       });
 
-      // Initialize state on page load
+      $('input[name="import_type"]:checked').trigger('change');
+      $('#import_server').on('change', function () {
+        if ($(this).is(':checked')) {
+          $.ajax({
+            url: `/college/${collegeSlug}/principals/csv_files/import_csv`,
+            method: 'POST',
+            dataType: 'json',
+            data: { import_type: 'server' },
+            success: function (data) {
+              var csvLink = data.generated_csv_url;
+              if (csvLink) {
+                $('#generated_csv_link').show();
+                $('#csv_link').attr('href', csvLink);
+              } else {
+                alert('Failed to generate CSV.');
+              }
+            },
+            error: function () {
+              alert('Error generating CSV.');
+            }
+          });
+        }
+      });
       $('input[name="import_type"]:checked').trigger('change');
     });
