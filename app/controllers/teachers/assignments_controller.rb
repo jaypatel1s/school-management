@@ -1,17 +1,19 @@
 # frozen_string_literal: true
 
-# :nodoc:
 module Teachers
+  # :nodoc:
   class AssignmentsController < BaseController
     before_action :set_assignment, only: %i[show edit update destroy]
+
     def index
       @assignments = @profile.assignments
     end
 
+    def show; end
+
     def new
       @assignment = @profile.assignments.new
     end
-
 
     def edit; end
 
@@ -21,10 +23,10 @@ module Teachers
       @assignment.course_id = @profile.course_id
       @assignment.college_id = @profile.college_id
       if @assignment.save
-        flash[:success] = "Assignment added successfully"
+        flash[:success] = 'Assignment added successfully'
         redirect_to college_teachers_assignments_path
       else
-        flash[:alert] = "Assignment creation failed"
+        flash[:alert] = 'Assignment creation failed'
         render :new
       end
     end

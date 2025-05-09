@@ -41,11 +41,16 @@ resources :colleges, param: :slug do
     resources :departments, param: :slug, only: %i[index show]
     resources :courses, param: :slug, only: %i[index show]
     resources :assignments, param: :slug
-    resources :sessions, param: :slug do
-      resources :attendances, only: %i[index new create] do
-        member do
-          get 'report'
-        end
+    resources :sessions, param: :slug
+    resources :attendances, only: %i[index new create] do
+      member do
+        get 'report'
+      end
+    end
+    resources :csv_files, only: %i[index new create] do
+      collection do
+        post :import_csv, action: :import_csv
+        get :export_csv, action: :export_csv
       end
     end
   end

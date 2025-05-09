@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
-# :nodoc:
 module Teachers
+  # :nodoc:
   class AttendancesController < BaseController
     before_action :set_attendance, only: %i[show edit update destroy]
 
@@ -20,6 +20,16 @@ module Teachers
     def edit; end
 
     def create
+      params[:attendance].each do |student_id, status|
+        Attendance.create!(
+          student_id: student_id,
+          session_id: params[:session_id],
+          college_id: current_user.college_id,
+          status: status,
+          date: Time.zone.today
+        )
+      end
+
       @attendance = current_college.attendances.new(attendance_params)
       @attendance.department_id = @profile.department_id
       if @attendance.save!
@@ -31,6 +41,13 @@ module Teachers
       end
     end
 
+    def report_by_student
+      @attendances = Attendance.where(
+        student_id: params[:student_id],
+        college_id: current_user.college_id
+      ).includes(:student)
+    end
+
     def update
       if @attendance.update(attendance_params)
         flash[:success] = 'Attendance Updated Successfully.'
@@ -39,6 +56,10 @@ module Teachers
         flash[:alert] = @attendance.errors.full_messages
         render :edit
       end
+    end
+
+    def report_by_date
+      @attendances = Attendance.where(college_id: current_user.college_id, date: params[:date]).includes(:student)
     end
 
     def destroy
