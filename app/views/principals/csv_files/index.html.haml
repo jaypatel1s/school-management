@@ -1,0 +1,69 @@
+%h1 CSV File Management
+%ul
+  %li= link_to 'Export CSV', export_csv_college_principals_csv_files_path(current_college.slug)
+  %li= link_to 'Add CSV', new_college_principals_csv_file_path(current_college.slug)
+  %li= link_to 'Import CSV', '#', onclick: 'showImportForm()'
+%h3 Existing CSV Files
+%ul
+  - @csv_files.each do |csv_file|
+    %li
+      = csv_file.name
+      \- #{csv_file.email} - #{csv_file.role}
+
+#import_form{ style: "display: none;" }
+  = form_with url: import_csv_college_principals_csv_files_path(current_college.slug), local: true do |f|
+    = f.label :import_type, 'Select Import Type'
+    = f.radio_button :import_type, 'server', id: 'import_server'
+    Server
+    = f.radio_button :import_type, 'local', id: 'import_local'
+    Local File
+
+    .file-upload-field{ style: "display: none;" }
+      = f.file_field :csv_file, accept: '.csv'
+
+    = f.submit 'Import CSV'
+
+#generated_csv_link{ style: "display: none;" }
+  %a{ href: "#", id: "csv_link", target: "_blank" } Download CSV
+
+- content_for :js_code do
+  :javascript
+    function showImportForm() {
+      document.getElementById("import_form").style.display = "block";
+    }
+
+    $(document).ready(function () {
+      var collegeSlug = "#{current_college.slug}";
+      $('input[name="import_type"]').on('change', function () {
+        if ($('#import_local').is(':checked')) {
+          $('.file-upload-field').show();
+        } else {
+          $('.file-upload-field').hide();
+        }
+      });
+
+      $('input[name="import_type"]:checked').trigger('change');
+      $('#import_server').on('change', function () {
+        if ($(this).is(':checked')) {
+          $.ajax({
+            url: `/college/${collegeSlug}/principals/csv_files/import_csv`,
+            method: 'POST',
+            dataType: 'json',
+            data: { import_type: 'server' },
+            success: function (data) {
+              var csvLink = data.generated_csv_url;
+              if (csvLink) {
+                $('#generated_csv_link').show();
+                $('#csv_link').attr('href', csvLink);
+              } else {
+                alert('Failed to generate CSV.');
+              }
+            },
+            error: function () {
+              alert('Error generating CSV.');
+            }
+          });
+        }
+      });
+      $('input[name="import_type"]:checked').trigger('change');
+    });

@@ -17,13 +17,13 @@
               %thead
                 %tr
                   %th{ scope: "col" }= t('issues.status.table.name')
-                  %th{ scope: "col" }= t('issues.status.table.actions')
+                  %th.text-end{ scope: "col" } Actions
               %tbody
               - @departments.each do |department|
                 %tr
                   %td.text-body= department.name
                   %td.text-end
-                    .d-flex.align-items-center.gap-1
+                    .d-flex.align-items-center.justify-content-end.gap-1
                       %button.ps-0.border-0.bg-transparent.lh-1.position-relative.top-2
                         %i.material-symbols-outlined.fs-16.text-primary visibility
                       - if can_access?(:departments, :edit)
