@@ -1,4 +1,5 @@
 /*
+ *= require 'bootstrap.min'
  *= require 'apexcharts'
  *= require 'fullcalendar.main'
  *= require 'google-icon'

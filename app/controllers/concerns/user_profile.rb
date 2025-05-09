@@ -11,10 +11,15 @@ module UserProfile
   private
 
   def set_user_profile
-    @profile = if current_user.teacher?
-                 current_user.teacher
-               else
-                 (current_user.principal? ? current_user : current_user.student)
-               end
-  end
+    return unless current_user  # ✅ avoid nil error
+  
+    @profile =
+      if current_user.teacher?
+        current_user.teacher
+      elsif current_user.principal?
+        current_user
+      else
+        current_user.student
+      end
+  end  
 end
