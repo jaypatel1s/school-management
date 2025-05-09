@@ -12,7 +12,7 @@
           %a.menu-link{ href: authenticated_user_path }
             %span.material-symbols-outlined.menu-icon dashboard
             %span.title Dashboard
-      -if current_user.profile_setup?
+      - if current_user.profile_setup?
         - if can_access?(:users, :index)
           %li.menu-item{ class: menu_active_class('users') }
             %a.menu-link{ href: send("college_#{current_user.role}s_users_path", college_slug: current_college.slug) }
@@ -33,3 +33,13 @@
             %a.menu-link{ href: send("college_#{current_user.role}s_sessions_path", college_slug: current_college.slug) }
               %span.material-symbols-outlined.menu-icon schedule
               %span.title Sessions
+        - if can_access?(:assignments, :index)
+          %li.menu-item{ class: menu_active_class('assignments') }
+            %a.menu-link{ href: send("college_#{current_user.role}s_assignments_path", college_slug: current_college.slug) }
+              %span.material-symbols-outlined.menu-icon assignment
+              %span.title Assignments
+        - if can_access?(:csv_files, :index)
+          %li.menu-item{ class: menu_active_class('csv_files') }
+            %a.menu-link{ href: send("college_#{current_user.role}s_csv_files_path", college_slug: current_college.slug) }
+              %span.material-symbols-outlined.menu-icon schedule
+              %span.title Csv Files

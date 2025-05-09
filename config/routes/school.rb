@@ -28,16 +28,24 @@ resources :colleges, param: :slug do
         end
       end
     end
+    resources :csv_files, only: %i[index new create] do
+      collection do
+        post :import_csv, action: :import_csv
+        get :export_csv, action: :export_csv
+      end
+    end
   end
 
   namespace :teachers do
     resources :users, param: :slug, only: %i[index show]
     resources :departments, param: :slug, only: %i[index show]
     resources :courses, param: :slug, only: %i[index show]
-    resources :sessions, param: :slug
-    resources :attendances, param: :id, only: %i[index new create] do
-      member do
-        get 'report'
+    resources :assignments, param: :slug
+    resources :sessions, param: :slug do
+      resources :attendances, only: %i[index new create] do
+        member do
+          get 'report'
+        end
       end
     end
   end
