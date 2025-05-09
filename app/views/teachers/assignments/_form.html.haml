@@ -1,0 +1,23 @@
+= form_with model: [:school, assignment], local: true, html: { multipart: true }, url: url, class: 'form' do |f|
+  .row
+    .col-md-6.mb-3
+      %label.form-label.required
+        = t('issues.assignments.table.title')
+      = f.text_field :name, class: "form-control #{error?(@assignment.errors, :name)}",
+        value: f.object.name, placeholder: 'Title', required: true
+      = print_error(@assignment.errors, :name)
+    .col-md-6.mb-3
+      %label.form-label.required
+        = t('issues.assignments.table.description')
+      = f.text_field :description, class: "form-control #{error?(@assignment.errors, :description)}",
+        value: f.object.description, placeholder: 'Description', required: true
+      = print_error(@assignment.errors, :description)
+    .col-md-12.mb-3
+      .input-group
+        %label.input-group-text= t('activerecord.attributes.blog.file')
+        %input.form-control{ name: "assignment[file]", type: "file" }
+      = print_error(@assignment.errors, :file)
+
+  .col-12.d-flex.justify-content-between
+    %button.btn.btn-primary{ type: 'submit', data: { confirm: 'Do you want to save the changes?' } }
+      = t('issues.assignments.table.save')

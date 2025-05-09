@@ -17,8 +17,9 @@ ROLE_PERMISSIONS = {
     courses: %i[index show],
     csv_files: %i[index add_csv create_csv import_csv export_csv],
     sessions: %i[index new create edit update destroy show],
-    attendances: %i[index new create edit update destroy show report],
-    marksheets: %i[new create index show]
+    attendances: %i[report],
+    marksheets: %i[new create index show],
+    assignments: %i[index new create edit update show destroy]
   },
   student: {
     dashboard: %i[index],
