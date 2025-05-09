@@ -1,6 +1,6 @@
 .main-content-container.overflow-hidden
   .d-flex.justify-content-between.align-items-center.flex-wrap.gap-2.mb-4
-    %h3.mb-0= t('issues.status.table.teachers')
+    %h3.mb-0= 'Users'
     = form_with(url: import_users_college_principals_users_path(current_college.slug), method: :post, local: true, html: { multipart: true, class: 'd-flex align-items-center gap-2' }) do |f|
       = f.file_field :csv_file, class: 'form-control', id: 'file-upload', accept: '.csv'
       = f.submit 'Upload', class: 'btn btn-primary btn-sm'
