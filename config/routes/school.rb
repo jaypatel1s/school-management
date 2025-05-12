@@ -48,6 +48,12 @@ resources :colleges, param: :slug do
         end
       end
     end
+    resources :csv_files, only: %i[index new create] do
+      collection do
+        post :import_csv, action: :import_csv
+        get :export_csv, action: :export_csv
+      end
+    end
   end
 
   namespace :student do
