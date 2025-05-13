@@ -8,6 +8,7 @@ class Student < ApplicationRecord
   has_many :courses, through: :student_courses
   has_many :sessions, dependent: :destroy
   has_many :attendances, dependent: :destroy
+  has_many :notes, as: :notable, dependent: :destroy
 
   enum :status, { active: 0, deactive: 1 }
 end

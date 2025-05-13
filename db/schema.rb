@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2025_05_12_072712) do
+ActiveRecord::Schema[7.1].define(version: 2025_05_13_053800) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -169,6 +169,16 @@ ActiveRecord::Schema[7.1].define(version: 2025_05_12_072712) do
     t.index ["fee_type_id"], name: "index_fees_on_fee_type_id"
   end
 
+  create_table "notes", force: :cascade do |t|
+    t.bigint "notable_id"
+    t.string "notable_type"
+    t.text "note"
+    t.bigint "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_notes_on_user_id"
+  end
+
   create_table "sessions", force: :cascade do |t|
     t.bigint "college_id", null: false
     t.bigint "department_id", null: false
@@ -285,6 +295,7 @@ ActiveRecord::Schema[7.1].define(version: 2025_05_12_072712) do
   add_foreign_key "fees", "courses"
   add_foreign_key "fees", "departments"
   add_foreign_key "fees", "fee_types"
+  add_foreign_key "notes", "users"
   add_foreign_key "sessions", "colleges"
   add_foreign_key "sessions", "courses"
   add_foreign_key "sessions", "departments"
