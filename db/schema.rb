@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2025_05_13_053800) do
+ActiveRecord::Schema[7.1].define(version: 2025_05_15_064325) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -169,14 +169,19 @@ ActiveRecord::Schema[7.1].define(version: 2025_05_13_053800) do
     t.index ["fee_type_id"], name: "index_fees_on_fee_type_id"
   end
 
-  create_table "notes", force: :cascade do |t|
-    t.bigint "notable_id"
-    t.string "notable_type"
-    t.text "note"
-    t.bigint "user_id", null: false
+  create_table "notifications", force: :cascade do |t|
+    t.string "message"
+    t.string "notifiable_type", null: false
+    t.bigint "notifiable_id", null: false
+    t.bigint "college_id", null: false
+    t.bigint "recipient_id", null: false
+    t.boolean "read"
+    t.string "action_type"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["user_id"], name: "index_notes_on_user_id"
+    t.index ["college_id"], name: "index_notifications_on_college_id"
+    t.index ["notifiable_type", "notifiable_id"], name: "index_notifications_on_notifiable"
+    t.index ["recipient_id"], name: "index_notifications_on_recipient_id"
   end
 
   create_table "sessions", force: :cascade do |t|
@@ -295,7 +300,8 @@ ActiveRecord::Schema[7.1].define(version: 2025_05_13_053800) do
   add_foreign_key "fees", "courses"
   add_foreign_key "fees", "departments"
   add_foreign_key "fees", "fee_types"
-  add_foreign_key "notes", "users"
+  add_foreign_key "notifications", "colleges"
+  add_foreign_key "notifications", "users", column: "recipient_id"
   add_foreign_key "sessions", "colleges"
   add_foreign_key "sessions", "courses"
   add_foreign_key "sessions", "departments"

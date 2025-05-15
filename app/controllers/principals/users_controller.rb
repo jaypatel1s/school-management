@@ -20,6 +20,8 @@ module Principals
     def create
       @user = current_college.users.new(user_params)
       if @user.save
+        message = "Student #{@user.email} was added by #{current_user.name}."
+        NotificationService.new(current_college, @user, message, :created).call
         flash[:success] = 'User Created Successfully'
         redirect_to college_principals_users_path(current_college.slug)
       else
@@ -30,6 +32,11 @@ module Principals
 
     def update
       if @user.update(user_params)
+        changes = @user.saved_changes.except('updated_at', 'created_at', 'encrypted_password')
+        if changes.any?
+          message = "Student #{@user.email} was updated (#{changes}) by #{current_user.name}."
+          NotificationService.new(current_college, @user, message, :updated).call
+        end
         flash[:success] = 'User Updated Successfully'
         redirect_to college_principals_users_path(current_college.slug)
       else

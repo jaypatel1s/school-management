@@ -8,5 +8,4 @@ class Teacher < ApplicationRecord
   belongs_to :user
   has_many :assignments, dependent: :destroy
   has_many :sessions, dependent: :destroy
-  has_many :notes, as: :notable, dependent: :destroy
 end

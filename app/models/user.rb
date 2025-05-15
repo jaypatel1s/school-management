@@ -9,7 +9,7 @@ class User < ApplicationRecord
   belongs_to :college
   has_one :teacher, dependent: :destroy
   has_one :student, dependent: :destroy
-  has_many :notes, as: :notable, dependent: :destroy
+  has_many :notifications, foreign_key: :recipient_id, dependent: :destroy, inverse_of: :recipient
 
   # has_many :attendances, foreign_key: :student_id
   # has_many :attended_sessions, through: :attendances, source: :session

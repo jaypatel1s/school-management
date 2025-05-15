@@ -54,6 +54,7 @@ resources :colleges, param: :slug do
         get :export_csv, action: :export_csv
       end
     end
+    resources :notifications, only: %i[index]
   end
 
   namespace :student do

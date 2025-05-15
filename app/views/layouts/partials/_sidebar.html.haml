@@ -1,11 +1,11 @@
-#sidebar-area.sidebar-area
+.sidebar-area#sidebar-area
   .logo.position-relative
-    %a.d-block.text-decoration-none.position-relative{href: "/"}
+    %a.d-block.text-decoration-none.position-relative{ href: "/" }
       = image_tag('logo-icon.png', alt: 'logo-icon')
       %span.logo-text.fw-bold.text-dark Trezo
-    %button#sidebar-burger-menu.sidebar-burger-menu.bg-transparent.p-0.border-0.opacity-0.z-n1.position-absolute.top-50.end-0.translate-middle-y
-      %i{"data-feather" => "x"}
-  %aside#layout-menu.layout-menu.menu-vertical.menu.active
+    %button.sidebar-burger-menu.bg-transparent.p-0.border-0.opacity-0.z-n1.position-absolute.top-50.end-0.translate-middle-y#sidebar-burger-menu
+      %i{ "data-feather" => "x" }
+  %aside.layout-menu.menu-vertical.menu.active#layout-menu
     %ul.menu-inner
       - if can_access?(:dashboard, :index)
         %li.menu-item{ class: menu_active_class('dashboard') }
@@ -43,3 +43,8 @@
             %a.menu-link{ href: send("college_#{current_user.role}s_csv_files_path", college_slug: current_college.slug) }
               %span.material-symbols-outlined.menu-icon schedule
               %span.title Csv Files
+        - if can_access?(:notifications, :index)
+          %li.menu-item{ class: menu_active_class('notifications') }
+            %a.menu-link{ href: send("college_#{current_user.role}s_notifications_path", college_slug: current_college.slug) }
+              %span.material-symbols-outlined.menu-icon notifications
+              %span.title Notifications

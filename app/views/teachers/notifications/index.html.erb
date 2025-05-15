@@ -1,0 +1,8 @@
+<h2>Notifications</h2>
+
+<% @notifications.each do |note| %>
+  <div class="notification <%= 'unread' unless note.read %>">
+    <p><%= note.message %></p>
+    <small><%= note.created_at.strftime('%b %d, %Y %H:%M') %></small>
+  </div>
+<% end %>

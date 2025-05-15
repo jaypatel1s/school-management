@@ -19,6 +19,7 @@ ROLE_PERMISSIONS = {
     sessions: %i[index new create edit update destroy show],
     attendances: %i[report],
     marksheets: %i[new create index show],
+    notifications: %i[index],
     assignments: %i[index new create edit update show destroy]
   },
   student: {
