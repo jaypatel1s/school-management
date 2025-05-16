@@ -20,5 +20,6 @@ namespace :puma do
 end
 
 before 'puma:start', 'puma:make_dirs'
-after 'deploy:published', 'puma:restart'
-  
+
+# Start Puma after publishing if it is not running, otherwise restart it
+after 'deploy:published', 'puma:start'
