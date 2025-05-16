@@ -11,15 +11,3 @@ append :linked_dirs, 'log', 'tmp', 'storage', '.bundle', 'config/credentials'
 set :keep_releases, 5
 set :rvm_ruby_version, '3.2.0'
 
-namespace :puma do
-  task :make_dirs do
-    on roles(:app) do
-      execute "mkdir -p #{shared_path}/tmp/sockets #{shared_path}/tmp/pids"
-    end
-  end
-end
-
-before 'puma:start', 'puma:make_dirs'
-
-# Start Puma after publishing if it is not running, otherwise restart it
-after 'deploy:published', 'puma:start'
