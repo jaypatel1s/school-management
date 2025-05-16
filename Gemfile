@@ -82,9 +82,9 @@ group :development do
 
   gem 'capistrano', '~> 3.17', '>= 3.17.1'
   gem 'capistrano-bundler'
+  gem 'capistrano-passenger'
   gem 'capistrano-rails'
   gem 'capistrano-rvm'
-  gem 'capistrano-puma'
   gem 'sshkit-sudo'
 end
 
