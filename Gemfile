@@ -24,6 +24,8 @@ gem 'sass-rails', '>= 6'
 gem 'trix-rails', require: 'trix'
 gem 'uglifier', '>= 1.3.0'
 gem 'webauthn'
+gem 'ed25519', '~> 1.2'
+gem 'bcrypt_pbkdf', '~> 1.0'
 
 # Background job adapter
 # gem 'importmap-rails'
