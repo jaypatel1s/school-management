@@ -38,8 +38,8 @@ require 'capistrano/bundler'
 require 'capistrano/rvm'
 require 'capistrano/rails/assets' # for asset handling add
 require 'capistrano/rails/migrations' # for running migrations
-require 'capistrano3/puma'
-require 'capistrano3/puma/nginx'  # if you want nginx tasks too
+require 'capistrano/puma'
+require 'capistrano/puma/nginx'  # if you want nginx tasks too
 
 # Load custom tasks from `lib/capistrano/tasks` if you have any defined
 Dir.glob("lib/capistrano/tasks/*.rake").each { |r| import r }

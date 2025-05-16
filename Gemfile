@@ -84,7 +84,7 @@ group :development do
   gem 'capistrano-bundler'
   gem 'capistrano-rails'
   gem 'capistrano-rvm'
-  gem 'capistrano3-puma'
+  gem 'capistrano-puma'
   gem 'sshkit-sudo'
 end
 
