@@ -10,4 +10,5 @@ append :linked_dirs, 'log', 'tmp', 'storage', '.bundle', 'config/credentials'
 # set :linked_dirs, %w{log tmp/pids tmp/cache tmp/sockets public/uploads}
 set :keep_releases, 5
 set :rvm_ruby_version, '3.2.0'
+set :passenger_restart_with_touch, true
 
