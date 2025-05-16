@@ -3,8 +3,7 @@ set :application, 'school'
 set :repo_url, 'git@github.com:jaypatel1s/school-management.git'  # Use SSH URL
 set :branch, 'main'
 set :deploy_to, '/home/jay/public/college'
-append :linked_dirs, 'log', 'tmp', 'storage', '.bundle'
-append :linked_files, 'config/database.yml', 'config/master.key', 'config/credentials.yml.enc'
+append :linked_dirs, 'log', 'tmp', 'storage', '.bundle', 'config/credentials'
 
 
 # set :linked_files, %w{config/database.yml config/master.key config/credentials.yml.enc}
