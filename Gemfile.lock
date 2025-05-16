@@ -692,7 +692,7 @@ DEPENDENCIES
   webdrivers
 
 RUBY VERSION
-   ruby 3.2.2p53
+   ruby 3.2.0p53
 
 BUNDLED WITH
    2.5.23
