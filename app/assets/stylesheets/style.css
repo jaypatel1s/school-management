@@ -6739,11 +6739,6 @@ fieldset:disabled .btn {
 	display: flex;
 	align-items: center;
 	padding: var(--bs-toast-padding-y) var(--bs-toast-padding-x);
-	color: var(--bs-toast-header-color);
-	background-color: var(--bs-toast-header-bg);
-	background-clip: padding-box;
-	border-bottom: var(--bs-toast-border-width) solid
-		var(--bs-toast-header-border-color);
 	border-top-left-radius: calc(
 		var(--bs-toast-border-radius) - var(--bs-toast-border-width)
 	);
