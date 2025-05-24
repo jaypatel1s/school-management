@@ -19,10 +19,10 @@
         %li.nav-item
           %a.nav-link.fs-16.fw-medium.text-body.hover.px-0.px-md-2.mx-1.mx-xl-0.px-xl-4{href: "#admin"} Admin
       .othres
-        = link_to new_user_session_path, class: "btn btn-outline-primary-div py-2 px-4 fw-medium fs-16 rounded-3" do
+        = link_to '/signin', class: "btn btn-outline-primary-div py-2 px-4 fw-medium fs-16 rounded-3" do
           %i.ri-login-box-line.fs-18.position-relative.top-2
           %span.ms-1 Login
 
-        = link_to new_user_registration_path, class: "btn btn-primary-div py-2 px-4 fw-medium fs-16 text-white ms-3 rounded-3" do
+        = link_to '/signup', class: "btn btn-primary-div py-2 px-4 fw-medium fs-16 text-white ms-3 rounded-3" do
           %i.ri-user-line.fs-18
           %span.ms-1 Register

@@ -1,10 +1,9 @@
 # frozen_string_literal: true
 
-# :nodoc:
 class User < ApplicationRecord
   include Sluggable
   devise :database_authenticatable,
-         :recoverable, :rememberable, :validatable, :confirmable, :timeoutable, :trackable, :registerable, :lockable
+         :recoverable, :rememberable, :validatable, :confirmable, :timeoutable, :trackable, :registerable
   belongs_to :college
   has_one :teacher, dependent: :destroy
   has_one :student, dependent: :destroy

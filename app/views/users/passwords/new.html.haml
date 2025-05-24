@@ -1,26 +1,17 @@
-.container
-  .main-content.d-flex.flex-column.p-0
-    .m-auto.m-1230
-      .row.align-items-center
-        .col-lg-6.d-none.d-lg-block
-          = image_tag('forgot.jpg', alt: 'login', class: "rounded-3")
-        .col-lg-6
-          .mw-480.ms-lg-auto
-            %a.d-inline-block.mb-4{ href: "/" }
-              = image_tag('logo.svg', alt: 'login', class: "rounded-3 for-light-logo")
-              = image_tag('white-logo.svg', alt: 'login', class: "rounded-3 for-dark-logo")
-            %h3.fs-28.mb-2 Forgot your password?
-            %p.fw-medium.fs-16.mb-4 Enter the email address you used when you joined and we’ll send you instructions to reset your password.
-            = form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post, class: 'mb-3' }) do |f|
-              .form-group.mb-4
-                %label.label.text-secondary Email Address
-                = f.email_field :email, autofocus: true, class: 'form-control h-55', required: true, placeholder: 'Enter your email'
-              .form-group.mb-4
-                %button.btn.btn-primary.fw-medium.py-2.px-3.w-100{ type: "submit" }
-                  .d-flex.align-items-center.justify-content-center.py-1
-                    %i.material-symbols-outlined.text-white.fs-20.me-2 autorenew
-                    %span Submit
-              .form-group
-                %p
-                  Do you have an account.
-                  = link_to "Login", new_user_session_path, class: "fw-medium text-primary text-decoration-none"
+.card
+  .card-body
+    .app-brand.justify-content-center
+      %a.app-brand-link.gap-2{ href: "index.html" }
+        .app-brand-logo.demo
+    %h4.mb-2= t('devise.forget_password.password')
+    %p.mb-4= t('devise.forget_password.email_instructions')
+    = form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post, class: 'mb-3' }) do |f|
+      .mb-3
+        %label.form-label{ for: "email" }= t('devise.forget_password.email')
+        = f.email_field :email, autofocus: true, autocomplete: 'email', class: 'form-control', required: true, placeholder: 'Enter your email'
+        = print_error(resource.errors, :email)
+      %button.btn.btn-primary.d-grid.w-100= t('devise.forget_password.send_reset_link')
+    .text-center
+      %a.d-flex.align-items-center.justify-content-center{ href: new_user_session_path }
+        %i.bx.bx-chevron-left.scaleX-n1-rtl.bx-sm
+        = t('devise.forget_password.back_to_login')
