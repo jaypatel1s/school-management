@@ -137,6 +137,6 @@ Rails.application.configure do
     enable_starttls_auto: Rails.application.credentials.dig(:email, :smtp_enable_tls_auto),
     ssl: Rails.application.credentials.dig(:email, :smtp_ssl),
     tls: Rails.application.credentials.dig(:email, :smtp_tls), 
-    openssl_verify_mode:Rails.application.credentials.dig(:email, :openssl_verify_mode)
+    openssl_verify_mode:Rails.application.credentials.dig(:email, :smtp_openssl_verify_mode)
   }
 end
