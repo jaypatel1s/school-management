@@ -6,8 +6,8 @@
     %meta{content: "width=device-width,initial-scale=1", name: "viewport"}/
     = csrf_meta_tags
     = csp_meta_tag
-    = stylesheet_link_tag "admin", "data-turbo-track": "reload"
-    = javascript_include_tag 'admin'
+    = stylesheet_link_tag "application", "data-turbo-track": "reload"
+    = javascript_include_tag 'application'
     = yield :css_code
 
   %body.boxed-size
