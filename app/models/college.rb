@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# :nodoc:
 class College < ApplicationRecord
   include Sluggable
 
@@ -10,7 +11,7 @@ class College < ApplicationRecord
   has_many :courses, dependent: :destroy
   has_many :sessions, dependent: :destroy
   has_many :attendances, dependent: :destroy
-  has_many :assignments
+  has_many :assignments,  dependent: :destroy
   has_many :csv_files, dependent: :destroy
   has_many :fees, dependent: :destroy
   has_many :fee_types, dependent: :destroy

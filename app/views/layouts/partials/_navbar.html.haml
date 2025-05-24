@@ -1,12 +1,12 @@
 %body
-  %header#header-area.header-area.bg-white.mb-4.rounded-bottom-15
+  %header.header-area.bg-white.mb-4.rounded-bottom-15#header-area
     .row.align-items-center.justify-content-end
       .col-lg-8.col-sm-6
         .right-header-content.mt-2.mt-sm-0
           %ul.d-flex.align-items-center.justify-content-center.justify-content-sm-end.ps-0.mb-0.list-unstyled
             %li.header-right-item
               .dropdown.admin-profile
-                .d-xxl-flex.align-items-center.bg-transparent.border-0.text-start.p-0.cursor.dropdown-toggle{"data-bs-toggle" => "dropdown"}
+                .d-xxl-flex.align-items-center.bg-transparent.border-0.text-start.p-0.cursor.dropdown-toggle{ "data-bs-toggle" => "dropdown" }
                   .flex-shrink-0
                     = image_tag('administrator.jpg', alt: 'admin', class: 'rounded-circle wh-40 administrator')
                   .flex-grow-1.ms-2
@@ -19,36 +19,36 @@
                     .flex-shrink-0
                       = image_tag('administrator.jpg', alt: 'admin', class: 'rounded-circle wh-30 administrator')
                     .flex-grow-1.ms-2
-                      %h3.fw-medium= @profile.name
-                      %span.fs-12= @profile.role.titleize
+                      %h3.fw-medium= current_user.name
+                      %span.fs-12= current_user.role.titleize
                   %ul.admin-link.ps-0.mb-0.list-unstyled
                     %li
-                      %a.dropdown-item.d-flex.align-items-center.text-body{href: "my-profile"}
+                      %a.dropdown-item.d-flex.align-items-center.text-body{ href: "my-profile" }
                         %i.material-symbols-outlined account_circle
                         %span.ms-2 My Profile
                     %li
-                      %a.dropdown-item.d-flex.align-items-center.text-body{href: "chat"}
+                      %a.dropdown-item.d-flex.align-items-center.text-body{ href: "chat" }
                         %i.material-symbols-outlined chat
                         %span.ms-2 Messages
                     %li
-                      %a.dropdown-item.d-flex.align-items-center.text-body{href: "to-do-list"}
+                      %a.dropdown-item.d-flex.align-items-center.text-body{ href: "to-do-list" }
                         %i.material-symbols-outlined format_list_bulleted
                         %span.ms-2 My Task
                     %li
-                      %a.dropdown-item.d-flex.align-items-center.text-body{href: "my-profile"}
+                      %a.dropdown-item.d-flex.align-items-center.text-body{ href: "my-profile" }
                         %i.material-symbols-outlined credit_card
                         %span.ms-2 Billing
                   %ul.admin-link.ps-0.mb-0.list-unstyled
                     %li
-                      %a.dropdown-item.d-flex.align-items-center.text-body{href: "settings"}
+                      %a.dropdown-item.d-flex.align-items-center.text-body{ href: "settings" }
                         %i.material-symbols-outlined settings
                         %span.ms-2 Settings
                     %li
-                      %a.dropdown-item.d-flex.align-items-center.text-body{href: "tickets"}
+                      %a.dropdown-item.d-flex.align-items-center.text-body{ href: "tickets" }
                         %i.material-symbols-outlined support
                         %span.ms-2 Support
                     %li
-                      %a.dropdown-item.d-flex.align-items-center.text-body{href: "lock-screen"}
+                      %a.dropdown-item.d-flex.align-items-center.text-body{ href: "lock-screen" }
                         %i.material-symbols-outlined lock
                         %span.ms-2 Lock Screen
                     %li

@@ -1,7 +1,10 @@
-class FeeType < ApplicationRecord
-   include Sluggable
+# frozen_string_literal: true
 
-   belongs_to :college
-   has_many :fees, dependent: :destroy
-   validates :name, presence: true
+# :nodoc:
+class FeeType < ApplicationRecord
+  include Sluggable
+
+  belongs_to :college
+  has_many :fees, dependent: :destroy
+  validates :name, presence: true
 end
