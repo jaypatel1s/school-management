@@ -1,5 +1,7 @@
+# frozen_string_literal: true
+
 devise_for :users, path: '', path_names: {
-  sign_in: 'signin', sign_up: 'signup', sign_out: 'logout'
+  sign_in: 'signin', sign_up: 'signup', sign_out: 'logout', password: 'reset_password'
 }, controllers: {
   sessions: 'users/sessions', passwords: 'users/passwords', registrations: 'users/registrations',
   confirmations: 'users/confirmations'
