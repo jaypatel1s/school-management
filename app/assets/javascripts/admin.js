@@ -1,4 +1,5 @@
-//= require jquery
+//= require jquery.min
+//= require jquery_ujs
 //= require 'bootstrap.bundle.min'
 //= require 'sidebar-menu'
 //= require 'dragdrop'
