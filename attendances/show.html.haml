@@ -1,0 +1,58 @@
+.content-wrapper
+  .page-header.row
+    .col-md-7
+      %h3.page-title
+        %span.page-title-icon.bg-primary.text-white.mr-2
+          %i.fa.fa-calendar
+        Attendance
+        %small
+          %i.fa.fa-arrow-right
+          = @attendance.employee.name
+        %small
+          %i.fa.fa-arrow-right
+          View
+    .col-md-5.mt-2.mt-md-0.text-right
+      %a.btn.btn-sm.btn-success{href: admin_attendances_path, data: {toggle: 'tooltip', placement: 'left'}, title: 'Attendances'}
+        %i.fa.fa-reply
+      - if current_employee.access?('attendances', 'edit')
+        %a.btn.btn-sm.btn-warning{href: edit_admin_attendance_path(@attendance.id), data: {toggle: 'tooltip', placement: 'left'}, title: 'Edit Attendance'}
+          %i.fa.fa-pencil
+      - if current_employee.access?('attendances', 'add')
+        %a.btn.btn-sm.btn-primary{href: new_admin_attendance_path, data: {toggle: 'tooltip', placement: 'left'}, title: 'New Attendance'}
+          %i.fa.fa-plus
+  .row
+    .col-12.grid-margin
+      .card
+        .card-body
+          .row
+            .col-md-4.form-group
+              %label.col-form-label
+                Employee
+              .form-control
+                = @attendance.employee.name
+            .col-md-4.form-group
+              %label.col-form-label
+                Date
+              .form-control
+                = show_date(@attendance.date)
+            .col-md-4.form-group
+              %label.col-form-label
+                State
+              .form-control
+                = @attendance.state.titleize if @attendance.state.present?
+          .row
+            .col-md-4.form-group
+              %label.col-form-label
+                Start Time
+              .form-control
+                = show_time(@attendance.start_time)
+            .col-md-4.form-group
+              %label.col-form-label
+                End Time
+              .form-control
+                = show_time(@attendance.end_time)
+            .col-md-4.form-group
+              %label.col-form-label
+                Work Time
+              .form-control
+                = show_time(@attendance.work_time)
