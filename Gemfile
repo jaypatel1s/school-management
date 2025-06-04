@@ -33,6 +33,7 @@ gem 'sidekiq'
 gem 'blamer'
 gem 'csv'
 gem 'paper_trail'
+gem 'turbolinks', '~> 5.2.0'
 
 # Use Active Storage
 gem 'active_storage_validations'
