@@ -1,9 +1,7 @@
-/ Footer
-%footer.content-footer.footer.bg-footer-theme
-  .container-xxl.d-flex.flex-wrap.justify-content-between.py-2.flex-md-row.flex-column
-    .mb-2.mb-md-0
-      ©
-      :javascript
-        document.write(new Date().getFullYear());
-      = t('layouts.footer.atkot')
-/ / Footer
+%footer.footer
+  .d-sm-flex.justify-content-center.justify-content-sm-between
+    %span.text-center.text-sm-left.d-block.d-sm-inline-block
+      &#xA9; #{Time.zone.today.year} School Management System. All rights reserved
+    %span.float-none.float-sm-right.d-block.mt-1.mt-sm-0.text-center
+      %a.text-primary
+        School Pvt Ltd

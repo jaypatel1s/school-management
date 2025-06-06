@@ -1,13 +1,12 @@
 /*
- *= require 'apexcharts'
- *= require 'fullcalendar.main'
- *= require 'google-icon'
- *= require 'prism'
- *= require 'quill.snow'
- *= require 'rangeslider'
- *= require 'remixicon'
- *= require 'sidebar-menu'
- *= require 'simplebar'
- *= require 'style'
- *= require 'swiper-bundle.min'
+ *= require select2/select2.min
+ *= require select2/select2-bootstrap.min
+ *= require fontawesome/fontawesome.min
+ *= require bootstrap/datetimepicker.min
+ *= require daterangepicker/daterangepicker
+ *= require jquery-ui/jquery-ui
+ *= require notify/notify
+ *= require jquery-tags/jquery-tags
+ *= require trix
+ *= require common/style
  */

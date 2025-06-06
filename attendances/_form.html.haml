@@ -1,0 +1,64 @@
+.row
+  .col-md-12.grid-margin.stretch-card
+    .card
+      .card-body
+        = form_with model: [:admin, @attendance], local: true, html: { multipart: true } do |f|
+          .row
+            %div{class: "col-md-6 form-group #{error?(@attendance.errors, :employee_id)}"}
+              = f.label :employee_id, class: 'col-form-label required' do
+                Employee
+                %span
+                  %i.fa.fa-question-circle-o{'data-toggle': 'tooltip', title: 'Employee of Attendance'}
+              = f.select :employee_id, options_from_collection_for_select(select_employees(active: true), :id, :name, f.object.employee_id), {include_blank: 'Select Employee'}, class: 'form-control select2-field', required: true
+              = print_error(@attendance.errors, :employee_id)
+            %div{class: "col-md-6 form-group #{error?(@attendance.errors, :date)}"}
+              = f.label :date, class: 'col-form-label required' do
+                Date
+                %span
+                  %i.fa.fa-question-circle-o{'data-toggle': 'tooltip', title: 'Attendance Date'}
+              .input-group.date.datepicker#attendance_date{'data-target-input': 'nearest'}
+                .input-group-prepend{data: {target: '#attendance_date', toggle: 'datetimepicker'}}
+                  %span.fa.fa-calendar.input-group-text
+                = f.text_field :date, class: 'form-control', autocomplete: 'off', required: true, data: {target: '#attendance_date', toggle: 'datetimepicker'}, value: show_date(f.object.date), placeholder: 'Date'
+              = print_error(@attendance.errors, :date)
+
+          .row
+            %div{class: "col-md-4 form-group #{error?(@attendance.errors, :start_time)}"}
+              = f.label :start_time, class: 'col-form-label' do
+                Start Time
+                %span
+                  %i.fa.fa-question-circle-o{'data-toggle': 'tooltip', title: 'Start Time'}
+              .input-group.date.timepicker#start_time{'data-target-input': 'nearest'}
+                .input-group-prepend{data: {target: '#start_time', toggle: 'datetimepicker'}}
+                  %span.fa.fa-clock-o.input-group-text
+                = f.text_field :start_time, class: 'form-control', autocomplete: 'off', data: {target: '#start_time', toggle: 'datetimepicker'}, value: show_time(f.object.start_time), placeholder: 'Start Time'
+            %div{class: "col-md-4 form-group #{error?(@attendance.errors, :end_time)}"}
+              = f.label :end_time, class: 'col-form-label' do
+                End Time
+                %span
+                  %i.fa.fa-question-circle-o{'data-toggle': 'tooltip', title: 'End Time'}
+              .input-group.date.timepicker#end_time{'data-target-input': 'nearest'}
+                .input-group-prepend{data: {target: '#end_time', toggle: 'datetimepicker'}}
+                  %span.fa.fa-clock-o.input-group-text
+                = f.text_field :end_time, class: 'form-control', autocomplete: 'off', data: {target: '#end_time', toggle: 'datetimepicker'}, value: show_time(f.object.end_time), placeholder: 'End Time'
+            %div{class: "col-md-4 form-group #{error?(@attendance.errors, :work_time)}"}
+              = f.label :work_time, class: 'col-form-label' do
+                Work Time
+                %span
+                  %i.fa.fa-question-circle-o{'data-toggle': 'tooltip', title: 'Work Time'}
+              .input-group.date.timepicker#work_time{'data-target-input': 'nearest'}
+                .input-group-prepend{data: {target: '#work_time', toggle: 'datetimepicker'}}
+                  %span.fa.fa-clock-o.input-group-text
+                = f.text_field :work_time, class: 'form-control', autocomplete: 'off', data: {target: '#work_time', toggle: 'datetimepicker'}, value: show_time(f.object.work_time), placeholder: 'Work Time'
+              = print_error(@attendance.errors, :work_time)
+          .row.mt-4
+            .col-12
+              = f.submit "Submit", class: "btn btn-primary btn-block"
+
+- content_for :js_code do
+  - if @attendance.errors[:base].present?
+    :javascript
+      $(document).on('turbolinks:load', function(){
+        var error_msg   = "#{@attendance.errors[:base].uniq.join(', ')}"
+        display_notify('danger', error_msg);
+      });

@@ -35,7 +35,7 @@ module Principals
     def update
       if @course.update(courses_params)
         flash[:success] = 'Courses Updated Successfully.'
-        redirect_to college_s_courses_path(current_college.slug)
+        redirect_to college_principals_courses_path(current_college.slug)
       else
         flash[:alert] = @course.errors.full_messages
         render :edit

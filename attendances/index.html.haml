@@ -1,0 +1,142 @@
+.content-wrapper
+  .page-header.row
+    .col-md-7
+      %h3.page-title
+        %span.page-title-icon.bg-primary.text-white.mr-2
+          %i.fa.fa-calendar
+        Attendances
+    .col-md-5.mt-2.mt-md-0
+      - if current_employee.access?('attendances', 'add')
+        .d-flex.justify-content-end
+          %a.btn.btn-sm.btn-primary.mr-2{href: new_admin_attendance_path, data: {toggle: 'tooltip', placement: 'left'}, title: 'New Attendance'}
+            %i.fa.fa-plus
+          .dropdown
+            %button#dropdownMenuButton.btn.btn-primary.dropdown-toggle{'aria-expanded': 'false', 'aria-haspopup': 'true', 'data-toggle':  'dropdown', type: 'button'}
+              Import
+            .dropdown-menu{'aria-labelledby': 'dropdownMenuButton'}
+              - if current_employee.access?('import_attendances', 'index')
+                %a.dropdown-item{href: admin_import_attendances_path} Import Attendances
+              - if current_employee.access?('import_ideal_activities', 'index')
+                %a.dropdown-item{href: admin_import_ideal_activities_path} Import Ideal Activity
+  .row
+    .col-12.grid-margin
+      .card
+        .card-body
+          = form_tag admin_attendances_path, method: :get, id: 'attendance-form' do |f|
+            .row
+              .col-md-4.col-sm-6.form-group.mb-2.mb-md-0
+                %label.col-form-label Period
+                = hidden_field_tag :start_date, @start_date
+                = hidden_field_tag :end_date, @end_date
+                #daterangepicker-div
+                  %i.fa.fa-calendar.mr-2
+                  %span#selected-date
+                  %i.fa.fa-caret-down.pull-right
+              .col-lg-3.col-md-3.col-sm-6.mb-2.mb-md-0.form-group
+                %label.col-form-label Employee
+                = select_tag :employee_ids, options_from_collection_for_select(select_employees(active: true), :id, :name, params[:employee_ids]), class: 'form-control form-field multiselect-employees', multiple: true
+              .col-lg-3.col-md-3.col-sm-6.mb-2.mb-md-0.form-group
+                %label.col-form-label State
+                = select_tag :states, options_for_select(attendance_states, params[:states]), class: 'form-control form-field multiselect-states', multiple: true
+              .col-lg-2.col-md-3.col-sm-6.form-group.mb-2.mb-md-0
+                %label.col-form-label.d-block= "&nbsp".html_safe
+                .d-flex.justify-content-end
+                  %button.btn.btn-primary.mr-2{type: 'submit', data: {toggle: 'tooltip', placement: 'left'}, title: 'Filter' }
+                    %i.fa.fa-search
+                  %a.btn.btn-info{href: admin_attendances_path, type: 'submit', data: {toggle: 'tooltip', placement: 'left'}, title: 'Clear' }
+                    %i.fa.fa-refresh
+
+  .row
+    .col-12.grid-margin
+      .card
+        .card-body
+          .table-responsive
+            - if @attendances.present?
+              %table.table.table-hover
+                %thead
+                  %tr.table-primary
+                    %th Employee
+                    %th Date
+                    %th Idle Activity
+                    %th Unproductive Activity
+                    %th Total Time
+                    %th Work Time
+                    %th Status
+                    %th.text-right{ width: '10%' } Action
+                %tbody
+                  - @attendances.each do |attendance|
+                    %tr{class: (attendance.extra_work? ? 'text-warning' : '')}
+                      %td= attendance.employee.name
+                      %td= show_date(attendance.date)
+                      %td
+                        - if attendance.idle_time.nil? && attendance.idle_percentage.nil?
+                          = '-'
+                        - else
+                          = show_timer(attendance.idle_time)
+                          = '&nbsp'.html_safe
+                          = "(#{attendance.idle_percentage}%)" if attendance.idle_percentage.present?
+                      %td
+                        - if attendance.unproductive_time.nil? && attendance.unproductive.nil?
+                          = '-'
+                        - else
+                          = show_timer(attendance.unproductive_time)
+                          = '&nbsp'.html_safe
+                          = "(#{attendance.unproductive}%)" if attendance.unproductive.present?
+                      %td{'data-toggle': 'tooltip', 'data-html': 'true', title: "Start Time: #{show_time(attendance.start_time)}</br> End Time: #{show_time(attendance.end_time)}", class: "#{attendance.check_total_or_work_time('total_time', attendance)} #{(attendance.extra_work? ? 'text-warning' : '')}", style: "color: #212529;"}
+                        - if attendance.start_time.nil? && attendance.end_time.nil?
+                          = '-'
+                        - else
+                          = attendance.total_time(attendance.start_time, attendance.end_time)
+                      %td{class: attendance.check_total_or_work_time('work_time', attendance)}
+                        - if attendance.work_time.nil?
+                          = '-'
+                        - else
+                          = show_time(attendance.work_time)
+                      %td= attendance.state.titleize if attendance.state.present?
+                      %td.text-right
+                        - if current_employee.access?('attendances', 'view')
+                          = link_to raw("<i class='fa fa-eye'></i>"), admin_attendance_path(attendance.id), {class: 'btn-sm btn-info px-2 py-1', 'data-toggle': 'tooltip', title: 'View'}
+                        - if current_employee.access?('attendances', 'edit')
+                          = link_to raw("<i class='fa fa-pencil-square-o'></i>"), edit_admin_attendance_path(attendance.id), {class: 'btn-sm btn-warning px-2 py-1', 'data-toggle': 'tooltip', title: 'Edit'}
+                        - if current_employee.access?('attendances', 'delete')
+                          = link_to raw("<i class='fa fa-trash-o'></i>"), admin_attendance_path(attendance.id), {class: 'btn-sm btn-danger px-2 py-1', 'data-toggle': 'tooltip', 'data-confirm': 'Are you sure?', title: 'Delete', method: :delete}
+            - else
+              %center
+                %h6
+                  No Attendances Found.
+                  %br
+                  %br
+                  - if current_employee.access?('attendances', 'add')
+                    Create New
+                    %a.btn.btn-sm.btn-primary{href: new_admin_attendance_path, data: {toggle: 'tooltip', placement: 'left'}, title: 'New Attendance'}
+                      %i.fa.fa-plus
+
+          - if @attendances.present?
+            .mt-4.pt-3.float-right
+              = render partial: 'pagy/bootstrap_nav', locals: { pagy: @pagy }
+
+- content_for :css_code do
+  :css
+    .tab-content {
+      border: none;
+      padding: 0px;
+    }
+    .nav-tabs {
+      border-bottom: none;
+    }
+
+- content_for :css_file do
+  = stylesheet_link_tag 'multiselect/multiselect.css', 'data-turbolinks-track': 'reload'
+
+- content_for :js_file do
+  = javascript_include_tag 'multiselect/multiselect.min.js', 'data-turbolinks-track': 'reload'
+  = javascript_include_tag 'daterangepicker/custom.js', 'data-turbolinks-track': 'reload'
+
+- content_for :js_code do
+  :javascript
+    $(document).on('turbolinks:load', function(){
+      $('.multiselect-employees').multiselect();
+      $('.multiselect-states').multiselect();
+      document.getElementById('employee_ids_input').placeholder = 'Select Employees';
+      document.getElementById('states_input').placeholder = 'Select Statuses';
+    })

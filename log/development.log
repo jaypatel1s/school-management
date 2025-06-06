@@ -1830,3 +1830,1123 @@ Processing by DashboardController#index as HTML
 Completed 200 OK in 102ms (Views: 96.3ms | ActiveRecord: 4.6ms | Allocations: 73535)
 
 
+Started GET "/" for ::1 at 2025-06-04 14:07:18 +0530
+  [1m[36mActiveRecord::SchemaMigration Load (1.6ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by HomeController#index as HTML
+  Rendering layout layouts/landing.html.haml
+  Rendering home/index.html.haml within layouts/landing
+  Rendered home/index.html.haml within layouts/landing (Duration: 178.1ms | Allocations: 183466)
+  Rendered layouts/partials/_landing_navbar.html.haml (Duration: 16.3ms | Allocations: 14438)
+  Rendered layout layouts/landing.html.haml (Duration: 206.0ms | Allocations: 205810)
+Completed 200 OK in 214ms (Views: 210.5ms | ActiveRecord: 0.0ms | Allocations: 208236)
+
+
+Started GET "/signin" for ::1 at 2025-06-04 14:07:23 +0530
+Processing by Users::SessionsController#new as HTML
+Completed 500 Internal Server Error in 88ms (ActiveRecord: 26.8ms | Allocations: 23258)
+
+
+  
+ActionView::MissingTemplate (Missing template layouts/authentication with {:locale=>[:en], :formats=>[:html], :variants=>[], :handlers=>[:raw, :erb, :html, :builder, :ruby, :haml, :arb]}.
+
+Searched in:
+  * "/home/scpl/school-management/app/views"
+  * "/usr/local/rvm/gems/ruby-3.2.2/gems/devise-4.9.4/app/views"
+  * "/usr/local/rvm/gems/ruby-3.2.2/gems/activeadmin-3.3.0/app/views"
+  * "/usr/local/rvm/gems/ruby-3.2.2/gems/kaminari-core-1.2.2/app/views"
+  * "/usr/local/rvm/gems/ruby-3.2.2/gems/actiontext-7.1.5.1/app/views"
+  * "/usr/local/rvm/gems/ruby-3.2.2/gems/actionmailbox-7.1.5.1/app/views"
+):
+  
+actionview (7.1.5.1) lib/action_view/path_set.rb:42:in `find'
+actionview (7.1.5.1) lib/action_view/lookup_context.rb:131:in `find'
+actionview (7.1.5.1) lib/action_view/renderer/template_renderer.rb:102:in `resolve_layout'
+actionview (7.1.5.1) lib/action_view/renderer/template_renderer.rb:109:in `resolve_layout'
+actionview (7.1.5.1) lib/action_view/renderer/template_renderer.rb:89:in `find_layout'
+actionview (7.1.5.1) lib/action_view/renderer/template_renderer.rb:72:in `render_with_layout'
+actionview (7.1.5.1) lib/action_view/renderer/template_renderer.rb:59:in `render_template'
+actionview (7.1.5.1) lib/action_view/renderer/template_renderer.rb:11:in `render'
+actionview (7.1.5.1) lib/action_view/renderer/renderer.rb:63:in `render_template_to_object'
+actionview (7.1.5.1) lib/action_view/renderer/renderer.rb:31:in `render_to_object'
+actionview (7.1.5.1) lib/action_view/rendering.rb:135:in `block in _render_template'
+actionview (7.1.5.1) lib/action_view/base.rb:290:in `in_rendering_context'
+actionview (7.1.5.1) lib/action_view/rendering.rb:134:in `_render_template'
+actionpack (7.1.5.1) lib/action_controller/metal/streaming.rb:256:in `_render_template'
+actionview (7.1.5.1) lib/action_view/rendering.rb:121:in `render_to_body'
+actionpack (7.1.5.1) lib/action_controller/metal/rendering.rb:158:in `render_to_body'
+actionpack (7.1.5.1) lib/action_controller/metal/renderers.rb:141:in `render_to_body'
+actionpack (7.1.5.1) lib/abstract_controller/rendering.rb:27:in `render'
+actionpack (7.1.5.1) lib/action_controller/metal/rendering.rb:139:in `render'
+actionpack (7.1.5.1) lib/action_controller/metal/instrumentation.rb:29:in `block (2 levels) in render'
+benchmark (0.4.0) lib/benchmark.rb:323:in `realtime'
+activesupport (7.1.5.1) lib/active_support/core_ext/benchmark.rb:14:in `ms'
+actionpack (7.1.5.1) lib/action_controller/metal/instrumentation.rb:29:in `block in render'
+actionpack (7.1.5.1) lib/action_controller/metal/instrumentation.rb:98:in `cleanup_view_runtime'
+activerecord (7.1.5.1) lib/active_record/railties/controller_runtime.rb:39:in `cleanup_view_runtime'
+actionpack (7.1.5.1) lib/action_controller/metal/instrumentation.rb:28:in `render'
+responders (3.1.1) lib/action_controller/responder.rb:245:in `default_render'
+responders (3.1.1) lib/action_controller/responder.rb:175:in `to_html'
+responders (3.1.1) lib/action_controller/responder.rb:168:in `respond'
+responders (3.1.1) lib/action_controller/responder.rb:161:in `call'
+responders (3.1.1) lib/action_controller/respond_with.rb:216:in `respond_with'
+devise (4.9.4) app/controllers/devise/sessions_controller.rb:14:in `new'
+actionpack (7.1.5.1) lib/action_controller/metal/basic_implicit_render.rb:6:in `send_action'
+actionpack (7.1.5.1) lib/abstract_controller/base.rb:224:in `process_action'
+actionpack (7.1.5.1) lib/action_controller/metal/rendering.rb:165:in `process_action'
+actionpack (7.1.5.1) lib/abstract_controller/callbacks.rb:259:in `block in process_action'
+activesupport (7.1.5.1) lib/active_support/callbacks.rb:121:in `block in run_callbacks'
+actiontext (7.1.5.1) lib/action_text/rendering.rb:23:in `with_renderer'
+actiontext (7.1.5.1) lib/action_text/engine.rb:69:in `block (4 levels) in <class:Engine>'
+activesupport (7.1.5.1) lib/active_support/callbacks.rb:130:in `instance_exec'
+activesupport (7.1.5.1) lib/active_support/callbacks.rb:130:in `block in run_callbacks'
+activesupport (7.1.5.1) lib/active_support/callbacks.rb:141:in `run_callbacks'
+actionpack (7.1.5.1) lib/abstract_controller/callbacks.rb:258:in `process_action'
+actionpack (7.1.5.1) lib/action_controller/metal/rescue.rb:25:in `process_action'
+actionpack (7.1.5.1) lib/action_controller/metal/instrumentation.rb:74:in `block in process_action'
+activesupport (7.1.5.1) lib/active_support/notifications.rb:206:in `block in instrument'
+activesupport (7.1.5.1) lib/active_support/notifications/instrumenter.rb:58:in `instrument'
+activesupport (7.1.5.1) lib/active_support/notifications.rb:206:in `instrument'
+actionpack (7.1.5.1) lib/action_controller/metal/instrumentation.rb:73:in `process_action'
+actionpack (7.1.5.1) lib/action_controller/metal/params_wrapper.rb:261:in `process_action'
+activerecord (7.1.5.1) lib/active_record/railties/controller_runtime.rb:32:in `process_action'
+actionpack (7.1.5.1) lib/abstract_controller/base.rb:160:in `process'
+actionview (7.1.5.1) lib/action_view/rendering.rb:40:in `process'
+actionpack (7.1.5.1) lib/action_controller/metal.rb:227:in `dispatch'
+actionpack (7.1.5.1) lib/action_controller/metal.rb:309:in `dispatch'
+actionpack (7.1.5.1) lib/action_dispatch/routing/route_set.rb:49:in `dispatch'
+actionpack (7.1.5.1) lib/action_dispatch/routing/route_set.rb:32:in `serve'
+actionpack (7.1.5.1) lib/action_dispatch/routing/mapper.rb:30:in `block in <class:Constraints>'
+actionpack (7.1.5.1) lib/action_dispatch/routing/mapper.rb:60:in `serve'
+actionpack (7.1.5.1) lib/action_dispatch/journey/router.rb:51:in `block in serve'
+actionpack (7.1.5.1) lib/action_dispatch/journey/router.rb:131:in `block in find_routes'
+actionpack (7.1.5.1) lib/action_dispatch/journey/router.rb:124:in `each'
+actionpack (7.1.5.1) lib/action_dispatch/journey/router.rb:124:in `find_routes'
+actionpack (7.1.5.1) lib/action_dispatch/journey/router.rb:32:in `serve'
+actionpack (7.1.5.1) lib/action_dispatch/routing/route_set.rb:882:in `call'
+bullet (8.0.1) lib/bullet/rack.rb:17:in `call'
+warden (1.2.9) lib/warden/manager.rb:36:in `block in call'
+warden (1.2.9) lib/warden/manager.rb:34:in `catch'
+warden (1.2.9) lib/warden/manager.rb:34:in `call'
+rack (3.1.12) lib/rack/tempfile_reaper.rb:20:in `call'
+rack (3.1.12) lib/rack/etag.rb:29:in `call'
+rack (3.1.12) lib/rack/conditional_get.rb:31:in `call'
+rack (3.1.12) lib/rack/head.rb:15:in `call'
+actionpack (7.1.5.1) lib/action_dispatch/http/permissions_policy.rb:36:in `call'
+actionpack (7.1.5.1) lib/action_dispatch/http/content_security_policy.rb:36:in `call'
+rack-session (2.1.0) lib/rack/session/abstract/id.rb:274:in `context'
+rack-session (2.1.0) lib/rack/session/abstract/id.rb:268:in `call'
+actionpack (7.1.5.1) lib/action_dispatch/middleware/cookies.rb:689:in `call'
+activerecord (7.1.5.1) lib/active_record/migration.rb:655:in `call'
+actionpack (7.1.5.1) lib/action_dispatch/middleware/callbacks.rb:29:in `block in call'
+activesupport (7.1.5.1) lib/active_support/callbacks.rb:101:in `run_callbacks'
+actionpack (7.1.5.1) lib/action_dispatch/middleware/callbacks.rb:28:in `call'
+actionpack (7.1.5.1) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (7.1.5.1) lib/action_dispatch/middleware/actionable_exceptions.rb:16:in `call'
+actionpack (7.1.5.1) lib/action_dispatch/middleware/debug_exceptions.rb:29:in `call'
+actionpack (7.1.5.1) lib/action_dispatch/middleware/show_exceptions.rb:31:in `call'
+railties (7.1.5.1) lib/rails/rack/logger.rb:37:in `call_app'
+railties (7.1.5.1) lib/rails/rack/logger.rb:24:in `block in call'
+activesupport (7.1.5.1) lib/active_support/tagged_logging.rb:139:in `block in tagged'
+activesupport (7.1.5.1) lib/active_support/tagged_logging.rb:39:in `tagged'
+activesupport (7.1.5.1) lib/active_support/tagged_logging.rb:139:in `tagged'
+activesupport (7.1.5.1) lib/active_support/broadcast_logger.rb:241:in `method_missing'
+railties (7.1.5.1) lib/rails/rack/logger.rb:24:in `call'
+sprockets-rails (3.5.2) lib/sprockets/rails/quiet_assets.rb:17:in `call'
+actionpack (7.1.5.1) lib/action_dispatch/middleware/remote_ip.rb:92:in `call'
+request_store (1.7.0) lib/request_store/middleware.rb:19:in `call'
+actionpack (7.1.5.1) lib/action_dispatch/middleware/request_id.rb:28:in `call'
+rack (3.1.12) lib/rack/method_override.rb:28:in `call'
+rack (3.1.12) lib/rack/runtime.rb:24:in `call'
+activesupport (7.1.5.1) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (7.1.5.1) lib/action_dispatch/middleware/server_timing.rb:59:in `block in call'
+actionpack (7.1.5.1) lib/action_dispatch/middleware/server_timing.rb:24:in `collect_events'
+actionpack (7.1.5.1) lib/action_dispatch/middleware/server_timing.rb:58:in `call'
+actionpack (7.1.5.1) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (7.1.5.1) lib/action_dispatch/middleware/static.rb:25:in `call'
+rack (3.1.12) lib/rack/sendfile.rb:114:in `call'
+actionpack (7.1.5.1) lib/action_dispatch/middleware/host_authorization.rb:141:in `call'
+railties (7.1.5.1) lib/rails/engine.rb:536:in `call'
+puma (6.4.3) lib/puma/configuration.rb:272:in `call'
+puma (6.4.3) lib/puma/request.rb:100:in `block in handle_request'
+puma (6.4.3) lib/puma/thread_pool.rb:378:in `with_force_shutdown'
+puma (6.4.3) lib/puma/request.rb:99:in `handle_request'
+puma (6.4.3) lib/puma/server.rb:464:in `process_client'
+puma (6.4.3) lib/puma/server.rb:245:in `block in run'
+puma (6.4.3) lib/puma/thread_pool.rb:155:in `block in spawn_thread'
+Started GET "/signin" for ::1 at 2025-06-04 14:09:21 +0530
+Processing by Users::SessionsController#new as HTML
+  Rendering layout layouts/authentication.html.haml
+  Rendering users/sessions/new.html.haml within layouts/authentication
+  Rendered users/sessions/new.html.haml within layouts/authentication (Duration: 22.7ms | Allocations: 20555)
+  Rendered layout layouts/authentication.html.haml (Duration: 43.6ms | Allocations: 36271)
+Completed 500 Internal Server Error in 70ms (ActiveRecord: 5.5ms | Allocations: 47020)
+
+
+  
+ActionView::Template::Error (The asset "logo_64.png" is not present in the asset pipeline.
+):
+     7:     %meta{content: 'IE=edge', 'http-equiv': 'X-UA-Compatible'}
+     8:     %title Internal Management Software - Softices
+     9: 
+    10:     %link{href: image_url('logo_64.png'), rel: 'shortcut icon', type: 'image/png'}
+    11:     %link{href: image_url('logo_64.png'), rel: 'apple-touch-icon'}
+    12:     %link{href: image_url('logo_152.png'), rel: 'apple-touch-icon', sizes: '152x152'}
+    13:     %link{href: image_url('logo_167.png'), rel: 'apple-touch-icon', sizes: '167x167'}
+  
+app/views/layouts/authentication.html.haml:10
+Started GET "/signin" for ::1 at 2025-06-04 14:10:52 +0530
+Processing by Users::SessionsController#new as HTML
+  Rendering layout layouts/authentication.html.haml
+  Rendering users/sessions/new.html.haml within layouts/authentication
+  Rendered users/sessions/new.html.haml within layouts/authentication (Duration: 21.4ms | Allocations: 19786)
+  Rendered layout layouts/authentication.html.haml (Duration: 265.6ms | Allocations: 109983)
+Completed 500 Internal Server Error in 291ms (ActiveRecord: 4.7ms | Allocations: 120717)
+
+
+  
+ActionView::Template::Error (couldn't find file 'select2/select2.min' with type 'text/css'
+Checked in these paths: 
+  /home/scpl/school-management/app/assets/config
+  /home/scpl/school-management/app/assets/fonts
+  /home/scpl/school-management/app/assets/images
+  /home/scpl/school-management/app/assets/javascripts
+  /home/scpl/school-management/app/assets/stylesheets
+  /home/scpl/school-management/vendor/assets/fonts
+  /home/scpl/school-management/vendor/assets/javascripts
+  /home/scpl/school-management/vendor/assets/stylesheets
+  /usr/local/rvm/gems/ruby-3.2.2/gems/trix-rails-2.4.0/vendor/assets/javascripts
+  /usr/local/rvm/gems/ruby-3.2.2/gems/trix-rails-2.4.0/vendor/assets/stylesheets
+  /usr/local/rvm/gems/ruby-3.2.2/gems/cocoon-1.2.15/app/assets/javascripts
+  /usr/local/rvm/gems/ruby-3.2.2/gems/arctic_admin-4.3.1/app/assets/fonts
+  /usr/local/rvm/gems/ruby-3.2.2/gems/arctic_admin-4.3.1/app/assets/javascripts
+  /usr/local/rvm/gems/ruby-3.2.2/gems/arctic_admin-4.3.1/app/assets/stylesheets
+  /usr/local/rvm/gems/ruby-3.2.2/gems/activeadmin-3.3.0/app/assets/javascripts
+  /usr/local/rvm/gems/ruby-3.2.2/gems/activeadmin-3.3.0/app/assets/stylesheets
+  /usr/local/rvm/gems/ruby-3.2.2/gems/activeadmin-3.3.0/vendor/assets/javascripts
+  /usr/local/rvm/gems/ruby-3.2.2/gems/jquery-rails-4.6.0/vendor/assets/javascripts
+  /usr/local/rvm/gems/ruby-3.2.2/gems/formtastic-5.0.0/app/assets/stylesheets
+  /usr/local/rvm/gems/ruby-3.2.2/gems/actiontext-7.1.5.1/app/assets/javascripts
+  /usr/local/rvm/gems/ruby-3.2.2/gems/actiontext-7.1.5.1/app/assets/stylesheets
+  /usr/local/rvm/gems/ruby-3.2.2/gems/actioncable-7.1.5.1/app/assets/javascripts
+  /usr/local/rvm/gems/ruby-3.2.2/gems/activestorage-7.1.5.1/app/assets/javascripts
+  /usr/local/rvm/gems/ruby-3.2.2/gems/actionview-7.1.5.1/app/assets/javascripts
+  /usr/local/rvm/gems/ruby-3.2.2/gems/font-awesome-sass-6.7.2/assets/stylesheets
+  /usr/local/rvm/gems/ruby-3.2.2/gems/font-awesome-sass-6.7.2/assets/fonts):
+  
+sprockets (4.2.1) lib/sprockets/resolve.rb:62:in `resolve!'
+sprockets (4.2.1) lib/sprockets/directive_processor.rb:427:in `resolve'
+sprockets (4.2.1) lib/sprockets/directive_processor.rb:216:in `process_require_directive'
+sprockets (4.2.1) lib/sprockets/directive_processor.rb:189:in `block in process_directives'
+sprockets (4.2.1) lib/sprockets/directive_processor.rb:187:in `each'
+sprockets (4.2.1) lib/sprockets/directive_processor.rb:187:in `process_directives'
+sprockets (4.2.1) lib/sprockets/directive_processor.rb:84:in `_call'
+sprockets (4.2.1) lib/sprockets/directive_processor.rb:65:in `call'
+sprockets (4.2.1) lib/sprockets/processor_utils.rb:84:in `call_processor'
+sprockets (4.2.1) lib/sprockets/processor_utils.rb:66:in `block in call_processors'
+sprockets (4.2.1) lib/sprockets/processor_utils.rb:65:in `reverse_each'
+sprockets (4.2.1) lib/sprockets/processor_utils.rb:65:in `call_processors'
+sprockets (4.2.1) lib/sprockets/loader.rb:184:in `load_from_unloaded'
+sprockets (4.2.1) lib/sprockets/loader.rb:59:in `block in load'
+sprockets (4.2.1) lib/sprockets/loader.rb:339:in `fetch_asset_from_dependency_cache'
+sprockets (4.2.1) lib/sprockets/loader.rb:43:in `load'
+sprockets (4.2.1) lib/sprockets/cached_environment.rb:44:in `block in load'
+concurrent-ruby (1.3.5) lib/concurrent-ruby/concurrent/map.rb:207:in `block in fetch_or_store'
+concurrent-ruby (1.3.5) lib/concurrent-ruby/concurrent/map.rb:187:in `fetch'
+concurrent-ruby (1.3.5) lib/concurrent-ruby/concurrent/map.rb:206:in `fetch_or_store'
+sprockets (4.2.1) lib/sprockets/cached_environment.rb:44:in `load'
+sprockets (4.2.1) lib/sprockets/bundle.rb:27:in `call'
+sprockets (4.2.1) lib/sprockets/processor_utils.rb:84:in `call_processor'
+sprockets (4.2.1) lib/sprockets/processor_utils.rb:66:in `block in call_processors'
+sprockets (4.2.1) lib/sprockets/processor_utils.rb:65:in `reverse_each'
+sprockets (4.2.1) lib/sprockets/processor_utils.rb:65:in `call_processors'
+sprockets (4.2.1) lib/sprockets/loader.rb:184:in `load_from_unloaded'
+sprockets (4.2.1) lib/sprockets/loader.rb:59:in `block in load'
+sprockets (4.2.1) lib/sprockets/loader.rb:339:in `fetch_asset_from_dependency_cache'
+sprockets (4.2.1) lib/sprockets/loader.rb:43:in `load'
+sprockets (4.2.1) lib/sprockets/cached_environment.rb:44:in `block in load'
+concurrent-ruby (1.3.5) lib/concurrent-ruby/concurrent/map.rb:207:in `block in fetch_or_store'
+concurrent-ruby (1.3.5) lib/concurrent-ruby/concurrent/map.rb:187:in `fetch'
+concurrent-ruby (1.3.5) lib/concurrent-ruby/concurrent/map.rb:206:in `fetch_or_store'
+sprockets (4.2.1) lib/sprockets/cached_environment.rb:44:in `load'
+sprockets (4.2.1) lib/sprockets/bundle.rb:32:in `block in call'
+/usr/local/rvm/rubies/ruby-3.2.2/lib/ruby/3.2.0/set.rb:511:in `each_key'
+/usr/local/rvm/rubies/ruby-3.2.2/lib/ruby/3.2.0/set.rb:511:in `each'
+sprockets (4.2.1) lib/sprockets/bundle.rb:31:in `call'
+sprockets (4.2.1) lib/sprockets/processor_utils.rb:84:in `call_processor'
+sprockets (4.2.1) lib/sprockets/processor_utils.rb:66:in `block in call_processors'
+sprockets (4.2.1) lib/sprockets/processor_utils.rb:65:in `reverse_each'
+sprockets (4.2.1) lib/sprockets/processor_utils.rb:65:in `call_processors'
+sprockets (4.2.1) lib/sprockets/loader.rb:184:in `load_from_unloaded'
+sprockets (4.2.1) lib/sprockets/loader.rb:59:in `block in load'
+sprockets (4.2.1) lib/sprockets/loader.rb:339:in `fetch_asset_from_dependency_cache'
+sprockets (4.2.1) lib/sprockets/loader.rb:43:in `load'
+sprockets (4.2.1) lib/sprockets/cached_environment.rb:44:in `block in load'
+concurrent-ruby (1.3.5) lib/concurrent-ruby/concurrent/map.rb:207:in `block in fetch_or_store'
+concurrent-ruby (1.3.5) lib/concurrent-ruby/concurrent/map.rb:187:in `fetch'
+concurrent-ruby (1.3.5) lib/concurrent-ruby/concurrent/map.rb:206:in `fetch_or_store'
+sprockets (4.2.1) lib/sprockets/cached_environment.rb:44:in `load'
+sprockets (4.2.1) lib/sprockets/base.rb:81:in `find_asset'
+sprockets (4.2.1) lib/sprockets/base.rb:88:in `find_all_linked_assets'
+sprockets (4.2.1) lib/sprockets/manifest.rb:125:in `each'
+sprockets (4.2.1) lib/sprockets/manifest.rb:125:in `to_a'
+sprockets (4.2.1) lib/sprockets/manifest.rb:125:in `block (2 levels) in find'
+concurrent-ruby (1.3.5) lib/concurrent-ruby/concurrent/executor/safe_task_executor.rb:24:in `block in execute'
+concurrent-ruby (1.3.5) lib/concurrent-ruby/concurrent/synchronization/mutex_lockable_object.rb:48:in `block in synchronize'
+concurrent-ruby (1.3.5) lib/concurrent-ruby/concurrent/synchronization/mutex_lockable_object.rb:48:in `synchronize'
+concurrent-ruby (1.3.5) lib/concurrent-ruby/concurrent/synchronization/mutex_lockable_object.rb:48:in `synchronize'
+concurrent-ruby (1.3.5) lib/concurrent-ruby/concurrent/executor/safe_task_executor.rb:22:in `execute'
+concurrent-ruby (1.3.5) lib/concurrent-ruby/concurrent/promise.rb:564:in `block in realize'
+concurrent-ruby (1.3.5) lib/concurrent-ruby/concurrent/executor/ruby_thread_pool_executor.rb:359:in `run_task'
+concurrent-ruby (1.3.5) lib/concurrent-ruby/concurrent/executor/ruby_thread_pool_executor.rb:350:in `block (3 levels) in create_worker'
+concurrent-ruby (1.3.5) lib/concurrent-ruby/concurrent/executor/ruby_thread_pool_executor.rb:341:in `loop'
+concurrent-ruby (1.3.5) lib/concurrent-ruby/concurrent/executor/ruby_thread_pool_executor.rb:341:in `block (2 levels) in create_worker'
+concurrent-ruby (1.3.5) lib/concurrent-ruby/concurrent/executor/ruby_thread_pool_executor.rb:340:in `catch'
+concurrent-ruby (1.3.5) lib/concurrent-ruby/concurrent/executor/ruby_thread_pool_executor.rb:340:in `block in create_worker'
+Started GET "/signin" for ::1 at 2025-06-04 14:11:57 +0530
+Processing by Users::SessionsController#new as HTML
+  Rendering layout layouts/authentication.html.haml
+  Rendering users/sessions/new.html.haml within layouts/authentication
+  Rendered users/sessions/new.html.haml within layouts/authentication (Duration: 2.1ms | Allocations: 498)
+  Rendered layout layouts/authentication.html.haml (Duration: 3019.2ms | Allocations: 134242)
+Completed 500 Internal Server Error in 3021ms (ActiveRecord: 0.0ms | Allocations: 134816)
+
+
+  
+ActionView::Template::Error (couldn't find file 'turbolinks' with type 'application/javascript'
+Checked in these paths: 
+  /home/scpl/school-management/app/assets/config
+  /home/scpl/school-management/app/assets/fonts
+  /home/scpl/school-management/app/assets/images
+  /home/scpl/school-management/app/assets/javascripts
+  /home/scpl/school-management/app/assets/stylesheets
+  /home/scpl/school-management/vendor/assets/fonts
+  /home/scpl/school-management/vendor/assets/javascripts
+  /home/scpl/school-management/vendor/assets/stylesheets
+  /usr/local/rvm/gems/ruby-3.2.2/gems/trix-rails-2.4.0/vendor/assets/javascripts
+  /usr/local/rvm/gems/ruby-3.2.2/gems/trix-rails-2.4.0/vendor/assets/stylesheets
+  /usr/local/rvm/gems/ruby-3.2.2/gems/cocoon-1.2.15/app/assets/javascripts
+  /usr/local/rvm/gems/ruby-3.2.2/gems/arctic_admin-4.3.1/app/assets/fonts
+  /usr/local/rvm/gems/ruby-3.2.2/gems/arctic_admin-4.3.1/app/assets/javascripts
+  /usr/local/rvm/gems/ruby-3.2.2/gems/arctic_admin-4.3.1/app/assets/stylesheets
+  /usr/local/rvm/gems/ruby-3.2.2/gems/activeadmin-3.3.0/app/assets/javascripts
+  /usr/local/rvm/gems/ruby-3.2.2/gems/activeadmin-3.3.0/app/assets/stylesheets
+  /usr/local/rvm/gems/ruby-3.2.2/gems/activeadmin-3.3.0/vendor/assets/javascripts
+  /usr/local/rvm/gems/ruby-3.2.2/gems/jquery-rails-4.6.0/vendor/assets/javascripts
+  /usr/local/rvm/gems/ruby-3.2.2/gems/formtastic-5.0.0/app/assets/stylesheets
+  /usr/local/rvm/gems/ruby-3.2.2/gems/actiontext-7.1.5.1/app/assets/javascripts
+  /usr/local/rvm/gems/ruby-3.2.2/gems/actiontext-7.1.5.1/app/assets/stylesheets
+  /usr/local/rvm/gems/ruby-3.2.2/gems/actioncable-7.1.5.1/app/assets/javascripts
+  /usr/local/rvm/gems/ruby-3.2.2/gems/activestorage-7.1.5.1/app/assets/javascripts
+  /usr/local/rvm/gems/ruby-3.2.2/gems/actionview-7.1.5.1/app/assets/javascripts
+  /usr/local/rvm/gems/ruby-3.2.2/gems/font-awesome-sass-6.7.2/assets/stylesheets
+  /usr/local/rvm/gems/ruby-3.2.2/gems/font-awesome-sass-6.7.2/assets/fonts):
+  
+sprockets (4.2.1) lib/sprockets/resolve.rb:62:in `resolve!'
+sprockets (4.2.1) lib/sprockets/directive_processor.rb:427:in `resolve'
+sprockets (4.2.1) lib/sprockets/directive_processor.rb:216:in `process_require_directive'
+sprockets (4.2.1) lib/sprockets/directive_processor.rb:189:in `block in process_directives'
+sprockets (4.2.1) lib/sprockets/directive_processor.rb:187:in `each'
+sprockets (4.2.1) lib/sprockets/directive_processor.rb:187:in `process_directives'
+sprockets (4.2.1) lib/sprockets/directive_processor.rb:84:in `_call'
+sprockets (4.2.1) lib/sprockets/directive_processor.rb:65:in `call'
+sprockets (4.2.1) lib/sprockets/processor_utils.rb:84:in `call_processor'
+sprockets (4.2.1) lib/sprockets/processor_utils.rb:66:in `block in call_processors'
+sprockets (4.2.1) lib/sprockets/processor_utils.rb:65:in `reverse_each'
+sprockets (4.2.1) lib/sprockets/processor_utils.rb:65:in `call_processors'
+sprockets (4.2.1) lib/sprockets/loader.rb:184:in `load_from_unloaded'
+sprockets (4.2.1) lib/sprockets/loader.rb:59:in `block in load'
+sprockets (4.2.1) lib/sprockets/loader.rb:339:in `fetch_asset_from_dependency_cache'
+sprockets (4.2.1) lib/sprockets/loader.rb:43:in `load'
+sprockets (4.2.1) lib/sprockets/cached_environment.rb:44:in `block in load'
+concurrent-ruby (1.3.5) lib/concurrent-ruby/concurrent/map.rb:207:in `block in fetch_or_store'
+concurrent-ruby (1.3.5) lib/concurrent-ruby/concurrent/map.rb:187:in `fetch'
+concurrent-ruby (1.3.5) lib/concurrent-ruby/concurrent/map.rb:206:in `fetch_or_store'
+sprockets (4.2.1) lib/sprockets/cached_environment.rb:44:in `load'
+sprockets (4.2.1) lib/sprockets/bundle.rb:27:in `call'
+sprockets (4.2.1) lib/sprockets/processor_utils.rb:84:in `call_processor'
+sprockets (4.2.1) lib/sprockets/processor_utils.rb:66:in `block in call_processors'
+sprockets (4.2.1) lib/sprockets/processor_utils.rb:65:in `reverse_each'
+sprockets (4.2.1) lib/sprockets/processor_utils.rb:65:in `call_processors'
+sprockets (4.2.1) lib/sprockets/loader.rb:184:in `load_from_unloaded'
+sprockets (4.2.1) lib/sprockets/loader.rb:59:in `block in load'
+sprockets (4.2.1) lib/sprockets/loader.rb:339:in `fetch_asset_from_dependency_cache'
+sprockets (4.2.1) lib/sprockets/loader.rb:43:in `load'
+sprockets (4.2.1) lib/sprockets/cached_environment.rb:44:in `block in load'
+concurrent-ruby (1.3.5) lib/concurrent-ruby/concurrent/map.rb:207:in `block in fetch_or_store'
+concurrent-ruby (1.3.5) lib/concurrent-ruby/concurrent/map.rb:187:in `fetch'
+concurrent-ruby (1.3.5) lib/concurrent-ruby/concurrent/map.rb:206:in `fetch_or_store'
+sprockets (4.2.1) lib/sprockets/cached_environment.rb:44:in `load'
+sprockets (4.2.1) lib/sprockets/bundle.rb:32:in `block in call'
+/usr/local/rvm/rubies/ruby-3.2.2/lib/ruby/3.2.0/set.rb:511:in `each_key'
+/usr/local/rvm/rubies/ruby-3.2.2/lib/ruby/3.2.0/set.rb:511:in `each'
+sprockets (4.2.1) lib/sprockets/bundle.rb:31:in `call'
+sprockets (4.2.1) lib/sprockets/processor_utils.rb:84:in `call_processor'
+sprockets (4.2.1) lib/sprockets/processor_utils.rb:66:in `block in call_processors'
+sprockets (4.2.1) lib/sprockets/processor_utils.rb:65:in `reverse_each'
+sprockets (4.2.1) lib/sprockets/processor_utils.rb:65:in `call_processors'
+sprockets (4.2.1) lib/sprockets/loader.rb:184:in `load_from_unloaded'
+sprockets (4.2.1) lib/sprockets/loader.rb:59:in `block in load'
+sprockets (4.2.1) lib/sprockets/loader.rb:339:in `fetch_asset_from_dependency_cache'
+sprockets (4.2.1) lib/sprockets/loader.rb:43:in `load'
+sprockets (4.2.1) lib/sprockets/cached_environment.rb:44:in `block in load'
+concurrent-ruby (1.3.5) lib/concurrent-ruby/concurrent/map.rb:207:in `block in fetch_or_store'
+concurrent-ruby (1.3.5) lib/concurrent-ruby/concurrent/map.rb:187:in `fetch'
+concurrent-ruby (1.3.5) lib/concurrent-ruby/concurrent/map.rb:206:in `fetch_or_store'
+sprockets (4.2.1) lib/sprockets/cached_environment.rb:44:in `load'
+sprockets (4.2.1) lib/sprockets/base.rb:81:in `find_asset'
+sprockets (4.2.1) lib/sprockets/base.rb:88:in `find_all_linked_assets'
+sprockets (4.2.1) lib/sprockets/manifest.rb:125:in `each'
+sprockets (4.2.1) lib/sprockets/manifest.rb:125:in `to_a'
+sprockets (4.2.1) lib/sprockets/manifest.rb:125:in `block (2 levels) in find'
+concurrent-ruby (1.3.5) lib/concurrent-ruby/concurrent/executor/safe_task_executor.rb:24:in `block in execute'
+concurrent-ruby (1.3.5) lib/concurrent-ruby/concurrent/synchronization/mutex_lockable_object.rb:48:in `block in synchronize'
+concurrent-ruby (1.3.5) lib/concurrent-ruby/concurrent/synchronization/mutex_lockable_object.rb:48:in `synchronize'
+concurrent-ruby (1.3.5) lib/concurrent-ruby/concurrent/synchronization/mutex_lockable_object.rb:48:in `synchronize'
+concurrent-ruby (1.3.5) lib/concurrent-ruby/concurrent/executor/safe_task_executor.rb:22:in `execute'
+concurrent-ruby (1.3.5) lib/concurrent-ruby/concurrent/promise.rb:564:in `block in realize'
+concurrent-ruby (1.3.5) lib/concurrent-ruby/concurrent/executor/ruby_thread_pool_executor.rb:359:in `run_task'
+concurrent-ruby (1.3.5) lib/concurrent-ruby/concurrent/executor/ruby_thread_pool_executor.rb:350:in `block (3 levels) in create_worker'
+concurrent-ruby (1.3.5) lib/concurrent-ruby/concurrent/executor/ruby_thread_pool_executor.rb:341:in `loop'
+concurrent-ruby (1.3.5) lib/concurrent-ruby/concurrent/executor/ruby_thread_pool_executor.rb:341:in `block (2 levels) in create_worker'
+concurrent-ruby (1.3.5) lib/concurrent-ruby/concurrent/executor/ruby_thread_pool_executor.rb:340:in `catch'
+concurrent-ruby (1.3.5) lib/concurrent-ruby/concurrent/executor/ruby_thread_pool_executor.rb:340:in `block in create_worker'
+Started GET "/signin" for ::1 at 2025-06-04 14:13:00 +0530
+  [1m[36mActiveRecord::SchemaMigration Load (1.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by Users::SessionsController#new as HTML
+  Rendering layout layouts/authentication.html.haml
+  Rendering users/sessions/new.html.haml within layouts/authentication
+  Rendered users/sessions/new.html.haml within layouts/authentication (Duration: 27.5ms | Allocations: 26456)
+  Rendered layout layouts/authentication.html.haml (Duration: 3112.1ms | Allocations: 334173)
+Completed 500 Internal Server Error in 3193ms (ActiveRecord: 18.2ms | Allocations: 360088)
+
+
+  
+ActionView::Template::Error (Asset `devise/application.css` was not declared to be precompiled in production.
+Declare links to your assets in `app/assets/config/manifest.js`.
+
+  //= link devise/application.css
+
+and restart your server):
+    15:     = csrf_meta_tags
+    16:     = csp_meta_tag
+    17: 
+    18:     = stylesheet_link_tag 'devise/application', 'data-turbolinks-track': 'reload', media: 'all'
+    19:     = yield :css_code
+    20: 
+    21:     = javascript_include_tag 'devise/application', 'data-turbolinks-track': 'reload'
+  
+app/views/layouts/authentication.html.haml:18
+Started GET "/signin" for ::1 at 2025-06-04 14:13:33 +0530
+Processing by Users::SessionsController#new as HTML
+  Rendering layout layouts/authentication.html.haml
+  Rendering users/sessions/new.html.haml within layouts/authentication
+  Rendered users/sessions/new.html.haml within layouts/authentication (Duration: 2.1ms | Allocations: 498)
+  Rendered common/_notification.html.haml (Duration: 4.0ms | Allocations: 3452)
+  Rendered layout layouts/authentication.html.haml (Duration: 730.6ms | Allocations: 130978)
+Completed 200 OK in 733ms (Views: 731.6ms | ActiveRecord: 0.0ms | Allocations: 131618)
+
+
+Started GET "/signin" for ::1 at 2025-06-04 14:13:40 +0530
+Processing by Users::SessionsController#new as HTML
+  Rendering layout layouts/authentication.html.haml
+  Rendering users/sessions/new.html.haml within layouts/authentication
+  Rendered users/sessions/new.html.haml within layouts/authentication (Duration: 1.9ms | Allocations: 498)
+  Rendered common/_notification.html.haml (Duration: 0.1ms | Allocations: 30)
+  Rendered layout layouts/authentication.html.haml (Duration: 23.6ms | Allocations: 12459)
+Completed 200 OK in 26ms (Views: 24.6ms | ActiveRecord: 0.0ms | Allocations: 13039)
+
+
+Started GET "/signin" for ::1 at 2025-06-04 14:14:22 +0530
+  [1m[36mActiveRecord::SchemaMigration Load (0.9ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by Users::SessionsController#new as HTML
+  Rendering layout layouts/authentication.html.haml
+  Rendering users/sessions/new.html.haml within layouts/authentication
+  Rendered /usr/local/rvm/gems/ruby-3.2.2/gems/devise-4.9.4/app/views/devise/shared/_links.html.erb (Duration: 1.1ms | Allocations: 707)
+  Rendered users/sessions/new.html.haml within layouts/authentication (Duration: 35.8ms | Allocations: 22617)
+  Rendered layout layouts/authentication.html.haml (Duration: 36.1ms | Allocations: 22732)
+Completed 500 Internal Server Error in 117ms (ActiveRecord: 15.4ms | Allocations: 48638)
+
+
+  
+ActionView::Template::Error (Missing partial devise/shared/_footer with {:locale=>[:en], :formats=>[:html], :variants=>[], :handlers=>[:raw, :erb, :html, :builder, :ruby, :haml, :arb]}.
+
+Searched in:
+  * "/home/scpl/school-management/app/views"
+  * "/usr/local/rvm/gems/ruby-3.2.2/gems/devise-4.9.4/app/views"
+  * "/usr/local/rvm/gems/ruby-3.2.2/gems/activeadmin-3.3.0/app/views"
+  * "/usr/local/rvm/gems/ruby-3.2.2/gems/kaminari-core-1.2.2/app/views"
+  * "/usr/local/rvm/gems/ruby-3.2.2/gems/actiontext-7.1.5.1/app/views"
+  * "/usr/local/rvm/gems/ruby-3.2.2/gems/actionmailbox-7.1.5.1/app/views"
+):
+    30:                 = f.submit 'LOGIN', class: 'btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn'
+    31:               = render 'devise/shared/links'
+    32: 
+    33:           = render 'devise/shared/footer'
+  
+app/views/users/sessions/new.html.haml:33
+Started GET "/signin" for ::1 at 2025-06-04 14:14:55 +0530
+Processing by Users::SessionsController#new as HTML
+  Rendering layout layouts/authentication.html.haml
+  Rendering users/sessions/new.html.haml within layouts/authentication
+  Rendered /usr/local/rvm/gems/ruby-3.2.2/gems/devise-4.9.4/app/views/devise/shared/_links.html.erb (Duration: 2.1ms | Allocations: 618)
+  Rendered users/sessions/new.html.haml within layouts/authentication (Duration: 42.8ms | Allocations: 14838)
+  Rendered layout layouts/authentication.html.haml (Duration: 43.3ms | Allocations: 14928)
+Completed 500 Internal Server Error in 91ms (ActiveRecord: 9.6ms | Allocations: 25688)
+
+
+  
+ActionView::Template::Error (Missing partial devise/shared/_footer with {:locale=>[:en], :formats=>[:html], :variants=>[], :handlers=>[:raw, :erb, :html, :builder, :ruby, :haml, :arb]}.
+
+Searched in:
+  * "/home/scpl/school-management/app/views"
+  * "/usr/local/rvm/gems/ruby-3.2.2/gems/devise-4.9.4/app/views"
+  * "/usr/local/rvm/gems/ruby-3.2.2/gems/activeadmin-3.3.0/app/views"
+  * "/usr/local/rvm/gems/ruby-3.2.2/gems/kaminari-core-1.2.2/app/views"
+  * "/usr/local/rvm/gems/ruby-3.2.2/gems/actiontext-7.1.5.1/app/views"
+  * "/usr/local/rvm/gems/ruby-3.2.2/gems/actionmailbox-7.1.5.1/app/views"
+):
+    30:                 = f.submit 'LOGIN', class: 'btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn'
+    31:               = render 'devise/shared/links'
+    32: 
+    33:           = render 'devise/shared/footer'
+  
+app/views/users/sessions/new.html.haml:33
+Started GET "/signin" for ::1 at 2025-06-04 14:15:08 +0530
+Processing by Users::SessionsController#new as HTML
+  Rendering layout layouts/authentication.html.haml
+  Rendering users/sessions/new.html.haml within layouts/authentication
+  Rendered /usr/local/rvm/gems/ruby-3.2.2/gems/devise-4.9.4/app/views/devise/shared/_links.html.erb (Duration: 1.0ms | Allocations: 168)
+  Rendered users/sessions/new.html.haml within layouts/authentication (Duration: 5.5ms | Allocations: 1103)
+  Rendered layout layouts/authentication.html.haml (Duration: 5.9ms | Allocations: 1192)
+Completed 500 Internal Server Error in 8ms (ActiveRecord: 0.0ms | Allocations: 1767)
+
+
+  
+ActionView::Template::Error (Missing partial devise/shared/_footer with {:locale=>[:en], :formats=>[:html], :variants=>[], :handlers=>[:raw, :erb, :html, :builder, :ruby, :haml, :arb]}.
+
+Searched in:
+  * "/home/scpl/school-management/app/views"
+  * "/usr/local/rvm/gems/ruby-3.2.2/gems/devise-4.9.4/app/views"
+  * "/usr/local/rvm/gems/ruby-3.2.2/gems/activeadmin-3.3.0/app/views"
+  * "/usr/local/rvm/gems/ruby-3.2.2/gems/kaminari-core-1.2.2/app/views"
+  * "/usr/local/rvm/gems/ruby-3.2.2/gems/actiontext-7.1.5.1/app/views"
+  * "/usr/local/rvm/gems/ruby-3.2.2/gems/actionmailbox-7.1.5.1/app/views"
+):
+    30:                 = f.submit 'LOGIN', class: 'btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn'
+    31:               = render 'devise/shared/links'
+    32: 
+    33:           = render 'devise/shared/footer'
+  
+app/views/users/sessions/new.html.haml:33
+Started GET "/signin" for ::1 at 2025-06-04 14:16:15 +0530
+Processing by Users::SessionsController#new as HTML
+  Rendering layout layouts/authentication.html.haml
+  Rendering users/sessions/new.html.haml within layouts/authentication
+  Rendered devise/shared/_links.html.erb (Duration: 1.7ms | Allocations: 741)
+  Rendered devise/shared/_footer.html.haml (Duration: 5.3ms | Allocations: 4271)
+  Rendered users/sessions/new.html.haml within layouts/authentication (Duration: 24.7ms | Allocations: 18753)
+  Rendered common/_notification.html.haml (Duration: 3.9ms | Allocations: 3409)
+  Rendered layout layouts/authentication.html.haml (Duration: 42.1ms | Allocations: 35928)
+Completed 200 OK in 66ms (Views: 44.2ms | ActiveRecord: 5.3ms | Allocations: 46721)
+
+
+Started POST "/signin" for ::1 at 2025-06-04 14:16:26 +0530
+Processing by Users::SessionsController#create as HTML
+  Parameters: {"authenticity_token"=>"[FILTERED]", "user"=>{"email"=>"alice@college.com", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"LOGIN"}
+[31mUnpermitted parameter: :remember_me. Context: { controller: Users::SessionsController, action: create, request: #<ActionDispatch::Request:0x00007f9f2112f328>, params: {"authenticity_token"=>"[FILTERED]", "user"=>{"email"=>"alice@college.com", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"LOGIN", "controller"=>"users/sessions", "action"=>"create"} }[0m
+  [1m[36mUser Load (2.7ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["email", "alice@college.com"], ["LIMIT", 1]]
+  ↳ app/controllers/users/sessions_controller.rb:10:in `create'
+[31mUnpermitted parameter: :remember_me. Context: { controller: Users::SessionsController, action: create, request: #<ActionDispatch::Request:0x00007f9f2112f328>, params: {"authenticity_token"=>"[FILTERED]", "user"=>{"email"=>"alice@college.com", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"LOGIN", "controller"=>"users/sessions", "action"=>"create"} }[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/users/sessions_controller.rb:14:in `create'
+  [1m[36mUser Update (2.4ms)[0m  [1m[33mUPDATE "users" SET "sign_in_count" = $1, "current_sign_in_at" = $2, "last_sign_in_at" = $3, "updated_at" = $4 WHERE "users"."id" = $5[0m  [["sign_in_count", 9], ["current_sign_in_at", "2025-06-04 08:46:26.468794"], ["last_sign_in_at", "2025-05-20 06:01:08.470056"], ["updated_at", "2025-06-04 08:46:26.469357"], ["id", 1]]
+  ↳ app/controllers/users/sessions_controller.rb:14:in `create'
+  [1m[36mTRANSACTION (2.1ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/users/sessions_controller.rb:14:in `create'
+Redirected to http://localhost:3001/
+Completed 302 Found in 344ms (ActiveRecord: 7.6ms | Allocations: 7433)
+
+
+Started GET "/" for ::1 at 2025-06-04 14:16:26 +0530
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+Processing by DashboardController#index as HTML
+  [1m[36mCollege Load (1.2ms)[0m  [1m[34mSELECT "colleges".* FROM "colleges" WHERE "colleges"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:10:in `set_current_college'
+  [1m[36mCollege Load (0.3ms)[0m  [1m[34mSELECT "colleges".* FROM "colleges" ORDER BY "colleges"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:15:in `set_current_college'
+  Rendering layout layouts/admin.html.haml
+  Rendering dashboard/index.html.haml within layouts/admin
+  Rendered dashboard/index.html.haml within layouts/admin (Duration: 5.6ms | Allocations: 4472)
+  Rendered layout layouts/admin.html.haml (Duration: 22.4ms | Allocations: 20760)
+Completed 500 Internal Server Error in 50ms (ActiveRecord: 5.5ms | Allocations: 30551)
+
+
+  
+ActionView::Template::Error (Missing partial layouts/admin/_header with {:locale=>[:en], :formats=>[:html], :variants=>[], :handlers=>[:raw, :erb, :html, :builder, :ruby, :haml, :arb]}.
+
+Searched in:
+  * "/home/scpl/school-management/app/views"
+  * "/usr/local/rvm/gems/ruby-3.2.2/gems/devise-4.9.4/app/views"
+  * "/usr/local/rvm/gems/ruby-3.2.2/gems/activeadmin-3.3.0/app/views"
+  * "/usr/local/rvm/gems/ruby-3.2.2/gems/kaminari-core-1.2.2/app/views"
+  * "/usr/local/rvm/gems/ruby-3.2.2/gems/actiontext-7.1.5.1/app/views"
+  * "/usr/local/rvm/gems/ruby-3.2.2/gems/actionmailbox-7.1.5.1/app/views"
+):
+    27: 
+    28:   %body.sidebar-fixed
+    29:     .container-scroller
+    30:       = render 'layouts/admin/header'
+    31:       .container-fluid.page-body-wrapper
+    32:         = render 'layouts/admin/sidebar'
+    33:         .main-panel
+  
+app/views/layouts/admin.html.haml:30
+Started GET "/" for ::1 at 2025-06-04 14:18:10 +0530
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+Processing by DashboardController#index as HTML
+  [1m[36mCollege Load (0.4ms)[0m  [1m[34mSELECT "colleges".* FROM "colleges" WHERE "colleges"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:10:in `set_current_college'
+  [1m[36mCollege Load (0.4ms)[0m  [1m[34mSELECT "colleges".* FROM "colleges" ORDER BY "colleges"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:15:in `set_current_college'
+  Rendering layout layouts/admin.html.haml
+  Rendering dashboard/index.html.haml within layouts/admin
+  Rendered dashboard/index.html.haml within layouts/admin (Duration: 6.2ms | Allocations: 4445)
+  Rendered layouts/admin/_header.html.haml (Duration: 9.3ms | Allocations: 9407)
+  Rendered layout layouts/admin.html.haml (Duration: 37.0ms | Allocations: 29947)
+Completed 500 Internal Server Error in 61ms (ActiveRecord: 4.4ms | Allocations: 37139)
+
+
+  
+ActionView::Template::Error (undefined local variable or method `authenticated_employee_path' for #<ActionView::Base:0x0000000005f6b8>):
+     9:       %span.fa.fa-bars
+    10:     %ul.navbar-nav.navbar-nav-right
+    11:       %li.nav-item
+    12:         %a.nav-link{href: authenticated_employee_path}
+    13:           My Profile
+    14:       %li.nav-item
+    15:         %a.nav-link{href: destroy_employee_session_path, 'data-method': 'delete'}
+  
+app/views/layouts/admin/_header.html.haml:12
+app/views/layouts/admin.html.haml:30
+Started GET "/" for ::1 at 2025-06-04 14:19:21 +0530
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+Processing by DashboardController#index as HTML
+  [1m[36mCollege Load (0.4ms)[0m  [1m[34mSELECT "colleges".* FROM "colleges" WHERE "colleges"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:10:in `set_current_college'
+  [1m[36mCollege Load (0.4ms)[0m  [1m[34mSELECT "colleges".* FROM "colleges" ORDER BY "colleges"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:15:in `set_current_college'
+  Rendering layout layouts/admin.html.haml
+  Rendering dashboard/index.html.haml within layouts/admin
+  Rendered dashboard/index.html.haml within layouts/admin (Duration: 8.9ms | Allocations: 4445)
+  Rendered layouts/admin/_header.html.haml (Duration: 14.6ms | Allocations: 9420)
+  Rendered layout layouts/admin.html.haml (Duration: 44.5ms | Allocations: 29959)
+Completed 500 Internal Server Error in 71ms (ActiveRecord: 6.5ms | Allocations: 37147)
+
+
+  
+ActionView::Template::Error (undefined local variable or method `destroy_employee_session_path' for #<ActionView::Base:0x00000000073a50>):
+    12:         %a.nav-link{href: authenticated_user_path}
+    13:           My Profile
+    14:       %li.nav-item
+    15:         %a.nav-link{href: destroy_employee_session_path, 'data-method': 'delete'}
+    16:           %i.fa.fa-power-off
+    17:     %button.navbar-toggler.navbar-toggler-right.d-lg-none.align-self-center{'data-toggle': 'offcanvas', type: 'button'}
+    18:       %span.fa.fa-bars
+  
+app/views/layouts/admin/_header.html.haml:15
+app/views/layouts/admin.html.haml:30
+Started GET "/" for ::1 at 2025-06-04 14:19:29 +0530
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+Processing by DashboardController#index as HTML
+  [1m[36mCollege Load (0.4ms)[0m  [1m[34mSELECT "colleges".* FROM "colleges" WHERE "colleges"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:10:in `set_current_college'
+  [1m[36mCollege Load (2.8ms)[0m  [1m[34mSELECT "colleges".* FROM "colleges" ORDER BY "colleges"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:15:in `set_current_college'
+  Rendering layout layouts/admin.html.haml
+  Rendering dashboard/index.html.haml within layouts/admin
+  Rendered dashboard/index.html.haml within layouts/admin (Duration: 10.5ms | Allocations: 4444)
+  Rendered layouts/admin/_header.html.haml (Duration: 12.2ms | Allocations: 9287)
+  Rendered layouts/admin/_sidebar.html.haml (Duration: 142.9ms | Allocations: 147011)
+  Rendered layout layouts/admin.html.haml (Duration: 190.7ms | Allocations: 176961)
+Completed 500 Internal Server Error in 223ms (ActiveRecord: 7.5ms | Allocations: 184146)
+
+
+  
+ActionView::Template::Error (undefined local variable or method `current_employee' for #<ActionView::Base:0x00000000087e10>):
+    3:     %li.nav-item.nav-profile
+    4:       %a.nav-link{href: '#'}
+    5:         .nav-profile-image
+    6:           - if current_employee.photo.present?
+    7:             = image_tag image_path(current_employee.photo, [100, 100], 'logo_64'), size: '50x50', class: 'img-thumbnail img-xs'
+    8:           - else
+    9:             #sidebar_nav_initial_image= current_employee.initials(current_employee.sort_name)
+  
+app/views/layouts/admin/_sidebar.html.haml:6
+app/views/layouts/admin.html.haml:32
+Started GET "/" for ::1 at 2025-06-04 14:21:14 +0530
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+Processing by DashboardController#index as HTML
+  [1m[36mCollege Load (0.4ms)[0m  [1m[34mSELECT "colleges".* FROM "colleges" WHERE "colleges"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:10:in `set_current_college'
+  [1m[36mCollege Load (1.0ms)[0m  [1m[34mSELECT "colleges".* FROM "colleges" ORDER BY "colleges"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:15:in `set_current_college'
+  Rendering layout layouts/admin.html.haml
+  Rendering dashboard/index.html.haml within layouts/admin
+  Rendered dashboard/index.html.haml within layouts/admin (Duration: 5.6ms | Allocations: 4445)
+  Rendered layouts/admin/_header.html.haml (Duration: 13.0ms | Allocations: 9287)
+  Rendered layouts/admin/_sidebar.html.haml (Duration: 34.9ms | Allocations: 18968)
+  Rendered layout layouts/admin.html.haml (Duration: 73.9ms | Allocations: 48918)
+Completed 500 Internal Server Error in 99ms (ActiveRecord: 5.7ms | Allocations: 56102)
+
+
+  
+ActionView::Template::Error (undefined local variable or method `current_employee' for #<ActionView::Base:0x0000000009c220>):
+    3:     %li.nav-item.nav-profile
+    4:       %a.nav-link{href: '#'}
+    5:         .nav-profile-image
+    6:           - if current_employee.photo.present?
+    7:             = image_tag image_path(current_employee.photo, [100, 100], 'logo_64'), size: '50x50', class: 'img-thumbnail img-xs'
+    8:           - else
+    9:             #sidebar_nav_initial_image= current_employee.initials(current_employee.sort_name)
+  
+app/views/layouts/admin/_sidebar.html.haml:6
+app/views/layouts/admin.html.haml:32
+Started GET "/" for ::1 at 2025-06-04 14:21:34 +0530
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+Processing by DashboardController#index as HTML
+  [1m[36mCollege Load (0.6ms)[0m  [1m[34mSELECT "colleges".* FROM "colleges" WHERE "colleges"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:10:in `set_current_college'
+  [1m[36mCollege Load (0.4ms)[0m  [1m[34mSELECT "colleges".* FROM "colleges" ORDER BY "colleges"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:15:in `set_current_college'
+  Rendering layout layouts/admin.html.haml
+  Rendering dashboard/index.html.haml within layouts/admin
+  Rendered dashboard/index.html.haml within layouts/admin (Duration: 5.4ms | Allocations: 4445)
+  Rendered layouts/admin/_header.html.haml (Duration: 19.2ms | Allocations: 9287)
+  Rendered layouts/admin/_sidebar.html.haml (Duration: 26.4ms | Allocations: 19162)
+  Rendered layout layouts/admin.html.haml (Duration: 70.1ms | Allocations: 49112)
+Completed 500 Internal Server Error in 93ms (ActiveRecord: 5.5ms | Allocations: 56299)
+
+
+  
+ActionView::Template::Error (undefined method `photo' for #<User id: 1, college_id: 1, email: "alice@college.com", name: "Professor Alice", role: "principal", contact_no: nil, description: nil, slug: "professor-alice", created_at: "2025-04-17 05:50:22.245394000 +0000", updated_at: "2025-06-04 08:46:26.469357000 +0000", profile_setup: true>):
+    3:     %li.nav-item.nav-profile
+    4:       %a.nav-link{href: '#'}
+    5:         .nav-profile-image
+    6:           - if current_user.photo.present?
+    7:             = image_tag image_path(current_user.photo, [100, 100], 'logo_64'), size: '50x50', class: 'img-thumbnail img-xs'
+    8:           - else
+    9:             #sidebar_nav_initial_image= current_user.initials(current_user.sort_name)
+  
+app/views/layouts/admin/_sidebar.html.haml:6
+app/views/layouts/admin.html.haml:32
+Started GET "/" for ::1 at 2025-06-04 14:21:56 +0530
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+Processing by DashboardController#index as HTML
+  [1m[36mCollege Load (0.4ms)[0m  [1m[34mSELECT "colleges".* FROM "colleges" WHERE "colleges"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:10:in `set_current_college'
+  [1m[36mCollege Load (0.4ms)[0m  [1m[34mSELECT "colleges".* FROM "colleges" ORDER BY "colleges"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:15:in `set_current_college'
+  Rendering layout layouts/admin.html.haml
+  Rendering dashboard/index.html.haml within layouts/admin
+  Rendered dashboard/index.html.haml within layouts/admin (Duration: 4.6ms | Allocations: 4443)
+  Rendered layouts/admin/_header.html.haml (Duration: 12.9ms | Allocations: 9290)
+  Rendered layouts/admin/_sidebar.html.haml (Duration: 20.6ms | Allocations: 17924)
+  Rendered layout layouts/admin.html.haml (Duration: 72.3ms | Allocations: 47877)
+Completed 500 Internal Server Error in 101ms (ActiveRecord: 7.2ms | Allocations: 55058)
+
+
+  
+ActionView::Template::Error (undefined method `sort_name' for #<User id: 1, college_id: 1, email: "alice@college.com", name: "Professor Alice", role: "principal", contact_no: nil, description: nil, slug: "professor-alice", created_at: "2025-04-17 05:50:22.245394000 +0000", updated_at: "2025-06-04 08:46:26.469357000 +0000", profile_setup: true>):
+    10:           %span.login-status.online
+    11:         .nav-profile-text.d-flex.flex-column
+    12:           %span.font-weight-bold.text-break
+    13:             = current_user.sort_name
+    14:     - if can_access?(:dashboard, :index)
+    15:       %li.menu-item{ class: menu_active_class('dashboard') }
+    16:         %a.menu-link{ href: authenticated_user_path }
+  
+app/views/layouts/admin/_sidebar.html.haml:13
+app/views/layouts/admin.html.haml:32
+Started GET "/" for ::1 at 2025-06-04 14:22:13 +0530
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+Processing by DashboardController#index as HTML
+  [1m[36mCollege Load (0.7ms)[0m  [1m[34mSELECT "colleges".* FROM "colleges" WHERE "colleges"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:10:in `set_current_college'
+  [1m[36mCollege Load (0.4ms)[0m  [1m[34mSELECT "colleges".* FROM "colleges" ORDER BY "colleges"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:15:in `set_current_college'
+  Rendering layout layouts/admin.html.haml
+  Rendering dashboard/index.html.haml within layouts/admin
+  Rendered dashboard/index.html.haml within layouts/admin (Duration: 10.1ms | Allocations: 4443)
+  Rendered layouts/admin/_header.html.haml (Duration: 12.1ms | Allocations: 9293)
+  Rendered layouts/admin/_sidebar.html.haml (Duration: 20.9ms | Allocations: 17972)
+  Rendered layouts/admin/_footer.html.haml (Duration: 7.3ms | Allocations: 3879)
+  Rendered common/_notification.html.haml (Duration: 6.8ms | Allocations: 3342)
+  Rendered layout layouts/admin.html.haml (Duration: 90.9ms | Allocations: 55427)
+Completed 200 OK in 118ms (Views: 93.0ms | ActiveRecord: 4.8ms | Allocations: 62618)
+
+
+Started GET "/" for ::1 at 2025-06-04 14:23:48 +0530
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+Processing by DashboardController#index as HTML
+  [1m[36mCollege Load (0.3ms)[0m  [1m[34mSELECT "colleges".* FROM "colleges" WHERE "colleges"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:10:in `set_current_college'
+  [1m[36mCollege Load (0.4ms)[0m  [1m[34mSELECT "colleges".* FROM "colleges" ORDER BY "colleges"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:15:in `set_current_college'
+  Rendering layout layouts/admin.html.haml
+  Rendering dashboard/index.html.haml within layouts/admin
+  Rendered dashboard/index.html.haml within layouts/admin (Duration: 5.2ms | Allocations: 4440)
+  Rendered layouts/admin/_header.html.haml (Duration: 26.3ms | Allocations: 9273)
+  Rendered layouts/admin/_sidebar.html.haml (Duration: 29.5ms | Allocations: 17961)
+  Rendered layouts/admin/_footer.html.haml (Duration: 7.1ms | Allocations: 3876)
+  Rendered common/_notification.html.haml (Duration: 7.2ms | Allocations: 3339)
+  Rendered layout layouts/admin.html.haml (Duration: 94.7ms | Allocations: 55382)
+Completed 200 OK in 116ms (Views: 96.5ms | ActiveRecord: 4.2ms | Allocations: 62577)
+
+
+Started GET "/" for ::1 at 2025-06-04 14:24:27 +0530
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+Processing by DashboardController#index as HTML
+  [1m[36mCollege Load (0.6ms)[0m  [1m[34mSELECT "colleges".* FROM "colleges" WHERE "colleges"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:10:in `set_current_college'
+  [1m[36mCollege Load (0.3ms)[0m  [1m[34mSELECT "colleges".* FROM "colleges" ORDER BY "colleges"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:15:in `set_current_college'
+  Rendering layout layouts/admin.html.haml
+  Rendering dashboard/index.html.haml within layouts/admin
+  Rendered dashboard/index.html.haml within layouts/admin (Duration: 10.5ms | Allocations: 4441)
+  Rendered layouts/admin/_header.html.haml (Duration: 15.2ms | Allocations: 9293)
+  Rendered layouts/admin/_sidebar.html.haml (Duration: 30.3ms | Allocations: 17949)
+  Rendered layouts/admin/_footer.html.haml (Duration: 6.6ms | Allocations: 3876)
+  Rendered common/_notification.html.haml (Duration: 7.4ms | Allocations: 3339)
+  Rendered layout layouts/admin.html.haml (Duration: 107.1ms | Allocations: 55397)
+Completed 200 OK in 130ms (Views: 109.9ms | ActiveRecord: 4.1ms | Allocations: 62591)
+
+
+Started GET "/" for ::1 at 2025-06-04 14:27:22 +0530
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+Processing by DashboardController#index as HTML
+  [1m[36mCollege Load (0.4ms)[0m  [1m[34mSELECT "colleges".* FROM "colleges" WHERE "colleges"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:10:in `set_current_college'
+  [1m[36mCollege Load (5.6ms)[0m  [1m[34mSELECT "colleges".* FROM "colleges" ORDER BY "colleges"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:15:in `set_current_college'
+  Rendering layout layouts/admin.html.haml
+  Rendering dashboard/index.html.haml within layouts/admin
+  Rendered dashboard/index.html.haml within layouts/admin (Duration: 11.1ms | Allocations: 4445)
+  Rendered layouts/admin/_header.html.haml (Duration: 21.4ms | Allocations: 9286)
+  Rendered layouts/admin/_sidebar.html.haml (Duration: 31.6ms | Allocations: 19772)
+  Rendered layout layouts/admin.html.haml (Duration: 94.5ms | Allocations: 49735)
+Completed 500 Internal Server Error in 131ms (ActiveRecord: 11.9ms | Allocations: 56953)
+
+
+  
+ActionView::SyntaxErrorInTemplate (Encountered a syntax error while rendering template: check %nav#sidebar.sidebar.sidebar-offcanvas
+  %ul.nav
+    %li.nav-item.nav-profile
+      %a.nav-link{href: '#'}
+        .nav-profile-image
+          -# - if current_user.photo.present?
+          -#   = image_tag image_path(current_user.photo, [100, 100], 'logo_64'), size: '50x50', class: 'img-thumbnail img-xs'
+          -# - else
+          -#   #sidebar_nav_initial_image= current_user.initials(current_user.sort_name)
+          %span.login-status.online
+        .nav-profile-text.d-flex.flex-column
+          %span.font-weight-bold.text-break
+            = "dummy"
+    - if can_access?(:dashboard, :index)
+    %li.nav-item{class: menu_active_class('admin/home')}
+      %a.nav-link{href: admin_dashboard_path}
+        %i.fa.fa-home.menu-icon
+        %span.menu-title Dashboard
+      %li.nav-item{ class: menu_active_class('dashboard') }
+        %a.nav-link{ href: authenticated_user_path }
+          %i.fa.fa-home.menu-icon
+          %span.title Dashboard
+    -if current_user.profile_setup?
+      - if can_access?(:users, :index)
+        %li.nav-item{ class: menu_active_class('users') }
+          %a.nav-link{ href: send("college_#{current_user.role}s_users_path", college_slug: current_college.slug) }
+            %i.fa.fa-users.menu-icon
+            %span.title Users
+      - if can_access?(:departments, :index)
+        %li.nav-item{ class: menu_active_class('departments') }
+          %a.nav-link{ href: send("college_#{current_user.role}s_departments_path", college_slug: current_college.slug) }
+            %i.fa.fa-gear.menu-icon
+            %span.title Departments
+      - if can_access?(:courses, :index)
+        %li.nav-item{ class: menu_active_class('courses') }
+          %a.nav-link{ href: send("college_#{current_user.role}s_courses_path", college_slug: current_college.slug) }
+            %i.fa.fa-school.menu-icon
+            %span.title Courses
+      - if can_access?(:sessions, :index)
+        %li.nav-item{ class: menu_active_class('sessions') }
+          %a.nav-link{ href: send("college_#{current_user.role}s_sessions_path", college_slug: current_college.slug) }
+            %i.fa.fa-calendar.menu-icon
+            %span.title Sessions
+
+):
+1:    %nav#sidebar.sidebar.sidebar-offcanvas
+2:      %ul.nav
+3:        %li.nav-item.nav-profile
+4:          %a.nav-link{href: '#'}
+5:            .nav-profile-image
+6:              -# - if current_user.photo.present?
+7:              -#   = image_tag image_path(current_user.photo, [100, 100], 'logo_64'), size: '50x50', class: 'img-thumbnail img-xs'
+8:              -# - else
+9:              -#   #sidebar_nav_initial_image= current_user.initials(current_user.sort_name)
+10:              %span.login-status.online
+11:            .nav-profile-text.d-flex.flex-column
+12:              %span.font-weight-bold.text-break
+13:                = "dummy"
+14:        - if can_access?(:dashboard, :index)
+15:        %li.nav-item{class: menu_active_class('admin/home')}
+16:          %a.nav-link{href: admin_dashboard_path}
+17:            %i.fa.fa-home.menu-icon
+18:            %span.menu-title Dashboard
+19:          %li.nav-item{ class: menu_active_class('dashboard') }
+20:            %a.nav-link{ href: authenticated_user_path }
+21:              %i.fa.fa-home.menu-icon
+22:              %span.title Dashboard
+23:        -if current_user.profile_setup?
+24:          - if can_access?(:users, :index)
+25:            %li.nav-item{ class: menu_active_class('users') }
+26:              %a.nav-link{ href: send("college_#{current_user.role}s_users_path", college_slug: current_college.slug) }
+27:                %i.fa.fa-users.menu-icon
+28:                %span.title Users
+29:          - if can_access?(:departments, :index)
+30:            %li.nav-item{ class: menu_active_class('departments') }
+31:              %a.nav-link{ href: send("college_#{current_user.role}s_departments_path", college_slug: current_college.slug) }
+32:                %i.fa.fa-gear.menu-icon
+33:                %span.title Departments
+34:          - if can_access?(:courses, :index)
+35:            %li.nav-item{ class: menu_active_class('courses') }
+36:              %a.nav-link{ href: send("college_#{current_user.role}s_courses_path", college_slug: current_college.slug) }
+37:                %i.fa.fa-school.menu-icon
+38:                %span.title Courses
+39:          - if can_access?(:sessions, :index)
+40:            %li.nav-item{ class: menu_active_class('sessions') }
+41:              %a.nav-link{ href: send("college_#{current_user.role}s_sessions_path", college_slug: current_college.slug) }
+42:                %i.fa.fa-calendar.menu-icon
+43:                %span.title Sessions
+  
+app/views/layouts/admin/_sidebar.html.haml:44: syntax error, unexpected end-of-input
+app/views/layouts/admin.html.haml:32
+Started GET "/" for ::1 at 2025-06-04 14:27:45 +0530
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+Processing by DashboardController#index as HTML
+  [1m[36mCollege Load (0.4ms)[0m  [1m[34mSELECT "colleges".* FROM "colleges" WHERE "colleges"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:10:in `set_current_college'
+  [1m[36mCollege Load (0.3ms)[0m  [1m[34mSELECT "colleges".* FROM "colleges" ORDER BY "colleges"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:15:in `set_current_college'
+  Rendering layout layouts/admin.html.haml
+  Rendering dashboard/index.html.haml within layouts/admin
+  Rendered dashboard/index.html.haml within layouts/admin (Duration: 8.2ms | Allocations: 4446)
+  Rendered layouts/admin/_header.html.haml (Duration: 16.0ms | Allocations: 9286)
+  Rendered layouts/admin/_sidebar.html.haml (Duration: 26.1ms | Allocations: 17944)
+  Rendered layouts/admin/_footer.html.haml (Duration: 5.2ms | Allocations: 3875)
+  Rendered common/_notification.html.haml (Duration: 5.2ms | Allocations: 3338)
+  Rendered layout layouts/admin.html.haml (Duration: 87.0ms | Allocations: 55386)
+Completed 200 OK in 121ms (Views: 89.4ms | ActiveRecord: 8.6ms | Allocations: 62583)
+
+
+Started GET "/" for ::1 at 2025-06-04 14:28:14 +0530
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+Processing by DashboardController#index as HTML
+  [1m[36mCollege Load (0.3ms)[0m  [1m[34mSELECT "colleges".* FROM "colleges" WHERE "colleges"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:10:in `set_current_college'
+  [1m[36mCollege Load (0.4ms)[0m  [1m[34mSELECT "colleges".* FROM "colleges" ORDER BY "colleges"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:15:in `set_current_college'
+  Rendering layout layouts/admin.html.haml
+  Rendering dashboard/index.html.haml within layouts/admin
+  Rendered dashboard/index.html.haml within layouts/admin (Duration: 4.5ms | Allocations: 4445)
+  Rendered layouts/admin/_header.html.haml (Duration: 11.2ms | Allocations: 9286)
+  Rendered layouts/admin/_sidebar.html.haml (Duration: 18.6ms | Allocations: 17940)
+  Rendered layouts/admin/_footer.html.haml (Duration: 4.2ms | Allocations: 3876)
+  Rendered common/_notification.html.haml (Duration: 5.0ms | Allocations: 3338)
+  Rendered layout layouts/admin.html.haml (Duration: 60.3ms | Allocations: 55382)
+Completed 200 OK in 80ms (Views: 61.8ms | ActiveRecord: 4.1ms | Allocations: 62579)
+
+
+Started GET "/.well-known/appspecific/com.chrome.devtools.json" for ::1 at 2025-06-04 14:28:17 +0530
+Redirected to http://localhost:3001/
+Completed 301 Moved Permanently in 1ms
+
+
+Started GET "/" for ::1 at 2025-06-04 14:28:17 +0530
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+Processing by DashboardController#index as HTML
+  [1m[36mCollege Load (0.4ms)[0m  [1m[34mSELECT "colleges".* FROM "colleges" WHERE "colleges"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:10:in `set_current_college'
+  [1m[36mCollege Load (0.3ms)[0m  [1m[34mSELECT "colleges".* FROM "colleges" ORDER BY "colleges"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:15:in `set_current_college'
+  Rendering layout layouts/admin.html.haml
+  Rendering dashboard/index.html.haml within layouts/admin
+  Rendered dashboard/index.html.haml within layouts/admin (Duration: 0.4ms | Allocations: 78)
+  Rendered layouts/admin/_header.html.haml (Duration: 0.3ms | Allocations: 80)
+  Rendered layouts/admin/_sidebar.html.haml (Duration: 0.6ms | Allocations: 232)
+  Rendered layouts/admin/_footer.html.haml (Duration: 0.2ms | Allocations: 30)
+  Rendered common/_notification.html.haml (Duration: 0.1ms | Allocations: 29)
+  Rendered layout layouts/admin.html.haml (Duration: 5.4ms | Allocations: 1127)
+Completed 200 OK in 14ms (Views: 6.2ms | ActiveRecord: 0.7ms | Allocations: 2625)
+
+
+Started GET "/" for ::1 at 2025-06-04 14:28:54 +0530
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+Processing by DashboardController#index as HTML
+  [1m[36mCollege Load (0.5ms)[0m  [1m[34mSELECT "colleges".* FROM "colleges" WHERE "colleges"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:10:in `set_current_college'
+  [1m[36mCollege Load (0.4ms)[0m  [1m[34mSELECT "colleges".* FROM "colleges" ORDER BY "colleges"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:15:in `set_current_college'
+  Rendering layout layouts/admin.html.haml
+  Rendering dashboard/index.html.haml within layouts/admin
+  Rendered dashboard/index.html.haml within layouts/admin (Duration: 6.5ms | Allocations: 4444)
+  Rendered layouts/admin/_header.html.haml (Duration: 10.8ms | Allocations: 9290)
+  Rendered layouts/admin/_sidebar.html.haml (Duration: 22.5ms | Allocations: 17943)
+  Rendered layouts/admin/_footer.html.haml (Duration: 8.9ms | Allocations: 3876)
+  Rendered common/_notification.html.haml (Duration: 5.9ms | Allocations: 3339)
+  Rendered layout layouts/admin.html.haml (Duration: 76.6ms | Allocations: 55389)
+Completed 200 OK in 103ms (Views: 79.3ms | ActiveRecord: 4.9ms | Allocations: 62587)
+
+
+Started GET "/" for ::1 at 2025-06-04 14:29:14 +0530
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+Processing by DashboardController#index as HTML
+  [1m[36mCollege Load (0.3ms)[0m  [1m[34mSELECT "colleges".* FROM "colleges" WHERE "colleges"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:10:in `set_current_college'
+  [1m[36mCollege Load (0.3ms)[0m  [1m[34mSELECT "colleges".* FROM "colleges" ORDER BY "colleges"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:15:in `set_current_college'
+  Rendering layout layouts/admin.html.haml
+  Rendering dashboard/index.html.haml within layouts/admin
+  Rendered dashboard/index.html.haml within layouts/admin (Duration: 5.1ms | Allocations: 4443)
+  Rendered layouts/admin/_header.html.haml (Duration: 9.1ms | Allocations: 9291)
+  Rendered layouts/admin/_sidebar.html.haml (Duration: 25.2ms | Allocations: 17945)
+  Rendered layouts/admin/_footer.html.haml (Duration: 6.5ms | Allocations: 3877)
+  Rendered common/_notification.html.haml (Duration: 5.7ms | Allocations: 3340)
+  Rendered layout layouts/admin.html.haml (Duration: 70.3ms | Allocations: 55393)
+Completed 200 OK in 93ms (Views: 72.0ms | ActiveRecord: 6.2ms | Allocations: 62591)
+
+
+Started GET "/" for ::1 at 2025-06-04 14:29:35 +0530
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+Processing by DashboardController#index as HTML
+  [1m[36mCollege Load (0.4ms)[0m  [1m[34mSELECT "colleges".* FROM "colleges" WHERE "colleges"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:10:in `set_current_college'
+  [1m[36mCollege Load (0.5ms)[0m  [1m[34mSELECT "colleges".* FROM "colleges" ORDER BY "colleges"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:15:in `set_current_college'
+  Rendering layout layouts/admin.html.haml
+  Rendering dashboard/index.html.haml within layouts/admin
+  Rendered dashboard/index.html.haml within layouts/admin (Duration: 5.0ms | Allocations: 4445)
+  Rendered layouts/admin/_header.html.haml (Duration: 25.3ms | Allocations: 9291)
+  Rendered layouts/admin/_sidebar.html.haml (Duration: 29.1ms | Allocations: 17945)
+  Rendered layouts/admin/_footer.html.haml (Duration: 8.9ms | Allocations: 3877)
+  Rendered common/_notification.html.haml (Duration: 6.5ms | Allocations: 3340)
+  Rendered layout layouts/admin.html.haml (Duration: 96.0ms | Allocations: 55395)
+Completed 200 OK in 122ms (Views: 98.2ms | ActiveRecord: 4.2ms | Allocations: 62596)
+
+
+Started GET "/" for ::1 at 2025-06-04 14:30:58 +0530
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+Processing by DashboardController#index as HTML
+  [1m[36mCollege Load (0.3ms)[0m  [1m[34mSELECT "colleges".* FROM "colleges" WHERE "colleges"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:10:in `set_current_college'
+  [1m[36mCollege Load (0.3ms)[0m  [1m[34mSELECT "colleges".* FROM "colleges" ORDER BY "colleges"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:15:in `set_current_college'
+  Rendering layout layouts/admin.html.haml
+  Rendering dashboard/index.html.haml within layouts/admin
+  Rendered dashboard/index.html.haml within layouts/admin (Duration: 11.4ms | Allocations: 4445)
+  Rendered layouts/admin/_header.html.haml (Duration: 13.5ms | Allocations: 9290)
+  Rendered layouts/admin/_sidebar.html.haml (Duration: 15.0ms | Allocations: 17943)
+  Rendered layouts/admin/_footer.html.haml (Duration: 5.8ms | Allocations: 3876)
+  Rendered common/_notification.html.haml (Duration: 3.6ms | Allocations: 3339)
+  Rendered layout layouts/admin.html.haml (Duration: 76.9ms | Allocations: 55395)
+Completed 200 OK in 107ms (Views: 79.7ms | ActiveRecord: 5.7ms | Allocations: 62593)
+
+
+Started GET "/" for ::1 at 2025-06-04 14:31:16 +0530
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+Processing by DashboardController#index as HTML
+  [1m[36mCollege Load (0.4ms)[0m  [1m[34mSELECT "colleges".* FROM "colleges" WHERE "colleges"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:10:in `set_current_college'
+  [1m[36mCollege Load (0.4ms)[0m  [1m[34mSELECT "colleges".* FROM "colleges" ORDER BY "colleges"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:15:in `set_current_college'
+  Rendering layout layouts/admin.html.haml
+  Rendering dashboard/index.html.haml within layouts/admin
+  Rendered dashboard/index.html.haml within layouts/admin (Duration: 8.7ms | Allocations: 4445)
+  Rendered layouts/admin/_header.html.haml (Duration: 16.8ms | Allocations: 9286)
+  Rendered layouts/admin/_sidebar.html.haml (Duration: 26.3ms | Allocations: 17941)
+  Rendered layouts/admin/_footer.html.haml (Duration: 17.8ms | Allocations: 3881)
+  Rendered common/_notification.html.haml (Duration: 6.3ms | Allocations: 3342)
+  Rendered layout layouts/admin.html.haml (Duration: 104.1ms | Allocations: 55394)
+Completed 200 OK in 133ms (Views: 106.1ms | ActiveRecord: 4.1ms | Allocations: 62593)
+
+
+Started GET "/" for ::1 at 2025-06-04 14:32:01 +0530
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+Processing by DashboardController#index as HTML
+  [1m[36mCollege Load (0.3ms)[0m  [1m[34mSELECT "colleges".* FROM "colleges" WHERE "colleges"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:10:in `set_current_college'
+  [1m[36mCollege Load (0.3ms)[0m  [1m[34mSELECT "colleges".* FROM "colleges" ORDER BY "colleges"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:15:in `set_current_college'
+  Rendering layout layouts/admin.html.haml
+  Rendering dashboard/index.html.haml within layouts/admin
+  Rendered dashboard/index.html.haml within layouts/admin (Duration: 10.9ms | Allocations: 4445)
+  Rendered layouts/admin/_header.html.haml (Duration: 15.8ms | Allocations: 9286)
+  Rendered layouts/admin/_sidebar.html.haml (Duration: 29.7ms | Allocations: 17941)
+  Rendered layouts/admin/_footer.html.haml (Duration: 7.3ms | Allocations: 3876)
+  Rendered common/_notification.html.haml (Duration: 7.7ms | Allocations: 3338)
+  Rendered layout layouts/admin.html.haml (Duration: 99.1ms | Allocations: 55384)
+Completed 200 OK in 127ms (Views: 101.0ms | ActiveRecord: 5.6ms | Allocations: 62583)
+
+
+Started GET "/" for ::1 at 2025-06-04 14:32:10 +0530
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+Processing by DashboardController#index as HTML
+  [1m[36mCollege Load (0.4ms)[0m  [1m[34mSELECT "colleges".* FROM "colleges" WHERE "colleges"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:10:in `set_current_college'
+  [1m[36mCollege Load (0.3ms)[0m  [1m[34mSELECT "colleges".* FROM "colleges" ORDER BY "colleges"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:15:in `set_current_college'
+  Rendering layout layouts/admin.html.haml
+  Rendering dashboard/index.html.haml within layouts/admin
+  Rendered dashboard/index.html.haml within layouts/admin (Duration: 9.2ms | Allocations: 4429)
+  Rendered layouts/admin/_header.html.haml (Duration: 16.3ms | Allocations: 9297)
+  Rendered layouts/admin/_sidebar.html.haml (Duration: 24.1ms | Allocations: 17657)
+  Rendered layouts/admin/_footer.html.haml (Duration: 6.3ms | Allocations: 3876)
+  Rendered common/_notification.html.haml (Duration: 4.2ms | Allocations: 3339)
+  Rendered layout layouts/admin.html.haml (Duration: 101.6ms | Allocations: 55083)
+Completed 200 OK in 131ms (Views: 104.4ms | ActiveRecord: 6.9ms | Allocations: 62277)
+
+
+Started GET "/" for ::1 at 2025-06-04 14:32:57 +0530
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+Processing by DashboardController#index as HTML
+  [1m[36mCollege Load (0.8ms)[0m  [1m[34mSELECT "colleges".* FROM "colleges" WHERE "colleges"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:10:in `set_current_college'
+  [1m[36mCollege Load (0.3ms)[0m  [1m[34mSELECT "colleges".* FROM "colleges" ORDER BY "colleges"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:15:in `set_current_college'
+  Rendering layout layouts/admin.html.haml
+  Rendering dashboard/index.html.haml within layouts/admin
+  Rendered dashboard/index.html.haml within layouts/admin (Duration: 0.4ms | Allocations: 78)
+  Rendered layouts/admin/_header.html.haml (Duration: 0.2ms | Allocations: 80)
+  Rendered layouts/admin/_sidebar.html.haml (Duration: 0.7ms | Allocations: 232)
+  Rendered layouts/admin/_footer.html.haml (Duration: 0.1ms | Allocations: 30)
+  Rendered common/_notification.html.haml (Duration: 0.1ms | Allocations: 29)
+  Rendered layout layouts/admin.html.haml (Duration: 3.3ms | Allocations: 1127)
+Completed 200 OK in 11ms (Views: 3.8ms | ActiveRecord: 1.1ms | Allocations: 2625)
+
+
+Started GET "/" for ::1 at 2025-06-04 14:33:30 +0530
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+Processing by DashboardController#index as HTML
+  [1m[36mCollege Load (0.3ms)[0m  [1m[34mSELECT "colleges".* FROM "colleges" WHERE "colleges"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:10:in `set_current_college'
+  [1m[36mCollege Load (0.3ms)[0m  [1m[34mSELECT "colleges".* FROM "colleges" ORDER BY "colleges"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:15:in `set_current_college'
+  Rendering layout layouts/admin.html.haml
+  Rendering dashboard/index.html.haml within layouts/admin
+  Rendered dashboard/index.html.haml within layouts/admin (Duration: 4.9ms | Allocations: 4437)
+  Rendered layouts/admin/_header.html.haml (Duration: 14.8ms | Allocations: 9295)
+  Rendered layouts/admin/_sidebar.html.haml (Duration: 22.5ms | Allocations: 17657)
+  Rendered layouts/admin/_footer.html.haml (Duration: 8.3ms | Allocations: 3876)
+  Rendered common/_notification.html.haml (Duration: 8.9ms | Allocations: 3339)
+  Rendered layout layouts/admin.html.haml (Duration: 95.7ms | Allocations: 55102)
+Completed 200 OK in 117ms (Views: 97.4ms | ActiveRecord: 4.2ms | Allocations: 62297)
+
+

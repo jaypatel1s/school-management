@@ -1,68 +1,33 @@
--# .card
--#   .card-body
--#     .app-brand.justify-content-center
--#       %a.app-brand-link.gap-2{ href: 'index.html' }
--#     %h4.mb-2= t('devise.sessions.welcome_to_school_management_system')
--#     = form_for(resource, as: resource_name, url: session_path(resource_name), html: { class: 'mb-3' }) do |f|
--#       .mb-3
--#         %label.form-label.required{ for: 'email' }= t('devise.sessions.email')
--#         = f.email_field :email, autofocus: true, class: 'form-control', required: true, placeholder: 'Enter your email'
--#       .mb-3.form-password-toggle
--#         %label.form-label.required{ for: 'password' }= t('devise.sessions.password')
--#         .input-group.input-group-merge
--#           = f.password_field :password, autocomplete: 'new-password', class: 'form-control', required: true, placeholder: '············'
--#           %span.input-group-text.cursor-pointer
--#             %i.bx.bx-hide
--#       .mb-3
--#         #webauthn-login
--#           %button.btn.btn-primary.d-grid.w-100{ id: "login-button" } Login with Passkey
--#         %button.btn.btn-primary.d-grid.w-100{ type: 'submit' }= t('devise.sessions.sign_in')
--#       .d-flex.justify-content-between
--#         = link_to new_confirmation_path(resource_name) do
--#           %small= t('devise.sessions.resend_verification')
--#         = link_to new_password_path(resource_name) do
--#           %small= t('devise.sessions.forget_password')
--#     %p.text-center
--#       %span= t('devise.sessions.new_platform')
--#       = link_to new_registration_path(resource_name) do
--#         %span= t('devise.sessions.create_account')
+.container-scroller
+  .container-fluid.page-body-wrapper.full-page-wrapper
+    .content-wrapper.align-items-stretch.auth.auth-img-bg
+      .row.justify-content-center
+        .col-lg-6.mt-4.align-items-center
+          .auth-form.text-left
+            .brand-logo
+              %a{href: '/'}
+                = image_tag 'common/logo.png', width: '100px', height: '100px'
+            %h4 Welcome back!
+            %h6.font-weight-light Happy to see you again!
+            .pt-3
+            = form_with model: resource, local: true, url: session_path(resource_name) do |f|
+              %div{class: "form-group #{error?(resource.errors, :email)}"}
+                = f.label :email
+                = f.email_field :email, autofocus: true, autocomplete: 'email', class: 'form-control', required: true, placeholder: 'Email'
+                = print_error(resource.errors, :email)
+              %div{class: "form-group #{error?(resource.errors, :password)}"}
+                = f.label :password
+                = f.password_field :password, autocomplete: 'new-password', class: 'form-control', required: true, placeholder: 'Password'
+                = print_error(resource.errors, :password)
+              - if devise_mapping.rememberable?
+                .mb-4
+                  .form-check
+                    %label.form-check-label.text-muted
+                      = f.check_box :remember_me, class: 'form-check-input'
+                      Keep me signed in
+                      %i.input-helper
+              .my-3
+                = f.submit 'LOGIN', class: 'btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn'
+              = render 'devise/shared/links'
 
-.container
-  .main-content.d-flex.flex-column.p-0
-    .m-auto.m-1230
-      .row.align-items-center
-        .col-lg-6.d-none.d-lg-block
-          = image_tag('login.jpg', alt: 'login', class: "rounded-3")
-        .col-lg-6
-          .mw-480.ms-lg-auto
-            %a.d-inline-block.mb-4{href: "/"}
-              = image_tag('logo.svg', alt: 'login', class: "rounded-3 for-light-logo")
-              = image_tag('white-logo.svg', alt: 'login', class: "rounded-3 for-dark-logo")
-            %h3.fs-28.mb-2 Welcome back to Trezo!
-            %p.fw-medium.fs-16.mb-4 Sign In with social account or enter your details
-            .row.justify-content-center
-              .col-lg-4.col-sm-4
-                %a.btn.btn-outline-secondary.bg-transparent.w-100.py-2.hover-bg.mb-4{href: "https://www.google.com/", style: "border-color: #D6DAE1;", target: "_blank"}
-                  = image_tag('google.svg', alt: 'google')
-              .col-lg-4.col-sm-4
-                %a.btn.btn-outline-secondary.bg-transparent.w-100.py-2.hover-bg.mb-4{href: "https://www.facebook.com/", style: "border-color: #D6DAE1;", target: "_blank"}
-                  = image_tag('facebook2.svg', alt: 'facebook2')
-              .col-lg-4.col-sm-4
-                %a.btn.btn-outline-secondary.bg-transparent.w-100.py-2.hover-bg.mb-4{href: "https://www.apple.com/", style: "border-color: #D6DAE1;", target: "_blank"}
-                  = image_tag('apple.svg', alt: 'apple')
-            = form_for(resource, as: resource_name, url: session_path(resource_name), html: { class: 'mb-3' }) do |f|
-              .form-group.mb-4
-                %label.label.text-secondary Email Address
-                = f.email_field :email, autofocus: true, class: 'form-control h-55', required: true, placeholder: 'Enter your email'
-              .form-group.mb-4
-                %label.label.text-secondary Password
-                = f.password_field :password, autocomplete: 'new-password', class: 'form-control h-55', required: true, placeholder: '············'
-              .form-group.mb-4
-                %button.btn.btn-primary.fw-medium.py-2.px-3.w-100{type: "submit"}
-                  .d-flex.align-items-center.justify-content-center.py-1
-                    %i.material-symbols-outlined.text-white.fs-20.me-2 login
-                    %span Login
-              .form-group
-                %p
-                  Do not have an account.
-                  = link_to "Register", new_registration_path(resource_name), class: "fw-medium text-primary text-decoration-none"
+          = render 'devise/shared/footer'

@@ -8,8 +8,6 @@ Rails.application.routes.draw do
 
   draw :common
 
-  root to: 'home#index'
-
   match '*path' => redirect { |_p, req|
     req.flash[:alert] = "Page doesn't exist"
     '/'
