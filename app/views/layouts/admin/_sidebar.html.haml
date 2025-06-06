@@ -6,7 +6,7 @@
           %span.login-status.online
         .nav-profile-text.d-flex.flex-column
           %span.font-weight-bold.text-break
-            = "dummy"
+            = current_user.email
     - if can_access?(:dashboard, :index)
       %li.nav-item{ class: menu_active_class('dashboard') }
         %a.nav-link{ href: authenticated_user_path }

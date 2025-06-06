@@ -1,40 +1,31 @@
-= form_with model: [:school, course], local: true, html: { multipart: true }, url: url, class: 'form' do |f|
-  .row
-    .col-lg-12.col-sm-6
-      .form-group.mb-4
-        %label.label.text-secondary.required= "Select Department"
-        = f.select :department_id, current_college.departments.map { |department| [department.name, department.id] }, { prompt: 'Select Department' }, include_blank: 'All', class: 'form-control'
-    .col-lg-6.col-sm-6
-      .form-group.mb-4
-        %label.label.text-secondary.required= t('issues.courses.table.name')
-        = f.text_field :name, class: "form-control #{error?(@course.errors, :name)}", value: f.object.name, placeholder: 'Name', required: true
-        = print_error(@course.errors, :name)
-    .col-lg-6.col-sm-6
-      .form-group.mb-4
-        %label.label.text-secondary.required= t('issues.courses.table.credits')
-        = f.number_field :credits, class: "form-control #{error?(@course.errors, :credits)}", value: f.object.credits, placeholder: 'Credits', required: true
-        = print_error(@course.errors, :credits)
-    .col-lg-12
-      .d-flex.flex-wrap.gap-3
-        %button.btn.btn-primary.py-2.px-4.fw-medium.fs-16.text-white{ type: 'submit', data: { confirm: 'Do you want to save the changes?' } }
-          %i.ri-add-line.text-white.fw-medium
-          = t('issues.users.table.save')
+.row
+  .col-md-12.grid-margin.stretch-card
+    .card
+      .card-body
+        = form_with model: [:school, course], local: true, html: { multipart: true }, url: url, class: 'form' do |f|
+          .row
+            %div{ class: "col-md-4 form-group #{ error?(course.errors, :department_id) }" }
+              = f.label :department_id, class: 'col-form-label' do
+                Department
+                %span
+                  %i.fa.fa-question-circle-o{ 'data-toggle': 'tooltip', title: 'Select Department' }
+              = f.select :department_id, options_from_collection_for_select(current_college.departments, :id, :name, f.object.department_id), {include_blank: 'Select Department'}, class: 'form-control select2-field', required: true
+              = print_error(course.errors, :department_id)
+            %div{ class: "col-md-4 form-group #{ error?(course.errors, :name) }" }
+              = f.label :name, class: 'col-form-label' do
+                Name
+                %span
+                  %i.fa.fa-question-circle-o{ 'data-toggle': 'tooltip', title: 'Name' }
+              = f.text_field :name, class: 'form-control', autocomplete: 'off', placeholder: 'Course name'
+              = print_error(course.errors, :name)
+            %div{ class: "col-md-4 form-group #{ error?(course.errors, :credits) }" }
+              = f.label :credits, class: 'col-form-label' do
+                Credits
+                %span
+                  %i.fa.fa-question-circle-o{ 'data-toggle': 'tooltip', title: 'Credits' }
+              = f.number_field :credits, class: 'form-control', autocomplete: 'off', placeholder: 'Number of Credits'
+              = print_error(course.errors, :credits)
 
-  -# .row
-  -#   .col-md-12.mb-3
-  -#     %label.form-label.required
-  -#       Select Department
-  -#     = f.select :department_id, current_college.departments.map { |department| [department.name, department.id] }, { prompt: 'Select Department' }, include_blank: 'All', class: 'form-select'
-  -# .row
-  -#   .col-md-6.mb-3
-  -#     %label.form-label.required
-  -#       = t('issues.courses.table.name')
-  -#     = f.text_field :name, class: "form-control #{error?(@course.errors, :name)}", value: f.object.name, placeholder: 'Name', required: true
-  -#     = print_error(@course.errors, :name)
-  -#   .col-md-6.mb-3
-  -#     %label.form-label.required
-  -#       = t('issues.courses.table.credits')
-  -#     = f.number_field :credits, class: "form-control #{error?(@course.errors, :credits)}", value: f.object.credits, placeholder: 'Credits', required: true
-  -# .col-12.d-flex.justify-content-between
-  -#   %button.btn.btn-primary{ type: 'submit', data: { confirm: 'Do you want to save the changes?' } }
-  -#     = t('issues.classrooms.table.save')
+          .row.mt-4
+            .col-12
+              = f.submit "Submit", class: "btn btn-primary btn-block"

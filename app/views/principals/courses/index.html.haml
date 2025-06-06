@@ -1,39 +1,38 @@
-.main-content-container.overflow-hidden
-  .d-flex.justify-content-between.align-items-center.flex-wrap.gap-2.mb-4
-    %h3.mb-0 Courses
-  .card.bg-white.border-0.rounded-3.mb-4
-    .card-body.p-0
-      .d-flex.justify-content-between.align-items-center.flex-wrap.gap-2.p-4
-        %form.position-relative.table-src-form.me-0
-          %input.form-control{ placeholder: "Search here", type: "text" }/
-          %i.material-symbols-outlined.position-absolute.top-50.start-0.translate-middle-y search
-        - if can_access?(:courses, :new)
-          %a.btn.btn-outline-primary.py-1.px-2.px-sm-4.fs-14.fw-medium.rounded-3.hover-bg{ href: new_college_principals_course_path(current_college.slug) }
-            %span.py-sm-1.d-block Create
-      .default-table-area.style-two.default-table-width
-        .table-responsive
-          %table.table.align-middle
-            %thead
-              %tr
-                %th{ scope: "col" } Name
-                %th.text-end{ scope: "col" } Actions
-            %tbody
-              - @courses.each do |course|
-                %tr
-                  %td.text-body= course.name
-                  %td.text-end
-                    .d-flex.align-items-center.justify-content-end.gap-1
-                      - if can_access?(:courses, :show)
-                        %a.ps-0.border-0.bg-transparent.lh-1.position-relative.top-2{
-                        href: college_principals_course_path(current_college.slug, course.slug), 'data-bs-html': 'true', 'data-bs-offset': '0,4', 'data-bs-original-title': '<span>Edit</span>', 'data-bs-placement': 'bottom', 'data-bs-toggle': 'tooltip', title: '', type: 'button' }
-                          %i.material-symbols-outlined.fs-16.text-primary visibility
-                      - if can_access?(:courses, :edit)
-                        %a.ps-0.border-0.bg-transparent.lh-1.position-relative.top-2{
-                        href: edit_college_principals_course_path(current_college.slug, course.slug), 'data-bs-html': 'true', 'data-bs-offset': '0,4', 'data-bs-original-title': '<span>Edit</span>', 'data-bs-placement': 'bottom', 'data-bs-toggle': 'tooltip', title: '', type: 'button' }
-                          %i.material-symbols-outlined.fs-16.text-body edit
-                      - if can_access?(:courses, :destroy)
-                        = link_to college_principals_course_path(current_college.slug, course.slug),
-                          class: 'ps-0 border-0 bg-transparent lh-1 position-relative top-2',
-                          data: { method: :delete, confirm: "You won't be able to revert this!",
-                            bs: { html: 'true',  offset: '0,4', original_title: '<span>Delete</span>', placement: 'bottom', toggle: 'tooltip' } } do
-                          %i.material-symbols-outlined.fs-16.text-danger delete
+.content-wrapper
+  .page-header.row
+    .col-md-7
+      %h3.page-title
+        %span.page-title-icon.bg-primary.text-white.mr-2
+          %i.fa.fa-file
+        Course
+    - if can_access?(:departments, :new)
+      .col-md-5.mt-2.mt-md-0.text-right
+        %a.btn.btn-sm.btn-primary{ href: new_college_principals_course_path(current_college.slug), data: { toggle: 'tooltip', placement: 'left '}, title: 'New Course' }
+          %i.fa.fa-plus
+
+  .row
+    .col-12.grid-margin
+      .card
+        .card-body
+          - if @courses.present?
+            .table-responsive
+              %table.table.table-hover
+                %thead
+                  %tr.table-primary
+                    %th Department
+                    %th Name
+                    %th.text-right{ width: '10%','data-orderable': 'false' } Action
+                %tbody
+                  - @courses.each do |course|
+                    %tr
+                      %td= course.department.name
+                      %td= course.name
+                      %td.text-right
+                        - if can_access?(:courses, :edit)
+                          = link_to raw("<i class='fa fa-pencil-square-o'></i>"), edit_college_principals_course_path(current_college.slug, course.slug), { class: 'btn-sm btn-warning px-2 py-1', 'data-toggle': 'tooltip', title: 'Edit' }
+                        - if can_access?(:courses, :destroy)
+                          = link_to raw("<i class='fa fa-trash-o'></i>"), college_principals_course_path(current_college.slug, course.slug), { class: 'btn-sm btn-danger px-2 py-1', 'data-toggle': 'tooltip', 'data-confirm': 'Are you sure?', title: 'Delete', method: :delete }
+          - else
+            %center
+              %h6
+                No Course Found.

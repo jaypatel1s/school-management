@@ -5,6 +5,4 @@
         .card-body
           .avatar.flex-shrink-0.d-flex.align-items-center
             .badge.badge-demo.bg-label-primary.p-2.rounded.me-2
-              %i.fs-4.bx.bx-sitemap
-            %span.fw-semibold.d-block.mb-0= t('dashboard.site')
-          %h1.card-title.mt-2.mb-0= current_user.college.name
+              %span.fw-semibold.d-block.mb-0= "College Name:- #{current_user.college.name}"
