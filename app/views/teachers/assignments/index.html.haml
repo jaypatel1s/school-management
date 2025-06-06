@@ -1,0 +1,41 @@
+.main-content-container.overflow-hidden
+  .d-flex.justify-content-between.align-items-center.flex-wrap.gap-2.mb-4
+    %h3.mb-0 Assignment
+  .card.bg-white.border-0.rounded-3.mb-4
+    .card-body.p-0
+      .d-flex.justify-content-between.align-items-center.flex-wrap.gap-2.p-4
+        %form.position-relative.table-src-form.me-0
+          %input.form-control{ placeholder: "Search here", type: "text" }/
+          %i.material-symbols-outlined.position-absolute.top-50.start-0.translate-middle-y search
+        - if can_access?(:assignments, :new)
+          %a.btn.btn-outline-primary.py-1.px-2.px-sm-4.fs-14.fw-medium.rounded-3.hover-bg{ href: new_college_teachers_assignment_path(current_college.slug) }
+            %span.py-sm-1.d-block Create
+      .default-table-area.style-two.default-table-width
+        .table-responsive
+          %table.table.align-middle
+            %thead
+              %tr
+                %th{ scope: "col" } Name
+                %th{ scope: "col" } Description
+                %th.text-end{ scope: "col" } Actions
+            %tbody
+              - @assignments.each do |assignment|
+                %tr
+                  %td.text-body= assignment.name
+                  %td.text-body= assignment.description
+                  %td.text-end
+                    .d-flex.align-items-center.justify-content-end.gap-1
+                      - if can_access?(:assignments, :show)
+                        %a.ps-0.border-0.bg-transparent.lh-1.position-relative.top-2{
+                        href: college_teachers_assignment_path(current_college.slug, assignment.slug), 'data-bs-html': 'true', 'data-bs-offset': '0,4', 'data-bs-original-title': '<span>Edit</span>', 'data-bs-placement': 'bottom', 'data-bs-toggle': 'tooltip', title: '', type: 'button' }
+                          %i.material-symbols-outlined.fs-16.text-primary visibility
+                      - if can_access?(:assignments, :edit)
+                        %a.ps-0.border-0.bg-transparent.lh-1.position-relative.top-2{
+                        href: edit_college_teachers_assignment_path(current_college.slug, assignment.slug), 'data-bs-html': 'true', 'data-bs-offset': '0,4', 'data-bs-original-title': '<span>Edit</span>', 'data-bs-placement': 'bottom', 'data-bs-toggle': 'tooltip', title: '', type: 'button' }
+                          %i.material-symbols-outlined.fs-16.text-body edit
+                      - if can_access?(:assignments, :destroy)
+                        = link_to college_teachers_assignment_path(current_college.slug, assignment.slug),
+                          class: 'ps-0 border-0 bg-transparent lh-1 position-relative top-2',
+                          data: { method: :delete, confirm: "You won't be able to revert this!",
+                            bs: { html: 'true',  offset: '0,4', original_title: '<span>Delete</span>', placement: 'bottom', toggle: 'tooltip' } } do
+                          %i.material-symbols-outlined.fs-16.text-danger delete

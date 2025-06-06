@@ -1,7 +1,7 @@
 # config/deploy/production.rb
-server '54.167.122.206', user: 'ubuntu', roles: %w{app db web}
-set :ssh_options, {
-  keys: %w(/home/jay/Downloads/college.pem),
-  forward_agent: true,
-  auth_methods: %w(publickey)
-}
+server '140.245.9.121', user: 'jay', roles: %w[app db web]
+set :stage, 'production'
+set :branch, 'main'
+set :deploy_to, '/home/jay/public/college'
+
+

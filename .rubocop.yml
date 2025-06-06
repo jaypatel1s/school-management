@@ -5,7 +5,7 @@ plugins:
   - rubocop-capybara
 AllCops:
   NewCops: enable
-  TargetRubyVersion: 3.2.2
+  TargetRubyVersion: 3.2.0
   Exclude:
     - "**/bin/*"
     - "**/db/schema.rb"

@@ -3,7 +3,7 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby '3.2.2'
+ruby '3.2.0'
 
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
 gem 'rails', '~> 7.1.3', '>= 7.1.3.4'
@@ -24,6 +24,8 @@ gem 'sass-rails', '>= 6'
 gem 'trix-rails', require: 'trix'
 gem 'uglifier', '>= 1.3.0'
 gem 'webauthn'
+gem 'ed25519', '~> 1.2'
+gem 'bcrypt_pbkdf', '~> 1.0'
 
 # Background job adapter
 # gem 'importmap-rails'
