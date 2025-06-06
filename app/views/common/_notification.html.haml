@@ -1,14 +1,4 @@
 :javascript
-  function display_notify(type, msg){
-    $('.toast-body').html(msg);
-    $('.bs-toast').removeClass('bg-success bg-warning bg-info bg-danger')
-    $('.bs-toast').addClass('bg-'+ type)
-    $('.bs-toast').fadeIn( function() {
-      setTimeout( function(){
-        $('.bs-toast').fadeOut("fast");
-      }, 3000);
-    });
-  }
   $(document).ready(function(){
     var success_msg = "#{flash[:success]}"
     var alert_msg   = "#{flash[:alert]}"

@@ -11,25 +11,25 @@
       %li.nav-item{ class: menu_active_class('dashboard') }
         %a.nav-link{ href: authenticated_user_path }
           %i.fa.fa-home.menu-icon
-          %span.title Dashboard
+          %span.menu-title Dashboard
     - if current_user.profile_setup?
       - if can_access?(:users, :index)
         %li.nav-item{ class: menu_active_class('users') }
           %a.nav-link{ href: send("college_#{current_user.role}s_users_path", college_slug: current_college.slug) }
             %i.fa.fa-users.menu-icon
-            %span.title Users
+            %span.menu-title Users
       - if can_access?(:departments, :index)
         %li.nav-item{ class: menu_active_class('departments') }
           %a.nav-link{ href: send("college_#{current_user.role}s_departments_path", college_slug: current_college.slug) }
             %i.fa.fa-gear.menu-icon
-            %span.title Departments
+            %span.menu-title Departments
       - if can_access?(:courses, :index)
         %li.nav-item{ class: menu_active_class('courses') }
           %a.nav-link{ href: send("college_#{current_user.role}s_courses_path", college_slug: current_college.slug) }
             %i.fa.fa-file.menu-icon
-            %span.title Courses
+            %span.menu-title Courses
       - if can_access?(:sessions, :index)
         %li.nav-item{ class: menu_active_class('sessions') }
           %a.nav-link{ href: send("college_#{current_user.role}s_sessions_path", college_slug: current_college.slug) }
             %i.fa.fa-calendar.menu-icon
-            %span.title Sessions
+            %span.menu-title Sessions
