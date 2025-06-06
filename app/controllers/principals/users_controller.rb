@@ -6,7 +6,7 @@ module Principals
     before_action :set_user, only: %i[show edit update destroy]
 
     def index
-      @users = current_college.users
+      @users = current_college.users.where.not(id: current_user.id)
     end
 
     def show; end
