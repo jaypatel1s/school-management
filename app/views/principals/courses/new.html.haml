@@ -3,12 +3,12 @@
     .col-md-7
       %h3.page-title
         %span.page-title-icon.bg-primary.text-white.mr-2
-          %i.fa.fa-calendar
+          %i.fa.fa-file
         Course
         %small
           %i.fa.fa-arrow-right
           New
     .col-md-5.mt-2.mt-md-0.text-right
-      %a.btn.btn-sm.btn-success{href: college_principals_courses_path(current_college.slug), data: {toggle: 'tooltip', placement: 'left'}, title: 'Courses'}
+      %a.btn.btn-sm.btn-success{ href: college_principals_courses_path(current_college.slug), data: {toggle: 'tooltip', placement: 'left'}, title: 'Courses' }
         %i.fa.fa-reply
-  = render 'form', course: @course, url: college_principals_courses_path(current_college.slug)  
+  = render 'form', course: @course, url: college_principals_courses_path(current_college.slug)
