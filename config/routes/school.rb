@@ -37,6 +37,7 @@ resources :colleges, param: :slug do
         get :export_csv, action: :export_csv
       end
     end
+    resources :academic_years, param: :slug
   end
 
   namespace :teachers do

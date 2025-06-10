@@ -10,9 +10,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2025_05_12_072712) do
+ActiveRecord::Schema[7.1].define(version: 2025_06_10_100939) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "academic_years", force: :cascade do |t|
+    t.bigint "college_id", null: false
+    t.string "name"
+    t.date "start_date"
+    t.date "end_date"
+    t.boolean "current"
+    t.string "slug", limit: 255, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["college_id"], name: "index_academic_years_on_college_id"
+  end
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string "namespace"
@@ -145,28 +157,64 @@ ActiveRecord::Schema[7.1].define(version: 2025_05_12_072712) do
     t.index ["college_id"], name: "index_departments_on_college_id"
   end
 
-  create_table "fee_types", force: :cascade do |t|
+  create_table "fee_components", force: :cascade do |t|
     t.bigint "college_id", null: false
     t.string "name"
+    t.text "description"
+    t.decimal "amount"
+    t.bigint "fee_structure_id", null: false
     t.string "slug", limit: 255, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["college_id"], name: "index_fee_types_on_college_id"
+    t.index ["college_id"], name: "index_fee_components_on_college_id"
+    t.index ["fee_structure_id"], name: "index_fee_components_on_fee_structure_id"
   end
 
-  create_table "fees", force: :cascade do |t|
+  create_table "fee_payments", force: :cascade do |t|
     t.bigint "college_id", null: false
-    t.bigint "department_id", null: false
-    t.bigint "course_id", null: false
-    t.string "name"
+    t.bigint "student_fee_id", null: false
+    t.decimal "amount"
+    t.date "payment_date"
+    t.string "payment_method"
+    t.string "transaction_reference"
+    t.text "notes"
     t.string "slug", limit: 255, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "fee_type_id", null: false
-    t.index ["college_id"], name: "index_fees_on_college_id"
-    t.index ["course_id"], name: "index_fees_on_course_id"
-    t.index ["department_id"], name: "index_fees_on_department_id"
-    t.index ["fee_type_id"], name: "index_fees_on_fee_type_id"
+    t.index ["college_id"], name: "index_fee_payments_on_college_id"
+    t.index ["student_fee_id"], name: "index_fee_payments_on_student_fee_id"
+  end
+
+  create_table "fee_structures", force: :cascade do |t|
+    t.bigint "college_id", null: false
+    t.string "name"
+    t.text "description"
+    t.decimal "total_amount"
+    t.bigint "academic_year_id", null: false
+    t.bigint "department_id", null: false
+    t.bigint "created_by_id", null: false
+    t.string "slug", limit: 255, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["academic_year_id"], name: "index_fee_structures_on_academic_year_id"
+    t.index ["college_id"], name: "index_fee_structures_on_college_id"
+    t.index ["created_by_id"], name: "index_fee_structures_on_created_by_id"
+    t.index ["department_id"], name: "index_fee_structures_on_department_id"
+  end
+
+  create_table "notifications", force: :cascade do |t|
+    t.string "message"
+    t.string "notifiable_type", null: false
+    t.bigint "notifiable_id", null: false
+    t.bigint "college_id", null: false
+    t.bigint "recipient_id", null: false
+    t.boolean "read"
+    t.string "action_type"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["college_id"], name: "index_notifications_on_college_id"
+    t.index ["notifiable_type", "notifiable_id"], name: "index_notifications_on_notifiable"
+    t.index ["recipient_id"], name: "index_notifications_on_recipient_id"
   end
 
   create_table "sessions", force: :cascade do |t|
@@ -192,6 +240,21 @@ ActiveRecord::Schema[7.1].define(version: 2025_05_12_072712) do
     t.datetime "updated_at", null: false
     t.index ["course_id"], name: "index_student_courses_on_course_id"
     t.index ["student_id"], name: "index_student_courses_on_student_id"
+  end
+
+  create_table "student_fees", force: :cascade do |t|
+    t.bigint "college_id", null: false
+    t.bigint "student_id", null: false
+    t.bigint "fee_structure_id", null: false
+    t.string "status"
+    t.decimal "amount_paid"
+    t.date "due_date"
+    t.string "slug", limit: 255, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["college_id"], name: "index_student_fees_on_college_id"
+    t.index ["fee_structure_id"], name: "index_student_fees_on_fee_structure_id"
+    t.index ["student_id"], name: "index_student_fees_on_student_id"
   end
 
   create_table "students", force: :cascade do |t|
@@ -266,6 +329,7 @@ ActiveRecord::Schema[7.1].define(version: 2025_05_12_072712) do
     t.index ["user_id"], name: "index_web_authn_credentials_on_user_id"
   end
 
+  add_foreign_key "academic_years", "colleges"
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "assignments", "colleges"
@@ -280,17 +344,25 @@ ActiveRecord::Schema[7.1].define(version: 2025_05_12_072712) do
   add_foreign_key "courses", "departments"
   add_foreign_key "csv_files", "colleges"
   add_foreign_key "departments", "colleges"
-  add_foreign_key "fee_types", "colleges"
-  add_foreign_key "fees", "colleges"
-  add_foreign_key "fees", "courses"
-  add_foreign_key "fees", "departments"
-  add_foreign_key "fees", "fee_types"
+  add_foreign_key "fee_components", "colleges"
+  add_foreign_key "fee_components", "fee_structures"
+  add_foreign_key "fee_payments", "colleges"
+  add_foreign_key "fee_payments", "student_fees"
+  add_foreign_key "fee_structures", "academic_years"
+  add_foreign_key "fee_structures", "colleges"
+  add_foreign_key "fee_structures", "departments"
+  add_foreign_key "fee_structures", "users", column: "created_by_id"
+  add_foreign_key "notifications", "colleges"
+  add_foreign_key "notifications", "users", column: "recipient_id"
   add_foreign_key "sessions", "colleges"
   add_foreign_key "sessions", "courses"
   add_foreign_key "sessions", "departments"
   add_foreign_key "sessions", "teachers"
   add_foreign_key "student_courses", "courses"
   add_foreign_key "student_courses", "students"
+  add_foreign_key "student_fees", "colleges"
+  add_foreign_key "student_fees", "fee_structures"
+  add_foreign_key "student_fees", "students"
   add_foreign_key "students", "colleges"
   add_foreign_key "students", "users"
   add_foreign_key "teachers", "colleges"
