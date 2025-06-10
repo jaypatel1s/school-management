@@ -1,0 +1,45 @@
+.row
+  .col-md-12.grid-margin.stretch-card
+    .card
+      .card-body
+        = form_with model: [:school, fee_structure], local: true, html: { multipart: true }, url: url, class: 'form' do |f|
+          .row
+            %div{ class: "col-md-6 form-group #{ error?(fee_structure.errors, :department_id) }" }
+              = f.label :department_id, class: 'col-form-label' do
+                Department
+                %span
+                  %i.fa.fa-question-circle-o{ 'data-toggle': 'tooltip', title: 'Select Department' }
+              = f.select :department_id, options_from_collection_for_select(current_college.departments, :id, :name, f.object.department_id), {include_blank: 'Select Department'}, class: 'form-control select2-field', required: true
+              = print_error(fee_structure.errors, :department_id)
+            %div{ class: "col-md-6 form-group #{ error?(fee_structure.errors, :academic_year_id) }" }
+              = f.label :academic_year_id, class: 'col-form-label' do
+                Academic Year
+                %span
+                  %i.fa.fa-question-circle-o{ 'data-toggle': 'tooltip', title: 'Select Department' }
+              = f.select :academic_year_id, options_from_collection_for_select(current_college.academic_years, :id, :name, f.object.academic_year_id), {include_blank: 'Select Academic Year'}, class: 'form-control select2-field', required: true
+              = print_error(fee_structure.errors, :academic_year_id)
+          .row
+            %div{ class: "col-md-4 form-group #{ error?(fee_structure.errors, :name) }" }
+              = f.label :name, class: 'col-form-label' do
+                Name
+                %span
+                  %i.fa.fa-question-circle-o{ 'data-toggle': 'tooltip', title: 'Name' }
+              = f.text_field :name, class: 'form-control', autocomplete: 'off', placeholder: 'Fee Structure name'
+              = print_error(fee_structure.errors, :name)
+            %div{ class: "col-md-4 form-group #{ error?(fee_structure.errors, :description) }" }
+              = f.label :description, class: 'col-form-label' do
+                Description
+                %span
+                  %i.fa.fa-question-circle-o{ 'data-toggle': 'tooltip', title: 'description' }
+              = f.text_field :description, class: 'form-control', autocomplete: 'off', placeholder: 'Description'
+              = print_error(fee_structure.errors, :description)
+            %div{ class: "col-md-4 form-group #{ error?(fee_structure.errors, :total_amount) }" }
+              = f.label :total_amount, class: 'col-form-label' do
+                Total Amount
+                %span
+                  %i.fa.fa-question-circle-o{ 'data-toggle': 'tooltip', title: 'total_amount' }
+              = f.number_field :total_amount, class: 'form-control', autocomplete: 'off', placeholder: 'Total Amount'
+              = print_error(fee_structure.errors, :total_amount)
+          .row.mt-4
+            .col-12
+              = f.submit "Submit", class: "btn btn-primary btn-block"

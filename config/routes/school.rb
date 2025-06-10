@@ -37,6 +37,8 @@ resources :colleges, param: :slug do
         get :export_csv, action: :export_csv
       end
     end
+    resources :academic_years, param: :slug
+    resources :fee_structures, param: :slug
   end
 
   namespace :teachers do
@@ -59,7 +61,7 @@ resources :colleges, param: :slug do
     end
   end
 
-  namespace :student do
+  namespace :students do
     resources :dashboard, only: [:index]
     resources :users, param: :slug
     resources :departments, param: :slug

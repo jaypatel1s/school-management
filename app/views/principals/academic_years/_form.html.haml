@@ -1,0 +1,52 @@
+.row
+  .col-md-12.grid-margin.stretch-card
+    .card
+      .card-body
+        = form_with model: [:school, academic_year], local: true, html: { multipart: true }, url: url, class: 'form' do |f| 
+          .row
+            %div{ class: "col-md-12 form-group #{ error?(academic_year.errors, :name) }" }
+              = f.label :name, class: 'col-form-label' do
+                Name
+                %span
+                  %i.fa.fa-question-circle-o{ 'data-toggle': 'tooltip', title: 'Name' }
+              = f.text_field :name, class: 'form-control', autocomplete: 'off', placeholder: 'Academic Year name'
+              = print_error(academic_year.errors, :name)
+          .row
+            %div{ class: "col-md-4 form-group #{error?(academic_year.errors, :start_date)}" }
+              = f.label :start_date, class: 'col-form-label required' do
+                Start Date
+                %span
+                  %i.fa.fa-question-circle-o{ 'data-toggle': 'tooltip', title: 'Academic Year Start At' }
+              .input-group.date.datepicker#academic_year_start_date{ 'data-target-input': 'nearest' }
+                .input-group-prepend{ data: { target: '#academic_year_start_date', toggle: 'datetimepicker'} }
+                  %span.fa.fa-calendar.input-group-text
+                = f.text_field :start_date, class: 'form-control', autocomplete: 'off', required: true, data: {target: '#academic_year_start_date', toggle: 'datetimepicker'}, value: show_date(f.object.start_date), placeholder: 'Start At'
+              = print_error(academic_year.errors, :start_date)
+            %div{ class: "col-md-4 form-group #{error?(academic_year.errors, :end_date)}" }
+              = f.label :end_date, class: 'col-form-label required' do
+                End Date
+                %span
+                  %i.fa.fa-question-circle-o{ 'data-toggle': 'tooltip', title: 'Academic Year End At' }
+              .input-group.date.datepicker#academic_year_end_date{ 'data-target-input': 'nearest' }
+                .input-group-prepend{ data: {target: '#academic_year_end_date', toggle: 'datetimepicker'} }
+                  %span.fa.fa-calendar.input-group-text
+                = f.text_field :end_date, class: 'form-control', autocomplete: 'off', required: true, data: {target: '#academic_year_end_date', toggle: 'datetimepicker'}, value: show_date(f.object.end_date), placeholder: 'End At'
+              = print_error(academic_year.errors, :end_date)
+            .col-1
+              .form-group
+              = f.label :current, class: 'col-form-label' do
+                Current Year
+              %div
+                %label.switch
+                  = f.check_box :current, class: 'switch-slider', type: 'checkbox'
+                  %span.slider.round
+          .row.mt-4
+            .col-12
+              = f.submit "Submit", class: "btn btn-primary btn-block"
+- content_for :js_code do
+  - if academic_year.errors[:base].present?
+    :javascript
+      $(document).on('turbolinks:load', function(){
+        var error_msg   = "#{academic_year.errors[:base].uniq.join(', ')}"
+        display_notify('danger', error_msg);
+      });
