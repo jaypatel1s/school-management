@@ -1,17 +1,17 @@
 # frozen_string_literal: true
 
+# :nodoc:
 class FeeStructure < ApplicationRecord
   include Sluggable
-
+  
   belongs_to :college
-  belongs_to :classroom
-  before_save :set_total_fees
+  belongs_to :academic_year
+  belongs_to :department
+  has_many :fee_components, dependent: :destroy
+  has_many :student_fees, dependent: :destroy
 
-  validates :tuition_fee, presence: true, numericality: { only_integer: true }
-  validates :other_expense, presence: true, numericality: { only_integer: true }
-  validates :name, presence: true, numericality: { only_integer: true }
+  accepts_nested_attributes_for :fee_components, allow_destroy: true, reject_if: :all_blank
 
-  def set_total_fees
-    self.total_fee = (tuition_fee || 0) + (other_expense || 0)
-  end
+  validates :name, :total_amount, presence: true
+  validates :total_amount, numericality: { greater_than: 0 }
 end

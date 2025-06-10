@@ -7,7 +7,6 @@ class User < ApplicationRecord
   belongs_to :college
   has_one :teacher, dependent: :destroy
   has_one :student, dependent: :destroy
-
   # has_many :attendances, foreign_key: :student_id
   # has_many :attended_sessions, through: :attendances, source: :session
   # has_many :webauthn_credentials, class_name: 'WebAuthnCredential', dependent: :destroy
