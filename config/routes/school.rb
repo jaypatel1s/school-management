@@ -59,7 +59,7 @@ resources :colleges, param: :slug do
     end
   end
 
-  namespace :student do
+  namespace :students do
     resources :dashboard, only: [:index]
     resources :users, param: :slug
     resources :departments, param: :slug
