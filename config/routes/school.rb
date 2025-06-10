@@ -38,6 +38,7 @@ resources :colleges, param: :slug do
       end
     end
     resources :academic_years, param: :slug
+    resources :fee_structures, param: :slug
   end
 
   namespace :teachers do

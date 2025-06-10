@@ -192,29 +192,12 @@ ActiveRecord::Schema[7.1].define(version: 2025_06_10_100939) do
     t.decimal "total_amount"
     t.bigint "academic_year_id", null: false
     t.bigint "department_id", null: false
-    t.bigint "created_by_id", null: false
     t.string "slug", limit: 255, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["academic_year_id"], name: "index_fee_structures_on_academic_year_id"
     t.index ["college_id"], name: "index_fee_structures_on_college_id"
-    t.index ["created_by_id"], name: "index_fee_structures_on_created_by_id"
     t.index ["department_id"], name: "index_fee_structures_on_department_id"
-  end
-
-  create_table "notifications", force: :cascade do |t|
-    t.string "message"
-    t.string "notifiable_type", null: false
-    t.bigint "notifiable_id", null: false
-    t.bigint "college_id", null: false
-    t.bigint "recipient_id", null: false
-    t.boolean "read"
-    t.string "action_type"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["college_id"], name: "index_notifications_on_college_id"
-    t.index ["notifiable_type", "notifiable_id"], name: "index_notifications_on_notifiable"
-    t.index ["recipient_id"], name: "index_notifications_on_recipient_id"
   end
 
   create_table "sessions", force: :cascade do |t|
@@ -351,9 +334,6 @@ ActiveRecord::Schema[7.1].define(version: 2025_06_10_100939) do
   add_foreign_key "fee_structures", "academic_years"
   add_foreign_key "fee_structures", "colleges"
   add_foreign_key "fee_structures", "departments"
-  add_foreign_key "fee_structures", "users", column: "created_by_id"
-  add_foreign_key "notifications", "colleges"
-  add_foreign_key "notifications", "users", column: "recipient_id"
   add_foreign_key "sessions", "colleges"
   add_foreign_key "sessions", "courses"
   add_foreign_key "sessions", "departments"

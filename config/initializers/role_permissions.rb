@@ -9,7 +9,7 @@ ROLE_PERMISSIONS = {
     marksheets: %i[index show],
     fee_types: %i[index new create edit update show destroy],
     courses: %i[index new create edit update show destroy],
-    fees: %i[index new create edit update show destroy]
+    fee_structures: %i[index new create edit update show destroy]
   },
   teacher: {
     dashboard: %i[index],

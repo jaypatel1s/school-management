@@ -11,7 +11,6 @@ class CreateFeeStructures < ActiveRecord::Migration[7.1]
       t.decimal :total_amount
       t.references :academic_year, null: false, foreign_key: true
       t.references :department, null: false, foreign_key: true
-      t.references :created_by, null: false, foreign_key: { to_table: :users }
       t.string :slug, limit: 255, null: false
 
       t.timestamps

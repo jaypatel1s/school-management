@@ -2,7 +2,7 @@
   .col-md-12.grid-margin.stretch-card
     .card
       .card-body
-        = form_with model: [:school, academic_year], local: true, html: { multipart: true }, url: url, class: 'form' do |f|
+        = form_with model: [:school, academic_year], local: true, html: { multipart: true }, url: url, class: 'form' do |f| 
           .row
             %div{ class: "col-md-12 form-group #{ error?(academic_year.errors, :name) }" }
               = f.label :name, class: 'col-form-label' do
@@ -21,6 +21,7 @@
                 .input-group-prepend{ data: { target: '#academic_year_start_date', toggle: 'datetimepicker'} }
                   %span.fa.fa-calendar.input-group-text
                 = f.text_field :start_date, class: 'form-control', autocomplete: 'off', required: true, data: {target: '#academic_year_start_date', toggle: 'datetimepicker'}, value: show_date(f.object.start_date), placeholder: 'Start At'
+              = print_error(academic_year.errors, :start_date)
             %div{ class: "col-md-4 form-group #{error?(academic_year.errors, :end_date)}" }
               = f.label :end_date, class: 'col-form-label required' do
                 End Date
@@ -30,6 +31,7 @@
                 .input-group-prepend{ data: {target: '#academic_year_end_date', toggle: 'datetimepicker'} }
                   %span.fa.fa-calendar.input-group-text
                 = f.text_field :end_date, class: 'form-control', autocomplete: 'off', required: true, data: {target: '#academic_year_end_date', toggle: 'datetimepicker'}, value: show_date(f.object.end_date), placeholder: 'End At'
+              = print_error(academic_year.errors, :end_date)
             .col-1
               .form-group
               = f.label :current, class: 'col-form-label' do

@@ -9,5 +9,5 @@ class Department < ApplicationRecord
   has_many :assignments, dependent: :destroy
   has_one :teacher, dependent: :destroy
 
-  validates :name, presence: true
+  validates :name, presence: true, uniqueness: { scope: :college_id }
 end
