@@ -1,15 +1,37 @@
-= form_with model: @student, url: college_setup_path(params[:college_slug]), local: true, html: { multipart: true }, method: :post, class: 'form' do |f|
-  .form-group
-    = f.label :roll_number
-    = f.number_field :roll_number, class: "form-control"
-
-  .form-group
-    = f.label :mobile_no
-    = f.number_field :mobile_no, class: "form-control"
-
-  .form-group
-    = f.label :status
-    = f.select :status, Student.statuses.keys.map { |status| [status.titleize, status] }, class: "form-control"
-
-  .form-group
-    = f.submit "Save", class: "btn btn-primary"
+.content-wrapper
+  .page-header.row
+    .col-md-7
+      %h3.page-title
+        %span.page-title-icon.bg-primary.text-white.mr-2
+          %i.fa.fa-users
+        Student
+        %small
+          %i.fa.fa-arrow-right
+          Setup
+  = form_with model: @student, url: college_setup_path(params[:college_slug]), local: true, html: { multipart: true }, method: :post, class: 'form' do |f|
+    .row
+      %div{ class: "col-md-6 form-group #{ error?(@student.errors, :roll_number) }" }
+        = f.label :roll_number, class: 'col-form-label' do
+          Roll Number
+          %span
+            %i.fa.fa-question-circle-o{ 'data-toggle': 'tooltip', title: 'Roll Number' }
+        = f.number_field :roll_number, class: 'form-control', required: true
+        = print_error(@student.errors, :roll_number)
+      %div{ class: "col-md-6 form-group #{ error?(@student.errors, :mobile_no) }" }
+        = f.label :mobile_no, class: 'col-form-label' do
+          Mobile Number
+          %span
+            %i.fa.fa-question-circle-o{ 'data-toggle': 'tooltip', title: 'Mobile Number' }
+        = f.number_field :mobile_no, class: 'form-control', required: true
+        = print_error(@student.errors, :mobile_no)
+    .row
+      %div{ class: "col-md-6 form-group #{ error?(@student.errors, :status) }" }
+        = f.label :status, class: 'col-form-label' do
+          Status
+          %span
+            %i.fa.fa-question-circle-o{ 'data-toggle': 'tooltip', title: 'Select Status' }
+        = f.select :status, Student.statuses.keys.map { |status| [status.titleize, status] }, {include_blank: 'Select Status'}, class: 'form-control select2-field', required: true
+        = print_error(@student.errors, :status)
+    .row.mt-4
+      .col-12
+        = f.submit "Submit", class: "btn btn-primary btn-block"

@@ -5,10 +5,11 @@ ROLE_PERMISSIONS = {
     sessions: %i[index show],
     departments: %i[index new create edit update destroy],
     csv_files: %i[index new create import_csv export_csv],
+    academic_years: %i[index new create edit update destroy],
     marksheets: %i[index show],
     fee_types: %i[index new create edit update show destroy],
     courses: %i[index new create edit update show destroy],
-    fees: %i[index new create edit update show destroy]
+    fee_structures: %i[index new create edit update show destroy]
   },
   teacher: {
     dashboard: %i[index],

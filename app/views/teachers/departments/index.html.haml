@@ -1,24 +1,24 @@
-.main-content-container.overflow-hidden
-  .d-flex.justify-content-between.align-items-center.flex-wrap.gap-2.mb-4
-    %h3.mb-0= t('issues.status.table.departments')
-  .card.bg-white.border-0.rounded-3.mb-4
-    .card-body.p-0
-      .default-table-area.style-two.default-table-width
-        .table-responsive
-          %table.table.align-middle
-            - if @departments.present?
-              %thead
-                %tr
-                  %th{ scope: "col" }= t('issues.status.table.name')
-                  %th{ scope: "col" }= t('issues.status.table.actions')
-              %tbody
-              - @departments.each do |department|
-                %tr
-                  %td.text-body= department.name
-            - else
-              .col-12
-                .card
-                  .card-body
-                    %h4.text-center.mb-0.d-flex.align-items-center.justify-content-center
-                      %i.bx.bx-error-circle.pe-2.data-icon
-                      = t('issues.status.table.no_data_found')
+.content-wrapper
+  .page-header.row
+    .col-md-7
+      %h3.page-title
+        %span.page-title-icon.bg-primary.text-white.mr-2
+          %i.fa.fa-gear
+        Departments
+  .row
+    .col-12.grid-margin
+      .card
+        .card-body
+          - if @department.present?
+            .table-responsive
+              %table.table.table-hover
+                %thead
+                  %tr.table-primary
+                    %th Name
+                %tbody
+                  %tr
+                    %td= @department.name
+          - else
+            %center
+              %h6
+                No Department Found.
