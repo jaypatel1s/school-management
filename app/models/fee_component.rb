@@ -2,6 +2,8 @@
 
 # :nodoc:
 class FeeComponent < ApplicationRecord
+  include Sluggable
+  
   belongs_to :college
   belongs_to :fee_structure
 

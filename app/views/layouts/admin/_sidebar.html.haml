@@ -41,8 +41,13 @@
       - if can_access?(:fee_structures, :index)
         %li.nav-item{ class: menu_active_class('fee_structures') }
           %a.nav-link{ href: send("college_#{current_user.role}s_fee_structures_path", college_slug: current_college.slug) }
-            %i.fa.fa-rss.menu-icon
+            %i.fa.fa-folder.menu-icon
             %span.menu-title Fee Structures
+      - if can_access?(:fee_components, :index)
+        %li.nav-item{ class: menu_active_class('fee_components') }
+          %a.nav-link{ href: send("college_#{current_user.role}s_fee_components_path", college_slug: current_college.slug) }
+            %i.fa.fa-money.menu-icon
+            %span.menu-title Fee Components
       - if can_access?(:semesters, :index)
         %li.nav-item{ class: menu_active_class('semesters') }
           %a.nav-link{ href: send("college_#{current_user.role}s_semesters_path", college_slug: current_college.slug) }
