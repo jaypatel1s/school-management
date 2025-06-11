@@ -3,7 +3,7 @@
 # :nodoc:
 class StudentFee < ApplicationRecord
   belongs_to :college
-  belongs_to :student, class_name: 'Student'
+  belongs_to :student
   belongs_to :fee_structure
   has_many :fee_payments, dependent: :destroy
 

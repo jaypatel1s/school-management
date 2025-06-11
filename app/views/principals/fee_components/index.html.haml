@@ -1,0 +1,40 @@
+.content-wrapper
+  .page-header.row
+    .col-md-7
+      %h3.page-title
+        %span.page-title-icon.bg-primary.text-white.mr-2
+          %i.fa.fa-money
+        Fee Components
+    - if can_access?(:fee_components, :new)
+      .col-md-5.mt-2.mt-md-0.text-right
+        %a.btn.btn-sm.btn-primary{ href: new_college_principals_fee_component_path(current_college.slug), data: { toggle: 'tooltip', placement: 'left '}, title: 'New Fee Structure' }
+          %i.fa.fa-plus
+
+  .row
+    .col-12.grid-margin
+      .card
+        .card-body
+          - if @fee_components.present?
+            .table-responsive
+              %table.table.table-hover
+                %thead
+                  %tr.table-primary
+                    %th Fee Structure
+                    %th Name
+                    %th Amount
+                    %th.text-right{ width: '10%','data-orderable': 'false' } Action
+                %tbody
+                  - @fee_components.each do |fee_component|
+                    %tr
+                      %td= fee_component.fee_structure.name
+                      %td= fee_component.name
+                      %td= fee_component.amount
+                      %td.text-right
+                        - if can_access?(:fee_components, :edit)
+                          = link_to raw("<i class='fa fa-pencil-square-o'></i>"), edit_college_principals_fee_component_path(current_college.slug, fee_component.slug), { class: 'btn-sm btn-warning px-2 py-1', 'data-toggle': 'tooltip', title: 'Edit' }
+                        - if can_access?(:fee_components, :destroy)
+                          = link_to raw("<i class='fa fa-trash-o'></i>"), college_principals_fee_component_path(current_college.slug, fee_component.slug), { class: 'btn-sm btn-danger px-2 py-1', 'data-toggle': 'tooltip', 'data-confirm': 'Are you sure?', title: 'Delete', method: :delete }
+          - else
+            %center
+              %h6
+                No Fee Components Found.
