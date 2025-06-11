@@ -22,9 +22,7 @@ ActiveRecord::Schema[7.1].define(version: 2025_06_11_085740) do
     t.string "slug", limit: 255, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "department_id", null: false
     t.index ["college_id"], name: "index_academic_years_on_college_id"
-    t.index ["department_id"], name: "index_academic_years_on_department_id"
   end
 
   create_table "active_admin_comments", force: :cascade do |t|
@@ -132,8 +130,12 @@ ActiveRecord::Schema[7.1].define(version: 2025_06_11_085740) do
     t.string "slug", limit: 255, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "department_id"
     t.bigint "semester_id", null: false
+    t.bigint "academic_year_id", null: false
+    t.index ["academic_year_id"], name: "index_courses_on_academic_year_id"
     t.index ["college_id"], name: "index_courses_on_college_id"
+    t.index ["department_id"], name: "index_courses_on_department_id"
     t.index ["semester_id"], name: "index_courses_on_semester_id"
   end
 
@@ -219,14 +221,12 @@ ActiveRecord::Schema[7.1].define(version: 2025_06_11_085740) do
   end
 
   create_table "semesters", force: :cascade do |t|
-    t.bigint "academic_year_id", null: false
     t.bigint "college_id", null: false
     t.string "name"
     t.boolean "current", default: false
     t.string "slug", limit: 255, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["academic_year_id"], name: "index_semesters_on_academic_year_id"
     t.index ["college_id"], name: "index_semesters_on_college_id"
   end
 
@@ -343,7 +343,6 @@ ActiveRecord::Schema[7.1].define(version: 2025_06_11_085740) do
   end
 
   add_foreign_key "academic_years", "colleges"
-  add_foreign_key "academic_years", "departments"
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "assignments", "colleges"
@@ -354,6 +353,7 @@ ActiveRecord::Schema[7.1].define(version: 2025_06_11_085740) do
   add_foreign_key "attendances", "departments"
   add_foreign_key "attendances", "sessions"
   add_foreign_key "attendances", "students"
+  add_foreign_key "courses", "academic_years"
   add_foreign_key "courses", "colleges"
   add_foreign_key "courses", "semesters"
   add_foreign_key "csv_files", "colleges"
@@ -368,7 +368,6 @@ ActiveRecord::Schema[7.1].define(version: 2025_06_11_085740) do
   add_foreign_key "fee_structures", "users", column: "created_by_id"
   add_foreign_key "notifications", "colleges"
   add_foreign_key "notifications", "users", column: "recipient_id"
-  add_foreign_key "semesters", "academic_years"
   add_foreign_key "semesters", "colleges"
   add_foreign_key "sessions", "colleges"
   add_foreign_key "sessions", "courses"

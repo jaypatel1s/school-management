@@ -5,8 +5,7 @@ class AcademicYear < ApplicationRecord
   include Sluggable
 
   belongs_to :college
-  belongs_to :department
-  has_many :semester, dependent: :destroy
+  has_many :courses, dependent: :destroy
   has_many :fee_structures, dependent: :nullify
   validates :name, :start_date, :end_date, presence: true
   validates :name, uniqueness: {scope: :college_id}

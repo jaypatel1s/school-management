@@ -5,6 +5,8 @@ class Course < ApplicationRecord
 
   belongs_to :college
   belongs_to :semester
+  belongs_to :department
+  belongs_to :academic_year
   has_many :student_courses
   has_many :students, through: :student_courses
   has_one :teacher, dependent: :destroy

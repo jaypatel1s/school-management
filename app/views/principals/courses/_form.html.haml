@@ -4,6 +4,20 @@
       .card-body
         = form_with model: [:school, course], local: true, html: { multipart: true }, url: url, class: 'form' do |f|
           .row
+            %div{ class: "col-md-4 form-group #{ error?(course.errors, :department_id) }" }
+              = f.label :department_id, class: 'col-form-label' do
+                Department
+                %span
+                  %i.fa.fa-question-circle-o{ 'data-toggle': 'tooltip', title: 'Select Department' }
+              = f.select :department_id, options_from_collection_for_select(current_college.departments, :id, :name, f.object.department_id), {include_blank: 'Select Department'}, class: 'form-control select2-field', required: true
+              = print_error(course.errors, :academic_year_id)
+            %div{ class: "col-md-4 form-group #{ error?(course.errors, :academic_year_id) }" }
+              = f.label :academic_year_id, class: 'col-form-label' do
+                Academic Year
+                %span
+                  %i.fa.fa-question-circle-o{ 'data-toggle': 'tooltip', title: 'Select Academic Year' }
+              = f.select :academic_year_id, options_from_collection_for_select(current_college.academic_years, :id, :name, f.object.academic_year_id), {include_blank: 'Select Academic Year'}, class: 'form-control select2-field', required: true
+              = print_error(course.errors, :academic_year_id)
             %div{ class: "col-md-4 form-group #{ error?(course.errors, :semester_id) }" }
               = f.label :semester_id, class: 'col-form-label' do
                 Semester
@@ -11,14 +25,15 @@
                   %i.fa.fa-question-circle-o{ 'data-toggle': 'tooltip', title: 'Select Semester' }
               = f.select :semester_id, options_from_collection_for_select(current_college.semesters, :id, :name, f.object.semester_id), {include_blank: 'Select Semester'}, class: 'form-control select2-field', required: true
               = print_error(course.errors, :semester_id)
-            %div{ class: "col-md-4 form-group #{ error?(course.errors, :name) }" }
+          .row
+            %div{ class: "col-md-6 form-group #{ error?(course.errors, :name) }" }
               = f.label :name, class: 'col-form-label' do
                 Name
                 %span
                   %i.fa.fa-question-circle-o{ 'data-toggle': 'tooltip', title: 'Name' }
               = f.text_field :name, class: 'form-control', autocomplete: 'off', placeholder: 'Course name'
               = print_error(course.errors, :name)
-            %div{ class: "col-md-4 form-group #{ error?(course.errors, :credits) }" }
+            %div{ class: "col-md-6 form-group #{ error?(course.errors, :credits) }" }
               = f.label :credits, class: 'col-form-label' do
                 Credits
                 %span

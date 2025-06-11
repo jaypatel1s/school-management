@@ -56,7 +56,7 @@ module Principals
 
     def academic_year_params
       params.require(:academic_year).permit(
-        :name, :start_date, :end_date, :department_id
+        :name, :start_date, :end_date
       )
     end
   end

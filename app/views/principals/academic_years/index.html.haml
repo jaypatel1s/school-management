@@ -19,7 +19,6 @@
               %table.table.table-hover
                 %thead
                   %tr.table-primary
-                    %th Department
                     %th Name
                     %th Start At
                     %th End At
@@ -27,7 +26,6 @@
                 %tbody
                   - @academic_years.each do |academic_year|
                     %tr
-                      %td= academic_year.department.name
                       %td= academic_year.name
                       %td= academic_year.start_date
                       %td= academic_year.end_date

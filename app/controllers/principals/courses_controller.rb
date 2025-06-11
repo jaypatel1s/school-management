@@ -59,7 +59,7 @@ module Principals
     end
 
     def courses_params
-      params.require(:course).permit(:name, :semester_id, :credits)
+      params.require(:course).permit(:name, :department_id, :academic_year_id, :semester_id, :credits)
     end
   end
 end
