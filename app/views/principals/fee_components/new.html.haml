@@ -1,0 +1,14 @@
+.content-wrapper
+  .page-header.row
+    .col-md-7
+      %h3.page-title
+        %span.page-title-icon.bg-primary.text-white.mr-2
+          %i.fa.fa-money
+        Fee Components
+        %small
+          %i.fa.fa-arrow-right
+          New
+    .col-md-5.mt-2.mt-md-0.text-right
+      %a.btn.btn-sm.btn-success{ href: college_principals_fee_components_path(current_college.slug), data: { toggle: 'tooltip', placement: 'left' }, title: 'Fee Structures' }
+        %i.fa.fa-reply
+  = render 'form', fee_component: @fee_component, url: college_principals_fee_components_path(current_college.slug)

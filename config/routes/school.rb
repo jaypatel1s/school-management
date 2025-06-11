@@ -39,6 +39,7 @@ resources :colleges, param: :slug do
     end
     resources :academic_years, param: :slug
     resources :fee_structures, param: :slug
+    resources :fee_components, param: :slug
     resources :semesters, param: :slug
   end
 

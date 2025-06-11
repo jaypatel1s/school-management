@@ -8,6 +8,7 @@ ROLE_PERMISSIONS = {
     academic_years: %i[index new create edit update destroy],
     courses: %i[index new create edit update show destroy],
     fee_structures: %i[index new create edit update show destroy],
+    fee_components: %i[index new create edit update show destroy],
     semesters: %i[index new create edit update show destroy]
   },
   teacher: {

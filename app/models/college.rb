@@ -16,4 +16,5 @@ class College < ApplicationRecord
   has_many :academic_years, dependent: :destroy
   has_many :semesters, dependent: :destroy
   has_many :fee_structures, dependent: :destroy
+  has_many :fee_components, dependent: :destroy
 end
