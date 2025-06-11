@@ -19,13 +19,13 @@
               %table.table.table-hover
                 %thead
                   %tr.table-primary
-                    %th Department
+                    %th Semester
                     %th Name
                     %th.text-right{ width: '10%','data-orderable': 'false' } Action
                 %tbody
                   - @courses.each do |course|
                     %tr
-                      %td= course.department.name
+                      %td= course.semester.name
                       %td= course.name
                       %td.text-right
                         - if can_access?(:courses, :edit)

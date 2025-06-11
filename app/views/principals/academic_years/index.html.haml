@@ -3,7 +3,7 @@
     .col-md-7
       %h3.page-title
         %span.page-title-icon.bg-primary.text-white.mr-2
-          %i.fa.fa-book
+          %i.fa.fa-graduation-cap
         Academic Year
     - if can_access?(:academic_years, :new)
       .col-md-5.mt-2.mt-md-0.text-right
@@ -19,18 +19,18 @@
               %table.table.table-hover
                 %thead
                   %tr.table-primary
+                    %th Department
                     %th Name
                     %th Start At
                     %th End At
-                    %th Current Year
                     %th.text-right{ width: '10%','data-orderable': 'false' } Action
                 %tbody
                   - @academic_years.each do |academic_year|
                     %tr
+                      %td= academic_year.department.name
                       %td= academic_year.name
                       %td= academic_year.start_date
                       %td= academic_year.end_date
-                      %td= academic_year.current
                       %td.text-right
                         - if can_access?(:academic_years, :edit)
                           = link_to raw("<i class='fa fa-pencil-square-o'></i>"), edit_college_principals_academic_year_path(current_college.slug, academic_year.slug), { class: 'btn-sm btn-warning px-2 py-1', 'data-toggle': 'tooltip', title: 'Edit' }

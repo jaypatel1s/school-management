@@ -6,10 +6,9 @@ ROLE_PERMISSIONS = {
     departments: %i[index new create edit update destroy],
     csv_files: %i[index new create import_csv export_csv],
     academic_years: %i[index new create edit update destroy],
-    marksheets: %i[index show],
-    fee_types: %i[index new create edit update show destroy],
     courses: %i[index new create edit update show destroy],
-    fee_structures: %i[index new create edit update show destroy]
+    fee_structures: %i[index new create edit update show destroy],
+    semesters: %i[index new create edit update show destroy]
   },
   teacher: {
     dashboard: %i[index],
@@ -19,12 +18,10 @@ ROLE_PERMISSIONS = {
     csv_files: %i[index add_csv create_csv import_csv export_csv],
     sessions: %i[index new create edit update destroy show],
     attendances: %i[report],
-    marksheets: %i[new create index show],
     assignments: %i[index new create edit update show destroy]
   },
   student: {
     dashboard: %i[index],
-    marksheets: %i[index show],
     sessions: %i[index show],
     attendances: %i[new create]
   }

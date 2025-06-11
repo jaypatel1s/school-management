@@ -36,10 +36,15 @@
       - if can_access?(:academic_years, :index)
         %li.nav-item{ class: menu_active_class('academic_years') }
           %a.nav-link{ href: send("college_#{current_user.role}s_academic_years_path", college_slug: current_college.slug) }
-            %i.fa.fa-book.menu-icon
+            %i.fa.fa-graduation-cap.menu-icon
             %span.menu-title Academic Year
       - if can_access?(:fee_structures, :index)
         %li.nav-item{ class: menu_active_class('fee_structures') }
           %a.nav-link{ href: send("college_#{current_user.role}s_fee_structures_path", college_slug: current_college.slug) }
             %i.fa.fa-rss.menu-icon
             %span.menu-title Fee Structures
+      - if can_access?(:semesters, :index)
+        %li.nav-item{ class: menu_active_class('semesters') }
+          %a.nav-link{ href: send("college_#{current_user.role}s_semesters_path", college_slug: current_college.slug) }
+            %i.fa.fa-book.menu-icon
+            %span.menu-title Semesters

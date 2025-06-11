@@ -56,7 +56,7 @@ module Principals
 
     def department_params
       params.require(:department).permit(
-        :name, :college_id, :description
+        :name, :description
       )
     end
   end
