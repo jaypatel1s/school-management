@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2025_06_11_085740) do
+ActiveRecord::Schema[7.1].define(version: 2025_06_17_061622) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -77,6 +77,31 @@ ActiveRecord::Schema[7.1].define(version: 2025_06_11_085740) do
     t.datetime "updated_at", null: false
     t.index ["email"], name: "index_admin_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_admin_users_on_reset_password_token", unique: true
+  end
+
+  create_table "admissions", force: :cascade do |t|
+    t.bigint "college_id", null: false
+    t.bigint "department_id", null: false
+    t.bigint "course_id", null: false
+    t.bigint "user_id"
+    t.bigint "processed_by_id"
+    t.string "application_number"
+    t.string "name", null: false
+    t.string "email"
+    t.string "phone"
+    t.string "status", default: "pending"
+    t.datetime "expires_at"
+    t.string "temporary_token"
+    t.string "slug", limit: 255, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["application_number"], name: "index_admissions_on_application_number", unique: true
+    t.index ["college_id"], name: "index_admissions_on_college_id"
+    t.index ["course_id"], name: "index_admissions_on_course_id"
+    t.index ["department_id"], name: "index_admissions_on_department_id"
+    t.index ["processed_by_id"], name: "index_admissions_on_processed_by_id"
+    t.index ["temporary_token"], name: "index_admissions_on_temporary_token", unique: true
+    t.index ["user_id"], name: "index_admissions_on_user_id"
   end
 
   create_table "assignments", force: :cascade do |t|
@@ -345,6 +370,11 @@ ActiveRecord::Schema[7.1].define(version: 2025_06_11_085740) do
   add_foreign_key "academic_years", "colleges"
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "admissions", "colleges"
+  add_foreign_key "admissions", "courses"
+  add_foreign_key "admissions", "departments"
+  add_foreign_key "admissions", "users"
+  add_foreign_key "admissions", "users", column: "processed_by_id"
   add_foreign_key "assignments", "colleges"
   add_foreign_key "assignments", "courses"
   add_foreign_key "assignments", "departments"
