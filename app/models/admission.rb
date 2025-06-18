@@ -2,6 +2,8 @@
 
 # app/models/admission.rb
 class Admission < ApplicationRecord
+  include Sluggable
+
   belongs_to :college
   belongs_to :department
   belongs_to :course
