@@ -1,0 +1,46 @@
+.content-wrapper
+  .page-header.row
+    .col-md-7
+      %h3.page-title
+        %span.page-title-icon.bg-primary.text-white.mr-2
+          %i.fa.fa-file-text-o
+        Admissions
+    .col-md-5.mt-2.mt-md-0.text-right
+      %a.btn.btn-sm.btn-success{ href: new_college_principals_admission_path(current_college.slug), data: { toggle: 'tooltip', placement: 'left' }, title: 'Admission' }
+        %i.fa.fa-plus
+
+  .row
+    .col-12.grid-margin
+      .card
+        .card-body
+          - if @admissions.present?
+            .table-responsive
+              %table.table.table-hover
+                %thead
+                  %tr.table-primary
+                    %th Application Number
+                    %th Name
+                    %th Email
+                    %th Phone
+                    %th Status
+                    %th Department
+                    %th Course
+                    %th.text-right{ width: '15%', 'data-orderable': 'false' } Action
+                %tbody
+                  - @admissions.each do |admission|
+                    %tr
+                      %td= admission.application_number
+                      %td= admission.name
+                      %td= admission.email
+                      %td= admission.phone
+                      %td= admission.status.titleize
+                      %td= admission.department.try(:name)
+                      %td= admission.course.try(:name)
+                      %td.text-right
+                        = link_to raw("<i class='fa fa-eye'></i>"), college_principals_admission_path(current_college.slug, admission.slug), { class: 'btn-sm btn-info px-2 py-1', 'data-toggle': 'tooltip', title: 'Show' }
+                        = link_to raw("<i class='fa fa-pencil-square-o'></i>"), edit_college_principals_admission_path(current_college.slug, admission.slug), { class: 'btn-sm btn-warning px-2 py-1', 'data-toggle': 'tooltip', title: 'Edit' }
+                        = link_to raw("<i class='fa fa-trash-o'></i>"), college_principals_admission_path(current_college.slug, admission.slug), { class: 'btn-sm btn-danger px-2 py-1', 'data-toggle': 'tooltip', 'data-confirm': 'Are you sure?', title: 'Delete', method: :delete }
+          - else
+            %center
+              %h6
+                No Admission Found.

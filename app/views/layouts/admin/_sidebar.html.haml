@@ -53,3 +53,8 @@
           %a.nav-link{ href: send("college_#{current_user.role}s_semesters_path", college_slug: current_college.slug) }
             %i.fa.fa-book.menu-icon
             %span.menu-title Semesters
+      - if can_access?(:admissions, :index)
+        %li.nav-item{ class: menu_active_class('admissions') }
+          %a.nav-link{ href: send("college_#{current_user.role}s_admissions_path", college_slug: current_college.slug) }
+            %i.fa.fa-file-text-o.menu-icon
+            %span.menu-title Admissions

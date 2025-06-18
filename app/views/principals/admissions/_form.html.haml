@@ -1,0 +1,67 @@
+.row
+  .col-md-12.grid-margin.stretch-card
+    .card
+      .card-body
+        = form_with model: [:school, admission], local: true, html: { multipart: true },url: url, class: 'form' do |f|
+          .row
+            %div{ class: "col-md-4 form-group #{ error?(admission.errors, :name) }" }
+              = f.label :name, class: 'col-form-label' do
+                Name
+                %span
+                  %i.fa.fa-question-circle-o{ 'data-toggle': 'tooltip', title: 'Full name of applicant' }
+              = f.text_field :name, class: 'form-control', autocomplete: 'off', placeholder: 'Applicant name'
+              = print_error(admission.errors, :name)
+            %div{ class: "col-md-4 form-group #{ error?(admission.errors, :email) }" }
+              = f.label :email, class: 'col-form-label' do
+                Email
+                %span
+                  %i.fa.fa-question-circle-o{ 'data-toggle': 'tooltip', title: 'Applicant email address' }
+              = f.email_field :email, class: 'form-control', autocomplete: 'off', placeholder: 'Email'
+              = print_error(admission.errors, :email)
+            %div{ class: "col-md-4 form-group #{ error?(admission.errors, :phone) }" }
+              = f.label :phone, class: 'col-form-label' do
+                Phone
+                %span
+                  %i.fa.fa-question-circle-o{ 'data-toggle': 'tooltip', title: 'Applicant phone number' }
+              = f.telephone_field :phone, class: 'form-control', autocomplete: 'off', placeholder: 'Phone number'
+              = print_error(admission.errors, :phone)
+          .row
+            %div{ class: "col-md-4 form-group #{ error?(admission.errors, :department_id) }" }
+              = f.label :department_id, class: 'col-form-label' do
+                Department
+                %span
+                  %i.fa.fa-question-circle-o{ 'data-toggle': 'tooltip', title: 'Select Department' }
+              = f.collection_select :department_id, Department.all, :id, :name, { prompt: 'Select Department' }, class: 'form-control select2-field', required: true
+              = print_error(admission.errors, :department_id)
+            %div{ class: "col-md-4 form-group #{ error?(admission.errors, :course_id) }" }
+              = f.label :course_id, class: 'col-form-label' do
+                Course
+                %span
+                  %i.fa.fa-question-circle-o{ 'data-toggle': 'tooltip', title: 'Select Course' }
+              = f.collection_select :course_id, Course.all, :id, :name, { prompt: 'Select Course' }, class: 'form-control select2-field', required: true
+              = print_error(admission.errors, :course_id)
+            %div{ class: "col-md-4 form-group #{ error?(admission.errors, :status) }" }
+              = f.label :status, class: 'col-form-label' do
+                Status
+                %span
+                  %i.fa.fa-question-circle-o{ 'data-toggle': 'tooltip', title: 'Admission status' }
+              = f.select :status, Admission.statuses.keys.map { |s| [s.titleize, s] }, {}, class: 'form-control select2-field', required: true
+              = print_error(admission.errors, :status)
+          .row
+            %div{ class: "col-md-4 form-group #{ error?(admission.errors, :user_id) }" }
+              = f.label :user_id, class: 'col-form-label' do
+                User (Student)
+                %span
+                  %i.fa.fa-question-circle-o{ 'data-toggle': 'tooltip', title: 'Registered user (if any)' }
+              = f.collection_select :user_id, User.all, :id, :email, { prompt: 'Select User' }, class: 'form-control select2-field'
+              = print_error(admission.errors, :user_id)
+            %div{ class: "col-md-4 form-group #{ error?(admission.errors, :processed_by_id) }" }
+              = f.label :processed_by_id, class: 'col-form-label' do
+                Processed By
+                %span
+                  %i.fa.fa-question-circle-o{ 'data-toggle': 'tooltip', title: 'Processed by (admin/teacher)' }
+              = f.collection_select :processed_by_id, User.all, :id, :email, { prompt: 'Select Processor' }, class: 'form-control select2-field'
+              = print_error(admission.errors, :processed_by_id)
+          .row.mt-4
+            .col-12
+              = f.submit "Submit", class: "btn btn-primary btn-block"

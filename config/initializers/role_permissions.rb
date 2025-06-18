@@ -9,7 +9,8 @@ ROLE_PERMISSIONS = {
     courses: %i[index new create edit update show destroy],
     fee_structures: %i[index new create edit update show destroy],
     fee_components: %i[index new create edit update show destroy],
-    semesters: %i[index new create edit update show destroy]
+    semesters: %i[index new create edit update show destroy],
+    admissions: %i[index new create edit update show destroy],
   },
   teacher: {
     dashboard: %i[index],
