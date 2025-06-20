@@ -63,10 +63,11 @@ Rails.application.configure do
   # config.cache_store = :mem_cache_store
 
   # Use a real queuing backend for Active Job (and separate queues per environment).
-  # config.active_job.queue_adapter     = :sidekiq
+  config.active_job.queue_adapter = :sidekiq
   config.action_mailer.raise_delivery_errors = false
   config.action_mailer.perform_deliveries = true
   config.action_mailer.perform_caching = false
+  config.active_job.queue_name_prefix = 'school_production'
 
   # Ignore bad email addresses and do not raise email delivery errors.
   # Set this to true and configure the email server for immediate delivery to raise delivery errors.
@@ -80,11 +81,11 @@ Rails.application.configure do
   config.active_support.deprecation = :notify
 
   # Use default logging formatter so that PID and timestamp are not suppressed.
-  config.log_formatter = ::Logger::Formatter.new
+  config.log_formatter = Logger::Formatter.new
 
   config.assets.configure do |env|
     env.js_compressor  = :uglifier # or :closure, :yui
-    env.css_compressor = :sass   # or :yui
+    env.css_compressor = :sass # or :yui
   end
 
   # Use a different logger for distributed setups.
@@ -136,7 +137,7 @@ Rails.application.configure do
     authentication: Rails.application.credentials.dig(:email, :smtp_authentication),
     enable_starttls_auto: Rails.application.credentials.dig(:email, :smtp_enable_tls_auto),
     ssl: Rails.application.credentials.dig(:email, :smtp_ssl),
-    tls: Rails.application.credentials.dig(:email, :smtp_tls), 
-    openssl_verify_mode:Rails.application.credentials.dig(:email, :smtp_openssl_verify_mode)
+    tls: Rails.application.credentials.dig(:email, :smtp_tls),
+    openssl_verify_mode: Rails.application.credentials.dig(:email, :smtp_openssl_verify_mode)
   }
 end
