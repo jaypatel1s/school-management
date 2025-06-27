@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# :nodoc:
 class User < ApplicationRecord
   include Sluggable
   devise :database_authenticatable,

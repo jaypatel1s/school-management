@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2025_06_19_105319) do
+ActiveRecord::Schema[7.1].define(version: 2025_06_27_040500) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -95,12 +95,12 @@ ActiveRecord::Schema[7.1].define(version: 2025_06_19_105319) do
     t.string "slug", limit: 255, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["application_number"], name: "index_admissions_on_application_number", unique: true
+    t.index ["application_number", "college_id"], name: "index_admissions_on_application_number_and_college_id", unique: true
     t.index ["college_id"], name: "index_admissions_on_college_id"
     t.index ["course_id"], name: "index_admissions_on_course_id"
     t.index ["department_id"], name: "index_admissions_on_department_id"
     t.index ["processed_by_id"], name: "index_admissions_on_processed_by_id"
-    t.index ["temporary_token"], name: "index_admissions_on_temporary_token", unique: true
+    t.index ["temporary_token", "college_id"], name: "index_admissions_on_temporary_token_and_college_id", unique: true
     t.index ["user_id"], name: "index_admissions_on_user_id"
   end
 
@@ -161,6 +161,7 @@ ActiveRecord::Schema[7.1].define(version: 2025_06_19_105319) do
     t.index ["academic_year_id"], name: "index_courses_on_academic_year_id"
     t.index ["college_id"], name: "index_courses_on_college_id"
     t.index ["department_id"], name: "index_courses_on_department_id"
+    t.index ["name", "college_id"], name: "index_courses_on_name_and_college_id", unique: true
     t.index ["semester_id"], name: "index_courses_on_semester_id"
   end
 
@@ -183,14 +184,18 @@ ActiveRecord::Schema[7.1].define(version: 2025_06_19_105319) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["college_id"], name: "index_departments_on_college_id"
+    t.index ["name", "college_id"], name: "index_departments_on_name_and_college_id", unique: true
   end
 
   create_table "document_types", force: :cascade do |t|
+    t.bigint "college_id", null: false
     t.string "name"
     t.text "description"
     t.boolean "required"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["college_id"], name: "index_document_types_on_college_id"
+    t.index ["name", "college_id"], name: "index_document_types_on_name_and_college_id", unique: true
   end
 
   create_table "fee_components", force: :cascade do |t|
@@ -396,6 +401,7 @@ ActiveRecord::Schema[7.1].define(version: 2025_06_19_105319) do
   add_foreign_key "courses", "semesters"
   add_foreign_key "csv_files", "colleges"
   add_foreign_key "departments", "colleges"
+  add_foreign_key "document_types", "colleges"
   add_foreign_key "fee_components", "colleges"
   add_foreign_key "fee_components", "fee_structures"
   add_foreign_key "fee_payments", "colleges"
