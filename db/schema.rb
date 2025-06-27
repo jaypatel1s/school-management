@@ -198,6 +198,14 @@ ActiveRecord::Schema[7.1].define(version: 2025_06_27_040500) do
     t.index ["name", "college_id"], name: "index_document_types_on_name_and_college_id", unique: true
   end
 
+  create_table "document_types", force: :cascade do |t|
+    t.string "name"
+    t.text "description"
+    t.boolean "required"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "fee_components", force: :cascade do |t|
     t.bigint "college_id", null: false
     t.string "name"
