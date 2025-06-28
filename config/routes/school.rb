@@ -9,7 +9,17 @@ devise_scope :user do
     root to: 'users/sessions#new'
   end
 end
-resources :public_admissions, param: :slug
+resources :public_admissions, param: :slug do
+  collection do
+    get :departments
+    get :courses
+  end
+  member do
+    post :upload_document
+    post :validate_token
+    delete :remove_document
+  end
+end
 
 resources :colleges, param: :slug do
   get  'setup', to: 'setup#setup'
@@ -43,6 +53,7 @@ resources :colleges, param: :slug do
     resources :fee_components, param: :slug
     resources :semesters, param: :slug
     resources :admissions, param: :slug
+    resources :admission_documents
     resources :document_types, only: %i[index edit new create update destroy]
   end
 
