@@ -43,6 +43,7 @@ resources :colleges, param: :slug do
     resources :fee_components, param: :slug
     resources :semesters, param: :slug
     resources :admissions, param: :slug
+    resources :document_types, only: %i[index edit new create update destroy]
   end
 
   namespace :teachers do

@@ -3,7 +3,6 @@ class CreateDocumentTypes < ActiveRecord::Migration[7.1]
     create_table :document_types do |t|
       t.references :college, null: false, foreign_key: true
       t.string :name
-      t.text :description
       t.boolean :required
 
       t.timestamps

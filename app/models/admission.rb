@@ -24,7 +24,7 @@ class Admission < ApplicationRecord
     waitlisted: 'waitlisted'
   }, default: 'draft'
 
-  validates :application_number, :temporary_token, presence: true, uniqueness: true
+  validates :application_number, :temporary_token, presence: true, uniqueness: { scope: :college_id }
 
   validate :expiry_date_validity, if: -> { user.nil? }
 

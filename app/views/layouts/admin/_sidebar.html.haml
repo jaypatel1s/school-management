@@ -58,3 +58,8 @@
           %a.nav-link{ href: send("college_#{current_user.role}s_admissions_path", college_slug: current_college.slug) }
             %i.fa.fa-file-text-o.menu-icon
             %span.menu-title Admissions
+      - if can_access?(:document_types, :index)
+        %li.nav-item{ class: menu_active_class('document_types') }
+          %a.nav-link{ href: send("college_#{current_user.role}s_document_types_path", college_slug: current_college.slug) }
+            %i.fa.fa-file-pdf-o.menu-icon
+            %span.menu-title Document Types
