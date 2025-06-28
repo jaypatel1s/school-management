@@ -8,7 +8,8 @@ class AcademicYear < ApplicationRecord
   has_many :courses, dependent: :destroy
   has_many :fee_structures, dependent: :nullify
   validates :name, :start_date, :end_date, presence: true
-  validates :name, uniqueness: {scope: :college_id}
+  validates :name, uniqueness: { scope: :college_id }
+
   validate :end_date_after_start_date
 
   def end_date_after_start_date

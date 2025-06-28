@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2025_06_11_085740) do
+ActiveRecord::Schema[7.1].define(version: 2025_06_27_040500) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -19,10 +19,12 @@ ActiveRecord::Schema[7.1].define(version: 2025_06_11_085740) do
     t.string "name"
     t.date "start_date"
     t.date "end_date"
+    t.boolean "current"
     t.string "slug", limit: 255, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["college_id"], name: "index_academic_years_on_college_id"
+    t.index ["name", "college_id"], name: "index_academic_years_on_name_and_college_id", unique: true
   end
 
   create_table "active_admin_comments", force: :cascade do |t|
@@ -79,6 +81,31 @@ ActiveRecord::Schema[7.1].define(version: 2025_06_11_085740) do
     t.index ["reset_password_token"], name: "index_admin_users_on_reset_password_token", unique: true
   end
 
+  create_table "admissions", force: :cascade do |t|
+    t.bigint "college_id", null: false
+    t.bigint "department_id", null: false
+    t.bigint "course_id", null: false
+    t.bigint "user_id"
+    t.bigint "processed_by_id"
+    t.string "application_number"
+    t.string "name", null: false
+    t.string "email"
+    t.string "phone"
+    t.string "status", default: "pending"
+    t.datetime "expires_at"
+    t.string "temporary_token"
+    t.string "slug", limit: 255, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["application_number", "college_id"], name: "index_admissions_on_application_number_and_college_id", unique: true
+    t.index ["college_id"], name: "index_admissions_on_college_id"
+    t.index ["course_id"], name: "index_admissions_on_course_id"
+    t.index ["department_id"], name: "index_admissions_on_department_id"
+    t.index ["processed_by_id"], name: "index_admissions_on_processed_by_id"
+    t.index ["temporary_token", "college_id"], name: "index_admissions_on_temporary_token_and_college_id", unique: true
+    t.index ["user_id"], name: "index_admissions_on_user_id"
+  end
+
   create_table "assignments", force: :cascade do |t|
     t.bigint "teacher_id", null: false
     t.bigint "course_id", null: false
@@ -124,18 +151,19 @@ ActiveRecord::Schema[7.1].define(version: 2025_06_11_085740) do
 
   create_table "courses", force: :cascade do |t|
     t.bigint "college_id", null: false
+    t.bigint "department_id", null: false
     t.string "name"
     t.text "description"
     t.integer "credits"
     t.string "slug", limit: 255, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "department_id"
     t.bigint "semester_id", null: false
     t.bigint "academic_year_id", null: false
     t.index ["academic_year_id"], name: "index_courses_on_academic_year_id"
     t.index ["college_id"], name: "index_courses_on_college_id"
     t.index ["department_id"], name: "index_courses_on_department_id"
+    t.index ["name", "college_id"], name: "index_courses_on_name_and_college_id", unique: true
     t.index ["semester_id"], name: "index_courses_on_semester_id"
   end
 
@@ -158,6 +186,17 @@ ActiveRecord::Schema[7.1].define(version: 2025_06_11_085740) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["college_id"], name: "index_departments_on_college_id"
+    t.index ["name", "college_id"], name: "index_departments_on_name_and_college_id", unique: true
+  end
+
+  create_table "document_types", force: :cascade do |t|
+    t.bigint "college_id", null: false
+    t.string "name"
+    t.boolean "required"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["college_id"], name: "index_document_types_on_college_id"
+    t.index ["name", "college_id"], name: "index_document_types_on_name_and_college_id", unique: true
   end
 
   create_table "fee_components", force: :cascade do |t|
@@ -195,35 +234,17 @@ ActiveRecord::Schema[7.1].define(version: 2025_06_11_085740) do
     t.decimal "total_amount"
     t.bigint "academic_year_id", null: false
     t.bigint "department_id", null: false
-    t.bigint "created_by_id", null: false
     t.string "slug", limit: 255, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["academic_year_id"], name: "index_fee_structures_on_academic_year_id"
     t.index ["college_id"], name: "index_fee_structures_on_college_id"
-    t.index ["created_by_id"], name: "index_fee_structures_on_created_by_id"
     t.index ["department_id"], name: "index_fee_structures_on_department_id"
-  end
-
-  create_table "notifications", force: :cascade do |t|
-    t.string "message"
-    t.string "notifiable_type", null: false
-    t.bigint "notifiable_id", null: false
-    t.bigint "college_id", null: false
-    t.bigint "recipient_id", null: false
-    t.boolean "read"
-    t.string "action_type"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["college_id"], name: "index_notifications_on_college_id"
-    t.index ["notifiable_type", "notifiable_id"], name: "index_notifications_on_notifiable"
-    t.index ["recipient_id"], name: "index_notifications_on_recipient_id"
   end
 
   create_table "semesters", force: :cascade do |t|
     t.bigint "college_id", null: false
     t.string "name"
-    t.boolean "current", default: false
     t.string "slug", limit: 255, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -345,6 +366,11 @@ ActiveRecord::Schema[7.1].define(version: 2025_06_11_085740) do
   add_foreign_key "academic_years", "colleges"
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "admissions", "colleges"
+  add_foreign_key "admissions", "courses"
+  add_foreign_key "admissions", "departments"
+  add_foreign_key "admissions", "users"
+  add_foreign_key "admissions", "users", column: "processed_by_id"
   add_foreign_key "assignments", "colleges"
   add_foreign_key "assignments", "courses"
   add_foreign_key "assignments", "departments"
@@ -355,9 +381,11 @@ ActiveRecord::Schema[7.1].define(version: 2025_06_11_085740) do
   add_foreign_key "attendances", "students"
   add_foreign_key "courses", "academic_years"
   add_foreign_key "courses", "colleges"
+  add_foreign_key "courses", "departments"
   add_foreign_key "courses", "semesters"
   add_foreign_key "csv_files", "colleges"
   add_foreign_key "departments", "colleges"
+  add_foreign_key "document_types", "colleges"
   add_foreign_key "fee_components", "colleges"
   add_foreign_key "fee_components", "fee_structures"
   add_foreign_key "fee_payments", "colleges"
@@ -365,9 +393,6 @@ ActiveRecord::Schema[7.1].define(version: 2025_06_11_085740) do
   add_foreign_key "fee_structures", "academic_years"
   add_foreign_key "fee_structures", "colleges"
   add_foreign_key "fee_structures", "departments"
-  add_foreign_key "fee_structures", "users", column: "created_by_id"
-  add_foreign_key "notifications", "colleges"
-  add_foreign_key "notifications", "users", column: "recipient_id"
   add_foreign_key "semesters", "colleges"
   add_foreign_key "sessions", "colleges"
   add_foreign_key "sessions", "courses"

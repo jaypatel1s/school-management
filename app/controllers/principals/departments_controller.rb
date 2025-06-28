@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
-# :nodoc:
 module Principals
+  # :nodoc:
   class DepartmentsController < BaseController
     before_action :set_department, only: %i[show edit update destroy]
 

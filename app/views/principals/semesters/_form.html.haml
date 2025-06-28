@@ -11,14 +11,6 @@
                   %i.fa.fa-question-circle-o{ 'data-toggle': 'tooltip', title: 'Name' }
               = f.text_field :name, class: 'form-control', autocomplete: 'off', placeholder: 'Semester name'
               = print_error(semester.errors, :name)
-            .col-1
-              .form-group
-              = f.label :current, class: 'col-form-label' do
-                Current
-              %div
-                %label.switch
-                  = f.check_box :current, class: 'switch-slider', type: 'checkbox'
-                  %span.slider.round
           .row.mt-4
             .col-12
               = f.submit "Submit", class: "btn btn-primary btn-block"

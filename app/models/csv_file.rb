@@ -1,3 +1,6 @@
+# frozen_string_literal: true
+
+# :nodoc:
 class CsvFile < ApplicationRecord
   belongs_to :college
 
