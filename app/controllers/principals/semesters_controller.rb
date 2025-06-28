@@ -55,7 +55,7 @@ module Principals
     end
 
     def semester_params
-      params.require(:semester).permit(:name, :current)
+      params.require(:semester).permit(:name)
     end
   end
 end

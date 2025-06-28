@@ -9,6 +9,7 @@ devise_scope :user do
     root to: 'users/sessions#new'
   end
 end
+resources :public_admissions, param: :slug
 
 resources :colleges, param: :slug do
   get  'setup', to: 'setup#setup'
@@ -41,6 +42,8 @@ resources :colleges, param: :slug do
     resources :fee_structures, param: :slug
     resources :fee_components, param: :slug
     resources :semesters, param: :slug
+    resources :admissions, param: :slug
+    resources :document_types, only: %i[index edit new create update destroy]
   end
 
   namespace :teachers do
@@ -61,6 +64,7 @@ resources :colleges, param: :slug do
         get :export_csv, action: :export_csv
       end
     end
+    resources :admissions, param: :slug
   end
 
   namespace :students do

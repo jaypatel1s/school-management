@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# :nodoc:
 class Course < ApplicationRecord
   include Sluggable
 
@@ -7,7 +8,7 @@ class Course < ApplicationRecord
   belongs_to :semester
   belongs_to :department
   belongs_to :academic_year
-  has_many :student_courses
+  has_many :student_courses, dependent: :destroy
   has_many :students, through: :student_courses
   has_one :teacher, dependent: :destroy
   has_many :sessions, dependent: :destroy
