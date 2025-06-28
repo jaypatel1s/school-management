@@ -28,6 +28,6 @@
                       %i.input-helper
               .my-3
                 = f.submit 'LOGIN', class: 'btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn'
+                = link_to 'New Admission', public_admissions_path, class: 'btn btn-block btn-primary btn-lg font-weight-medium'
               = render 'devise/shared/links'
-
           = render 'devise/shared/footer'
