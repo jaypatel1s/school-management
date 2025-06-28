@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# app/models/admission.rb
+# :nodoc:
 class Admission < ApplicationRecord
   include Sluggable
 
@@ -16,13 +16,12 @@ class Admission < ApplicationRecord
   before_validation :set_expiry, on: :create
 
   enum :status, {
-    draft: 'draft',
-    pending: 'pending',
+    document_upload_pending: 'document_upload_pending',
     under_review: 'under_review',
     accepted: 'accepted',
     rejected: 'rejected',
     waitlisted: 'waitlisted'
-  }, default: 'draft'
+  }, default: 'document_upload_pending'
 
   validates :application_number, :temporary_token, presence: true, uniqueness: { scope: :college_id }
 

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2025_06_27_040500) do
+ActiveRecord::Schema[7.1].define(version: 2025_06_28_091235) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -79,6 +79,16 @@ ActiveRecord::Schema[7.1].define(version: 2025_06_27_040500) do
     t.datetime "updated_at", null: false
     t.index ["email"], name: "index_admin_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_admin_users_on_reset_password_token", unique: true
+  end
+
+  create_table "admission_documents", force: :cascade do |t|
+    t.bigint "admission_id", null: false
+    t.bigint "document_type_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["admission_id", "document_type_id"], name: "index_admission_documents_on_admission_and_document_type", unique: true
+    t.index ["admission_id"], name: "index_admission_documents_on_admission_id"
+    t.index ["document_type_id"], name: "index_admission_documents_on_document_type_id"
   end
 
   create_table "admissions", force: :cascade do |t|
@@ -366,6 +376,8 @@ ActiveRecord::Schema[7.1].define(version: 2025_06_27_040500) do
   add_foreign_key "academic_years", "colleges"
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "admission_documents", "admissions"
+  add_foreign_key "admission_documents", "document_types"
   add_foreign_key "admissions", "colleges"
   add_foreign_key "admissions", "courses"
   add_foreign_key "admissions", "departments"
