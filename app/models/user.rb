@@ -4,7 +4,8 @@
 class User < ApplicationRecord
   include Sluggable
   devise :database_authenticatable,
-         :recoverable, :rememberable, :validatable, :confirmable, :timeoutable, :trackable, :registerable
+         :recoverable, :rememberable, :validatable, :confirmable, :timeoutable, :trackable, :registerable,
+         timeout_in: 60.minutes
   belongs_to :college
   has_one :teacher, dependent: :destroy
   has_one :student, dependent: :destroy
