@@ -18,6 +18,7 @@ resources :public_admissions, param: :slug do
     post :upload_document
     post :validate_token
     delete :remove_document
+    post :regenerate_token
   end
 end
 

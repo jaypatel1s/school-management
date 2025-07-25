@@ -42,7 +42,7 @@
                 Department
                 %span
                   %i.fa.fa-question-circle-o{ 'data-toggle': 'tooltip', title: 'Select Department' }
-              = f.select :department_id, [], { prompt: 'Select Department' }, class: 'form-control select2-field', required: true
+              = f.collection_select :department_id, Department.where(college_id: admission.college_id), :id, :name, { prompt: 'Select Department' }, class: 'form-control select2-field', required: true
               = print_error(admission.errors, :department_id)
 
             .col-md-4.form-group{ class: error?(admission.errors, :course_id) }
@@ -50,7 +50,7 @@
                 Course
                 %span
                   %i.fa.fa-question-circle-o{ 'data-toggle': 'tooltip', title: 'Select Course' }
-              = f.select :course_id, [], { prompt: 'Select Course' }, class: 'form-control select2-field', required: true
+              = f.collection_select :course_id, Course.where(department_id: admission.department_id), :id, :name, { prompt: 'Select Course' }, class: 'form-control select2-field', required: true
               = print_error(admission.errors, :course_id)
 
           .row.mt-4
@@ -60,6 +60,7 @@
   :javascript
     $(document).ready(function () {
       $('#admission_college_id').on('change', function () {
+        debugger
         var collegeId = $(this).val();
         if (!collegeId) {
           $('#admission_department_id').html('<option value="">Select Department</option>');
