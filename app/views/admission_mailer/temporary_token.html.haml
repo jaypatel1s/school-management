@@ -1,0 +1,16 @@
+%p Hello #{@admission.name || "Candidate"},
+
+%p A new admission token has been generated for you.
+
+%p Token:
+%strong #{@admission.temporary_token}
+
+%p The token is valid until
+%strong #{@admission.expires_at.strftime('%d %b %Y, %I:%M %p')}
+
+%p Click below to continue your admission process:
+%p= link_to 'Resume Admission', public_admission_url(@admission.slug)
+
+
+%p Thanks,
+%p Admissions Team
