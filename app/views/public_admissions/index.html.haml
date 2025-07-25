@@ -36,4 +36,5 @@
                     %td= admission.status.humanize
                     %td= l(admission.expires_at, format: :long)
                     %td.text-right
+                      = link_to raw("<i class='fa fa-refresh'></i>"), regenerate_token_public_admission_path(admission.slug), method: :post, class: 'btn-sm btn-success px-2 py-1', data: { toggle: 'tooltip' }, title: 'Regenerate Token'
                       = link_to raw("<i class='fa fa-eye'></i>"), public_admission_path(admission.slug), { class: 'btn-sm btn-warning px-2 py-1', 'data-toggle': 'tooltip', title: 'Edit' }

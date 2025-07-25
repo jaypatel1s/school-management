@@ -1,9 +1,0 @@
-/ app/views/attendances/new.html.erb
-%h1 Mark Attendance
-%p
-  Session: #{@session.name}
-= form_with model: [:school, attendance], local: true, html: { multipart: true }, url: url, class: 'form' do |f|
-  .field
-    = f.label :student_id, "Student ID"
-    = f.text_field :student_id
-  = f.submit "Mark Attendance"
