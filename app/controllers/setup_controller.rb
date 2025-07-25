@@ -1,3 +1,6 @@
+# frozen_string_literal: true
+
+# :nodoc:
 class SetupController < ApplicationController
   def setup
     if current_user.teacher?
@@ -5,29 +8,31 @@ class SetupController < ApplicationController
       @existing_teacher = current_user.teacher
 
       # If no existing teacher profile, create a new one
-      if @existing_teacher.nil?
-        @teacher = current_user.build_teacher
-      else
-        @teacher = @existing_teacher
-      end
+      @teacher = if @existing_teacher.nil?
+                   current_user.build_teacher
+                 else
+                   @existing_teacher
+                 end
 
       redirect_to authenticated_user_path if @existing_teacher.present?
-    else
+    elsif current_user.student?
       @existing_student = current_user.student
 
-      if @existing_student.nil?
-        @student = current_user.build_student
-      else
-        @student = @existing_student
-      end
+      @student = if @existing_student.nil?
+                   current_user.build_student
+                 else
+                   @existing_student
+                 end
       redirect_to authenticated_user_path if @existing_student.present?
+    elsif current_user.principal?
+      redirect_to authenticated_user_path
     end
   end
 
   def department_courses
     @courses = Course.where(department_id: params[:department_id])
     render json: @courses
-  end  
+  end
 
   def create
     if current_user.teacher?
