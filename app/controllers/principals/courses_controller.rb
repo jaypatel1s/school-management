@@ -1,16 +1,16 @@
 # frozen_string_literal: true
 
-# :nodoc:
 module Principals
+  # :nodoc:
   class CoursesController < BaseController
     before_action :set_course, only: %i[show edit update destroy]
 
     def index
       @courses = if current_user.principal?
-                  current_college.courses
-                else
-                  current_user.courses
-                end
+                   current_college.courses.includes(:department, :semester, :academic_year)
+                 else
+                   current_user.courses.includes(:department, :semester, :academic_year)
+                 end
     end
 
     def show; end

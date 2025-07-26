@@ -6,7 +6,7 @@ module Principals
     before_action :set_admission, only: %i[show edit update destroy]
 
     def index
-      @admissions = current_college.admissions
+      @admissions = current_college.admissions.includes(:department, :course)
     end
 
     def show; end
