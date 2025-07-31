@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2025_07_31_065812) do
+ActiveRecord::Schema[7.1].define(version: 2025_07_31_073317) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -124,20 +124,12 @@ ActiveRecord::Schema[7.1].define(version: 2025_07_31_065812) do
   end
 
   create_table "admissions", force: :cascade do |t|
-    t.bigint "user_id"
-    t.bigint "processed_by_id"
-    t.string "application_number"
-    t.string "name", null: false
-    t.string "email"
-    t.string "phone"
     t.string "status", default: "pending"
     t.datetime "expires_at"
-    t.string "temporary_token"
     t.string "slug", limit: 255, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["processed_by_id"], name: "index_admissions_on_processed_by_id"
-    t.index ["user_id"], name: "index_admissions_on_user_id"
+    t.string "name"
   end
 
   create_table "assignments", force: :cascade do |t|
@@ -412,8 +404,6 @@ ActiveRecord::Schema[7.1].define(version: 2025_07_31_065812) do
   add_foreign_key "admission_payments", "admission_applications"
   add_foreign_key "admission_receipts", "admission_payments"
   add_foreign_key "admission_receipts", "student_fees"
-  add_foreign_key "admissions", "users"
-  add_foreign_key "admissions", "users", column: "processed_by_id"
   add_foreign_key "assignments", "colleges"
   add_foreign_key "assignments", "courses"
   add_foreign_key "assignments", "departments"
