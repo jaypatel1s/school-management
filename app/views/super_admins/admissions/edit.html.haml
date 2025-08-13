@@ -1,0 +1,14 @@
+.content-wrapper
+  .page-header.row
+    .col-md-7
+      %h3.page-title
+        %span.page-title-icon.bg-primary.text-white.mr-2
+          %i.fa.fa-file-text-o
+        Admission
+        %small
+          %i.fa.fa-arrow-right
+          Edit
+    .col-md-5.mt-2.mt-md-0.text-right
+      %a.btn.btn-sm.btn-success{ href: super_admins_admissions_path(current_college.slug), data: { toggle: 'tooltip', placement: 'left' }, title: 'Admission' }
+        %i.fa.fa-reply
+  = render 'form', admission: @admission, url: super_admins_admissions_path(current_college.slug, @admission.slug)

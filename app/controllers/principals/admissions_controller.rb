@@ -67,10 +67,17 @@
 module Principals
   class AdmissionsController < BaseController
     def index
-      @admissions = Admission.joins(:admission_applications)
-                              .where(admission_applications: { college_id: current_college.id })
-                              .includes(:admission_applications)
-                              .distinct
+      @admissions = Admission
+                    .left_joins(:admission_applications)
+                    .where(
+                      admission_applications: { college_id: current_college.id }
+                    )
+                    .or(
+                      Admission.where.missing(:admission_applications)
+                      # admissions with no applications yet
+                    )
+                    .includes(:admission_applications)
+                    .distinct
     end
 
     def show

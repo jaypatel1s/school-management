@@ -22,6 +22,10 @@ resources :public_admissions, param: :slug do
   end
 end
 
+namespace :super_admins do
+  resources :admissions, param: :slug
+end
+
 resources :colleges, param: :slug do
   get  'setup', to: 'setup#setup'
   post 'setup', to: 'setup#create'
