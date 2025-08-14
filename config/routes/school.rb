@@ -57,7 +57,11 @@ resources :colleges, param: :slug do
     resources :fee_structures, param: :slug
     resources :fee_components, param: :slug
     resources :semesters, param: :slug
-    resources :admissions, param: :slug
+    resources :admissions, param: :slug, only: %i[index show] do
+      member do
+        put :change_status
+      end
+    end
     resources :admission_documents
     resources :document_types, only: %i[index edit new create update destroy]
   end

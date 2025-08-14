@@ -5,6 +5,9 @@ class Admission < ApplicationRecord
   include Sluggable
 
   has_many :admission_applications, dependent: :destroy
+  has_many :admission_college_actives, dependent: :destroy
+  has_many :colleges, through: :admission_college_actives
+
   accepts_nested_attributes_for :admission_applications, allow_destroy: true
 
   # before_validation :generate_application_number, on: :create

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2025_08_13_071129) do
+ActiveRecord::Schema[7.1].define(version: 2025_08_14_060349) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -93,6 +93,18 @@ ActiveRecord::Schema[7.1].define(version: 2025_08_13_071129) do
     t.index ["college_id"], name: "index_admission_applications_on_college_id"
     t.index ["course_id"], name: "index_admission_applications_on_course_id"
     t.index ["department_id"], name: "index_admission_applications_on_department_id"
+  end
+
+  create_table "admission_college_actives", force: :cascade do |t|
+    t.bigint "admission_id", null: false
+    t.bigint "college_id", null: false
+    t.boolean "active"
+    t.datetime "activation_date"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["admission_id", "college_id"], name: "index_admission_college_actives_on_admission_id_and_college_id", unique: true
+    t.index ["admission_id"], name: "index_admission_college_actives_on_admission_id"
+    t.index ["college_id"], name: "index_admission_college_actives_on_college_id"
   end
 
   create_table "admission_documents", force: :cascade do |t|
@@ -402,6 +414,8 @@ ActiveRecord::Schema[7.1].define(version: 2025_08_13_071129) do
   add_foreign_key "admission_applications", "colleges"
   add_foreign_key "admission_applications", "courses"
   add_foreign_key "admission_applications", "departments"
+  add_foreign_key "admission_college_actives", "admissions"
+  add_foreign_key "admission_college_actives", "colleges"
   add_foreign_key "admission_documents", "document_types"
   add_foreign_key "admission_payments", "admission_applications"
   add_foreign_key "admission_receipts", "admission_payments"
