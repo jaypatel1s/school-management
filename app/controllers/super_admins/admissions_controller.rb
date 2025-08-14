@@ -17,6 +17,7 @@ module SuperAdmins
     def create
       @admission = Admission.new(admission_params)
       if @admission.save
+        create_admission_college_active
         flash[:success] = 'Admission Created Successfully'
         redirect_to super_admins_admissions_path
       else
@@ -39,6 +40,16 @@ module SuperAdmins
       @admission.destroy
       flash[:success] = 'Admission Deleted Successfully'
       redirect_to super_admins_admissions_path
+    end
+
+    def create_admission_college_active
+      colleges = []
+      College.all.each do |college|
+        admission_college_active = college.admission_college_actives.find_or_initialize_by(admission_id: @admission.id)
+        admission_college_active.save
+        colleges << college
+      end
+      AdmissionActiveJob.perform_later(@admission, colleges)
     end
 
     private
