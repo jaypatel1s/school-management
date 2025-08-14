@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2025_07_31_073317) do
+ActiveRecord::Schema[7.1].define(version: 2025_08_14_105556) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -89,10 +89,29 @@ ActiveRecord::Schema[7.1].define(version: 2025_07_31_073317) do
     t.string "status", default: "document_upload_pending"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "application_number"
+    t.string "temporary_token"
+    t.string "email"
+    t.string "phone"
+    t.string "name"
+    t.string "slug"
+    t.datetime "expires_at"
     t.index ["admission_id"], name: "index_admission_applications_on_admission_id"
     t.index ["college_id"], name: "index_admission_applications_on_college_id"
     t.index ["course_id"], name: "index_admission_applications_on_course_id"
     t.index ["department_id"], name: "index_admission_applications_on_department_id"
+  end
+
+  create_table "admission_college_actives", force: :cascade do |t|
+    t.bigint "admission_id", null: false
+    t.bigint "college_id", null: false
+    t.boolean "active"
+    t.datetime "activation_date"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["admission_id", "college_id"], name: "index_admission_college_actives_on_admission_id_and_college_id", unique: true
+    t.index ["admission_id"], name: "index_admission_college_actives_on_admission_id"
+    t.index ["college_id"], name: "index_admission_college_actives_on_college_id"
   end
 
   create_table "admission_documents", force: :cascade do |t|
@@ -125,11 +144,13 @@ ActiveRecord::Schema[7.1].define(version: 2025_07_31_073317) do
 
   create_table "admissions", force: :cascade do |t|
     t.string "status", default: "pending"
-    t.datetime "expires_at"
     t.string "slug", limit: 255, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "name"
+    t.datetime "start_date"
+    t.datetime "end_date"
+    t.datetime "closed_at"
   end
 
   create_table "assignments", force: :cascade do |t|
@@ -348,7 +369,7 @@ ActiveRecord::Schema[7.1].define(version: 2025_07_31_073317) do
   end
 
   create_table "users", force: :cascade do |t|
-    t.bigint "college_id", null: false
+    t.bigint "college_id"
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
     t.string "name"
@@ -400,6 +421,8 @@ ActiveRecord::Schema[7.1].define(version: 2025_07_31_073317) do
   add_foreign_key "admission_applications", "colleges"
   add_foreign_key "admission_applications", "courses"
   add_foreign_key "admission_applications", "departments"
+  add_foreign_key "admission_college_actives", "admissions"
+  add_foreign_key "admission_college_actives", "colleges"
   add_foreign_key "admission_documents", "document_types"
   add_foreign_key "admission_payments", "admission_applications"
   add_foreign_key "admission_receipts", "admission_payments"
