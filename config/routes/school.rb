@@ -9,16 +9,18 @@ devise_scope :user do
     root to: 'users/sessions#new'
   end
 end
-resources :public_admissions, param: :slug do
-  collection do
-    get :departments
-    get :courses
-  end
-  member do
-    post :upload_document
-    post :validate_token
-    delete :remove_document
-    post :regenerate_token
+resources :public_admissions, param: :slug, only: %i[index] do
+  resources :admission_applications, param: :slug do
+    collection do
+      get :departments
+      get :courses
+    end
+    member do
+      post :upload_document
+      post :validate_token
+      delete :remove_document
+      post :regenerate_token
+    end
   end
 end
 

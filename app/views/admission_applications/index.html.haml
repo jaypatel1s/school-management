@@ -1,0 +1,41 @@
+
+
+.content-wrapper
+  .page-header.row
+    .col-md-7
+      %h3.page-title
+        %span.page-title-icon.bg-primary.text-white.mr-2
+          %i.fa.fa-file
+        List of all Applicant applications
+    .col-md-5.mt-2.mt-md-0.text-right
+      %a.btn.btn-sm.btn-primary{ href: new_public_admission_admission_application_path, data: { toggle: 'tooltip', placement: 'left '}, title: 'New Public Admission' }
+        %i.fa.fa-plus
+
+  .row
+    .col-12.grid-margin
+      .card
+        .card-body
+          .table-responsive
+            %table.table.table-hover
+              %thead
+                %tr.table-primary
+                  %th Application No
+                  %th Name of candidate
+                  %th Course
+                  %th Department
+                  %th College
+                  %th Status
+                  %th.text-right{ width: '10%','data-orderable': 'false' } Actions
+              %tbody
+                - @admission_applications.each do |admission_application|
+                  %tr
+                    %td= admission_application.application_number
+                    %td= admission_application.name
+                    %td= admission_application.course.name
+                    %td= admission_application.department.name
+                    %td= admission_application.college.name
+                    %td= admission_application.status.humanize
+                    %td.text-right
+                      = link_to raw("<i class='fa fa-refresh'></i>"), regenerate_token_public_admission_admission_application_path(slug: admission_application.slug,
+                      public_admission_slug: @admission.slug), method: :post, class: 'btn-sm btn-success px-2 py-1', data: { toggle: 'tooltip' }, title: 'Regenerate Token'
+                      = link_to raw("<i class='fa fa-eye'></i>"), edit_public_admission_admission_application_path(slug: admission_application.slug), { class: 'btn-sm btn-warning px-2 py-1', 'data-toggle': 'tooltip', title: 'Edit' }

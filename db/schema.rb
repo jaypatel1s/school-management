@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2025_08_14_060349) do
+ActiveRecord::Schema[7.1].define(version: 2025_08_14_105556) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -89,6 +89,13 @@ ActiveRecord::Schema[7.1].define(version: 2025_08_14_060349) do
     t.string "status", default: "document_upload_pending"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "application_number"
+    t.string "temporary_token"
+    t.string "email"
+    t.string "phone"
+    t.string "name"
+    t.string "slug"
+    t.datetime "expires_at"
     t.index ["admission_id"], name: "index_admission_applications_on_admission_id"
     t.index ["college_id"], name: "index_admission_applications_on_college_id"
     t.index ["course_id"], name: "index_admission_applications_on_course_id"
@@ -137,13 +144,13 @@ ActiveRecord::Schema[7.1].define(version: 2025_08_14_060349) do
 
   create_table "admissions", force: :cascade do |t|
     t.string "status", default: "pending"
-    t.datetime "expires_at"
     t.string "slug", limit: 255, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "name"
     t.datetime "start_date"
     t.datetime "end_date"
+    t.datetime "closed_at"
   end
 
   create_table "assignments", force: :cascade do |t|

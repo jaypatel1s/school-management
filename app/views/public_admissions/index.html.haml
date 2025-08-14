@@ -6,7 +6,7 @@
           %i.fa.fa-file
         List of all active public applications
     .col-md-5.mt-2.mt-md-0.text-right
-      %a.btn.btn-sm.btn-primary{ href: new_public_admission_path, data: { toggle: 'tooltip', placement: 'left '}, title: 'New Public Admission' }
+      -# %a.btn.btn-sm.btn-primary{ href: new_admission_application_path, data: { toggle: 'tooltip', placement: 'left '}, title: 'New Public Admission' }
         %i.fa.fa-plus
 
   .row
@@ -17,24 +17,19 @@
             %table.table.table-hover
               %thead
                 %tr.table-primary
-                  %th Application No
-                  %th Name of candidate
-                  %th Course
-                  %th Department
-                  %th College
+                  %th Name
                   %th Status
-                  %th Expires At
+                  %th Start Date
+                  %th End Date
+                  %th Closed on
                   %th.text-right{ width: '10%','data-orderable': 'false' } Actions
               %tbody
                 - @admissions.each do |admission|
                   %tr
-                    %td= admission.application_number
                     %td= admission.name
-                    %td= admission.course.name
-                    %td= admission.department.name
-                    %td= admission.college.name
-                    %td= admission.status.humanize
-                    %td= l(admission.expires_at, format: :long)
+                    %td= admission.status
+                    %td= admission.start_date
+                    %td= admission.end_date
+                    %td= l(admission.closed_at, format: :long)
                     %td.text-right
-                      = link_to raw("<i class='fa fa-refresh'></i>"), regenerate_token_public_admission_path(admission.slug), method: :post, class: 'btn-sm btn-success px-2 py-1', data: { toggle: 'tooltip' }, title: 'Regenerate Token'
-                      = link_to raw("<i class='fa fa-eye'></i>"), public_admission_path(admission.slug), { class: 'btn-sm btn-warning px-2 py-1', 'data-toggle': 'tooltip', title: 'Edit' }
+                      = link_to raw("<i class='fa fa-plus'></i>"), public_admission_admission_applications_path(public_admission_slug: admission.slug), { class: 'btn-sm btn-primary px-2 py-1', 'data-toggle': 'tooltip', title: 'New Application' }

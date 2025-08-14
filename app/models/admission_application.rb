@@ -2,6 +2,8 @@
 
 # :nodoc:
 class AdmissionApplication < ApplicationRecord
+  include Sluggable
+
   belongs_to :admission
   belongs_to :college
   belongs_to :department
@@ -10,6 +12,14 @@ class AdmissionApplication < ApplicationRecord
   has_many :admission_documents, dependent: :destroy
   has_many :admission_payments, dependent: :destroy
   has_many :admission_receipts, through: :admission_payments
+
+  before_validation :generate_application_number, on: :create
+  before_validation :generate_temporary_token, on: :create
+  before_validation :set_expiry, on: :create
+
+  validates :email, :application_number, :temporary_token, presence: true
+  validates :application_number, :temporary_token, uniqueness: true
+  validate :unique_application_per_combination
 
   enum :status, {
     document_upload_pending: 'document_upload_pending',
@@ -20,16 +30,31 @@ class AdmissionApplication < ApplicationRecord
     rejected: 'rejected'
   }, default: 'document_upload_pending'
 
-  validate :unique_application_per_combination
-
   def unique_application_per_combination
     existing = AdmissionApplication.where(
       admission_id: admission_id,
       college_id: college_id,
       department_id: department_id,
-      course_id: course_id
+      course_id: course_id,
+      email: email
     )
     existing = existing.where.not(id: id) if persisted?
     errors.add(:base, 'You have already applied to this college/department/course') if existing.exists?
+  end
+
+  def self.find_by_token(token)
+    active.find_by(temporary_token: token)
+  end
+
+  def generate_application_number
+    self.application_number ||= "ADM-#{SecureRandom.alphanumeric(6).upcase}"
+  end
+
+  def generate_temporary_token
+    self.temporary_token ||= SecureRandom.alphanumeric(6)
+  end
+
+  def set_expiry
+    self.expires_at ||= 24.hours.from_now
   end
 end
