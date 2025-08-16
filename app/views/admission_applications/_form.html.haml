@@ -34,7 +34,7 @@
                 College
                 %span
                   %i.fa.fa-question-circle-o{ 'data-toggle': 'tooltip', title: 'Select College' }
-              = f.collection_select :college_id, College.all, :id, :name, { prompt: 'Select College' }, class: 'form-control select2-field', required: true
+              = f.collection_select :college_id, @colleges, :id, :name, { prompt: 'Select College' }, class: 'form-control select2-field', required: true
               = print_error(admission_application.errors, :college_id)
 
             .col-md-4.form-group{ class: error?(admission_application.errors, :department_id) }

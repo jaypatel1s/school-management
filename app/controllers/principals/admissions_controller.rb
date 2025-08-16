@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 module Principals
+  # :nodoc:
   class AdmissionsController < BaseController
     before_action :set_admission, only: %i[show change_status]
 
@@ -21,10 +22,11 @@ module Principals
 
       if admission_college_active.persisted?
         admission_college_active.active? ? admission_college_active.deactivate : admission_college_active.activate
-        flash[:success] = "Admission #{admission_college_active.active? ? 'activated' : 'deactivated'}"
+        flash[:success] =
+          "Admission #{admission_college_active.active? ? 'activated successfully' : 'deactivated successfully'}"
       else
         admission_college_active.activate
-        flash[:success] = 'Admission activated'
+        flash[:success] = 'Admission activated successfully'
       end
       redirect_to college_principals_admissions_path(current_college.slug)
     end

@@ -1,4 +1,7 @@
+# frozen_string_literal: true
+
 module SuperAdmins
+  # :nodoc:
   class AdmissionsController < BaseController
     before_action :set_admission, only: %i[show edit update destroy]
 
@@ -44,7 +47,7 @@ module SuperAdmins
 
     def create_admission_college_active
       colleges = []
-      College.all.each do |college|
+      College.find_each do |college|
         admission_college_active = college.admission_college_actives.find_or_initialize_by(admission_id: @admission.id)
         admission_college_active.save
         colleges << college
@@ -64,7 +67,7 @@ module SuperAdmins
 
     def admission_params
       params.require(:admission).permit(
-        :name, :status, :expires_at
+        :name, :status, :expires_at, :start_date, :end_date, :closed_at
       )
     end
   end
