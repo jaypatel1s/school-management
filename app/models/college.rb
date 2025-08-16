@@ -17,6 +17,8 @@ class College < ApplicationRecord
   has_many :semesters, dependent: :destroy
   has_many :fee_structures, dependent: :destroy
   has_many :fee_components, dependent: :destroy
-  has_many :admissions, dependent: :destroy
+  has_many :admission_college_actives, dependent: :destroy
+  has_many :admissions, through: :admission_college_actives
+  has_many :admission_applications, dependent: :destroy
   has_many :document_types, dependent: :destroy
 end
