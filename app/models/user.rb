@@ -6,14 +6,15 @@ class User < ApplicationRecord
   devise :database_authenticatable,
          :recoverable, :rememberable, :validatable, :confirmable, :timeoutable, :trackable, :registerable,
          timeout_in: 60.minutes
-  belongs_to :college
+  belongs_to :college, optional: true
   has_one :teacher, dependent: :destroy
   has_one :student, dependent: :destroy
   # has_many :attendances, foreign_key: :student_id
   # has_many :attended_sessions, through: :attendances, source: :session
   # has_many :webauthn_credentials, class_name: 'WebAuthnCredential', dependent: :destroy
+  validates :college_id, presence: true, unless: :super_admin?
 
-  enum :role, { principal: 0, teacher: 1, student: 2 }
+  enum :role, { principal: 0, teacher: 1, student: 2, super_admin: 3 }
 
   def webauthn_user
     WebAuthn::PublicKeyCredential::UserEntity.new(
@@ -33,5 +34,9 @@ class User < ApplicationRecord
 
   def user?
     %w[student].include?(role)
+  end
+
+  def super_admin?
+    %w[super_admin].include?(role)
   end
 end

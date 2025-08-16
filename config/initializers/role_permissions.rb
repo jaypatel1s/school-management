@@ -10,7 +10,7 @@ ROLE_PERMISSIONS = {
     fee_structures: %i[index new create edit update show destroy],
     fee_components: %i[index new create edit update show destroy],
     semesters: %i[index new create edit update show destroy],
-    admissions: %i[index new create edit update show destroy],
+    admissions: %i[index show change_status],
     document_types: %i[index new create edit update destroy]
   },
   teacher: {
@@ -27,5 +27,8 @@ ROLE_PERMISSIONS = {
     dashboard: %i[index],
     sessions: %i[index show],
     attendances: %i[new create]
+  },
+  super_admin: {
+    admissions: %i[index new create edit update show destroy]
   }
 }

@@ -7,10 +7,13 @@ class BaseController < ApplicationController
   layout 'admin'
   before_action :authenticate_user!
   before_action :authorize_action!
-  before_action :set_current_college
+  before_action :set_current_college, unless: -> { current_user&.super_admin? }
+
   before_action :ensure_profile_setup
 
   def authorize_action!
+    return if current_user.role == 'super_admin' # super_admin can access everything
+
     user_role = current_user.role.to_sym
     resource = controller_name.to_sym
     action = action_name.to_sym

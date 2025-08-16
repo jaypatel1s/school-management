@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2025_06_28_091235) do
+ActiveRecord::Schema[7.1].define(version: 2025_08_14_172034) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -81,39 +81,78 @@ ActiveRecord::Schema[7.1].define(version: 2025_06_28_091235) do
     t.index ["reset_password_token"], name: "index_admin_users_on_reset_password_token", unique: true
   end
 
-  create_table "admission_documents", force: :cascade do |t|
+  create_table "admission_applications", force: :cascade do |t|
     t.bigint "admission_id", null: false
-    t.bigint "document_type_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["admission_id", "document_type_id"], name: "index_admission_documents_on_admission_and_document_type", unique: true
-    t.index ["admission_id"], name: "index_admission_documents_on_admission_id"
-    t.index ["document_type_id"], name: "index_admission_documents_on_document_type_id"
-  end
-
-  create_table "admissions", force: :cascade do |t|
     t.bigint "college_id", null: false
     t.bigint "department_id", null: false
     t.bigint "course_id", null: false
-    t.bigint "user_id"
-    t.bigint "processed_by_id"
+    t.string "status", default: "document_upload_pending"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.string "application_number"
-    t.string "name", null: false
+    t.string "temporary_token"
     t.string "email"
     t.string "phone"
-    t.string "status", default: "pending"
+    t.string "name"
+    t.string "slug"
     t.datetime "expires_at"
-    t.string "temporary_token"
+    t.index ["admission_id"], name: "index_admission_applications_on_admission_id"
+    t.index ["college_id"], name: "index_admission_applications_on_college_id"
+    t.index ["course_id"], name: "index_admission_applications_on_course_id"
+    t.index ["department_id"], name: "index_admission_applications_on_department_id"
+  end
+
+  create_table "admission_college_actives", force: :cascade do |t|
+    t.bigint "admission_id", null: false
+    t.bigint "college_id", null: false
+    t.boolean "active"
+    t.datetime "activation_date"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["admission_id", "college_id"], name: "index_admission_college_actives_on_admission_id_and_college_id", unique: true
+    t.index ["admission_id"], name: "index_admission_college_actives_on_admission_id"
+    t.index ["college_id"], name: "index_admission_college_actives_on_college_id"
+  end
+
+  create_table "admission_documents", force: :cascade do |t|
+    t.bigint "document_type_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "admission_application_id", null: false
+    t.index ["admission_application_id"], name: "index_admission_documents_on_admission_application_id"
+    t.index ["document_type_id"], name: "index_admission_documents_on_document_type_id"
+  end
+
+  create_table "admission_payments", force: :cascade do |t|
+    t.bigint "admission_application_id", null: false
+    t.string "transaction_id"
+    t.string "payment_status"
+    t.datetime "paid_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["admission_application_id"], name: "index_admission_payments_on_admission_application_id"
+  end
+
+  create_table "admission_receipts", force: :cascade do |t|
+    t.bigint "student_fee_id", null: false
+    t.bigint "admission_payment_id", null: false
+    t.string "receipt_number", null: false
+    t.string "pdf_url"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["admission_payment_id"], name: "index_admission_receipts_on_admission_payment_id"
+    t.index ["student_fee_id"], name: "index_admission_receipts_on_student_fee_id"
+  end
+
+  create_table "admissions", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "status", default: "pending"
     t.string "slug", limit: 255, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["application_number", "college_id"], name: "index_admissions_on_application_number_and_college_id", unique: true
-    t.index ["college_id"], name: "index_admissions_on_college_id"
-    t.index ["course_id"], name: "index_admissions_on_course_id"
-    t.index ["department_id"], name: "index_admissions_on_department_id"
-    t.index ["processed_by_id"], name: "index_admissions_on_processed_by_id"
-    t.index ["temporary_token", "college_id"], name: "index_admissions_on_temporary_token_and_college_id", unique: true
-    t.index ["user_id"], name: "index_admissions_on_user_id"
+    t.datetime "start_date"
+    t.datetime "end_date"
+    t.datetime "closed_at"
   end
 
   create_table "assignments", force: :cascade do |t|
@@ -296,6 +335,8 @@ ActiveRecord::Schema[7.1].define(version: 2025_06_28_091235) do
     t.string "slug", limit: 255, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "admission_application_id", null: false
+    t.index ["admission_application_id"], name: "index_student_fees_on_admission_application_id"
     t.index ["college_id"], name: "index_student_fees_on_college_id"
     t.index ["fee_structure_id"], name: "index_student_fees_on_fee_structure_id"
     t.index ["student_id"], name: "index_student_fees_on_student_id"
@@ -309,6 +350,8 @@ ActiveRecord::Schema[7.1].define(version: 2025_06_28_091235) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "user_id", null: false
+    t.bigint "admission_application_id"
+    t.index ["admission_application_id"], name: "index_students_on_admission_application_id"
     t.index ["college_id"], name: "index_students_on_college_id"
     t.index ["user_id"], name: "index_students_on_user_id"
   end
@@ -328,7 +371,7 @@ ActiveRecord::Schema[7.1].define(version: 2025_06_28_091235) do
   end
 
   create_table "users", force: :cascade do |t|
-    t.bigint "college_id", null: false
+    t.bigint "college_id"
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
     t.string "name"
@@ -376,13 +419,17 @@ ActiveRecord::Schema[7.1].define(version: 2025_06_28_091235) do
   add_foreign_key "academic_years", "colleges"
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
-  add_foreign_key "admission_documents", "admissions"
+  add_foreign_key "admission_applications", "admissions"
+  add_foreign_key "admission_applications", "colleges"
+  add_foreign_key "admission_applications", "courses"
+  add_foreign_key "admission_applications", "departments"
+  add_foreign_key "admission_college_actives", "admissions"
+  add_foreign_key "admission_college_actives", "colleges"
+  add_foreign_key "admission_documents", "admission_applications"
   add_foreign_key "admission_documents", "document_types"
-  add_foreign_key "admissions", "colleges"
-  add_foreign_key "admissions", "courses"
-  add_foreign_key "admissions", "departments"
-  add_foreign_key "admissions", "users"
-  add_foreign_key "admissions", "users", column: "processed_by_id"
+  add_foreign_key "admission_payments", "admission_applications"
+  add_foreign_key "admission_receipts", "admission_payments"
+  add_foreign_key "admission_receipts", "student_fees"
   add_foreign_key "assignments", "colleges"
   add_foreign_key "assignments", "courses"
   add_foreign_key "assignments", "departments"
@@ -412,9 +459,11 @@ ActiveRecord::Schema[7.1].define(version: 2025_06_28_091235) do
   add_foreign_key "sessions", "teachers"
   add_foreign_key "student_courses", "courses"
   add_foreign_key "student_courses", "students"
+  add_foreign_key "student_fees", "admission_applications"
   add_foreign_key "student_fees", "colleges"
   add_foreign_key "student_fees", "fee_structures"
   add_foreign_key "student_fees", "students"
+  add_foreign_key "students", "admission_applications"
   add_foreign_key "students", "colleges"
   add_foreign_key "students", "users"
   add_foreign_key "teachers", "colleges"

@@ -7,59 +7,19 @@
         .nav-profile-text.d-flex.flex-column
           %span.font-weight-bold.text-break
             = current_user.email
+
     - if can_access?(:dashboard, :index)
       %li.nav-item{ class: menu_active_class('dashboard') }
         %a.nav-link{ href: authenticated_user_path }
           %i.fa.fa-home.menu-icon
           %span.menu-title Dashboard
+
     - if current_user.profile_setup?
-      - if can_access?(:users, :index)
-        %li.nav-item{ class: menu_active_class('users') }
-          %a.nav-link{ href: send("college_#{current_user.role}s_users_path", college_slug: current_college.slug) }
-            %i.fa.fa-users.menu-icon
-            %span.menu-title Users
-      - if can_access?(:departments, :index)
-        %li.nav-item{ class: menu_active_class('departments') }
-          %a.nav-link{ href: send("college_#{current_user.role}s_departments_path", college_slug: current_college.slug) }
-            %i.fa.fa-gear.menu-icon
-            %span.menu-title Departments
-      - if can_access?(:courses, :index)
-        %li.nav-item{ class: menu_active_class('courses') }
-          %a.nav-link{ href: send("college_#{current_user.role}s_courses_path", college_slug: current_college.slug) }
-            %i.fa.fa-file.menu-icon
-            %span.menu-title Courses
-      - if can_access?(:sessions, :index)
-        %li.nav-item{ class: menu_active_class('sessions') }
-          %a.nav-link{ href: send("college_#{current_user.role}s_sessions_path", college_slug: current_college.slug) }
-            %i.fa.fa-calendar.menu-icon
-            %span.menu-title Sessions
-      - if can_access?(:academic_years, :index)
-        %li.nav-item{ class: menu_active_class('academic_years') }
-          %a.nav-link{ href: send("college_#{current_user.role}s_academic_years_path", college_slug: current_college.slug) }
-            %i.fa.fa-graduation-cap.menu-icon
-            %span.menu-title Academic Year
-      - if can_access?(:fee_structures, :index)
-        %li.nav-item{ class: menu_active_class('fee_structures') }
-          %a.nav-link{ href: send("college_#{current_user.role}s_fee_structures_path", college_slug: current_college.slug) }
-            %i.fa.fa-folder.menu-icon
-            %span.menu-title Fee Structures
-      - if can_access?(:fee_components, :index)
-        %li.nav-item{ class: menu_active_class('fee_components') }
-          %a.nav-link{ href: send("college_#{current_user.role}s_fee_components_path", college_slug: current_college.slug) }
-            %i.fa.fa-money.menu-icon
-            %span.menu-title Fee Components
-      - if can_access?(:semesters, :index)
-        %li.nav-item{ class: menu_active_class('semesters') }
-          %a.nav-link{ href: send("college_#{current_user.role}s_semesters_path", college_slug: current_college.slug) }
-            %i.fa.fa-book.menu-icon
-            %span.menu-title Semesters
-      - if can_access?(:admissions, :index)
-        %li.nav-item{ class: menu_active_class('admissions') }
-          %a.nav-link{ href: send("college_#{current_user.role}s_admissions_path", college_slug: current_college.slug) }
-            %i.fa.fa-file-text-o.menu-icon
-            %span.menu-title Admissions
-      - if can_access?(:document_types, :index)
-        %li.nav-item{ class: menu_active_class('document_types') }
-          %a.nav-link{ href: send("college_#{current_user.role}s_document_types_path", college_slug: current_college.slug) }
-            %i.fa.fa-file-pdf-o.menu-icon
-            %span.menu-title Document Types
+      - resources = %i[users departments courses sessions academic_years fee_structures fee_components semesters admissions document_types]
+      - resources.each do |resource|
+        - if can_access?(resource, :index)
+          %li.nav-item{ class: menu_active_class(resource.to_s) }
+            %a.nav-link{ href: path_for(resource) }
+              - icons = { users: 'fa-users', departments: 'fa-gear', courses: 'fa-file', sessions: 'fa-calendar',  academic_years: 'fa-graduation-cap',  fee_structures: 'fa-folder', fee_components: 'fa-money', semesters: 'fa-book', admissions: 'fa-file-text-o',  document_types: 'fa-file-pdf-o' }
+              %i.fa{ class: "fa #{icons[resource]} menu-icon" }
+              %span.menu-title= resource.to_s.titleize

@@ -13,10 +13,15 @@ module UserProfile
   def set_user_profile
     return false if current_user.nil?
 
-    @profile = if current_user&.teacher?
-                 current_user&.teacher
-               else
-                 (current_user&.principal? ? current_user : current_user&.student)
-               end
+    @profile =
+      if current_user.super_admin?
+        current_user # super_admin has no college-scoped record
+      elsif current_user.teacher?
+        current_user.teacher
+      elsif current_user.principal?
+        current_user
+      else
+        current_user.student
+      end
   end
 end
