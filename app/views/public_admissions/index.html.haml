@@ -30,6 +30,6 @@
                     %td= admission.status
                     %td= admission.start_date
                     %td= admission.end_date
-                    %td= l(admission.closed_at, format: :long)
+                    %td= admission.closed_at
                     %td.text-right
                       = link_to raw("<i class='fa fa-plus'></i>"), public_admission_admission_applications_path(public_admission_slug: admission.slug), { class: 'btn-sm btn-primary px-2 py-1', 'data-toggle': 'tooltip', title: 'New Application' }

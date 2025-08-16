@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2025_08_14_105556) do
+ActiveRecord::Schema[7.1].define(version: 2025_08_14_172034) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -118,6 +118,8 @@ ActiveRecord::Schema[7.1].define(version: 2025_08_14_105556) do
     t.bigint "document_type_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "admission_application_id", null: false
+    t.index ["admission_application_id"], name: "index_admission_documents_on_admission_application_id"
     t.index ["document_type_id"], name: "index_admission_documents_on_document_type_id"
   end
 
@@ -143,11 +145,11 @@ ActiveRecord::Schema[7.1].define(version: 2025_08_14_105556) do
   end
 
   create_table "admissions", force: :cascade do |t|
+    t.string "name", null: false
     t.string "status", default: "pending"
     t.string "slug", limit: 255, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "name"
     t.datetime "start_date"
     t.datetime "end_date"
     t.datetime "closed_at"
@@ -423,6 +425,7 @@ ActiveRecord::Schema[7.1].define(version: 2025_08_14_105556) do
   add_foreign_key "admission_applications", "departments"
   add_foreign_key "admission_college_actives", "admissions"
   add_foreign_key "admission_college_actives", "colleges"
+  add_foreign_key "admission_documents", "admission_applications"
   add_foreign_key "admission_documents", "document_types"
   add_foreign_key "admission_payments", "admission_applications"
   add_foreign_key "admission_receipts", "admission_payments"

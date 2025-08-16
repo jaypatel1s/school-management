@@ -18,6 +18,46 @@
                   %i.fa.fa-question-circle-o{ 'data-toggle': 'tooltip', title: 'Admission status' }
               = f.select :status, Admission.statuses.keys.map { |s| [s.titleize, s] }, {}, class: 'form-control select2-field', required: true
               = print_error(admission.errors, :status)
+          .row
+            %div{ class: "col-md-4 form-group #{error?(admission.errors, :start_date)}" }
+              = f.label :start_date, class: 'col-form-label required' do
+                Start Date
+                %span
+                  %i.fa.fa-question-circle-o{ 'data-toggle': 'tooltip', title: 'Admission Start At' }
+              .input-group.date.datepicker#admission_start_date{ 'data-target-input': 'nearest' }
+                .input-group-prepend{ data: { target: '#admission_start_date', toggle: 'datetimepicker'} }
+                  %span.fa.fa-calendar.input-group-text
+                = f.text_field :start_date, class: 'form-control', autocomplete: 'off', required: true, data: {target: '#admission_start_date', toggle: 'datetimepicker'}, value: show_date(f.object.start_date), placeholder: 'Start At'
+              = print_error(admission.errors, :start_date)
+            %div{ class: "col-md-4 form-group #{error?(admission.errors, :end_date)}" }
+              = f.label :end_date, class: 'col-form-label required' do
+                End Date
+                %span
+                  %i.fa.fa-question-circle-o{ 'data-toggle': 'tooltip', title: 'Admission End At' }
+              .input-group.date.datepicker#admission_end_date{ 'data-target-input': 'nearest' }
+                .input-group-prepend{ data: {target: '#admission_end_date', toggle: 'datetimepicker'} }
+                  %span.fa.fa-calendar.input-group-text
+                = f.text_field :end_date, class: 'form-control', autocomplete: 'off', required: true, data: {target: '#admission_end_date', toggle: 'datetimepicker'}, value: show_date(f.object.end_date), placeholder: 'End At'
+              = print_error(admission.errors, :end_date)
+            %div{ class: "col-md-4 form-group #{error?(admission.errors, :closed_at)}" }
+              = f.label :closed_at, class: 'col-form-label required' do
+                Closed At
+                %span
+                  %i.fa.fa-question-circle-o{ 'data-toggle': 'tooltip', title: 'Closed At' }
+              .input-group.date.datepicker#admission_closed_at{ 'data-target-input': 'nearest' }
+                .input-group-prepend{ data: {target: '#admission_closed_at', toggle: 'datetimepicker'} }
+                  %span.fa.fa-calendar.input-group-text
+                = f.text_field :closed_at, class: 'form-control', autocomplete: 'off', required: true, data: {target: '#admission_closed_at', toggle: 'datetimepicker'}, value: show_date(f.object.closed_at), placeholder: 'Closed At'
+              = print_error(admission.errors, :closed_at)
+
+
           .row.mt-4
             .col-12
               = f.submit "Submit", class: "btn btn-primary btn-block"
+- content_for :js_code do
+  - if admission.errors[:base].present?
+    :javascript
+      $(document).on('turbolinks:load', function(){
+        var error_msg   = "#{admission.errors[:base].uniq.join(', ')}"
+        display_notify('danger', error_msg);
+      });
