@@ -2,16 +2,16 @@
 
 # :nodoc:
 class PublicAdmissionsController < ApplicationController
-  before_action :set_admission, only: %i[show remove_document]
+  # before_action :set_admission, only: %i[show]
 
   def index
     @admissions = Admission.all
   end
 
-  def show
-    @admission_applications = @admission.admission_applications
-    @document_types = DocumentType.where(college_id: @admission.admission_applications.pluck(:college_id))
-  end
+  # def show
+  #   @admission_applications = @admission.admission_applications
+  #   @document_types = DocumentType.where(college_id: @admission.admission_applications.pluck(:college_id))
+  # end
 
   # def validate_token
   #   college_ids = @admission.admission_applications.pluck(:college_id)
@@ -43,14 +43,14 @@ class PublicAdmissionsController < ApplicationController
   #   redirect_to public_admission_path(@admission.slug)
   # end
 
-  def remove_document
-    @document = @admission.admission_documents.find_by(document_type_id: params[:document_type_id])
-    @document&.destroy
+  # def remove_document
+  #   @document = @admission.admission_documents.find_by(document_type_id: params[:document_type_id])
+  #   @document&.destroy
 
-    flash[:success] = 'Document removed successfully.'
-    respond_to do |format|
-      format.js
-      format.html { redirect_to public_admission_path(@admission.slug) }
-    end
-  end
+  #   flash[:success] = 'Document removed successfully.'
+  #   respond_to do |format|
+  #     format.js
+  #     format.html { redirect_to public_admission_path(@admission.slug) }
+  #   end
+  # end
 end

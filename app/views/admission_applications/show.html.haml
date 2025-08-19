@@ -20,6 +20,7 @@
             Status:
             %strong= @admission_application.status.humanize
           %hr
+
           %h4 Upload Documents
           = form_with url: validate_token_public_admission_admission_application_path(@admission_application.slug, public_admission_slug: @admission.slug), method: :post, local: true, class: 'form-inline mb-3' do
             .form-group.mr-2
@@ -29,9 +30,9 @@
               = label_tag :temporary_token, 'Temporary Token'
               = text_field_tag :temporary_token, params[:temporary_token], class: 'form-control', required: true
             = submit_tag 'Validate', class: 'btn btn-info'
+
           - if @validate_attempt
             - if @token_matched
-
               .row
                 - @document_types.each do |doc_type|
                   .col-md-6
@@ -43,21 +44,22 @@
                           %h5= doc_type.name
                           %p.text-success.mb-1
                             - if uploaded_doc.file.content_type.start_with?('image/')
-                              = image_tag uploaded_doc.file.variant( resize_to_limit: [300, 300] ), class: 'img-thumbnail mt-2'
+                              = image_tag uploaded_doc.file.variant(resize_to_limit: [300, 300]), class: 'img-thumbnail mt-2'
                             - else
                               = link_to uploaded_doc.file.filename.to_s, url_for(uploaded_doc.file), target: '_blank'
-                          = button_to 'Remove', remove_document_public_admission_path(@admission.slug, document_type_id: doc_type.id),
-                            method: :delete, class: 'btn btn-sm btn-danger mt-2'
+                          = button_to 'Remove',
+                            remove_document_public_admission_admission_application_path(@admission.slug, document_type_id: doc_type.id),
+                            method: :delete, remote: true, class: 'btn btn-sm btn-danger mt-2'
 
                       - else
                         .card.mb-3.p-3
                           %h5= doc_type.name
-                          = form_with model: AdmissionDocument.new, url: upload_document_public_admission_admission_application_path(@admission_application.slug, public_admission_slug: @admission.slug), local: true, html: { multipart: true } do |f|
+                          = form_with model: AdmissionDocument.new,
+                            url: upload_document_public_admission_admission_application_path(@admission_application.slug, public_admission_slug: @admission.slug),
+                            local: false,
+                            html: { multipart: true } do |f|
                             = hidden_field_tag :document_type_id, doc_type.id
                             .form-group
                               = f.label :file, "Upload #{doc_type.name}"
                               = f.file_field :file, required: true, class: 'form-control'
                             = f.submit 'Upload', class: 'btn btn-sm btn-primary mt-2'
-
-            - else
-              .alert.alert-danger.mt-3 Invalid application number or token.
