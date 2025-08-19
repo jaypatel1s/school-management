@@ -13,7 +13,7 @@ module SchoolManagementSystem
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 7.0
     config.autoload_paths += %W[#{config.root}/lib]
-    config.active_job.queue_adapter = :sidekiq
+    # config.active_job.queue_adapter = :sidekiq
     config.i18n.available_locales = %i[en]
     config.i18n.default_locale = :en
     config.i18n.fallbacks = [:en]
