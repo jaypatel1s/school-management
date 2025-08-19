@@ -3,9 +3,9 @@
 # :nodoc:
 class AdmissionApplicationsController < ApplicationController
   before_action :set_admission_application,
-                only: %i[upload_document show validate_token update destroy regenerate_token]
+                only: %i[upload_document remove_document show validate_token update destroy regenerate_token]
   before_action :set_admission,
-                only: %i[upload_document show validate_token index new create update destroy regenerate_token]
+                only: %i[remove_document show validate_token index new create update destroy regenerate_token]
 
   def index
     @admission_applications = @admission.admission_applications.includes(:course, :department, :college)
@@ -84,8 +84,15 @@ class AdmissionApplicationsController < ApplicationController
       params[:application_number] == @admission_application.application_number &&
       params[:temporary_token] == @admission_application.temporary_token
 
-    flash.now[:success] = 'Validation successful. You can now upload your documents'
-    render :show
+    respond_to do |format|
+      if @token_matched
+        flash[:success] = 'Validation successful. You can now upload your documents'
+        format.html { render :show }
+      else
+        flash[:alert] = 'Invalid Application Number or Temporary Token. Please check and try again.'
+        format.html { redirect_to public_admission_admission_application_path(slug: @admission_application.slug) }
+      end
+    end
   end
 
   def upload_document
@@ -93,16 +100,35 @@ class AdmissionApplicationsController < ApplicationController
     doc_type_id = params[:document_type_id]
 
     if file.present? && doc_type_id.present?
-      @admission.admission_documents.create!(
-        document_type_id: doc_type_id,
-        file: file
-      )
-      @admission.update(status: 'under_review') if @admission.status == 'document_upload_pending'
-      flash[:success] = 'Document uploaded successfully.'
+      @document = @admission_application.admission_documents.new(document_type_id: doc_type_id, file: file)
+
+      if @document.save
+        if @admission_application.status == 'document_upload_pending'
+          @admission_application.update(status: 'under_review')
+        end
+        flash[:success] = 'Document uploaded successfully.'
+      else
+        flash[:alert] = 'Failed to save document.'
+      end
     else
       flash[:alert] = 'Missing file or document type.'
     end
-    redirect_to public_admission_path(@admission.slug)
+
+    respond_to do |format|
+      format.js
+      format.html { redirect_to public_admission_admission_application_path(slug: @admission_application.slug) }
+    end
+  end
+
+  def remove_document
+    @document = @admission_application.admission_documents.find_by(document_type_id: params[:document_type_id])
+    @document&.destroy
+
+    flash[:success] = 'Document removed successfully.'
+    respond_to do |format|
+      format.js
+      format.html { redirect_to public_admission_admission_application_path(@admission_application.slug) }
+    end
   end
 
   private
@@ -113,7 +139,7 @@ class AdmissionApplicationsController < ApplicationController
 
   def set_admission
     @admission = Admission.find_by(slug: params[:public_admission_slug])
-    return if @admission&.closed_at&.future?
+    return if @admission.present?
 
     flash[:alert] = 'Token expired or admission invalid.'
     redirect_to public_admissions_path
