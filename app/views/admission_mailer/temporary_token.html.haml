@@ -9,7 +9,7 @@
 %strong #{@admission.expires_at.strftime('%d %b %Y, %I:%M %p')}
 
 %p Click below to continue your admission process:
-%p= link_to 'Resume Admission', public_admission_url(@admission.slug)
+%p= link_to 'Resume Admission', public_admission_admission_applications_url(@admission.slug)
 
 
 %p Thanks,
