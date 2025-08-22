@@ -5,7 +5,8 @@ class AdmissionApplicationsController < ApplicationController
   before_action :set_admission_application,
                 only: %i[upload_document remove_document show validate_token update destroy regenerate_token]
   before_action :set_admission,
-                only: %i[remove_document show validate_token index new create update destroy regenerate_token]
+                only: %i[upload_document remove_document show validate_token index new create update destroy
+                         regenerate_token]
 
   def index
     @admission_applications = @admission.admission_applications.includes(:course, :department, :college)
@@ -96,11 +97,10 @@ class AdmissionApplicationsController < ApplicationController
   end
 
   def upload_document
-    file = params.dig(:admission_document, :file)
-    doc_type_id = params[:document_type_id]
-
-    if file.present? && doc_type_id.present?
-      @document = @admission_application.admission_documents.new(document_type_id: doc_type_id, file: file)
+    file = params[:file]
+    @document_type = params[:document_type_id]
+    if file.present? && @document_type.present?
+      @document = @admission_application.admission_documents.new(document_type_id: @document_type, file: file)
 
       if @document.save
         if @admission_application.status == 'document_upload_pending'
@@ -116,11 +116,11 @@ class AdmissionApplicationsController < ApplicationController
 
     respond_to do |format|
       format.js
-      format.html { redirect_to public_admission_admission_application_path(slug: @admission_application.slug) }
     end
   end
 
   def remove_document
+    @document_type = DocumentType.find_by(id: params[:document_type_id])
     @document = @admission_application.admission_documents.find_by(document_type_id: params[:document_type_id])
     @document&.destroy
 

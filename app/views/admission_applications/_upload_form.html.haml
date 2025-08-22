@@ -1,0 +1,9 @@
+.card.mb-3.p-3
+  %h5= document_type.name
+  = form_with url: upload_document_public_admission_admission_application_path(admission_application.slug, public_admission_slug: admission.slug),
+              method: :post, local: false,
+              multipart: true, html: { id: "document-#{document_type.id}" } do |f|
+    = hidden_field_tag :document_type_id, document_type.id
+    .form-group
+      = file_field_tag :file, required: true, class: 'form-control'
+    = f.submit 'Upload', class: 'btn btn-sm btn-primary mt-2 submit_btn'

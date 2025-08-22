@@ -8,6 +8,7 @@
     .col-md-5.mt-2.mt-md-0.text-right
       %a.btn.btn-sm.btn-success{ href: public_admissions_path, data: { toggle: 'tooltip', placement: 'left' }, title: 'Public Admission' }
         %i.fa.fa-reply
+
   .row
     .col-12.grid-margin
       .card
@@ -22,7 +23,8 @@
           %hr
 
           %h4 Upload Documents
-          = form_with url: validate_token_public_admission_admission_application_path(@admission_application.slug, public_admission_slug: @admission.slug), method: :post, local: true, class: 'form-inline mb-3' do
+          = form_with url: validate_token_public_admission_admission_application_path(@admission_application.slug, public_admission_slug: @admission.slug),
+                      method: :post, local: true, class: 'form-inline mb-3' do
             .form-group.mr-2
               = label_tag :application_number, 'Application Number'
               = text_field_tag :application_number, params[:application_number], class: 'form-control', required: true
@@ -48,18 +50,32 @@
                             - else
                               = link_to uploaded_doc.file.filename.to_s, url_for(uploaded_doc.file), target: '_blank'
                           = button_to 'Remove',
-                            remove_document_public_admission_admission_application_path(@admission.slug, document_type_id: doc_type.id),
-                            method: :delete, remote: true, class: 'btn btn-sm btn-danger mt-2'
+                                      remove_document_public_admission_admission_application_path(@admission.slug, document_type_id: doc_type.id),
+                                      method: :delete, remote: true, class: 'btn btn-sm btn-danger mt-2'
 
                       - else
                         .card.mb-3.p-3
                           %h5= doc_type.name
-                          = form_with model: AdmissionDocument.new,
-                            url: upload_document_public_admission_admission_application_path(@admission_application.slug, public_admission_slug: @admission.slug),
-                            local: false,
-                            html: { multipart: true } do |f|
+                          = form_with url: upload_document_public_admission_admission_application_path(@admission_application.slug, public_admission_slug: @admission.slug),
+                                    method: :post,
+                                    local: false, html: { id: "document-#{doc_type.id}" },
+                                    multipart: true do |f|
                             = hidden_field_tag :document_type_id, doc_type.id
                             .form-group
-                              = f.label :file, "Upload #{doc_type.name}"
-                              = f.file_field :file, required: true, class: 'form-control'
-                            = f.submit 'Upload', class: 'btn btn-sm btn-primary mt-2'
+                              = file_field_tag :file, required: true, class: 'form-control'
+                            = f.submit 'Upload', class: 'btn btn-sm btn-primary mt-2 submit_btn'
+- content_for :js_code do
+  :javascript
+    $(document).on("submit", "[id^=document-]", function(e){
+      e.preventDefault();
+      var formData = new FormData(this);
+      $.ajax({
+        url: this.action,
+        type: this.method,
+        data: formData,
+        contentType: false,
+        processData: false,
+        dataType: 'script',
+        headers: { 'Accept': 'text/javascript' }
+      });
+    });
