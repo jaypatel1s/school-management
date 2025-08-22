@@ -1,0 +1,10 @@
+.card.mb-3.p-3
+  %h5= document.document_type.name
+  %p.text-success.mb-1
+    - if document.file.content_type.start_with?('image/')
+      = image_tag document.file.variant(resize_to_limit: [300, 300]), class: 'img-thumbnail mt-2'
+    - else
+      = link_to document.file.filename.to_s, url_for(document.file), target: '_blank'
+  = button_to 'Remove',
+              remove_document_public_admission_admission_application_path(admission.slug, document_type_id: document.document_type.id),
+              method: :delete, remote: true, class: 'btn btn-sm btn-danger mt-2'
