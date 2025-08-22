@@ -1,0 +1,1 @@
+$("#document-section-#{@document_type.id}").html("#{escape_javascript(render(partial: 'upload_form', locals: { document_type: @document_type, admission_application: @admission_application, admission: @admission }))}");
