@@ -5,5 +5,5 @@ class Semester < ApplicationRecord
   include Sluggable
 
   belongs_to :college
-  has_many :courses, dependent: :destroy
+  has_many :course_semesters, dependent: :destroy
 end

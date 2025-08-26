@@ -1,0 +1,9 @@
+.nested-fields
+  .row
+    %div{ class: "col-md-5 form-group #{error?(f.object.errors, :academic_year_id)}" }
+      = f.select :academic_year_id, options_for_select(current_college.academic_years.pluck(:name, :id), f.object.academic_year_id), {include_blank: 'Select Academic Year', required: true}, class: 'form-control select2-field'
+    %div{ class: "col-md-5 form-group #{error?(f.object.errors, :semester_id)}" }
+      = f.select :semester_id, options_for_select(current_college.semesters.pluck(:name, :id), f.object.semester_id), {include_blank: 'Select Semester', required: true}, class: 'form-control select2-field'
+    .col-md-2.delete
+      = link_to_remove_association raw("<i class='fa fa-trash-o pt-1'></i>"), f, class: 'btn btn-sm btn-danger', data: {toggle: 'tooltip', placement: 'left'}, title: 'Delete information'
+      = print_error(f.object.errors, :value)

@@ -16,9 +16,11 @@ class AdmissionApplicationsController < ApplicationController
 
   def new
     @admission_application = @admission.admission_applications.new
-    @colleges = College.joins(:admission_college_actives)
-                       .where(admission_college_actives: { active: true })
-                       .distinct
+
+    @colleges = College.joins(admission_college_actives: :admission)
+                       .where(
+                         admission_college_actives: { active: true, admission_id: @admission.id }
+                       ).distinct.includes(admission_college_actives: :admission)
   end
 
   def create
