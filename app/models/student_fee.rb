@@ -14,7 +14,7 @@ class StudentFee < ApplicationRecord
 
   enum :status, { unpaid: 'unpaid', partial: 'partial', paid: 'paid', overdue: 'overdue' }
 
-  after_save :create_student_if_fully_paid
+  # after_save :create_student_if_fully_paid
 
   def create_student_if_fully_paid
     return unless paid? && student.nil? && admission_application.present?

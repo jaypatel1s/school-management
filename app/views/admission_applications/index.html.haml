@@ -38,4 +38,8 @@
                     %td.text-right
                       = link_to raw("<i class='fa fa-refresh'></i>"), regenerate_token_public_admission_admission_application_path(slug: admission_application.slug,
                       public_admission_slug: @admission.slug), method: :post, class: 'btn-sm btn-success px-2 py-1', data: { toggle: 'tooltip' }, title: 'Regenerate Token'
-                      = link_to raw("<i class='fa fa-eye'></i>"), public_admission_admission_application_path(slug: admission_application.slug), { class: 'btn-sm btn-warning px-2 py-1', 'data-toggle': 'tooltip', title: 'Show' }
+                      - if admission_application.admission_documents.exists? && admission_application.admission_documents.all?(&:verified)
+                        = link_to raw("<i class='fa fa-money'></i>"), new_public_admission_admission_application_admission_payment_path( public_admission_slug: @admission.slug, admission_application_slug: admission_application.slug),
+                         { class: 'btn-sm btn-warning px-2 py-1', 'data-toggle': 'tooltip', title: 'Payment' }
+                      - else
+                        = link_to raw("<i class='fa fa-eye'></i>"), public_admission_admission_application_path(slug: admission_application.slug), { class: 'btn-sm btn-warning px-2 py-1', 'data-toggle': 'tooltip', title: 'Show' }

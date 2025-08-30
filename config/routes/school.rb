@@ -21,6 +21,11 @@ resources :public_admissions, param: :slug, only: %i[index] do
       delete :remove_document
       post :regenerate_token
     end
+    resources :admission_payments, only: %i[new create] do
+      collection do
+        post :verify
+      end
+    end
   end
 end
 
@@ -66,6 +71,7 @@ resources :colleges, param: :slug do
     end
     resources :admission_documents
     resources :document_types, only: %i[index edit new create update destroy]
+    resources :college_payment_gateways, only: %i[index edit new create update destroy], param: :slug
   end
 
   namespace :teachers do

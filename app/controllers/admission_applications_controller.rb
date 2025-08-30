@@ -23,6 +23,9 @@ class AdmissionApplicationsController < ApplicationController
 
   def create
     @admission_application = @admission.admission_applications.new(admission_application_params)
+    fee_structure = FeeStructure.find_by(college_id: admission_application_params[:college_id],
+                                         department_id: admission_application_params[:department_id])
+    @admission_application.fee_structure_id = fee_structure.id
     if @admission_application.save
       AdmissionMailer.temporary_token(@admission_application).deliver_later
       flash[:success] = 'Admission application submitted successfully'
