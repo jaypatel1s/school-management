@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2025_08_14_172034) do
+ActiveRecord::Schema[7.1].define(version: 2025_08_30_170853) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -96,10 +96,13 @@ ActiveRecord::Schema[7.1].define(version: 2025_08_14_172034) do
     t.string "name"
     t.string "slug"
     t.datetime "expires_at"
+    t.bigint "fee_structure_id"
+    t.boolean "documents_verified", default: false, null: false
     t.index ["admission_id"], name: "index_admission_applications_on_admission_id"
     t.index ["college_id"], name: "index_admission_applications_on_college_id"
     t.index ["course_id"], name: "index_admission_applications_on_course_id"
     t.index ["department_id"], name: "index_admission_applications_on_department_id"
+    t.index ["fee_structure_id"], name: "index_admission_applications_on_fee_structure_id"
   end
 
   create_table "admission_college_actives", force: :cascade do |t|
@@ -119,6 +122,7 @@ ActiveRecord::Schema[7.1].define(version: 2025_08_14_172034) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "admission_application_id", null: false
+    t.boolean "verified", default: false, null: false
     t.index ["admission_application_id"], name: "index_admission_documents_on_admission_application_id"
     t.index ["document_type_id"], name: "index_admission_documents_on_document_type_id"
   end
@@ -130,6 +134,8 @@ ActiveRecord::Schema[7.1].define(version: 2025_08_14_172034) do
     t.datetime "paid_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.decimal "amount", precision: 10, scale: 2, default: "0.0", null: false
+    t.integer "payment_mode", default: 0, null: false
     t.index ["admission_application_id"], name: "index_admission_payments_on_admission_application_id"
   end
 
@@ -183,6 +189,21 @@ ActiveRecord::Schema[7.1].define(version: 2025_08_14_172034) do
     t.index ["department_id"], name: "index_attendances_on_department_id"
     t.index ["session_id"], name: "index_attendances_on_session_id"
     t.index ["student_id"], name: "index_attendances_on_student_id"
+  end
+
+  create_table "college_payment_gateways", force: :cascade do |t|
+    t.bigint "college_id", null: false
+    t.string "name", null: false
+    t.string "api_key"
+    t.string "api_secret"
+    t.string "merchant_id"
+    t.jsonb "options", default: {}
+    t.boolean "active", default: true
+    t.string "slug", limit: 255, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["college_id", "name"], name: "index_college_payment_gateways_on_college_id_and_name", unique: true
+    t.index ["college_id"], name: "index_college_payment_gateways_on_college_id"
   end
 
   create_table "colleges", force: :cascade do |t|
@@ -269,7 +290,6 @@ ActiveRecord::Schema[7.1].define(version: 2025_08_14_172034) do
     t.string "payment_method"
     t.string "transaction_reference"
     t.text "notes"
-    t.string "slug", limit: 255, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["college_id"], name: "index_fee_payments_on_college_id"
@@ -332,7 +352,6 @@ ActiveRecord::Schema[7.1].define(version: 2025_08_14_172034) do
     t.string "status"
     t.decimal "amount_paid"
     t.date "due_date"
-    t.string "slug", limit: 255, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "admission_application_id", null: false
@@ -345,7 +364,7 @@ ActiveRecord::Schema[7.1].define(version: 2025_08_14_172034) do
   create_table "students", force: :cascade do |t|
     t.bigint "college_id", null: false
     t.integer "status"
-    t.integer "roll_number"
+    t.string "roll_number"
     t.integer "mobile_no"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -423,6 +442,7 @@ ActiveRecord::Schema[7.1].define(version: 2025_08_14_172034) do
   add_foreign_key "admission_applications", "colleges"
   add_foreign_key "admission_applications", "courses"
   add_foreign_key "admission_applications", "departments"
+  add_foreign_key "admission_applications", "fee_structures"
   add_foreign_key "admission_college_actives", "admissions"
   add_foreign_key "admission_college_actives", "colleges"
   add_foreign_key "admission_documents", "admission_applications"
@@ -438,6 +458,7 @@ ActiveRecord::Schema[7.1].define(version: 2025_08_14_172034) do
   add_foreign_key "attendances", "departments"
   add_foreign_key "attendances", "sessions"
   add_foreign_key "attendances", "students"
+  add_foreign_key "college_payment_gateways", "colleges"
   add_foreign_key "courses", "academic_years"
   add_foreign_key "courses", "colleges"
   add_foreign_key "courses", "departments"

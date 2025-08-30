@@ -3,10 +3,11 @@
 # :nodoc:
 class FeeStructure < ApplicationRecord
   include Sluggable
-  
+
   belongs_to :college
   belongs_to :academic_year
   belongs_to :department
+  has_many :admission_applications, dependent: :nullify
   has_many :fee_components, dependent: :destroy
   has_many :student_fees, dependent: :destroy
 

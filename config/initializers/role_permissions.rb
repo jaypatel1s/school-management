@@ -11,7 +11,8 @@ ROLE_PERMISSIONS = {
     fee_components: %i[index new create edit update show destroy],
     semesters: %i[index new create edit update show destroy],
     admissions: %i[index show change_status],
-    document_types: %i[index new create edit update destroy]
+    document_types: %i[index new create edit update destroy],
+    college_payment_gateways:  %i[index new create edit update destroy]
   },
   teacher: {
     dashboard: %i[index],

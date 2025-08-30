@@ -1,0 +1,14 @@
+.content-wrapper
+  .page-header.row
+    .col-md-7
+      %h3.page-title
+        %span.page-title-icon.bg-primary.text-white.mr-2
+          %i.fa.fa-file
+        Payment Gateway
+        %small
+          %i.fa.fa-arrow-right
+          New
+    .col-md-5.mt-2.mt-md-0.text-right
+      %a.btn.btn-sm.btn-success{ href: college_principals_college_payment_gateways_path(current_college.slug), data: {toggle: 'tooltip', placement: 'left'}, title: 'Payment Gateway' }
+        %i.fa.fa-reply
+  = render 'form', college_payment_gateway: @college_payment_gateway, url: college_principals_college_payment_gateways_path(current_college.slug)
