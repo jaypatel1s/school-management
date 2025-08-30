@@ -1,0 +1,48 @@
+.row
+  .col-md-12.grid-margin.stretch-card
+    .card
+      .card-body
+        = form_with model: [:school, college_payment_gateway], local: true, html: { multipart: true }, url: url, class: 'form' do |f|
+          .row
+            %div{ class: "col-md-6 form-group #{ error?(college_payment_gateway.errors, :name) }" }
+              = f.label :name, class: 'col-form-label' do
+                Select Gateway
+                %span
+                  %i.fa.fa-question-circle-o{ 'data-toggle': 'tooltip', title: 'Select Gateway' }
+              = f.select :name, options_for_select(select_gateway_options), { prompt: 'Select Gateway' }, class: 'form-control select2-field'
+              = print_error(college_payment_gateway.errors, :name)
+            %div{ class: "col-md-6 form-group #{ error?(college_payment_gateway.errors, :api_key) }" }
+              = f.label :api_key, class: 'col-form-label' do
+                Api Key
+                %span
+                  %i.fa.fa-question-circle-o{ 'data-toggle': 'tooltip', title: 'api_key' }
+              = f.text_field :api_key, class: 'form-control', autocomplete: 'off', placeholder: 'Api Key'
+              = print_error(college_payment_gateway.errors, :api_key)
+          .row
+            %div{ class: "col-md-6 form-group #{ error?(college_payment_gateway.errors, :api_secret) }" }
+              = f.label :api_secret, class: 'col-form-label' do
+                Api Secret
+                %span
+                  %i.fa.fa-question-circle-o{ 'data-toggle': 'tooltip', title: 'Api Secret' }
+              = f.text_field :api_secret, class: 'form-control', autocomplete: 'off', placeholder: 'Api Secret'
+              = print_error(college_payment_gateway.errors, :api_secret)
+            %div{ class: "col-md-6 form-group #{ error?(college_payment_gateway.errors, :merchant_id) }" }
+              = f.label :merchant_id, class: 'col-form-label' do
+                Merchant Id
+                %span
+                  %i.fa.fa-question-circle-o{ 'data-toggle': 'tooltip', title: 'Api Secret' }
+              = f.text_field :merchant_id, class: 'form-control', autocomplete: 'off', placeholder: 'Merchant Id'
+              = print_error(college_payment_gateway.errors, :merchant_id)
+          .row
+            %div{ class: "col-md-2 form-group #{ error?(college_payment_gateway.errors, :active) }" }
+              = f.label :current, class: 'col-form-label' do
+                Active
+                %span
+                  %i.fa.fa-question-circle-o{ 'data-toggle': 'tooltip', title: 'Active' }
+              %div
+                %label.switch
+                  = f.check_box :active, class: 'switch-slider', type: 'checkbox'
+                  %span.slider.round
+          .row.mt-4
+            .col-12
+              = f.submit "Submit", class: "btn btn-primary btn-block"

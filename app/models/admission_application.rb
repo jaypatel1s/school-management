@@ -8,8 +8,10 @@ class AdmissionApplication < ApplicationRecord
   belongs_to :college
   belongs_to :department
   belongs_to :course
+  belongs_to :fee_structure
 
   has_many :admission_documents, dependent: :destroy
+  has_many :document_types, through: :admission_documents
   has_many :admission_payments, dependent: :destroy
   has_many :admission_receipts, through: :admission_payments
 
@@ -56,5 +58,9 @@ class AdmissionApplication < ApplicationRecord
 
   def set_expiry
     self.expires_at ||= 24.hours.from_now
+  end
+
+  def update_documents_verified!
+    update(documents_verified: admission_documents.all?(&:verified))
   end
 end
