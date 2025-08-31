@@ -28,7 +28,10 @@ gem 'uglifier', '>= 1.3.0'
 gem 'webauthn'
 # Gemfile
 gem 'razorpay'
-
+# Gemfile
+gem 'bootstrap', '~> 5.3.0'
+gem 'sassc-rails', '~> 2.1'
+gem 'sprockets', '~> 4.2'
 # Background job adapter
 # gem 'importmap-rails'
 gem 'activerecord-import'
