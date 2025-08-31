@@ -29,6 +29,7 @@ module Payments
     private
 
     def create_razorpay_order
+      Razorpay.setup(gateway_config.api_key, gateway_config.api_secret)
       @order = Razorpay::Order.create(
         amount: (admission_application.fee_structure.total_amount * 100).to_i,
         currency: 'INR',
