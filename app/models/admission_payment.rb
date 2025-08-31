@@ -3,6 +3,7 @@
 # :nodoc:
 class AdmissionPayment < ApplicationRecord
   belongs_to :admission_application
+  belongs_to :semester
   has_many :admission_receipts, dependent: :destroy
 
   # Payment mode: online/offline
