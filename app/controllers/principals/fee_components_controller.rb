@@ -6,7 +6,7 @@ module Principals
     before_action :set_fee_component, only: %i[show edit update destroy]
 
     def index
-      @fee_components = current_college.fee_components.includes(:fee_structure)
+      @fee_components = current_college.fee_components.includes(:fee_structure, :semester).order(created_at: :desc)
     end
 
     def show; end
@@ -56,7 +56,7 @@ module Principals
 
     def fee_component_params
       params.require(:fee_component).permit(
-        :name, :description, :amount, :fee_structure_id
+        :name, :description, :amount, :fee_structure_id, :semester_id
       )
     end
   end

@@ -3,11 +3,12 @@
 module Admissions
   # :nodoc:
   class PaymentProcessor
-    attr_accessor :admission_application, :payment
+    attr_accessor :admission_application, :payment, :semester
 
     def initialize(admission_application, payment)
       @admission_application = admission_application
       @payment = payment
+      @semester = admission_application.college.semesters.find_by(name: 'SEM1')
     end
 
     def call
@@ -43,11 +44,15 @@ module Admissions
         student: @student,
         fee_structure: fee_structure,
         college: admission_application.college,
-        admission_application: admission_application
+        admission_application: admission_application, semester_id: semester&.id
       )
+      semester_amount = admission_application.fee_structure.fee_components
+                                             .where(semester_id: semester&.id)
+                                             .sum(:amount)
       amount_in_rupees = payment.amount / 100.0
       amount_paid = @student_fee.amount_paid.to_f + amount_in_rupees
-      @student_fee.update(amount_paid:, status: :paid, due_date: Time.zone.today + 30.days)
+      @student_fee.update(amount_paid:, status: :paid, due_date: Time.zone.today + 30.days,
+                          total_amount: semester_amount)
     end
 
     def record_fee_payment

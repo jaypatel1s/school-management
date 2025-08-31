@@ -3,13 +3,17 @@
 module Payments
   # :nodoc:
   class CreateGatewayOrder
-    attr_reader :admission_application, :gateway_name, :gateway_config, :order
+    attr_reader :admission_application, :gateway_name, :gateway_config, :order, :semester, :semester_amount
 
     def initialize(admission_application, gateway_name)
       @admission_application = admission_application
       @gateway_name = gateway_name
       @gateway_config = admission_application.college.college_payment_gateways.find_by(name: gateway_name,
                                                                                        active: true)
+      @semester = admission_application.college.semesters.find_by(name: 'SEM1')
+      @semester_amount =
+        @admission_application.fee_structure.fee_components.where(semester_id: semester&.id).sum(:amount)
+
       raise 'No active payment gateway found for this college' unless @gateway_config
     end
 
@@ -31,7 +35,7 @@ module Payments
     def create_razorpay_order
       Razorpay.setup(gateway_config.api_key, gateway_config.api_secret)
       @order = Razorpay::Order.create(
-        amount: (admission_application.fee_structure.total_amount * 100).to_i,
+        amount: (semester_amount * 100).to_i,
         currency: 'INR',
         receipt: "APP-#{admission_application.id}-#{SecureRandom.hex(4)}"
       )
@@ -41,7 +45,7 @@ module Payments
     def create_stripe_order
       Stripe.api_key = gateway_config.api_secret
       @order = Stripe::PaymentIntent.create(
-        amount: (admission_application.fee_structure.total_amount * 100).to_i,
+        amount: (semester_amount * 100).to_i,
         currency: 'inr',
         description: "Admission Payment for #{@admission_application.application_number}"
       )
@@ -71,10 +75,11 @@ module Payments
 
     def save_pending_payment(transaction_id)
       admission_application.admission_payments.create!(
-        amount: admission_application.fee_structure.total_amount,
+        amount: semester_amount,
         payment_mode: :online,
         payment_status: :pending,
-        transaction_id: transaction_id
+        transaction_id: transaction_id,
+        semester_id: semester.id
       )
     end
   end

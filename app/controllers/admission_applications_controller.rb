@@ -9,7 +9,8 @@ class AdmissionApplicationsController < ApplicationController
                          regenerate_token]
 
   def index
-    @admission_applications = @admission.admission_applications.includes(:course, :department, :college)
+    @admission_applications = @admission.admission_applications.includes(:course, :department, :college,
+                                                                         :admission_documents)
   end
 
   def show; end

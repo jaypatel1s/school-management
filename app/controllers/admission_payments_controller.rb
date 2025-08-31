@@ -13,8 +13,9 @@ class AdmissionPaymentsController < ApplicationController
   # app/controllers/admission_payments_controller.rb
   def new
     @payment = @admission_application.admission_payments.new
+    @semester = @admission_application.college.semesters.find_by(name: 'SEM1')
     @fee_structure = @admission_application.fee_structure
-    @fee_components = @fee_structure.fee_components
+    @semester_amount = @fee_structure.fee_components.where(semester_id: @semester.id).sum(:amount)
     @gateway = @admission_application.college.college_payment_gateways.find_by(active: true)
     # Token validation flags
     @validate_attempt = params[:validate].present?

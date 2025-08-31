@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2025_08_30_170853) do
+ActiveRecord::Schema[7.1].define(version: 2025_08_31_071318) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -136,7 +136,9 @@ ActiveRecord::Schema[7.1].define(version: 2025_08_30_170853) do
     t.datetime "updated_at", null: false
     t.decimal "amount", precision: 10, scale: 2, default: "0.0", null: false
     t.integer "payment_mode", default: 0, null: false
+    t.bigint "semester_id", null: false
     t.index ["admission_application_id"], name: "index_admission_payments_on_admission_application_id"
+    t.index ["semester_id"], name: "index_admission_payments_on_semester_id"
   end
 
   create_table "admission_receipts", force: :cascade do |t|
@@ -278,8 +280,10 @@ ActiveRecord::Schema[7.1].define(version: 2025_08_30_170853) do
     t.string "slug", limit: 255, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "semester_id", null: false
     t.index ["college_id"], name: "index_fee_components_on_college_id"
     t.index ["fee_structure_id"], name: "index_fee_components_on_fee_structure_id"
+    t.index ["semester_id"], name: "index_fee_components_on_semester_id"
   end
 
   create_table "fee_payments", force: :cascade do |t|
@@ -355,9 +359,12 @@ ActiveRecord::Schema[7.1].define(version: 2025_08_30_170853) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "admission_application_id", null: false
+    t.bigint "semester_id", null: false
+    t.decimal "total_amount", precision: 12, scale: 2, default: "0.0"
     t.index ["admission_application_id"], name: "index_student_fees_on_admission_application_id"
     t.index ["college_id"], name: "index_student_fees_on_college_id"
     t.index ["fee_structure_id"], name: "index_student_fees_on_fee_structure_id"
+    t.index ["semester_id"], name: "index_student_fees_on_semester_id"
     t.index ["student_id"], name: "index_student_fees_on_student_id"
   end
 
@@ -448,6 +455,7 @@ ActiveRecord::Schema[7.1].define(version: 2025_08_30_170853) do
   add_foreign_key "admission_documents", "admission_applications"
   add_foreign_key "admission_documents", "document_types"
   add_foreign_key "admission_payments", "admission_applications"
+  add_foreign_key "admission_payments", "semesters"
   add_foreign_key "admission_receipts", "admission_payments"
   add_foreign_key "admission_receipts", "student_fees"
   add_foreign_key "assignments", "colleges"
@@ -468,6 +476,7 @@ ActiveRecord::Schema[7.1].define(version: 2025_08_30_170853) do
   add_foreign_key "document_types", "colleges"
   add_foreign_key "fee_components", "colleges"
   add_foreign_key "fee_components", "fee_structures"
+  add_foreign_key "fee_components", "semesters"
   add_foreign_key "fee_payments", "colleges"
   add_foreign_key "fee_payments", "student_fees"
   add_foreign_key "fee_structures", "academic_years"
@@ -483,6 +492,7 @@ ActiveRecord::Schema[7.1].define(version: 2025_08_30_170853) do
   add_foreign_key "student_fees", "admission_applications"
   add_foreign_key "student_fees", "colleges"
   add_foreign_key "student_fees", "fee_structures"
+  add_foreign_key "student_fees", "semesters"
   add_foreign_key "student_fees", "students"
   add_foreign_key "students", "admission_applications"
   add_foreign_key "students", "colleges"

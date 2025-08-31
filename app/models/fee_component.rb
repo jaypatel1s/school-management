@@ -3,9 +3,10 @@
 # :nodoc:
 class FeeComponent < ApplicationRecord
   include Sluggable
-  
+
   belongs_to :college
   belongs_to :fee_structure
+  belongs_to :semester
 
   validates :name, :amount, presence: true
   validates :amount, numericality: { greater_than_or_equal_to: 0 }
