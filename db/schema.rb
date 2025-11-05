@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2025_08_31_071318) do
+ActiveRecord::Schema[7.1].define(version: 2025_11_05_154627) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -153,11 +153,11 @@ ActiveRecord::Schema[7.1].define(version: 2025_08_31_071318) do
   end
 
   create_table "admissions", force: :cascade do |t|
+    t.string "name", null: false
     t.string "status", default: "pending"
     t.string "slug", limit: 255, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "name"
     t.datetime "start_date"
     t.datetime "end_date"
     t.datetime "closed_at"
@@ -276,6 +276,41 @@ ActiveRecord::Schema[7.1].define(version: 2025_08_31_071318) do
     t.datetime "updated_at", null: false
     t.index ["college_id"], name: "index_document_types_on_college_id"
     t.index ["name", "college_id"], name: "index_document_types_on_name_and_college_id", unique: true
+  end
+
+  create_table "exam_results", force: :cascade do |t|
+    t.bigint "college_id", null: false
+    t.bigint "exam_id", null: false
+    t.bigint "student_id", null: false
+    t.integer "marks_obtained"
+    t.string "grade"
+    t.boolean "passed", default: false
+    t.bigint "evaluated_by_teacher_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["college_id"], name: "index_exam_results_on_college_id"
+    t.index ["evaluated_by_teacher_id"], name: "index_exam_results_on_evaluated_by_teacher_id"
+    t.index ["exam_id", "student_id"], name: "index_exam_results_on_exam_id_and_student_id", unique: true
+    t.index ["exam_id"], name: "index_exam_results_on_exam_id"
+    t.index ["student_id"], name: "index_exam_results_on_student_id"
+  end
+
+  create_table "exams", force: :cascade do |t|
+    t.bigint "college_id", null: false
+    t.bigint "academic_year_id", null: false
+    t.bigint "semester_id", null: false
+    t.bigint "course_id", null: false
+    t.string "name", null: false
+    t.datetime "scheduled_at", null: false
+    t.integer "max_marks", default: 100
+    t.integer "exam_type", default: 0
+    t.string "slug", limit: 255, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["academic_year_id"], name: "index_exams_on_academic_year_id"
+    t.index ["college_id"], name: "index_exams_on_college_id"
+    t.index ["course_id"], name: "index_exams_on_course_id"
+    t.index ["semester_id"], name: "index_exams_on_semester_id"
   end
 
   create_table "fee_components", force: :cascade do |t|
@@ -473,16 +508,23 @@ ActiveRecord::Schema[7.1].define(version: 2025_08_31_071318) do
   add_foreign_key "attendances", "departments"
   add_foreign_key "attendances", "sessions"
   add_foreign_key "attendances", "students"
+  add_foreign_key "college_payment_gateways", "colleges"
   add_foreign_key "course_semesters", "academic_years"
   add_foreign_key "course_semesters", "courses"
   add_foreign_key "course_semesters", "semesters"
-  add_foreign_key "college_payment_gateways", "colleges"
-  add_foreign_key "courses", "academic_years"
   add_foreign_key "courses", "colleges"
   add_foreign_key "courses", "departments"
   add_foreign_key "csv_files", "colleges"
   add_foreign_key "departments", "colleges"
   add_foreign_key "document_types", "colleges"
+  add_foreign_key "exam_results", "colleges"
+  add_foreign_key "exam_results", "exams"
+  add_foreign_key "exam_results", "students"
+  add_foreign_key "exam_results", "teachers", column: "evaluated_by_teacher_id"
+  add_foreign_key "exams", "academic_years"
+  add_foreign_key "exams", "colleges"
+  add_foreign_key "exams", "courses"
+  add_foreign_key "exams", "semesters"
   add_foreign_key "fee_components", "colleges"
   add_foreign_key "fee_components", "fee_structures"
   add_foreign_key "fee_components", "semesters"

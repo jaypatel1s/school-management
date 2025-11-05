@@ -72,6 +72,7 @@ resources :colleges, param: :slug do
     resources :admission_documents
     resources :document_types, only: %i[index edit new create update destroy]
     resources :college_payment_gateways, only: %i[index edit new create update destroy], param: :slug
+    resources :exams, param: :slug
   end
 
   namespace :teachers do
@@ -93,6 +94,9 @@ resources :colleges, param: :slug do
       end
     end
     resources :admissions, param: :slug
+    resources :exams, param: :slug do
+      resources :exam_results, param: :slug
+    end
   end
 
   namespace :students do

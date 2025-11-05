@@ -12,7 +12,8 @@ ROLE_PERMISSIONS = {
     semesters: %i[index new create edit update show destroy],
     admissions: %i[index show change_status],
     document_types: %i[index new create edit update destroy],
-    college_payment_gateways:  %i[index new create edit update destroy]
+    college_payment_gateways:  %i[index new create edit update destroy],
+    exams: %i[index show]
   },
   teacher: {
     dashboard: %i[index],
@@ -22,7 +23,10 @@ ROLE_PERMISSIONS = {
     csv_files: %i[index add_csv create_csv import_csv export_csv],
     sessions: %i[index new create edit update destroy show],
     attendances: %i[report],
-    assignments: %i[index new create edit update show destroy]
+    assignments: %i[index new create edit update show destroy],
+    admissions: %i[index show],
+    exams: %i[index new create edit update show destroy],
+    exam_results: %i[index new create edit update show destroy]
   },
   student: {
     dashboard: %i[index],
