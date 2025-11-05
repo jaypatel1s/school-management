@@ -153,11 +153,11 @@ ActiveRecord::Schema[7.1].define(version: 2025_08_31_071318) do
   end
 
   create_table "admissions", force: :cascade do |t|
-    t.string "name", null: false
     t.string "status", default: "pending"
     t.string "slug", limit: 255, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "name"
     t.datetime "start_date"
     t.datetime "end_date"
     t.datetime "closed_at"
@@ -221,6 +221,17 @@ ActiveRecord::Schema[7.1].define(version: 2025_08_31_071318) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "course_semesters", force: :cascade do |t|
+    t.bigint "course_id", null: false
+    t.bigint "academic_year_id", null: false
+    t.bigint "semester_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["academic_year_id"], name: "index_course_semesters_on_academic_year_id"
+    t.index ["course_id"], name: "index_course_semesters_on_course_id"
+    t.index ["semester_id"], name: "index_course_semesters_on_semester_id"
+  end
+
   create_table "courses", force: :cascade do |t|
     t.bigint "college_id", null: false
     t.bigint "department_id", null: false
@@ -230,13 +241,9 @@ ActiveRecord::Schema[7.1].define(version: 2025_08_31_071318) do
     t.string "slug", limit: 255, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "semester_id", null: false
-    t.bigint "academic_year_id", null: false
-    t.index ["academic_year_id"], name: "index_courses_on_academic_year_id"
     t.index ["college_id"], name: "index_courses_on_college_id"
     t.index ["department_id"], name: "index_courses_on_department_id"
     t.index ["name", "college_id"], name: "index_courses_on_name_and_college_id", unique: true
-    t.index ["semester_id"], name: "index_courses_on_semester_id"
   end
 
   create_table "csv_files", force: :cascade do |t|
@@ -466,11 +473,13 @@ ActiveRecord::Schema[7.1].define(version: 2025_08_31_071318) do
   add_foreign_key "attendances", "departments"
   add_foreign_key "attendances", "sessions"
   add_foreign_key "attendances", "students"
+  add_foreign_key "course_semesters", "academic_years"
+  add_foreign_key "course_semesters", "courses"
+  add_foreign_key "course_semesters", "semesters"
   add_foreign_key "college_payment_gateways", "colleges"
   add_foreign_key "courses", "academic_years"
   add_foreign_key "courses", "colleges"
   add_foreign_key "courses", "departments"
-  add_foreign_key "courses", "semesters"
   add_foreign_key "csv_files", "colleges"
   add_foreign_key "departments", "colleges"
   add_foreign_key "document_types", "colleges"
