@@ -7,9 +7,9 @@ module Principals
 
     def index
       @courses = if current_user.principal?
-                   current_college.courses.includes(:department, :semester, :academic_year)
+                   current_college.courses.includes(:department)
                  else
-                   current_user.courses.includes(:department, :semester, :academic_year)
+                   current_user.courses.includes(:department)
                  end
     end
 
@@ -17,12 +17,14 @@ module Principals
 
     def new
       @course = current_college.courses.new
+      @academic_years = current_college.academic_years
+      @semesters = current_college.semesters
     end
 
     def edit; end
 
     def create
-      @course = current_college.courses.new(courses_params)
+      @course = current_college.courses.new(course_params)
       if @course.save
         flash[:success] = 'Courses Created Successfully'
         redirect_to college_principals_courses_path(current_college.slug)
@@ -33,7 +35,7 @@ module Principals
     end
 
     def update
-      if @course.update(courses_params)
+      if @course.update(course_params)
         flash[:success] = 'Courses Updated Successfully.'
         redirect_to college_principals_courses_path(current_college.slug)
       else
@@ -58,8 +60,9 @@ module Principals
       redirect_to college_principals_courses_path(current_college.slug)
     end
 
-    def courses_params
-      params.require(:course).permit(:name, :department_id, :academic_year_id, :semester_id, :credits)
+    def course_params
+      params.require(:course).permit(:name, :department_id, :credits,
+                                     course_semesters_attributes: %i[id academic_year_id semester_id _destroy])
     end
   end
 end

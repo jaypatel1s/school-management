@@ -7,6 +7,7 @@
 //= require select2/select2.min
 //= require moment/moment.min
 //= require bootstrap/datetimepicker.min
+//= require bootstrap/bootstrap.bundle.min
 //= require daterangepicker/daterangepicker.min
 //= require daterangepicker/custom
 //= require notify/notify

@@ -12,7 +12,7 @@ class ApplicationController < ActionController::Base
                        elsif params[:session_slug] == current_user.college.slug
                          College.find_by(slug: params[:session_slug])
                        else
-                         College.first
+                         current_user.college
                        end
     return if @current_college.present?
 
