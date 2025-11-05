@@ -6,9 +6,9 @@ class StudentFee < ApplicationRecord
   belongs_to :student, optional: true
   belongs_to :fee_structure
   belongs_to :admission_application, optional: true
-
+  belongs_to :semester
   has_many :fee_payments, dependent: :destroy
-  has_one :admission_receipt, dependent: :destroy
+  has_many :admission_receipts, dependent: :destroy
 
   validates :due_date, presence: true
 

@@ -31,8 +31,8 @@
 
         = form_with url: public_admission_admission_application_admission_payments_path(public_admission_slug: @admission.slug, admission_application_slug: @admission_application.slug), model: @payment, local: true, id: 'payment-form' do |f|
           .mb-3
-            = f.label :amount, class: "form-label fw-semibold"
-            = f.number_field :amount, value: @fee_structure.total_amount, class: 'form-control rounded-3 shadow-sm', readonly: true
+            = f.label :semester_amount, class: "form-label fw-semibold"
+            = f.number_field :amount, value: @semester_amount, class: 'form-control rounded-3 shadow-sm', readonly: true
 
           = hidden_field_tag :gateway_name, @gateway&.name
           = button_tag "Pay Now", type: "button", id: "pay-button", class: "btn btn-success btn-sm rounded-pill mt-3 shadow"

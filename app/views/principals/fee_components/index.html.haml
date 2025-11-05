@@ -20,6 +20,7 @@
                 %thead
                   %tr.table-primary
                     %th Fee Structure
+                    %th Semester
                     %th Name
                     %th Amount
                     %th.text-right{ width: '10%','data-orderable': 'false' } Actions
@@ -27,6 +28,7 @@
                   - @fee_components.each do |fee_component|
                     %tr
                       %td= fee_component.fee_structure.name
+                      %td= fee_component.semester.name
                       %td= fee_component.name
                       %td= fee_component.amount
                       %td.text-right
