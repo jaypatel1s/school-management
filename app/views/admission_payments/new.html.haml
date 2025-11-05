@@ -1,0 +1,130 @@
+.content-wrapper
+  .card.shadow-lg.rounded-4.border-0
+    .card-body.p-4
+      %h4.fw-bold.text-primary.mb-4
+        Payment for Application #{@admission_application.application_number}
+
+      - if !@token_matched
+        %h5.text-secondary.mb-3 Validate your Application
+        = form_with url: new_public_admission_admission_application_admission_payment_path(public_admission_slug: @admission.slug, admission_application_slug: @admission_application.slug), method: :get, local: true do |f|
+          .row.mb-3
+            .col-md-6
+              = label_tag :application_number, 'Application Number', class: "form-label fw-semibold"
+              = text_field_tag :application_number, params[:application_number], class: 'form-control rounded-3 shadow-sm', required: true
+            .col-md-6
+              = label_tag :temporary_token, 'Temporary Token', class: "form-label fw-semibold"
+              = text_field_tag :temporary_token, params[:temporary_token], class: 'form-control rounded-3 shadow-sm', required: true
+            = hidden_field_tag :validate, true
+          .col-md-6.p-0
+            = f.submit 'Validate', class: 'btn btn-primary btn-sm'
+
+      - else
+        %h5.text-secondary.mb-3 Payment Summary
+
+        .d-flex.justify-content-between.align-items-center.bg-light.p-3.rounded-3.shadow-sm.mb-3
+          %span.fw-bold.fs-5.text-dark Total Fee:
+          %span.fs-5.text-success.fw-bold ₹#{@fee_structure.total_amount}
+
+          %button.btn.btn-outline-info.btn-sm.rounded-pill{ "data-bs-toggle" => "modal", "data-bs-target" => "#feeBreakdownModal" }
+            %i.fas.fa-eye.me-1
+            View Fee Breakdown
+
+        = form_with url: public_admission_admission_application_admission_payments_path(public_admission_slug: @admission.slug, admission_application_slug: @admission_application.slug), model: @payment, local: true, id: 'payment-form' do |f|
+          .mb-3
+            = f.label :semester_amount, class: "form-label fw-semibold"
+            = f.number_field :amount, value: @semester_amount, class: 'form-control rounded-3 shadow-sm', readonly: true
+
+          = hidden_field_tag :gateway_name, @gateway&.name
+          = button_tag "Pay Now", type: "button", id: "pay-button", class: "btn btn-success btn-sm rounded-pill mt-3 shadow"
+.modal.fade#feeBreakdownModal{ tabindex: "-1", role: "dialog", "aria-labelledby" => "feeBreakdownModalLabel", "aria-hidden" => "true" }
+  .modal-dialog.modal-md.modal-dialog-centered
+    .modal-content.rounded-4.shadow-lg.border-0.overflow-hidden
+      .modal-header.bg-gradient.bg-primary.text-white.px-4.py-3
+        %h5.modal-title.fw-bold#feeBreakdownModalLabel
+          %i.fas.fa-receipt.me-2
+          Detailed Fee Breakdown
+        %button.btn-close.btn-close-white{ type: "button", "data-bs-dismiss" => "modal", "aria-label" => "Close" }
+
+      .modal-body.p-0
+        %div{ style: "max-height: 400px; overflow-y: auto;" }
+          - @fee_structure.fee_components.each do |comp|
+            .d-flex.justify-content-between.align-items-center.p-3.border-bottom.hover-shadow-sm
+              .d-flex.align-items-center.gap-2
+                %i.fas.fa-dot-circle.text-primary
+                %span.fw-semibold= comp.name
+              %span.text-success.fw-bold.fs-6= number_to_currency(comp.amount, unit: "₹", precision: 2)
+
+      .modal-footer.bg-light.d-flex.justify-content-between.align-items-center
+        %h6.mb-0.fw-bold.text-dark
+          Total:
+          %span.text-success.fs-5.ms-2 ₹#{@fee_structure.total_amount}
+        %button.btn.btn-secondary.rounded-pill{ type: "button", "data-bs-dismiss" => "modal" }
+          Close
+- content_for :js_code do
+  :javascript
+    $(document).on("click", "#pay-button", function(e) {
+      e.preventDefault();
+
+      $.ajax({
+        url: "#{public_admission_admission_application_admission_payments_path(public_admission_slug: @admission.slug, admission_application_slug: @admission_application.slug)}",
+        method: "POST",
+        dataType: "json",
+        headers: {
+          "X-CSRF-Token": $('meta[name="csrf-token"]').attr("content")
+        },
+        data: $("#payment-form").serialize(),
+        success: function(data) {
+          if (data.gateway_name === "razorpay") {
+            var options = {
+              key: data.key,
+              amount: data.amount,
+              currency: "INR",
+              name: "Admission Payment",
+              order_id: data.order_id,
+              handler: function (response) {
+                verifyPayment(response, data.gateway_name);
+              }
+            };
+            var rzp = new Razorpay(options);
+            rzp.open();
+          } else if (data.gateway_name === "stripe") {
+            // Call Stripe checkout here
+            stripeRedirect(data);
+          } else if (data.gateway_name === "payu") {
+            payuRedirect(data);
+          } else if (data.gateway_name === "paytm") {
+            paytmRedirect(data);
+          }
+        },
+        error: function(xhr) {
+          alert("Error creating payment: " + xhr.responseJSON['error']);
+        }
+      });
+    });
+
+    function verifyPayment(response, gateway_name) {
+      $.ajax({
+        url: "#{verify_public_admission_admission_application_admission_payments_path(public_admission_slug: @admission.slug, admission_application_slug: @admission_application.slug)}",
+        method: "POST",
+        dataType: "json",
+        headers: {
+          "X-CSRF-Token": $('meta[name="csrf-token"]').attr("content")
+        },
+        data: {
+          gateway_name: gateway_name,
+          razorpay_payment_id: response.razorpay_payment_id,
+          razorpay_order_id: response.razorpay_order_id,
+          razorpay_signature: response.razorpay_signature
+        },
+        success: function(res) {
+          if (res.success) {
+            window.location.href = res.redirect_url;
+          } else {
+            alert("Payment verification failed: " + (res.error || "Unknown error"));
+          }
+        },
+        error: function(xhr) {
+          alert("Error verifying payment: " + xhr.responseJSON['error']);
+        }
+      });
+    }

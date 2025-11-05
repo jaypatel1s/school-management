@@ -10,10 +10,12 @@ gem 'rails', '~> 7.1.3', '>= 7.1.3.4'
 
 gem 'activeadmin'
 gem 'arctic_admin'
+gem 'bcrypt_pbkdf', '~> 1.0'
 gem 'bootsnap', require: false
 gem 'cocoon'
 gem 'country_select'
 gem 'devise'
+gem 'ed25519', '~> 1.2'
 gem 'haml'
 gem 'jquery-rails'
 gem 'pagy'
@@ -24,9 +26,12 @@ gem 'sass-rails', '>= 6'
 gem 'trix-rails', require: 'trix'
 gem 'uglifier', '>= 1.3.0'
 gem 'webauthn'
-gem 'ed25519', '~> 1.2'
-gem 'bcrypt_pbkdf', '~> 1.0'
-
+# Gemfile
+gem 'razorpay'
+# Gemfile
+gem 'bootstrap', '~> 5.3.0'
+gem 'sassc-rails', '~> 2.1'
+gem 'sprockets', '~> 4.2'
 # Background job adapter
 # gem 'importmap-rails'
 gem 'activerecord-import'
