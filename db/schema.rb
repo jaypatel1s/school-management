@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2025_11_05_154627) do
+ActiveRecord::Schema[7.1].define(version: 2025_11_06_103739) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -153,11 +153,11 @@ ActiveRecord::Schema[7.1].define(version: 2025_11_05_154627) do
   end
 
   create_table "admissions", force: :cascade do |t|
-    t.string "name", null: false
     t.string "status", default: "pending"
     t.string "slug", limit: 255, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "name"
     t.datetime "start_date"
     t.datetime "end_date"
     t.datetime "closed_at"
@@ -276,6 +276,17 @@ ActiveRecord::Schema[7.1].define(version: 2025_11_05_154627) do
     t.datetime "updated_at", null: false
     t.index ["college_id"], name: "index_document_types_on_college_id"
     t.index ["name", "college_id"], name: "index_document_types_on_name_and_college_id", unique: true
+  end
+
+  create_table "exam_attendances", force: :cascade do |t|
+    t.bigint "exam_id", null: false
+    t.bigint "student_id", null: false
+    t.integer "status", default: 0, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["exam_id", "student_id"], name: "index_exam_attendances_on_exam_id_and_student_id", unique: true
+    t.index ["exam_id"], name: "index_exam_attendances_on_exam_id"
+    t.index ["student_id"], name: "index_exam_attendances_on_student_id"
   end
 
   create_table "exam_results", force: :cascade do |t|
@@ -517,6 +528,8 @@ ActiveRecord::Schema[7.1].define(version: 2025_11_05_154627) do
   add_foreign_key "csv_files", "colleges"
   add_foreign_key "departments", "colleges"
   add_foreign_key "document_types", "colleges"
+  add_foreign_key "exam_attendances", "exams"
+  add_foreign_key "exam_attendances", "students"
   add_foreign_key "exam_results", "colleges"
   add_foreign_key "exam_results", "exams"
   add_foreign_key "exam_results", "students"
