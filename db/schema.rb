@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2025_11_06_103739) do
+ActiveRecord::Schema[7.1].define(version: 2025_11_07_144532) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -153,11 +153,11 @@ ActiveRecord::Schema[7.1].define(version: 2025_11_06_103739) do
   end
 
   create_table "admissions", force: :cascade do |t|
+    t.string "name", null: false
     t.string "status", default: "pending"
     t.string "slug", limit: 255, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "name"
     t.datetime "start_date"
     t.datetime "end_date"
     t.datetime "closed_at"
@@ -299,8 +299,10 @@ ActiveRecord::Schema[7.1].define(version: 2025_11_06_103739) do
     t.bigint "evaluated_by_teacher_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "exam_attendance_id"
     t.index ["college_id"], name: "index_exam_results_on_college_id"
     t.index ["evaluated_by_teacher_id"], name: "index_exam_results_on_evaluated_by_teacher_id"
+    t.index ["exam_attendance_id"], name: "index_exam_results_on_exam_attendance_id"
     t.index ["exam_id", "student_id"], name: "index_exam_results_on_exam_id_and_student_id", unique: true
     t.index ["exam_id"], name: "index_exam_results_on_exam_id"
     t.index ["student_id"], name: "index_exam_results_on_student_id"
@@ -531,6 +533,7 @@ ActiveRecord::Schema[7.1].define(version: 2025_11_06_103739) do
   add_foreign_key "exam_attendances", "exams"
   add_foreign_key "exam_attendances", "students"
   add_foreign_key "exam_results", "colleges"
+  add_foreign_key "exam_results", "exam_attendances"
   add_foreign_key "exam_results", "exams"
   add_foreign_key "exam_results", "students"
   add_foreign_key "exam_results", "teachers", column: "evaluated_by_teacher_id"

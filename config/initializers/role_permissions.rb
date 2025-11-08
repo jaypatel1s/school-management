@@ -26,6 +26,7 @@ ROLE_PERMISSIONS = {
     assignments: %i[index new create edit update show destroy],
     admissions: %i[index show],
     exams: %i[index new create edit update show destroy],
+    exam_attendances: %i[edit update],
     exam_results: %i[index new create edit update show destroy]
   },
   student: {

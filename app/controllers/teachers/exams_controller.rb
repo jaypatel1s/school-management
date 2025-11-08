@@ -54,7 +54,7 @@ module Teachers
     def destroy
       @exam.destroy
       flash[:success] = 'Exam was successfully deleted.'
-      redirect_to redirect_to college_teachers_exams_path
+      redirect_to college_teachers_exams_path
     end
 
     private

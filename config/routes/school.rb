@@ -95,7 +95,8 @@ resources :colleges, param: :slug do
     end
     resources :admissions, param: :slug
     resources :exams, param: :slug do
-      resources :exam_results, param: :slug
+      resource :exam_attendance, only: %i[edit update]
+      resources :exam_results, only: %i[new create edit update index]
     end
   end
 

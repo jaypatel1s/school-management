@@ -17,13 +17,13 @@ class Exam < ApplicationRecord
 
   enum :exam_type, { midterm: 0, final: 1, quiz: 2, assignment_test: 3 }
   scope :upcoming, -> { where('scheduled_at > ?', Time.current).order(scheduled_at: :asc) }
-
+  accepts_nested_attributes_for :exam_attendances
   after_create :generate_default_attendance_and_csv
 
   def generate_default_attendance_and_csv
     student_ids = Student.joins(:student_courses)
-                     .where(student_courses: { course_id: course_id })
-                     .pluck(:id)
+                         .where(student_courses: { course_id: course_id })
+                         .pluck(:id)
 
     records = student_ids.map do |student_id|
       {
@@ -55,7 +55,7 @@ class Exam < ApplicationRecord
       end
     end
 
-    file_path = Rails.root.join("tmp", "exam_#{id}_attendance.csv")
+    file_path = Rails.root.join('tmp', "exam_#{id}_attendance.csv")
     File.write(file_path, csv_data)
 
     Teacher.where(course_id: course_id).each do |teacher|
