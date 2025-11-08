@@ -7,6 +7,7 @@ class AcademicYear < ApplicationRecord
   belongs_to :college
   has_many :course_semesters, dependent: :destroy
   has_many :fee_structures, dependent: :nullify
+  has_many :exams, dependent: :nullify
   validates :name, :start_date, :end_date, presence: true
   validates :name, uniqueness: { scope: :college_id }
 

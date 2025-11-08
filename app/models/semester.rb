@@ -9,4 +9,5 @@ class Semester < ApplicationRecord
   has_many :fee_components, dependent: :destroy
   has_many :admission_payments, dependent: :destroy
   has_many :student_fees, dependent: :destroy
+  has_many :exams, dependent: :nullify
 end

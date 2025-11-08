@@ -22,6 +22,7 @@ class College < ApplicationRecord
   has_many :admission_applications, dependent: :destroy
   has_many :document_types, dependent: :destroy
   has_many :college_payment_gateways, dependent: :destroy
+  has_many :exams, dependent: :destroy
 
   def active_payment_gateway
     college_payment_gateways.find_by(active: true)

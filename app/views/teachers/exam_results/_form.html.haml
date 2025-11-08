@@ -1,0 +1,38 @@
+
+.row
+  .col-md-12.grid-margin.stretch-card
+    .card
+      .card-body
+        / This form submits an array of 'results' to the create action
+        = form_with url: url, method: :post, local: true, class: 'form' do |f|
+
+          %h4.card-title
+            Entering Scores for Present Students
+          %p.card-description
+            Only students marked 'present' during attendance are listed. Max Marks:
+            %strong= @exam.max_marks
+
+          .table-responsive
+            %table.table.table.table-hover
+              %thead
+                %tr.table-primary
+                  %th Student Name
+                  %th Roll Number
+                  %th{width: '20%'} Score Obtained
+              %tbody
+                - puts "========+#{@results.inspect}"
+                - @results.each do |result|
+                  = fields_for "results[]", result do |result_form|
+                    = result_form.hidden_field :exam_attendance_id
+                    %tr
+                      %td
+                        = result.student.user.name
+                        = result_form.hidden_field :student_id
+                      %td
+                        = result.student.roll_number
+                      %td
+                        = result_form.number_field :marks_obtained, class: 'form-control', placeholder: "Max: #{@exam.max_marks}", min: 0, max: @exam.max_marks
+
+          .row.mt-4
+            .col-12
+              = f.submit "Save All Scores", class: "btn btn-primary btn-block"

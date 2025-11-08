@@ -1,0 +1,44 @@
+.row
+	.col-md-12.grid-margin.stretch-card
+		.card
+			.card-body
+				= form_with model: [:college, @exam], url: college_teachers_exam_exam_attendance_path(current_college.slug, @exam.slug), method: :patch, local: true, class: 'form' do |f|
+					%h4.card-title
+						Course:
+						%strong= @exam.course.name
+					%p.card-description
+						Update the status for any students who were absent. All students are marked 'present' by default.
+
+					.table-responsive
+						%table.table.table-hover
+							%thead
+								%tr.table-primary
+									%th Student Name
+									%th Roll Number
+									%th Status (Present)
+									%th Status (Absent)
+							%tbody
+								= f.fields_for :exam_attendances do |attendance_form|
+									%tr
+										%td
+											= attendance_form.object.student.user.name
+											= attendance_form.hidden_field :id
+										%td
+											= attendance_form.object.student.roll_number
+
+										%td
+											.form-check
+												%label.form-check-label
+													= attendance_form.radio_button :status, 'present', class: 'form-check-input'
+													Present
+													%i.input-helper
+										%td
+											.form-check
+												%label.form-check-label
+													= attendance_form.radio_button :status, 'absent', class: 'form-check-input'
+													Absent
+													%i.input-helper
+
+					.row.mt-4
+						.col-12
+							= f.submit "Update Attendance", class: "btn btn-primary btn-block"

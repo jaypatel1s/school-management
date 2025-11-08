@@ -1,0 +1,15 @@
+.content-wrapper
+  .page-header.row
+    .col-md-7
+      %h3.page-title
+        %span.page-title-icon.bg-warning.text-white.mr-2
+          %i.fa.fa-user-times
+        Manage Attendance
+        %small
+          %i.fa.fa-arrow-right
+          = @exam.name
+    .col-md-5.mt-2.mt-md-0.text-right
+      %a.btn.btn-sm.btn-success{ href: college_teachers_exam_path(current_college.slug, @exam.slug), data: {toggle: 'tooltip', placement: 'left'}, title: 'Back to Exam Details' }
+        %i.fa.fa-reply
+  = render 'form', exam: @exam, url: college_teachers_exam_exam_attendance_path(current_college.slug, @exam.slug)
+

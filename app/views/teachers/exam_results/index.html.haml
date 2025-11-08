@@ -1,0 +1,66 @@
+.content-wrapper
+  .page-header.row
+    .col-md-7
+      %h3.page-title
+        %span.page-title-icon.bg-primary.text-white.mr-2
+          %i.fa.fa-pencil-square-o
+        Enter Scores
+        %small
+          %i.fa.fa-arrow-right
+          = @exam.name
+    .col-md-5.mt-2.mt-md-0.text-right
+      %a.btn.btn-sm.btn-primary.mr-2{ href: new_college_teachers_exam_exam_result_path(current_college.slug, @exam.slug), data: {toggle: 'tooltip', placement: 'left'}, title: 'Enter New Scores' }
+        %i.fa.fa-plus
+        Enter New Scores
+      %a.btn.btn-sm.btn-success{ href: college_teachers_exam_path(current_college.slug, @exam.slug), data: {toggle: 'tooltip', placement: 'left'}, title: 'Back to Exam Details' }
+        %i.fa.fa-reply
+
+  .row
+    .col-12.grid-margin
+      .card
+        .card-body
+          %h4.card-title
+            Student List for:
+            %strong= @exam.course.name
+          %p.card-description
+            View recorded scores or use the 'Enter New Scores' button to record marks for all 'Present' students who have not been scored.
+
+          .table-responsive
+            %table.table.table-hover
+              %thead
+                %tr.table-primary
+                  %th Student Name
+                  %th Roll Number
+                  %th Max Marks
+                  %th Score Obtained
+                  %th Grade
+                  %th Status
+
+                  %th.text-right{ width: '10%' } Actions
+              %tbody
+                - if @students.present?
+                  - @students.each do |student|
+                    - result = @existing_results[student.id]
+                    %tr
+                      %td= student.user.name
+                      %td= student.roll_number
+                      %td= @exam.max_marks
+
+                      - if result
+                        %td
+                          %strong= result.marks_obtained
+                        %td
+                          = result.grade
+                        %td
+                          - if result.passed?
+                            %span.badge.badge-success Passed
+                          - else
+                            %span.badge.badge-danger Failed
+                        %td.text-right
+                          = link_to raw("<i class='fa fa-pencil-square-o'></i>"), edit_college_teachers_exam_exam_result_path(current_college.slug, @exam.slug, result.id), { class: 'btn-sm btn-warning px-2 py-1', 'data-toggle': 'tooltip', title: 'Edit Score' }
+
+                - else
+                  %tr
+                    %td{colspan: 7}
+                      %center
+                        %h6 No students are enrolled in this course.

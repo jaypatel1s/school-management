@@ -1,0 +1,58 @@
+.content-wrapper
+  .page-header.row
+    .col-md-9
+      %h3.page-title
+        %span.page-title-icon.bg-primary.text-white.mr-2
+          %i.fa.fa-calendar-check-o
+        = @exam.name
+        %small
+          %i.fa.fa-arrow-right
+          Details
+    .col-md-3.mt-2.mt-md-0.text-right
+      / REVERTED: Restored 'college_' prefix to the route helper
+      %a.btn.btn-sm.btn-success{ href: college_teachers_exams_path(current_college.slug), data: {toggle: 'tooltip', placement: 'left'}, title: 'Back to All Exams' }
+        %i.fa.fa-reply
+
+  .row
+    .col-12.grid-margin
+      .card
+        .card-body
+          %h4.card-title= @exam.name
+          %p.card-description
+            Scheduled for:
+            %strong= @exam.scheduled_at.strftime('%A, %B %d, %Y at %I:%M %p')
+
+          / --- Exam Details ---
+          .row
+            .col-md-4
+              %strong Course:
+              %p= @exam.course.name
+            .col-md-4
+              %strong Max Marks:
+              %p= @exam.max_marks
+            .col-md-4
+              %strong Exam Type:
+              %p= @exam.exam_type.titleize
+
+          %hr
+
+          %h4.card-title Actions
+          .row
+            .col-md-6
+              / FIXED: Added .h-100 to make card fill height
+              .card.bg-light.h-100
+                / FIXED: Added .d-flex.flex-column to card-body
+                .card-body.d-flex.flex-column
+                  %h5 1. Manage Attendance
+                  %p.mb-3
+                    Your exam automatically marked all students as 'present'. Click here to update the list and mark any absentees.
+                  = link_to raw("<i class='fa fa-user-times'></i> Manage Attendance"), edit_college_teachers_exam_exam_attendance_path(current_college.slug, exam_slug: @exam.slug), { class: 'btn btn-warning btn-block mt-auto' }
+
+            .col-md-6
+              / FIXED: Added .h-100
+              .card.bg-light.h-100
+                .card-body.d-flex.flex-column
+                  %h5 2. Enter Scores
+                  %p.mb-3
+                    After managing attendance, click here to enter scores for all students marked as 'present'.
+                  = link_to raw("<i class='fa fa-pencil-square-o'></i> Enter Scores"), new_college_teachers_exam_exam_result_path(current_college.slug, exam_slug: @exam.slug), { class: 'btn btn-primary btn-block mt-auto' }
