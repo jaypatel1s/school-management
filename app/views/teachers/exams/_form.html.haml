@@ -1,0 +1,54 @@
+.row
+  .col-md-12.grid-margin.stretch-card
+    .card
+      .card-body
+        = form_with model: [:teachers, exam], local: true, html: { multipart: true }, url: url, class: 'form' do |f|
+          .row
+            %div{ class: "col-md-4 form-group #{ error?(exam.errors, :name) }" }
+              = f.label :name, class: 'col-form-label' do
+                Exam Title
+                %span
+                  %i.fa.fa-question-circle-o{ 'data-toggle': 'tooltip', title: 'e.g., Mid-Term Assessment' }
+              = f.text_field :name, class: 'form-control', autocomplete: 'off', placeholder: 'Exam Title'
+              = print_error(exam.errors, :name)
+
+            %div{ class: "col-md-4 form-group #{ error?(exam.errors, :scheduled_at) }" }
+              = f.label :scheduled_at, class: 'col-form-label' do
+                Date & Time
+                %span
+                  %i.fa.fa-question-circle-o{ 'data-toggle': 'tooltip', title: 'The date and time the exam will take place.' }
+              = f.datetime_field :scheduled_at, class: 'form-control'
+              = print_error(exam.errors, :scheduled_at)
+
+            %div{ class: "col-md-4 form-group #{ error?(exam.errors, :max_marks) }" }
+              = f.label :max_marks, class: 'col-form-label' do
+                Maximum Marks
+                %span
+                  %i.fa.fa-question-circle-o{ 'data-toggle': 'tooltip', title: 'Total marks this exam is worth (e.g., 100)' }
+              = f.number_field :max_marks, class: 'form-control', autocomplete: 'off', placeholder: '100', min: 1
+              = print_error(exam.errors, :max_marks)
+
+            %div{ class: "col-md-4 form-group #{ error?(exam.errors, :academic_year_id) }" }
+              = f.label :academic_year_id, class: 'col-form-label' do
+                Academic Year
+              = f.select :academic_year_id, options_for_select(select_academic_years), { prompt: 'Select Year' }, { class: 'form-control' }
+              = print_error(exam.errors, :academic_year_id)
+
+            %div{ class: "col-md-4 form-group #{ error?(exam.errors, :semester_id) }" }
+              = f.label :semester_id, class: 'col-form-label' do
+                Semester
+              = f.select :semester_id, options_for_select(select_semesters), { prompt: 'Select Semester' }, { class: 'form-control' }
+              = print_error(exam.errors, :semester_id)
+
+          .row
+            %div{ class: "col-md-4 form-group #{ error?(exam.errors, :exam_type) }" }
+              = f.label :exam_type, class: 'col-form-label' do
+                Exam Type
+                %span
+                  %i.fa.fa-question-circle-o{ 'data-toggle': 'tooltip', title: 'Midterm, Final, Quiz, etc.' }
+              = f.select :exam_type, Exam.exam_types.keys.map { |k| [k.titleize, k] }, { prompt: 'Select Type' }, { class: 'form-control' }
+              = print_error(exam.errors, :exam_type)
+
+          .row.mt-4
+            .col-12
+              = f.submit "Schedule Exam", class: "btn btn-primary btn-block"

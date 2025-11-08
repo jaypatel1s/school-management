@@ -1,0 +1,39 @@
+.content-wrapper
+  .page-header.row
+    .col-md-7
+      %h3.page-title
+        %span.page-title-icon.bg-warning.text-white.mr-2
+          %i.fa.fa-pencil-square-o
+        Update Score
+        %small
+          %i.fa.fa-arrow-right
+          = @exam_result.student.user.name
+    .col-md-5.mt-2.mt-md-0.text-right
+      %a.btn.btn-sm.btn-success{ href: college_teachers_exam_exam_results_path(current_college.slug, @exam.slug), data: {toggle: 'tooltip', placement: 'left'}, title: 'Back to Results List' }
+        %i.fa.fa-reply
+
+  .row
+    .col-md-12.grid-margin.stretch-card
+      .card
+        .card-body
+          / Standard form_with for a single resource
+          = form_with model: @exam_result, url: college_teachers_exam_exam_result_path(current_college.slug, @exam.slug, @exam_result.id), method: :patch, local: true, class: 'form' do |f|
+
+            %h4.card-title
+              Student:
+              %strong= @exam_result.student.user.name
+            %p.card-description
+              Roll Number:
+              %strong= @exam_result.student.roll_number
+
+            .row
+              %div{ class: "col-md-4 form-group" }
+                = f.label :marks_obtained, class: 'col-form-label' do
+                  Score Obtained (Max: #{@exam.max_marks})
+                = f.number_field :marks_obtained, class: 'form-control', autocomplete: 'off', min: 0, max: @exam.max_marks
+                / Add error printing if you have it: = print_error(@exam_result.errors, :marks_obtained)
+
+
+            .row.mt-4
+              .col-1G2
+                = f.submit "Update Score", class: "btn btn-primary btn-block"

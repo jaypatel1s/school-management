@@ -12,6 +12,7 @@ class Course < ApplicationRecord
   has_one :teacher, dependent: :destroy
   has_many :sessions, dependent: :destroy
   has_many :assignments, dependent: :destroy
+  has_many :exams, dependent: :nullify
 
   accepts_nested_attributes_for :course_semesters, allow_destroy: true, reject_if: :all_blank
 
