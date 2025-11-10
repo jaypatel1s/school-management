@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2025_11_07_144532) do
+ActiveRecord::Schema[7.1].define(version: 2025_11_10_063434) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -153,11 +153,11 @@ ActiveRecord::Schema[7.1].define(version: 2025_11_07_144532) do
   end
 
   create_table "admissions", force: :cascade do |t|
-    t.string "name", null: false
     t.string "status", default: "pending"
     t.string "slug", limit: 255, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "name"
     t.datetime "start_date"
     t.datetime "end_date"
     t.datetime "closed_at"
@@ -191,6 +191,32 @@ ActiveRecord::Schema[7.1].define(version: 2025_11_07_144532) do
     t.index ["department_id"], name: "index_attendances_on_department_id"
     t.index ["session_id"], name: "index_attendances_on_session_id"
     t.index ["student_id"], name: "index_attendances_on_student_id"
+  end
+
+  create_table "book_issues", force: :cascade do |t|
+    t.bigint "college_id", null: false
+    t.bigint "student_id", null: false
+    t.bigint "book_id", null: false
+    t.date "issue_date"
+    t.date "due_date"
+    t.date "return_date"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["book_id"], name: "index_book_issues_on_book_id"
+    t.index ["college_id"], name: "index_book_issues_on_college_id"
+    t.index ["student_id"], name: "index_book_issues_on_student_id"
+  end
+
+  create_table "books", force: :cascade do |t|
+    t.bigint "college_id", null: false
+    t.string "title"
+    t.string "author"
+    t.string "isbn"
+    t.integer "total_copies"
+    t.integer "available_copies"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["college_id"], name: "index_books_on_college_id"
   end
 
   create_table "college_payment_gateways", force: :cascade do |t|
@@ -370,6 +396,20 @@ ActiveRecord::Schema[7.1].define(version: 2025_11_07_144532) do
     t.index ["department_id"], name: "index_fee_structures_on_department_id"
   end
 
+  create_table "fines", force: :cascade do |t|
+    t.bigint "college_id", null: false
+    t.bigint "student_id", null: false
+    t.bigint "book_issue_id", null: false
+    t.decimal "amount", precision: 8, scale: 2, default: "0.0"
+    t.string "reason"
+    t.boolean "paid"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["book_issue_id"], name: "index_fines_on_book_issue_id"
+    t.index ["college_id"], name: "index_fines_on_college_id"
+    t.index ["student_id"], name: "index_fines_on_student_id"
+  end
+
   create_table "semesters", force: :cascade do |t|
     t.bigint "college_id", null: false
     t.string "name"
@@ -521,6 +561,10 @@ ActiveRecord::Schema[7.1].define(version: 2025_11_07_144532) do
   add_foreign_key "attendances", "departments"
   add_foreign_key "attendances", "sessions"
   add_foreign_key "attendances", "students"
+  add_foreign_key "book_issues", "books"
+  add_foreign_key "book_issues", "colleges"
+  add_foreign_key "book_issues", "students"
+  add_foreign_key "books", "colleges"
   add_foreign_key "college_payment_gateways", "colleges"
   add_foreign_key "course_semesters", "academic_years"
   add_foreign_key "course_semesters", "courses"
@@ -549,6 +593,9 @@ ActiveRecord::Schema[7.1].define(version: 2025_11_07_144532) do
   add_foreign_key "fee_structures", "academic_years"
   add_foreign_key "fee_structures", "colleges"
   add_foreign_key "fee_structures", "departments"
+  add_foreign_key "fines", "book_issues"
+  add_foreign_key "fines", "colleges"
+  add_foreign_key "fines", "students"
   add_foreign_key "semesters", "colleges"
   add_foreign_key "sessions", "colleges"
   add_foreign_key "sessions", "courses"
