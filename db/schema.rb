@@ -209,11 +209,12 @@ ActiveRecord::Schema[7.1].define(version: 2025_11_10_063434) do
 
   create_table "books", force: :cascade do |t|
     t.bigint "college_id", null: false
-    t.string "title"
+    t.string "name"
     t.string "author"
     t.string "isbn"
     t.integer "total_copies"
     t.integer "available_copies"
+    t.string "slug", limit: 255, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["college_id"], name: "index_books_on_college_id"

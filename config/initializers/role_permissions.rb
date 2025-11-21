@@ -12,7 +12,7 @@ ROLE_PERMISSIONS = {
     semesters: %i[index new create edit update show destroy],
     admissions: %i[index show change_status],
     document_types: %i[index new create edit update destroy],
-    college_payment_gateways:  %i[index new create edit update destroy],
+    college_payment_gateways: %i[index new create edit update destroy],
     exams: %i[index show]
   },
   teacher: {
@@ -27,7 +27,9 @@ ROLE_PERMISSIONS = {
     admissions: %i[index show],
     exams: %i[index new create edit update show destroy],
     exam_attendances: %i[edit update],
-    exam_results: %i[index new create edit update show destroy]
+    exam_results: %i[index new create edit update show destroy],
+    books: %i[index new create edit update destroy],
+    book_issues: %i[index new create edit update destroy]
   },
   student: {
     dashboard: %i[index],

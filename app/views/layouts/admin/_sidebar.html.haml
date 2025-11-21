@@ -15,12 +15,12 @@
           %span.menu-title Dashboard
 
     - if current_user.profile_setup?
-      - resources = %i[users departments courses sessions academic_years fee_structures fee_components semesters admissions document_types college_payment_gateways exams]
+      - resources = %i[users departments courses sessions academic_years fee_structures fee_components semesters admissions document_types college_payment_gateways exams books]
       - resources.each do |resource|
         - if can_access?(resource, :index)
           %li.nav-item{ class: menu_active_class(resource.to_s) }
             %a.nav-link{ href: path_for(resource) }
-              - icons = { users: 'fa-users', departments: 'fa-gear', courses: 'fa-file', sessions: 'fa-calendar',  academic_years: 'fa-graduation-cap',  fee_structures: 'fa-folder', fee_components: 'fa-money', semesters: 'fa-book', admissions: 'fa-file-text-o',  document_types: 'fa-file-pdf-o',
+              - icons = { users: 'fa-users', departments: 'fa-gear', courses: 'fa-file', sessions: 'fa-calendar',  academic_years: 'fa-graduation-cap',  fee_structures: 'fa-folder', fee_components: 'fa-money', semesters: 'fa-book', admissions: 'fa-file-text-o',  document_types: 'fa-file-pdf-o', books: 'fa-graduation-cap',
                          college_payment_gateways: 'fa-money', exams: 'fa-gear' }
               %i.fa{ class: "fa #{icons[resource]} menu-icon" }
               %span.menu-title= resource.to_s.titleize

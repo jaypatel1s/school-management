@@ -1,9 +1,11 @@
 class Book < ApplicationRecord
+  include Sluggable
+
   belongs_to :college
   has_many :book_issues, dependent: :destroy
   has_many :students, through: :book_issues
 
-  validates :title, :author, presence: true
+  validates :name, :author, presence: true
   validates :total_copies, numericality: { greater_than_or_equal_to: 0 }
 
   before_create :set_available_copies
@@ -26,8 +28,6 @@ class Book < ApplicationRecord
       book_issue
     end
   end
-
-  private
 
   def set_available_copies
     self.available_copies ||= total_copies
