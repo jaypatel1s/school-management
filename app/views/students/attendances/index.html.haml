@@ -1,0 +1,28 @@
+.main-content-container.overflow-hidden
+  .d-flex.justify-content-between.align-items-center.flex-wrap.gap-2.mb-4
+    %div
+      %h3.mb-0 Attendance for #{@session.name}
+      %small.text-muted #{@session.course&.name} - #{@session.date.strftime('%b %d, %Y')}
+    %div
+      = link_to 'Back to Session', college_students_session_path(current_college.slug, @session.slug), class: 'btn btn-secondary'
+
+.row
+  .col-md-12
+    .card.mb-4
+      .card-body
+        .table-responsive
+          %table.table
+            %thead
+              %tr
+                %th Status
+                %th Marked On
+                %th Actions
+            %tbody
+              - @attendances.each do |attendance|
+                %tr
+                  %td
+                    %span.badge{class: "badge-#{attendance.status == 'present' ? 'success' : 'danger'}"}
+                      = attendance.status.titleize
+                  %td= attendance.created_at.strftime('%b %d, %Y %H:%M')
+                  %td
+                    = link_to 'View Details', college_students_session_attendance_path(current_college.slug, @session.slug, attendance), class: 'btn btn-sm btn-primary'

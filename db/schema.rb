@@ -153,14 +153,30 @@ ActiveRecord::Schema[7.1].define(version: 2025_11_10_063434) do
   end
 
   create_table "admissions", force: :cascade do |t|
+    t.string "name", null: false
     t.string "status", default: "pending"
     t.string "slug", limit: 255, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "name"
     t.datetime "start_date"
     t.datetime "end_date"
     t.datetime "closed_at"
+  end
+
+  create_table "assignment_submissions", force: :cascade do |t|
+    t.bigint "assignment_id", null: false
+    t.bigint "student_id", null: false
+    t.text "comments"
+    t.decimal "grade", precision: 5, scale: 2
+    t.text "feedback"
+    t.datetime "submitted_at"
+    t.datetime "graded_at"
+    t.string "status", default: "submitted"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["assignment_id", "student_id"], name: "index_assignment_submissions_on_assignment_id_and_student_id", unique: true
+    t.index ["assignment_id"], name: "index_assignment_submissions_on_assignment_id"
+    t.index ["student_id"], name: "index_assignment_submissions_on_student_id"
   end
 
   create_table "assignments", force: :cascade do |t|
@@ -259,6 +275,16 @@ ActiveRecord::Schema[7.1].define(version: 2025_11_10_063434) do
     t.index ["semester_id"], name: "index_course_semesters_on_semester_id"
   end
 
+  create_table "course_teachers", force: :cascade do |t|
+    t.bigint "course_id", null: false
+    t.bigint "teacher_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["course_id", "teacher_id"], name: "index_course_teachers_on_course_id_and_teacher_id", unique: true
+    t.index ["course_id"], name: "index_course_teachers_on_course_id"
+    t.index ["teacher_id"], name: "index_course_teachers_on_teacher_id"
+  end
+
   create_table "courses", force: :cascade do |t|
     t.bigint "college_id", null: false
     t.bigint "department_id", null: false
@@ -333,6 +359,17 @@ ActiveRecord::Schema[7.1].define(version: 2025_11_10_063434) do
     t.index ["exam_id", "student_id"], name: "index_exam_results_on_exam_id_and_student_id", unique: true
     t.index ["exam_id"], name: "index_exam_results_on_exam_id"
     t.index ["student_id"], name: "index_exam_results_on_student_id"
+  end
+
+  create_table "exam_teachers", force: :cascade do |t|
+    t.bigint "exam_id", null: false
+    t.bigint "teacher_id", null: false
+    t.string "role", default: "invigilator"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["exam_id", "teacher_id"], name: "index_exam_teachers_on_exam_id_and_teacher_id", unique: true
+    t.index ["exam_id"], name: "index_exam_teachers_on_exam_id"
+    t.index ["teacher_id"], name: "index_exam_teachers_on_teacher_id"
   end
 
   create_table "exams", force: :cascade do |t|
@@ -554,6 +591,8 @@ ActiveRecord::Schema[7.1].define(version: 2025_11_10_063434) do
   add_foreign_key "admission_payments", "semesters"
   add_foreign_key "admission_receipts", "admission_payments"
   add_foreign_key "admission_receipts", "student_fees"
+  add_foreign_key "assignment_submissions", "assignments"
+  add_foreign_key "assignment_submissions", "students"
   add_foreign_key "assignments", "colleges"
   add_foreign_key "assignments", "courses"
   add_foreign_key "assignments", "departments"
@@ -570,6 +609,8 @@ ActiveRecord::Schema[7.1].define(version: 2025_11_10_063434) do
   add_foreign_key "course_semesters", "academic_years"
   add_foreign_key "course_semesters", "courses"
   add_foreign_key "course_semesters", "semesters"
+  add_foreign_key "course_teachers", "courses"
+  add_foreign_key "course_teachers", "teachers"
   add_foreign_key "courses", "colleges"
   add_foreign_key "courses", "departments"
   add_foreign_key "csv_files", "colleges"
@@ -582,6 +623,8 @@ ActiveRecord::Schema[7.1].define(version: 2025_11_10_063434) do
   add_foreign_key "exam_results", "exams"
   add_foreign_key "exam_results", "students"
   add_foreign_key "exam_results", "teachers", column: "evaluated_by_teacher_id"
+  add_foreign_key "exam_teachers", "exams"
+  add_foreign_key "exam_teachers", "teachers"
   add_foreign_key "exams", "academic_years"
   add_foreign_key "exams", "colleges"
   add_foreign_key "exams", "courses"

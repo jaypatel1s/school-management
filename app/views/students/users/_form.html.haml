@@ -1,0 +1,23 @@
+= form_with model: [:students, user], local: true, url: url, method: user.new_record? ? :post : :patch, class: 'form' do |f|
+  .row
+    .col-md-6
+      .form-group
+        = f.label :name, class: 'form-label'
+        = f.text_field :name, class: 'form-control', required: true
+    .col-md-6
+      .form-group
+        = f.label :email, class: 'form-label'
+        = f.email_field :email, class: 'form-control', required: true
+  .row
+    .col-md-6
+      .form-group
+        = f.label :phone, class: 'form-label'
+        = f.telephone_field :phone, class: 'form-control'
+    .col-md-6
+      .form-group
+        %label.form-label College
+        %input.form-control{value: user&.student&.college&.name || current_college.name, disabled: true}
+  .row.mt-4
+    .col-md-12
+      = f.submit user.new_record? ? 'Create Profile' : 'Update Profile', class: 'btn btn-primary'
+      = link_to 'Cancel', user.new_record? ? college_students_dashboard_path(current_college.slug) : college_students_user_path(current_college.slug, user.slug), class: 'btn btn-secondary ml-2'

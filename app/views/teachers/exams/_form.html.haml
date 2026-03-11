@@ -40,6 +40,12 @@
               = f.select :semester_id, options_for_select(select_semesters), { prompt: 'Select Semester' }, { class: 'form-control' }
               = print_error(exam.errors, :semester_id)
 
+            %div{ class: "col-md-4 form-group #{ error?(exam.errors, :course_id) }" }
+              = f.label :course_id, class: 'col-form-label' do
+                Course
+              = f.select :course_id, options_for_select(@courses.map { |c| [c.name, c.id] }, f.object.course_id), { prompt: 'Select Course' }, { class: 'form-control' }
+              = print_error(exam.errors, :course_id)
+
           .row
             %div{ class: "col-md-4 form-group #{ error?(exam.errors, :exam_type) }" }
               = f.label :exam_type, class: 'col-form-label' do

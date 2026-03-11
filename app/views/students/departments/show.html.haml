@@ -1,0 +1,38 @@
+.main-content-container.overflow-hidden
+  .d-flex.justify-content-between.align-items-center.flex-wrap.gap-2.mb-4
+    %div
+      %h3.mb-0= @department.name
+    %div
+      %a.ps-0.border-0.bg-transparent.lh-1.position-relative.top-2{ href: college_students_departments_path(current_college.slug), 'data-bs-html': 'true', 'data-bs-offset': '0,4', 'data-bs-original-title': '<span>Back</span>', 'data-bs-placement': 'bottom', 'data-bs-toggle': 'tooltip', type: 'button' }
+        %i.material-symbols-outlined.fs-16.text-body arrow_back
+
+.row
+  .col-md-12
+    .card.mb-4
+      .card-body
+        .row
+          .col-md-6
+            %table.table.table-borderless
+              %tr
+                %td
+                  %strong College:
+                %td= @department.college.name
+              %tr
+                %td
+                  %strong Total Courses:
+                %td= @department.courses.count
+              %tr
+                %td
+                  %strong Total Teachers:
+                %td= @department.teachers.count
+          .col-md-6
+            %h5 Courses in this Department
+            %ul.list-group
+              - @department.courses.each do |course|
+                %li.list-group-item.d-flex.justify-content-between.align-items-center
+                  = course.name
+                  = link_to 'View', college_students_course_path(current_college.slug, course.slug), class: 'btn btn-sm btn-outline-primary'
+
+.row
+  .col-md-12
+    = link_to 'Back to Departments', college_students_departments_path(current_college.slug), class: 'btn btn-secondary'

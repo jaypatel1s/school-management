@@ -7,6 +7,8 @@ class Exam < ApplicationRecord
   belongs_to :academic_year
   belongs_to :semester
   belongs_to :course
+  has_many :exam_teachers, dependent: :destroy
+  has_many :assigned_teachers, through: :exam_teachers, source: :teacher
   has_many :exam_attendances, dependent: :destroy
   has_many :attending_students, through: :exam_attendances, source: :student
   has_many :exam_results, dependent: :destroy
@@ -58,7 +60,9 @@ class Exam < ApplicationRecord
     file_path = Rails.root.join('tmp', "exam_#{id}_attendance.csv")
     File.write(file_path, csv_data)
 
-    Teacher.where(course_id: course_id).each do |teacher|
+    Teacher.joins(:exam_teachers)
+          .where(exam_teachers: { exam_id: id })
+          .each do |teacher|
       ExamMailer.attendance_csv(teacher, self, file_path.to_s).deliver_later
     end
   end

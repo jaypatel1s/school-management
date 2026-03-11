@@ -9,6 +9,7 @@ class Assignment < ApplicationRecord
   belongs_to :department
   belongs_to :college
   has_one_attached :file
+  has_many :assignment_submissions, dependent: :destroy
 
   validate :file_format
 

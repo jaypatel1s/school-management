@@ -6,6 +6,7 @@ class Attendance < ApplicationRecord
   belongs_to :department
   belongs_to :session
   belongs_to :student
+  has_one :teacher, through: :session
 
   enum :status, { present: 0, absent: 1, late: 2 }
   validates :status, presence: true

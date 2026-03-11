@@ -6,22 +6,25 @@ module Teachers
     before_action :set_session, only: %i[show edit update destroy]
 
     def index
-      @sessions = @profile.sessions
+      @sessions = @profile.sessions.includes(:course).order(date: :desc)
     end
 
     def show; end
 
     def new
       @session = @profile.sessions.new
+      @courses = @profile.courses
     end
 
-    def edit; end
+    def edit
+      @courses = @profile.courses
+    end
 
     def create
       @session = @profile.sessions.new(session_params)
       @session.college_id = @profile.college_id
       @session.department_id = @profile.department_id
-      @session.course_id = @profile.course_id
+      @session.teacher_id = @profile.id
       if @session.save
         flash[:success] = 'Session Created Successfully'
         redirect_to college_teachers_sessions_path(current_college.slug)
@@ -58,7 +61,7 @@ module Teachers
     end
 
     def session_params
-      params.require(:session).permit(:name, :date)
+      params.require(:session).permit(:name, :date, :course_id)
     end
   end
 end

@@ -116,6 +116,12 @@ resources :colleges, param: :slug do
         end
       end
     end
+    resources :fees, param: :slug
+    resources :receipts, only: [:index, :show] do
+      member do
+        get :download
+      end
+    end
   end
 
   resources :fees, param: :slug

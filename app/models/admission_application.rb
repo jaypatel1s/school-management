@@ -14,6 +14,8 @@ class AdmissionApplication < ApplicationRecord
   has_many :document_types, through: :admission_documents
   has_many :admission_payments, dependent: :destroy
   has_many :admission_receipts, through: :admission_payments
+  has_one :student, dependent: :destroy
+  has_many :student_fees, through: :student
 
   before_validation :generate_application_number, on: :create
   before_validation :generate_temporary_token, on: :create

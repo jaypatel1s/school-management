@@ -1,0 +1,33 @@
+.main-content-container.overflow-hidden
+  .d-flex.justify-content-between.align-items-center.flex-wrap.gap-2.mb-4
+    %h3.mb-0 Class Sessions
+    %div
+      %span.badge.bg-info #{@sessions.count} Sessions
+
+.row
+  .col-md-12
+    .card.mb-4
+      .card-body
+        .table-responsive
+          %table.table
+            %thead
+              %tr
+                %th Session Name
+                %th Course
+                %th Date
+                %th Teacher
+                %th Attendance Status
+            %tbody
+              - @sessions.each do |session|
+                %tr
+                  %td= session.name
+                  %td= session.course&.name
+                  %td= session.date.strftime('%b %d, %Y')
+                  %td= session.teacher&.user&.name
+                  %td
+                    - attendance = @profile.attendances.find_by(session: session)
+                    - if attendance
+                      %span.badge{class: "badge-#{attendance.status == 'present' ? 'success' : 'danger'}"}
+                        = attendance.status.titleize
+                    - else
+                      %span.badge.badge-secondary Not Marked

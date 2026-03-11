@@ -1,0 +1,47 @@
+.main-content-container.overflow-hidden
+  .d-flex.justify-content-between.align-items-center.flex-wrap.gap-2.mb-4
+    %div
+      %h3.mb-0= @session.name
+    %div
+      %a.ps-0.border-0.bg-transparent.lh-1.position-relative.top-2{ href: college_students_sessions_path(current_college.slug), 'data-bs-html': 'true', 'data-bs-offset': '0,4', 'data-bs-original-title': '<span>Back</span>', 'data-bs-placement': 'bottom', 'data-bs-toggle': 'tooltip', type: 'button' }
+        %i.material-symbols-outlined.fs-16.text-body arrow_back
+
+.row
+  .col-md-12
+    .card.mb-4
+      .card-body
+        .row
+          .col-md-6
+            %table.table.table-borderless
+              %tr
+                %td
+                  %strong Course:
+                %td= @session.course&.name
+              %tr
+                %td
+                  %strong Date:
+                %td= @session.date.strftime('%B %d, %Y')
+              %tr
+                %td
+                  %strong Teacher:
+                %td= @session.teacher&.user&.name
+              %tr
+                %td
+                  %strong Department:
+                %td= @session.department&.name
+          .col-md-6
+            %h5 Attendance Status
+            - attendance = @profile.attendances.find_by(session: @session)
+            - if attendance
+              %p
+                %span.badge{class: "badge-#{attendance.status == 'present' ? 'success' : 'danger'}"}
+                  = attendance.status.titleize
+              %p.small.text-muted Marked on: #{attendance.created_at.strftime('%B %d, %Y at %I:%M %p')}
+            - else
+              %p
+                %span.badge.badge-secondary Not Marked
+              %p.small.text-muted Attendance not yet recorded
+
+.row
+  .col-md-12
+    = link_to 'Back to Sessions', college_students_sessions_path(current_college.slug), class: 'btn btn-secondary'

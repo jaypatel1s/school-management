@@ -9,7 +9,8 @@ class Course < ApplicationRecord
   has_many :course_semesters, dependent: :destroy
   has_many :student_courses, dependent: :destroy
   has_many :students, through: :student_courses
-  has_one :teacher, dependent: :destroy
+  has_many :course_teachers, dependent: :destroy
+  has_many :teachers, through: :course_teachers
   has_many :sessions, dependent: :destroy
   has_many :assignments, dependent: :destroy
   has_many :exams, dependent: :nullify

@@ -8,7 +8,8 @@ module Teachers
     # GET /teachers/exams
     def index
       @exams = current_college.exams
-                              .where(course_id: @profile.course_id)
+                              .joins(:exam_teachers)
+                              .where(exam_teachers: { teacher_id: @profile.id })
                               .includes(:course)
                               .order(scheduled_at: :desc)
     end
@@ -19,17 +20,20 @@ module Teachers
       @exam = current_college.exams.new
       @academic_years = current_college.academic_years.order(:start_date)
       @semesters = current_college.semesters
+      @courses = @profile.courses
     end
 
     def edit
       @academic_years = current_college.academic_years.order(:start_date)
       @semesters = current_college.semesters
+      @courses = @profile.courses
     end
 
     def create
       @exam = current_college.exams.new(exam_params)
-      @exam.course_id = @profile.course_id
       if @exam.save
+        # Assign current teacher to the exam
+        @exam.exam_teachers.create(teacher: @profile, role: 'coordinator')
         flash[:success] = 'Exam was successfully scheduled.'
         redirect_to college_teachers_exams_path
       else
@@ -59,15 +63,16 @@ module Teachers
 
     private
 
-    # Scopes the exam find operation to the current college AND the teacher's courses.
+    # Scopes the exam find operation to the current college AND teacher's assigned exams
     def set_exam
       @exam = current_college.exams
-                             .where(course_id: @profile.course_id)
+                             .joins(:exam_teachers)
+                             .where(exam_teachers: { teacher_id: @profile.id })
                              .find_by(slug: params[:slug])
 
       return if @exam.present?
 
-      flash[:notice] = 'Exam Not Found or not associated with your courses.'
+      flash[:notice] = 'Exam Not Found or not assigned to you.'
       redirect_to college_teachers_exams_path
     end
 

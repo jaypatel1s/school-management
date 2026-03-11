@@ -5,20 +5,22 @@ module Teachers
   class AssignmentsController < BaseController
     before_action :set_assignment, only: %i[show edit update destroy]
     def index
-      @assignments = @profile.assignments
+      @assignments = @profile.assignments.includes(:course).order(created_at: :desc)
     end
 
     def new
       @assignment = @profile.assignments.new
+      @courses = @profile.courses
     end
 
 
-    def edit; end
+    def edit
+      @courses = @profile.courses
+    end
 
     def create
       @assignment = @profile.assignments.new(assignment_params)
       @assignment.department_id = @profile.department_id
-      @assignment.course_id = @profile.course_id
       @assignment.college_id = @profile.college_id
       if @assignment.save
         flash[:success] = "Assignment added successfully"
@@ -56,7 +58,7 @@ module Teachers
     end
 
     def assignment_params
-      params.require(:assignment).permit(:name, :description, :file)
+      params.require(:assignment).permit(:name, :description, :file, :course_id)
     end
   end
 end

@@ -8,10 +8,18 @@
       = print_error(@assignment.errors, :name)
     .col-md-6.mb-3
       %label.form-label.required
+        Course
+      = f.select :course_id, options_for_select(@courses.map { |c| [c.name, c.id] }, f.object.course_id),
+        { prompt: 'Select Course' }, { class: 'form-control', required: true }
+      = print_error(@assignment.errors, :course_id)
+  .row
+    .col-md-12.mb-3
+      %label.form-label.required
         = t('issues.assignments.table.description')
-      = f.text_field :description, class: "form-control #{error?(@assignment.errors, :description)}",
-        value: f.object.description, placeholder: 'Description', required: true
+      = f.text_area :description, class: "form-control #{error?(@assignment.errors, :description)}",
+        rows: 4, placeholder: 'Assignment description', required: true
       = print_error(@assignment.errors, :description)
+  .row
     .col-md-12.mb-3
       .input-group
         %label.input-group-text= t('activerecord.attributes.blog.file')

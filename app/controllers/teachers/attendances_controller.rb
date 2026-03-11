@@ -6,25 +6,26 @@ module Teachers
     before_action :set_attendance, only: %i[show edit update destroy]
 
     def index
-      @attendances =
-        Attendance.joins(:session).where(sessions: { teacher_id: @profile.id }).includes(:student, :session)
+      @attendances = Attendance.joins(:session).where(sessions: { teacher_id: @profile.id }).includes(:student, :session, :course).order(created_at: :desc)
     end
 
     def show; end
 
     def new
       @attendance = @profile.attendances.new
+      @courses = @profile.courses
     end
 
-    def edit; end
+    def edit
+      @courses = @profile.courses
+    end
 
     def create
       @attendance = @profile.attendances.new(attendance_params)
       @attendance.college_id = @profile.college_id
       @attendance.department_id = @profile.department_id
-      @attendance.course_id = @profile.course_id
       if @attendance.save
-        flash[:success] = 'attendance Created Successfully'
+        flash[:success] = 'Attendance Created Successfully'
         redirect_to college_teachers_attendances_path(current_college.slug)
       else
         flash[:alert] = @attendance.errors.full_messages
@@ -59,7 +60,7 @@ module Teachers
     end
 
     def attendance_params
-      params.require(:attendance).permit(:name, :date)
+      params.require(:attendance).permit(:student_id, :session_id, :status)
     end
   end
 end

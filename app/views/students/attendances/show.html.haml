@@ -1,0 +1,51 @@
+.main-content-container.overflow-hidden
+  .d-flex.justify-content-between.align-items-center.flex-wrap.gap-2.mb-4
+    %div
+      %h3.mb-0 Attendance Details
+      %small.text-muted #{@session.name} - #{@session.course&.name}
+    %div
+      = link_to 'Back to Attendance', college_students_session_attendances_path(current_college.slug, @session.slug), class: 'btn btn-secondary'
+
+.row
+  .col-md-12
+    .card.mb-4
+      .card-body
+        .row
+          .col-md-6
+            %table.table.table-borderless
+              %tr
+                %td
+                  %strong Session:
+                %td= @attendance.session&.name
+              %tr
+                %td
+                  %strong Course:
+                %td= @attendance.session&.course&.name
+              %tr
+                %td
+                  %strong Date:
+                %td= @attendance.session&.date&.strftime('%B %d, %Y')
+              %tr
+                %td
+                  %strong Teacher:
+                %td= @attendance.session&.teacher&.user&.name
+          .col-md-6
+            %table.table.table-borderless
+              %tr
+                %td
+                  %strong Status:
+                %td
+                  %span.badge{class: "badge-#{@attendance.status == 'present' ? 'success' : 'danger'}"}
+                    = @attendance.status.titleize
+              %tr
+                %td
+                  %strong Marked On:
+                %td= @attendance.created_at.strftime('%B %d, %Y at %I:%M %p')
+              %tr
+                %td
+                  %strong Department:
+                %td= @attendance.session&.department&.name
+
+.row
+  .col-md-12
+    = link_to 'Back to Session', college_students_session_path(current_college.slug, @session.slug), class: 'btn btn-secondary'

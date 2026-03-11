@@ -11,6 +11,8 @@ class Student < ApplicationRecord
   has_many :attendances, dependent: :destroy
   has_many :exam_attendances, dependent: :destroy
   has_many :exam_results, dependent: :destroy
+  has_many :assignment_submissions, dependent: :destroy
+  has_many :student_fees, dependent: :destroy
 
   enum :status, { active: 0, deactive: 1 }
 end

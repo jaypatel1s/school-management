@@ -7,6 +7,12 @@
       = f.text_field :name, class: "form-control #{error?(@session.errors, :name)}",
       value: f.object.name, placeholder: 'Name', required: true
       = print_error(@session.errors, :name)
+    .col-md-6.mb-3
+      %label.form-label.required
+        Course
+      = f.select :course_id, options_for_select(@courses.map { |c| [c.name, c.id] }, f.object.course_id),
+        { prompt: 'Select Course' }, { class: 'form-control', required: true }
+      = print_error(@session.errors, :course_id)
   .row
     .col-md-6.mb-3
       .form-group.mb-0

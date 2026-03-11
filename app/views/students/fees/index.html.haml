@@ -1,0 +1,35 @@
+.main-content-container.overflow-hidden
+  .d-flex.justify-content-between.align-items-center.flex-wrap.gap-2.mb-4
+    %h3.mb-0 My Fees
+    %div
+      %span.badge.bg-info #{@student_fees.count} Fee Records
+      
+.row
+  .col-md-12
+    .card.mb-4
+      .card-body
+        .table-responsive
+          %table.table
+            %thead
+              %tr
+                %th Fee Structure
+                %th Semester
+                %th Total Amount
+                %th Amount Paid
+                %th Status
+                %th Due Date
+                %th Actions
+            %tbody
+              - @student_fees.each do |student_fee|
+                %tr
+                  %td= student_fee.fee_structure&.name
+                  %td= student_fee.semester&.name
+                  %td= number_to_currency(student_fee.total_amount)
+                  %td= number_to_currency(student_fee.amount_paid)
+                  %td
+                    %span.badge{class: "badge-#{fee_status_class(student_fee.status)}"}
+                      = student_fee.status.titleize
+                  %td= student_fee.due_date&.strftime('%b %d, %Y')
+                  %td
+                    = link_to 'View Details', college_students_fee_path(current_college.slug, student_fee.slug), class: 'btn btn-sm btn-primary'
+                    = link_to 'Receipts', college_students_receipts_path(current_college.slug), class: 'btn btn-sm btn-info ml-1'

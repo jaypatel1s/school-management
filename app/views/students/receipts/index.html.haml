@@ -1,0 +1,54 @@
+.main-content-container.overflow-hidden
+  .d-flex.justify-content-between.align-items-center.flex-wrap.gap-2.mb-4
+    %h3.mb-0 My Receipts
+    %div
+      %span.badge.bg-info #{@admission_receipts.count + @fee_receipts.count} Receipts
+      
+.row
+  .col-md-12
+    .card.mb-4
+      .card-body
+        %h5 Admission Receipts
+        .table-responsive
+          %table.table
+            %thead
+              %tr
+                %th Receipt Number
+                %th Date
+                %th Amount
+                %th Fee Structure
+                %th Actions
+            %tbody
+              - @admission_receipts.each do |receipt|
+                %tr
+                  %td= receipt.receipt_number
+                  %td= receipt.created_at.strftime('%b %d, %Y')
+                  %td= number_to_currency(receipt.admission_payment&.amount)
+                  %td= receipt.student_fee&.fee_structure&.name
+                  %td
+                    = link_to 'View', college_students_receipt_path(current_college.slug, receipt.id), class: 'btn btn-sm btn-primary'
+                    = link_to 'Download', download_college_students_receipt_path(current_college.slug, receipt.id), class: 'btn btn-sm btn-info ml-1'
+
+.row
+  .col-md-12
+    .card.mb-4
+      .card-body
+        %h5 Fee Payment Receipts
+        .table-responsive
+          %table.table
+            %thead
+              %tr
+                %th Payment Date
+                %th Amount
+                %th Method
+                %th Fee Structure
+                %th Transaction Reference
+            %tbody
+              - @fee_receipts.each do |student_fee|
+                - student_fee.fee_payments.each do |payment|
+                  %tr
+                    %td= payment.payment_date&.strftime('%b %d, %Y')
+                    %td= number_to_currency(payment.amount)
+                    %td= payment.payment_method&.titleize
+                    %td= student_fee.fee_structure&.name
+                    %td= payment.transaction_reference

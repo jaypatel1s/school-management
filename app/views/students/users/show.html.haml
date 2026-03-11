@@ -1,0 +1,60 @@
+.main-content-container.overflow-hidden
+  .d-flex.justify-content-between.align-items-center.flex-wrap.gap-2.mb-4
+    %div
+      %h3.mb-0 Profile
+    %div
+      %a.ps-0.border-0.bg-transparent.lh-1.position-relative.top-2{ href: college_students_dashboard_path(current_college.slug), 'data-bs-html': 'true', 'data-bs-offset': '0,4', 'data-bs-original-title': '<span>Back</span>', 'data-bs-placement': 'bottom', 'data-bs-toggle': 'tooltip', type: 'button' }
+        %i.material-symbols-outlined.fs-16.text-body arrow_back
+
+.row
+  .col-md-12
+    .card.mb-4
+      .card-body
+        .row
+          .col-md-6
+            %table.table.table-borderless
+              %tr
+                %td
+                  %strong Name:
+                %td= @user.name
+              %tr
+                %td
+                  %strong Email:
+                %td= @user.email
+              %tr
+                %td
+                  %strong Roll Number:
+                %td= @profile.roll_number
+              %tr
+                %td
+                  %strong College:
+                %td= @profile.college.name
+              %tr
+                %td
+                  %strong Department:
+                %td= @profile.department&.name
+          .col-md-6
+            %table.table.table-borderless
+              %tr
+                %td
+                  %strong Status:
+                %td
+                  %span.badge{class: "badge-#{@profile.active? ? 'success' : 'danger'}"}
+                    = @profile.status.titleize
+              %tr
+                %td
+                  %strong Enrolled Courses:
+                %td= @profile.courses.count
+              %tr
+                %td
+                  %strong Total Attendances:
+                %td= @profile.attendances.count
+              %tr
+                %td
+                  %strong Assignment Submissions:
+                %td= @profile.assignment_submissions.count
+
+        .row.mt-4
+          .col-md-12
+            = link_to 'Edit Profile', edit_college_students_user_path(current_college.slug, @user.slug), class: 'btn btn-primary'
+            = link_to 'Back to Dashboard', college_students_dashboard_path(current_college.slug), class: 'btn btn-secondary ml-2'

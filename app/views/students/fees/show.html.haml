@@ -1,0 +1,102 @@
+.main-content-container.overflow-hidden
+  .d-flex.justify-content-between.align-items-center.flex-wrap.gap-2.mb-4
+    %div
+      %h3.mb-0 Fee Details
+      %small.text-muted #{@student_fee.fee_structure&.name} - #{@student_fee.semester&.name}
+    %div
+      = link_to 'Back to Fees', college_students_fees_path(current_college.slug), class: 'btn btn-secondary'
+      = link_to 'View Receipts', college_students_receipts_path(current_college.slug), class: 'btn btn-primary ml-2'
+
+.row
+  .col-md-12
+    .card.mb-4
+      .card-body
+        .row
+          .col-md-6
+            %table.table.table-borderless
+              %tr
+                %td
+                  %strong Fee Structure:
+                %td= @student_fee.fee_structure&.name
+              %tr
+                %td
+                  %strong Semester:
+                %td= @student_fee.semester&.name
+              %tr
+                %td
+                  %strong Total Amount:
+                %td= number_to_currency(@student_fee.total_amount)
+              %tr
+                %td
+                  %strong Amount Paid:
+                %td= number_to_currency(@student_fee.amount_paid)
+              %tr
+                %td
+                  %strong Balance Due:
+                %td= number_to_currency(@student_fee.total_amount - @student_fee.amount_paid)
+          .col-md-6
+            %table.table.table-borderless
+              %tr
+                %td
+                  %strong Status:
+                %td
+                  %span.badge{class: "badge-#{fee_status_class(@student_fee.status)}"}
+                    = @student_fee.status.titleize
+              %tr
+                %td
+                  %strong Due Date:
+                %td= @student_fee.due_date&.strftime('%B %d, %Y')
+              %tr
+                %td
+                  %strong Created On:
+                %td= @student_fee.created_at.strftime('%B %d, %Y')
+              %tr
+                %td
+                  %strong Last Updated:
+                %td= @student_fee.updated_at.strftime('%B %d, %Y')
+
+.row
+  .col-md-12
+    .card.mb-4
+      .card-body
+        %h5 Payment History
+        .table-responsive
+          %table.table
+            %thead
+              %tr
+                %th Payment Date
+                %th Amount
+                %th Method
+                %th Transaction Reference
+                %th Notes
+            %tbody
+              - @fee_payments.each do |payment|
+                %tr
+                  %td= payment.payment_date&.strftime('%b %d, %Y')
+                  %td= number_to_currency(payment.amount)
+                  %td= payment.payment_method&.titleize
+                  %td= payment.transaction_reference
+                  %td= payment.notes
+
+.row
+  .col-md-12
+    .card.mb-4
+      .card-body
+        %h5 Admission Receipts
+        .table-responsive
+          %table.table
+            %thead
+              %tr
+                %th Receipt Number
+                %th Date
+                %th Amount
+                %th Actions
+            %tbody
+              - @admission_receipts.each do |receipt|
+                %tr
+                  %td= receipt.receipt_number
+                  %td= receipt.created_at.strftime('%b %d, %Y')
+                  %td= number_to_currency(receipt.admission_payment&.amount)
+                  %td
+                    = link_to 'View', college_students_receipt_path(current_college.slug, receipt.id), class: 'btn btn-sm btn-primary'
+                    = link_to 'Download', download_college_students_receipt_path(current_college.slug, receipt.id), class: 'btn btn-sm btn-info ml-1'

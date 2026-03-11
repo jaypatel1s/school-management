@@ -1,0 +1,45 @@
+.main-content-container.overflow-hidden
+  .d-flex.justify-content-between.align-items-center.flex-wrap.gap-2.mb-4
+    %div
+      %h3.mb-0= @course.name
+    %div
+      %a.ps-0.border-0.bg-transparent.lh-1.position-relative.top-2{ href: college_students_courses_path(current_college.slug), 'data-bs-html': 'true', 'data-bs-offset': '0,4', 'data-bs-original-title': '<span>Back</span>', 'data-bs-placement': 'bottom', 'data-bs-toggle': 'tooltip', type: 'button' }
+        %i.material-symbols-outlined.fs-16.text-body arrow_back
+
+.row
+  .col-md-12
+    .card.mb-4
+      .card-body
+        .row
+          .col-md-6
+            %table.table.table-borderless
+              %tr
+                %td
+                  %strong Department:
+                %td= @course.department&.name
+              %tr
+                %td
+                  %strong Credits:
+                %td= @course.credits
+              %tr
+                %td
+                  %strong Teachers:
+                %td= @course.teachers.map(&:user).map(&:name).join(', ')
+          .col-md-6
+            %table.table.table-borderless
+              %tr
+                %td
+                  %strong Total Sessions:
+                %td= @course.sessions.count
+              %tr
+                %td
+                  %strong Assignments:
+                %td= @course.assignments.count
+              %tr
+                %td
+                  %strong Exams:
+                %td= @course.exams.count
+
+.row
+  .col-md-12
+    = link_to 'Back to Courses', college_students_courses_path(current_college.slug), class: 'btn btn-secondary'
