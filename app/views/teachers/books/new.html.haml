@@ -1,0 +1,15 @@
+.content-wrapper
+  .page-header.row
+    .col-md-7
+      %h3.page-title
+        %span.page-title-icon.bg-primary.text-white.mr-2
+          %i.fa.fa-calendar-plus-o
+        Books
+        %small
+          %i.fa.fa-arrow-right
+          New
+    .col-md-5.mt-2.mt-md-0.text-right
+      %a.btn.btn-sm.btn-success{ href: college_teachers_books_path, data: {toggle: 'tooltip', placement: 'left'}, title: 'All Books' }
+        %i.fa.fa-reply
+
+  = render 'form', book: @book, url: college_teachers_books_path

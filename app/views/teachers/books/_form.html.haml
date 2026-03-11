@@ -1,0 +1,42 @@
+.row
+  .col-md-12.grid-margin.stretch-card
+    .card
+      .card-body
+        = form_with model: [:teachers, book], url: url, local: true, class: 'form' do |f|
+          .row
+            %div{ class: "col-md-6 form-group #{ error?(@book.errors, :title) }" }
+              = f.label :name, class: 'col-form-label' do
+                Name
+                %span
+                  %i.fa.fa-question-circle-o{ 'data-toggle': 'tooltip', name: 'Name of the book (e.g., Data Structures in C)' }
+              = f.text_field :name, class: 'form-control', placeholder: 'Enter Book Name'
+              = print_error(@book.errors, :name)
+
+            %div{ class: "col-md-6 form-group #{ error?(@book.errors, :author) }" }
+              = f.label :author, class: 'col-form-label' do
+                Author
+                %span
+                  %i.fa.fa-question-circle-o{ 'data-toggle': 'tooltip', title: 'Name of the author (e.g., E. Balagurusamy)' }
+              = f.text_field :author, class: 'form-control', placeholder: 'Enter Author Name'
+              = print_error(@book.errors, :author)
+
+          .row
+            %div{ class: "col-md-6 form-group #{ error?(@book.errors, :isbn) }" }
+              = f.label :isbn, class: 'col-form-label' do
+                ISBN
+                %span
+                  %i.fa.fa-question-circle-o{ 'data-toggle': 'tooltip', title: 'Unique book identifier (e.g., 978-93-5299-019-9)' }
+              = f.text_field :isbn, class: 'form-control', placeholder: 'Enter ISBN'
+              = print_error(@book.errors, :isbn)
+
+            %div{ class: "col-md-6 form-group #{ error?(@book.errors, :total_copies) }" }
+              = f.label :total_copies, class: 'col-form-label' do
+                Total Copies
+                %span
+                  %i.fa.fa-question-circle-o{ 'data-toggle': 'tooltip', title: 'Total number of copies available in library' }
+              = f.number_field :total_copies, class: 'form-control', placeholder: 'Enter total copies', min: 1
+              = print_error(@book.errors, :total_copies)
+
+          .row.mt-4
+            .col-12
+              = f.submit (@book.new_record? ? 'Add Book' : 'Update Book'), class: 'btn btn-primary btn-block'

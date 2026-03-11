@@ -1,0 +1,35 @@
+.content-wrapper
+  .page-header.row
+    .col-md-7
+      %h3.page-title
+        %span.page-title-icon.bg-primary.text-white.mr-2
+          %i.fa.fa-book
+        Library Books
+
+    - if can_access?(:books, :new)
+      .col-md-5.mt-2.mt-md-0.text-right
+        = link_to raw("<i class='fa fa-plus'></i> Add New Book Issue"), new_college_teachers_book_path(current_college.slug), { class: 'btn btn-sm btn-primary', data: { toggle: 'tooltip', placement: 'left' }, title: 'Add Book to Library' }
+
+  .row
+    .col-12.grid-margin
+      .card
+        .card-body
+          - if @book_issues.present?
+            .table-responsive
+              %table.table.table-hover
+                %thead
+                  %tr.table-primary
+                    %th Book Name
+                    %th Student Name
+                    %th Issue Date
+                    %th Due Date
+                    %th Return Date
+                    %th.text-right{ width: '20%', 'data-orderable': 'false' } Actions
+                %tbody
+                  - @book_issues.each do |book_issue|
+                    %tr
+                      %td= book_issue.book.name
+                      %td= book_issue.student.name
+                      %td= book_issue.issue_date
+                      %td= book_issue.due_date
+                      %td= book_issue.return_date

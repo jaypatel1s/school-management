@@ -1,0 +1,51 @@
+.content-wrapper
+  .page-header.row
+    .col-md-7
+      %h3.page-title
+        %span.page-title-icon.bg-primary.text-white.mr-2
+          %i.fa.fa-book
+        Library Books
+
+    - if can_access?(:books, :new)
+      .col-md-5.mt-2.mt-md-0.text-right
+        = link_to raw("<i class='fa fa-plus'></i> Add New Book"), new_college_teachers_book_path(current_college.slug), { class: 'btn btn-sm btn-primary', data: { toggle: 'tooltip', placement: 'left' }, title: 'Add Book to Library' }
+
+  .row
+    .col-12.grid-margin
+      .card
+        .card-body
+          - if @books.present?
+            .table-responsive
+              %table.table.table-hover
+                %thead
+                  %tr.table-primary
+                    %th Title
+                    %th Author
+                    %th Total Copies
+                    %th Available Copies
+                    %th.text-right{ width: '20%', 'data-orderable': 'false' } Actions
+                %tbody
+                  - @books.each do |book|
+                    %tr
+                      %td= book.name
+                      %td= book.author
+                      %td= book.total_copies
+                      %td
+                        - if book.available_copies.positive?
+                          %span.badge.badge-success= book.available_copies
+                        - else
+                          %span.badge.badge-danger 0
+                      %td.text-right
+                        = link_to raw("<i class='fa fa-eye'></i>"), college_teachers_book_path(current_college.slug, book), class: 'btn-sm btn-info px-2 py-1 ml-1', data: { toggle: 'tooltip' }, title: 'View Book Details'
+
+                        - if can_access?(:books, :edit)
+                          = link_to raw("<i class='fa fa-pencil-square-o'></i>"), edit_college_teachers_book_path(current_college.slug, book), class: 'btn-sm btn-warning px-2 py-1 ml-1', data: { toggle: 'tooltip' }, title: 'Edit Book'
+
+                        - if can_access?(:books, :destroy)
+                          = link_to raw("<i class='fa fa-trash-o'></i>"), college_teachers_book_path(current_college.slug, book), method: :delete, data: { confirm: 'Are you sure you want to delete this book?' }, class: 'btn-sm btn-danger px-2 py-1 ml-1', title: 'Delete Book'
+                        - if can_access?(:book_issues, :new)
+                          = link_to raw("<i class='fa fa-exchange'></i> Issue Book"), college_teachers_book_book_issues_path(current_college.slug, book_slug: book.slug), class: 'btn-sm btn-success px-2 py-1 ml-1', title: 'Issue Book'
+
+          - else
+            %center
+              %h6 No books have been added to your library yet.
