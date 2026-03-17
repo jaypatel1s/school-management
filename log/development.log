@@ -2950,3 +2950,614 @@ Processing by DashboardController#index as HTML
 Completed 200 OK in 117ms (Views: 97.4ms | ActiveRecord: 4.2ms | Allocations: 62297)
 
 
+  [1m[36mUser Load (3.3ms)[0m  [1m[34mSELECT "users".* FROM "users" /* loading for pp */ LIMIT $1[0m  [["LIMIT", 11]]
+Started GET "/" for ::1 at 2025-11-20 13:49:58 +0530
+  [1m[36mActiveRecord::SchemaMigration Load (2.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by Users::SessionsController#new as HTML
+  Rendering layout layouts/authentication.html.haml
+  Rendering users/sessions/new.html.haml within layouts/authentication
+  Rendered devise/shared/_links.html.erb (Duration: 1.2ms | Allocations: 680)
+  Rendered devise/shared/_footer.html.haml (Duration: 11.7ms | Allocations: 3585)
+  Rendered users/sessions/new.html.haml within layouts/authentication (Duration: 52.4ms | Allocations: 26055)
+  Rendered common/_notification.html.haml (Duration: 3.9ms | Allocations: 2880)
+  Rendered layout layouts/authentication.html.haml (Duration: 73.4ms | Allocations: 42710)
+Completed 200 OK in 158ms (Views: 85.0ms | ActiveRecord: 22.5ms | Allocations: 66979)
+
+
+Started POST "/signin" for ::1 at 2025-11-20 13:50:03 +0530
+Processing by Users::SessionsController#create as HTML
+  Parameters: {"authenticity_token"=>"[FILTERED]", "user"=>{"email"=>"teacher@example.com", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"LOGIN"}
+[31mUnpermitted parameter: :remember_me. Context: { controller: Users::SessionsController, action: create, request: #<ActionDispatch::Request:0x00007fba96d8d210>, params: {"authenticity_token"=>"[FILTERED]", "user"=>{"email"=>"teacher@example.com", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"LOGIN", "controller"=>"users/sessions", "action"=>"create"} }[0m
+  [1m[36mUser Load (1.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["email", "teacher@example.com"], ["LIMIT", 1]]
+  ↳ app/controllers/users/sessions_controller.rb:10:in `create'
+[31mUnpermitted parameter: :remember_me. Context: { controller: Users::SessionsController, action: create, request: #<ActionDispatch::Request:0x00007fba96d8d210>, params: {"authenticity_token"=>"[FILTERED]", "user"=>{"email"=>"teacher@example.com", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"LOGIN", "controller"=>"users/sessions", "action"=>"create"} }[0m
+Redirected to http://localhost:3001/signin
+Completed 302 Found in 325ms (ActiveRecord: 1.5ms | Allocations: 5557)
+
+
+Started GET "/signin" for ::1 at 2025-11-20 13:50:03 +0530
+Processing by Users::SessionsController#new as HTML
+  Rendering layout layouts/authentication.html.haml
+  Rendering users/sessions/new.html.haml within layouts/authentication
+  Rendered devise/shared/_links.html.erb (Duration: 0.4ms | Allocations: 128)
+  Rendered devise/shared/_footer.html.haml (Duration: 0.1ms | Allocations: 30)
+  Rendered users/sessions/new.html.haml within layouts/authentication (Duration: 3.5ms | Allocations: 1030)
+  Rendered common/_notification.html.haml (Duration: 0.1ms | Allocations: 32)
+  Rendered layout layouts/authentication.html.haml (Duration: 4.8ms | Allocations: 1523)
+Completed 200 OK in 7ms (Views: 5.5ms | ActiveRecord: 0.0ms | Allocations: 2136)
+
+
+Started POST "/signin" for ::1 at 2025-11-20 13:50:06 +0530
+Processing by Users::SessionsController#create as HTML
+  Parameters: {"authenticity_token"=>"[FILTERED]", "user"=>{"email"=>"teacher@example.com", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"LOGIN"}
+[31mUnpermitted parameter: :remember_me. Context: { controller: Users::SessionsController, action: create, request: #<ActionDispatch::Request:0x00007fba96ca4ec0>, params: {"authenticity_token"=>"[FILTERED]", "user"=>{"email"=>"teacher@example.com", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"LOGIN", "controller"=>"users/sessions", "action"=>"create"} }[0m
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["email", "teacher@example.com"], ["LIMIT", 1]]
+  ↳ app/controllers/users/sessions_controller.rb:10:in `create'
+[31mUnpermitted parameter: :remember_me. Context: { controller: Users::SessionsController, action: create, request: #<ActionDispatch::Request:0x00007fba96ca4ec0>, params: {"authenticity_token"=>"[FILTERED]", "user"=>{"email"=>"teacher@example.com", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"LOGIN", "controller"=>"users/sessions", "action"=>"create"} }[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/users/sessions_controller.rb:14:in `create'
+  [1m[36mUser Update (2.7ms)[0m  [1m[33mUPDATE "users" SET "sign_in_count" = $1, "current_sign_in_at" = $2, "updated_at" = $3 WHERE "users"."id" = $4[0m  [["sign_in_count", 2], ["current_sign_in_at", "2025-11-20 08:20:06.773636"], ["updated_at", "2025-11-20 08:20:06.774199"], ["id", 26]]
+  ↳ app/controllers/users/sessions_controller.rb:14:in `create'
+  [1m[36mTRANSACTION (2.2ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/users/sessions_controller.rb:14:in `create'
+  [1m[36mCollege Load (1.3ms)[0m  [1m[34mSELECT "colleges".* FROM "colleges" WHERE "colleges"."id" = $1 LIMIT $2[0m  [["id", 136], ["LIMIT", 1]]
+  ↳ app/controllers/users/sessions_controller.rb:37:in `specific_dashboard_path'
+Redirected to http://localhost:3001/colleges/whole-freckle/setup
+Completed 302 Found in 348ms (ActiveRecord: 14.4ms | Allocations: 12730)
+
+
+Started GET "/colleges/whole-freckle/setup" for ::1 at 2025-11-20 13:50:06 +0530
+Processing by SetupController#setup as HTML
+  Parameters: {"college_slug"=>"whole-freckle"}
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 26], ["LIMIT", 1]]
+  ↳ app/controllers/setup_controller.rb:6:in `setup'
+  [1m[36mTeacher Load (2.4ms)[0m  [1m[34mSELECT "teachers".* FROM "teachers" WHERE "teachers"."user_id" = $1 LIMIT $2[0m  [["user_id", 26], ["LIMIT", 1]]
+  ↳ app/controllers/setup_controller.rb:8:in `setup'
+Redirected to http://localhost:3001/
+Completed 302 Found in 43ms (ActiveRecord: 7.0ms | Allocations: 10054)
+
+
+Started GET "/" for ::1 at 2025-11-20 13:50:06 +0530
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 26], ["LIMIT", 1]]
+Processing by DashboardController#index as HTML
+  [1m[36mTeacher Load (0.6ms)[0m  [1m[34mSELECT "teachers".* FROM "teachers" WHERE "teachers"."user_id" = $1 LIMIT $2[0m  [["user_id", 26], ["LIMIT", 1]]
+  ↳ app/controllers/concerns/user_profile.rb:20:in `set_user_profile'
+  [1m[36mCollege Load (0.5ms)[0m  [1m[34mSELECT "colleges".* FROM "colleges" WHERE "colleges"."id" = $1 LIMIT $2[0m  [["id", 136], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:10:in `set_current_college'
+  Rendering layout layouts/admin.html.haml
+  Rendering dashboard/index.html.haml within layouts/admin
+  Rendered dashboard/index.html.haml within layouts/admin (Duration: 4.5ms | Allocations: 3767)
+  Rendered layouts/admin/_header.html.haml (Duration: 12.9ms | Allocations: 9094)
+  Rendered layouts/admin/_sidebar.html.haml (Duration: 12.8ms | Allocations: 11083)
+  Rendered common/_notification.html.haml (Duration: 0.1ms | Allocations: 32)
+  Rendered layout layouts/admin.html.haml (Duration: 75.7ms | Allocations: 39965)
+Completed 200 OK in 85ms (Views: 77.8ms | ActiveRecord: 1.0ms | Allocations: 42083)
+
+
+Started GET "/colleges/whole-freckle/teachers/books" for ::1 at 2025-11-20 13:50:08 +0530
+Processing by Teachers::BooksController#index as HTML
+  Parameters: {"college_slug"=>"whole-freckle"}
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 26], ["LIMIT", 1]]
+  ↳ app/controllers/concerns/user_profile.rb:14:in `set_user_profile'
+  [1m[36mTeacher Load (0.5ms)[0m  [1m[34mSELECT "teachers".* FROM "teachers" WHERE "teachers"."user_id" = $1 LIMIT $2[0m  [["user_id", 26], ["LIMIT", 1]]
+  ↳ app/controllers/concerns/user_profile.rb:20:in `set_user_profile'
+  [1m[36mCollege Load (0.5ms)[0m  [1m[34mSELECT "colleges".* FROM "colleges" WHERE "colleges"."id" = $1 LIMIT $2[0m  [["id", 136], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:10:in `set_current_college'
+  [1m[36mCollege Load (0.3ms)[0m  [1m[34mSELECT "colleges".* FROM "colleges" WHERE "colleges"."slug" = $1 LIMIT $2[0m  [["slug", "whole-freckle"], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:11:in `set_current_college'
+  Rendering layout layouts/admin.html.haml
+  Rendering teachers/books/index.html.haml within layouts/admin
+  [1m[36mBook Load (1.2ms)[0m  [1m[34mSELECT "books".* FROM "books" WHERE "books"."college_id" = $1 ORDER BY "title" ASC[0m  [["college_id", 136]]
+  ↳ app/views/teachers/books/index.html.haml:17
+  Rendered teachers/books/index.html.haml within layouts/admin (Duration: 18.9ms | Allocations: 16488)
+  Rendered layout layouts/admin.html.haml (Duration: 19.1ms | Allocations: 16573)
+Completed 500 Internal Server Error in 48ms (ActiveRecord: 7.9ms | Allocations: 22597)
+
+
+  
+ActionView::Template::Error (PG::UndefinedColumn: ERROR:  column "title" does not exist
+LINE 1: ... "books" WHERE "books"."college_id" = $1 ORDER BY "title" AS...
+                                                             ^
+):
+    14:     .col-12.grid-margin
+    15:       .card
+    16:         .card-body
+    17:           - if @books.present?
+    18:             .table-responsive
+    19:               %table.table.table-hover
+    20:                 %thead
+  
+Started GET "/colleges/whole-freckle/teachers/books" for ::1 at 2025-11-20 13:50:34 +0530
+Processing by Teachers::BooksController#index as HTML
+  Parameters: {"college_slug"=>"whole-freckle"}
+  [1m[36mUser Load (2.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 26], ["LIMIT", 1]]
+  ↳ app/controllers/concerns/user_profile.rb:14:in `set_user_profile'
+  [1m[36mTeacher Load (0.4ms)[0m  [1m[34mSELECT "teachers".* FROM "teachers" WHERE "teachers"."user_id" = $1 LIMIT $2[0m  [["user_id", 26], ["LIMIT", 1]]
+  ↳ app/controllers/concerns/user_profile.rb:20:in `set_user_profile'
+  [1m[36mCollege Load (0.4ms)[0m  [1m[34mSELECT "colleges".* FROM "colleges" WHERE "colleges"."id" = $1 LIMIT $2[0m  [["id", 136], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:10:in `set_current_college'
+  [1m[36mCollege Load (0.5ms)[0m  [1m[34mSELECT "colleges".* FROM "colleges" WHERE "colleges"."slug" = $1 LIMIT $2[0m  [["slug", "whole-freckle"], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:11:in `set_current_college'
+  Rendering layout layouts/admin.html.haml
+  Rendering teachers/books/index.html.haml within layouts/admin
+  [1m[36mBook Load (0.9ms)[0m  [1m[34mSELECT "books".* FROM "books" WHERE "books"."college_id" = $1 ORDER BY "title" ASC[0m  [["college_id", 136]]
+  ↳ app/views/teachers/books/index.html.haml:17
+  Rendered teachers/books/index.html.haml within layouts/admin (Duration: 24.8ms | Allocations: 16053)
+  Rendered layout layouts/admin.html.haml (Duration: 25.3ms | Allocations: 16139)
+Completed 500 Internal Server Error in 123ms (ActiveRecord: 28.0ms | Allocations: 42719)
+
+
+  
+ActionView::Template::Error (PG::UndefinedColumn: ERROR:  column "title" does not exist
+LINE 1: ... "books" WHERE "books"."college_id" = $1 ORDER BY "title" AS...
+                                                             ^
+):
+    14:     .col-12.grid-margin
+    15:       .card
+    16:         .card-body
+    17:           - if @books.present?
+    18:             .table-responsive
+    19:               %table.table.table-hover
+    20:                 %thead
+  
+Started GET "/colleges/whole-freckle/teachers/books" for ::1 at 2025-11-20 13:50:37 +0530
+Processing by Teachers::BooksController#index as HTML
+  Parameters: {"college_slug"=>"whole-freckle"}
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 26], ["LIMIT", 1]]
+  ↳ app/controllers/concerns/user_profile.rb:14:in `set_user_profile'
+  [1m[36mTeacher Load (0.5ms)[0m  [1m[34mSELECT "teachers".* FROM "teachers" WHERE "teachers"."user_id" = $1 LIMIT $2[0m  [["user_id", 26], ["LIMIT", 1]]
+  ↳ app/controllers/concerns/user_profile.rb:20:in `set_user_profile'
+  [1m[36mCollege Load (0.4ms)[0m  [1m[34mSELECT "colleges".* FROM "colleges" WHERE "colleges"."id" = $1 LIMIT $2[0m  [["id", 136], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:10:in `set_current_college'
+  [1m[36mCollege Load (0.4ms)[0m  [1m[34mSELECT "colleges".* FROM "colleges" WHERE "colleges"."slug" = $1 LIMIT $2[0m  [["slug", "whole-freckle"], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:11:in `set_current_college'
+  Rendering layout layouts/admin.html.haml
+  Rendering teachers/books/index.html.haml within layouts/admin
+  [1m[36mBook Load (1.1ms)[0m  [1m[34mSELECT "books".* FROM "books" WHERE "books"."college_id" = $1 ORDER BY "title" ASC[0m  [["college_id", 136]]
+  ↳ app/views/teachers/books/index.html.haml:17
+  Rendered teachers/books/index.html.haml within layouts/admin (Duration: 3.6ms | Allocations: 633)
+  Rendered layout layouts/admin.html.haml (Duration: 4.1ms | Allocations: 718)
+Completed 500 Internal Server Error in 20ms (ActiveRecord: 2.7ms | Allocations: 3862)
+
+
+  
+ActionView::Template::Error (PG::UndefinedColumn: ERROR:  column "title" does not exist
+LINE 1: ... "books" WHERE "books"."college_id" = $1 ORDER BY "title" AS...
+                                                             ^
+):
+    14:     .col-12.grid-margin
+    15:       .card
+    16:         .card-body
+    17:           - if @books.present?
+    18:             .table-responsive
+    19:               %table.table.table-hover
+    20:                 %thead
+  
+  [1m[36mBook Load (3.9ms)[0m  [1m[34mSELECT "books".* FROM "books" /* loading for pp */ LIMIT $1[0m  [["LIMIT", 11]]
+  [1m[36mBookIssue Load (4.3ms)[0m  [1m[34mSELECT "book_issues".* FROM "book_issues" /* loading for pp */ LIMIT $1[0m  [["LIMIT", 11]]
+Started GET "/colleges/whole-freckle/teachers/books" for ::1 at 2025-11-20 13:51:04 +0530
+Processing by Teachers::BooksController#index as HTML
+  Parameters: {"college_slug"=>"whole-freckle"}
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 26], ["LIMIT", 1]]
+  ↳ app/controllers/concerns/user_profile.rb:14:in `set_user_profile'
+  [1m[36mTeacher Load (0.3ms)[0m  [1m[34mSELECT "teachers".* FROM "teachers" WHERE "teachers"."user_id" = $1 LIMIT $2[0m  [["user_id", 26], ["LIMIT", 1]]
+  ↳ app/controllers/concerns/user_profile.rb:20:in `set_user_profile'
+  [1m[36mCollege Load (0.6ms)[0m  [1m[34mSELECT "colleges".* FROM "colleges" WHERE "colleges"."id" = $1 LIMIT $2[0m  [["id", 136], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:10:in `set_current_college'
+  [1m[36mCollege Load (0.4ms)[0m  [1m[34mSELECT "colleges".* FROM "colleges" WHERE "colleges"."slug" = $1 LIMIT $2[0m  [["slug", "whole-freckle"], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:11:in `set_current_college'
+  Rendering layout layouts/admin.html.haml
+  Rendering teachers/books/index.html.haml within layouts/admin
+  [1m[36mBook Load (0.7ms)[0m  [1m[34mSELECT "books".* FROM "books" WHERE "books"."college_id" = $1 ORDER BY "title" ASC[0m  [["college_id", 136]]
+  ↳ app/views/teachers/books/index.html.haml:17
+  Rendered teachers/books/index.html.haml within layouts/admin (Duration: 19.1ms | Allocations: 16051)
+  Rendered layout layouts/admin.html.haml (Duration: 19.7ms | Allocations: 16137)
+Completed 500 Internal Server Error in 108ms (ActiveRecord: 21.7ms | Allocations: 42805)
+
+
+  
+ActionView::Template::Error (PG::UndefinedColumn: ERROR:  column "title" does not exist
+LINE 1: ... "books" WHERE "books"."college_id" = $1 ORDER BY "title" AS...
+                                                             ^
+):
+    14:     .col-12.grid-margin
+    15:       .card
+    16:         .card-body
+    17:           - if @books.present?
+    18:             .table-responsive
+    19:               %table.table.table-hover
+    20:                 %thead
+  
+Started GET "/colleges/whole-freckle/teachers/books" for ::1 at 2025-11-20 13:51:21 +0530
+Processing by Teachers::BooksController#index as HTML
+  Parameters: {"college_slug"=>"whole-freckle"}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 26], ["LIMIT", 1]]
+  ↳ app/controllers/concerns/user_profile.rb:14:in `set_user_profile'
+  [1m[36mTeacher Load (0.3ms)[0m  [1m[34mSELECT "teachers".* FROM "teachers" WHERE "teachers"."user_id" = $1 LIMIT $2[0m  [["user_id", 26], ["LIMIT", 1]]
+  ↳ app/controllers/concerns/user_profile.rb:20:in `set_user_profile'
+  [1m[36mCollege Load (0.3ms)[0m  [1m[34mSELECT "colleges".* FROM "colleges" WHERE "colleges"."id" = $1 LIMIT $2[0m  [["id", 136], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:10:in `set_current_college'
+  [1m[36mCollege Load (0.4ms)[0m  [1m[34mSELECT "colleges".* FROM "colleges" WHERE "colleges"."slug" = $1 LIMIT $2[0m  [["slug", "whole-freckle"], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:11:in `set_current_college'
+  Rendering layout layouts/admin.html.haml
+  Rendering teachers/books/index.html.haml within layouts/admin
+  [1m[36mBook Load (0.6ms)[0m  [1m[34mSELECT "books".* FROM "books" WHERE "books"."college_id" = $1 ORDER BY "books"."name" ASC[0m  [["college_id", 136]]
+  ↳ app/views/teachers/books/index.html.haml:17
+  Rendered teachers/books/index.html.haml within layouts/admin (Duration: 29.4ms | Allocations: 15951)
+  Rendered layouts/admin/_header.html.haml (Duration: 14.3ms | Allocations: 9065)
+  Rendered layouts/admin/_sidebar.html.haml (Duration: 11.9ms | Allocations: 11039)
+  Rendered common/_notification.html.haml (Duration: 3.4ms | Allocations: 2812)
+  Rendered layout layouts/admin.html.haml (Duration: 76.3ms | Allocations: 54904)
+Completed 200 OK in 153ms (Views: 78.2ms | ActiveRecord: 18.9ms | Allocations: 81474)
+
+
+Started GET "/colleges/whole-freckle/teachers/books/new" for ::1 at 2025-11-20 13:51:23 +0530
+Processing by Teachers::BooksController#new as HTML
+  Parameters: {"college_slug"=>"whole-freckle"}
+  [1m[36mUser Load (0.8ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 26], ["LIMIT", 1]]
+  ↳ app/controllers/concerns/user_profile.rb:14:in `set_user_profile'
+  [1m[36mTeacher Load (0.7ms)[0m  [1m[34mSELECT "teachers".* FROM "teachers" WHERE "teachers"."user_id" = $1 LIMIT $2[0m  [["user_id", 26], ["LIMIT", 1]]
+  ↳ app/controllers/concerns/user_profile.rb:20:in `set_user_profile'
+  [1m[36mCollege Load (1.3ms)[0m  [1m[34mSELECT "colleges".* FROM "colleges" WHERE "colleges"."id" = $1 LIMIT $2[0m  [["id", 136], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:10:in `set_current_college'
+  [1m[36mCollege Load (0.6ms)[0m  [1m[34mSELECT "colleges".* FROM "colleges" WHERE "colleges"."slug" = $1 LIMIT $2[0m  [["slug", "whole-freckle"], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:11:in `set_current_college'
+  Rendering layout layouts/admin.html.haml
+  Rendering teachers/books/new.html.haml within layouts/admin
+  Rendered teachers/books/_form.html.haml (Duration: 35.6ms | Allocations: 18797)
+  Rendered teachers/books/new.html.haml within layouts/admin (Duration: 52.5ms | Allocations: 24772)
+  Rendered layouts/admin/_header.html.haml (Duration: 0.5ms | Allocations: 64)
+  Rendered layouts/admin/_sidebar.html.haml (Duration: 2.6ms | Allocations: 741)
+  Rendered common/_notification.html.haml (Duration: 0.1ms | Allocations: 29)
+  Rendered layout layouts/admin.html.haml (Duration: 58.8ms | Allocations: 26213)
+Completed 200 OK in 95ms (Views: 59.4ms | ActiveRecord: 3.1ms | Allocations: 34502)
+
+
+Started POST "/colleges/whole-freckle/teachers/books" for ::1 at 2025-11-20 13:51:30 +0530
+Processing by Teachers::BooksController#create as HTML
+  Parameters: {"authenticity_token"=>"[FILTERED]", "book"=>{"name"=>"jia", "author"=>"12", "isbn"=>"12", "total_copies"=>"12"}, "commit"=>"Add Book", "college_slug"=>"whole-freckle"}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 26], ["LIMIT", 1]]
+  ↳ app/controllers/concerns/user_profile.rb:14:in `set_user_profile'
+  [1m[36mTeacher Load (0.6ms)[0m  [1m[34mSELECT "teachers".* FROM "teachers" WHERE "teachers"."user_id" = $1 LIMIT $2[0m  [["user_id", 26], ["LIMIT", 1]]
+  ↳ app/controllers/concerns/user_profile.rb:20:in `set_user_profile'
+  [1m[36mCollege Load (0.9ms)[0m  [1m[34mSELECT "colleges".* FROM "colleges" WHERE "colleges"."id" = $1 LIMIT $2[0m  [["id", 136], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:10:in `set_current_college'
+  [1m[36mCollege Load (0.8ms)[0m  [1m[34mSELECT "colleges".* FROM "colleges" WHERE "colleges"."slug" = $1 LIMIT $2[0m  [["slug", "whole-freckle"], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:11:in `set_current_college'
+  [1m[36mTRANSACTION (0.9ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/models/concerns/sluggable.rb:19:in `set_slug_from_name'
+  [1m[36mBook Exists? (3.2ms)[0m  [1m[34mSELECT 1 AS one FROM "books" WHERE "books"."slug" = $1 AND "books"."id" IS NOT NULL LIMIT $2[0m  [["slug", "jia"], ["LIMIT", 1]]
+  ↳ app/models/concerns/sluggable.rb:19:in `set_slug_from_name'
+  [1m[36mBook Create (2.5ms)[0m  [1m[32mINSERT INTO "books" ("college_id", "name", "author", "isbn", "total_copies", "available_copies", "slug", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING "id"[0m  [["college_id", 136], ["name", "jia"], ["author", "12"], ["isbn", "12"], ["total_copies", 12], ["available_copies", 12], ["slug", "jia"], ["created_at", "2025-11-20 08:21:30.355064"], ["updated_at", "2025-11-20 08:21:30.355064"]]
+  ↳ app/controllers/teachers/books_controller.rb:21:in `create'
+  [1m[36mTRANSACTION (1.8ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/teachers/books_controller.rb:21:in `create'
+Redirected to http://localhost:3001/colleges/whole-freckle/teachers/books
+Completed 302 Found in 38ms (ActiveRecord: 10.9ms | Allocations: 5913)
+
+
+Started GET "/colleges/whole-freckle/teachers/books" for ::1 at 2025-11-20 13:51:30 +0530
+Processing by Teachers::BooksController#index as HTML
+  Parameters: {"college_slug"=>"whole-freckle"}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 26], ["LIMIT", 1]]
+  ↳ app/controllers/concerns/user_profile.rb:14:in `set_user_profile'
+  [1m[36mTeacher Load (0.3ms)[0m  [1m[34mSELECT "teachers".* FROM "teachers" WHERE "teachers"."user_id" = $1 LIMIT $2[0m  [["user_id", 26], ["LIMIT", 1]]
+  ↳ app/controllers/concerns/user_profile.rb:20:in `set_user_profile'
+  [1m[36mCollege Load (0.3ms)[0m  [1m[34mSELECT "colleges".* FROM "colleges" WHERE "colleges"."id" = $1 LIMIT $2[0m  [["id", 136], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:10:in `set_current_college'
+  [1m[36mCollege Load (0.3ms)[0m  [1m[34mSELECT "colleges".* FROM "colleges" WHERE "colleges"."slug" = $1 LIMIT $2[0m  [["slug", "whole-freckle"], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:11:in `set_current_college'
+  Rendering layout layouts/admin.html.haml
+  Rendering teachers/books/index.html.haml within layouts/admin
+  [1m[36mBook Load (0.7ms)[0m  [1m[34mSELECT "books".* FROM "books" WHERE "books"."college_id" = $1 ORDER BY "books"."name" ASC[0m  [["college_id", 136]]
+  ↳ app/views/teachers/books/index.html.haml:17
+  Rendered teachers/books/index.html.haml within layouts/admin (Duration: 4.5ms | Allocations: 775)
+  Rendered layout layouts/admin.html.haml (Duration: 5.2ms | Allocations: 860)
+Completed 500 Internal Server Error in 20ms (ActiveRecord: 1.7ms | Allocations: 4039)
+
+
+  
+ActionView::Template::Error (undefined method `college_book_path' for #<ActionView::Base:0x000000000a5000>):
+    36:                         - else
+    37:                           %span.badge.badge-danger 0
+    38:                       %td.text-right
+    39:                         = link_to raw("<i class='fa fa-eye'></i>"), college_book_path(current_college.slug, book), class: 'btn-sm btn-info px-2 py-1 ml-1', data: { toggle: 'tooltip' }, title: 'View Book Details'
+    40: 
+    41:                         - if can_access?(:books, :edit)
+    42:                           = link_to raw("<i class='fa fa-pencil-square-o'></i>"), edit_college_book_path(current_college.slug, book), class: 'btn-sm btn-warning px-2 py-1 ml-1', data: { toggle: 'tooltip' }, title: 'Edit Book'
+  
+app/views/teachers/books/index.html.haml:39
+app/views/teachers/books/index.html.haml:28
+Started GET "/colleges/whole-freckle/teachers/books" for ::1 at 2025-11-20 13:53:10 +0530
+Processing by Teachers::BooksController#index as HTML
+  Parameters: {"college_slug"=>"whole-freckle"}
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 26], ["LIMIT", 1]]
+  ↳ app/controllers/concerns/user_profile.rb:14:in `set_user_profile'
+  [1m[36mTeacher Load (0.4ms)[0m  [1m[34mSELECT "teachers".* FROM "teachers" WHERE "teachers"."user_id" = $1 LIMIT $2[0m  [["user_id", 26], ["LIMIT", 1]]
+  ↳ app/controllers/concerns/user_profile.rb:20:in `set_user_profile'
+  [1m[36mCollege Load (0.3ms)[0m  [1m[34mSELECT "colleges".* FROM "colleges" WHERE "colleges"."id" = $1 LIMIT $2[0m  [["id", 136], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:10:in `set_current_college'
+  [1m[36mCollege Load (0.6ms)[0m  [1m[34mSELECT "colleges".* FROM "colleges" WHERE "colleges"."slug" = $1 LIMIT $2[0m  [["slug", "whole-freckle"], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:11:in `set_current_college'
+  Rendering layout layouts/admin.html.haml
+  Rendering teachers/books/index.html.haml within layouts/admin
+  [1m[36mBook Load (1.1ms)[0m  [1m[34mSELECT "books".* FROM "books" WHERE "books"."college_id" = $1 ORDER BY "books"."name" ASC[0m  [["college_id", 136]]
+  ↳ app/views/teachers/books/index.html.haml:17
+  Rendered teachers/books/index.html.haml within layouts/admin (Duration: 29.4ms | Allocations: 19699)
+  Rendered layout layouts/admin.html.haml (Duration: 29.8ms | Allocations: 19785)
+Completed 500 Internal Server Error in 144ms (ActiveRecord: 27.4ms | Allocations: 46371)
+
+
+  
+ActionView::Template::Error (undefined method `college_teacher_book_path' for #<ActionView::Base:0x000000000ca670>):
+    42:                           = link_to raw("<i class='fa fa-pencil-square-o'></i>"), edit_college_teachers_book_path(current_college.slug, book), class: 'btn-sm btn-warning px-2 py-1 ml-1', data: { toggle: 'tooltip' }, title: 'Edit Book'
+    43: 
+    44:                         - if can_access?(:books, :destroy)
+    45:                           = link_to raw("<i class='fa fa-trash-o'></i>"), college_teacher_book_path(current_college.slug, book), method: :delete, data: { confirm: 'Are you sure you want to delete this book?' }, class: 'btn-sm btn-danger px-2 py-1 ml-1', title: 'Delete Book'
+    46: 
+    47:                         - if can_access?(:book_issues, :new)
+    48:                           = link_to raw("<i class='fa fa-exchange'></i> Issue Book"), new_college_teacher_book_issue_path(current_college.slug, book_id: book.id), class: 'btn-sm btn-success px-2 py-1 ml-1', title: 'Issue Book'
+  
+app/views/teachers/books/index.html.haml:45
+app/views/teachers/books/index.html.haml:28
+Started GET "/colleges/whole-freckle/teachers/books" for ::1 at 2025-11-20 13:53:23 +0530
+Processing by Teachers::BooksController#index as HTML
+  Parameters: {"college_slug"=>"whole-freckle"}
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 26], ["LIMIT", 1]]
+  ↳ app/controllers/concerns/user_profile.rb:14:in `set_user_profile'
+  [1m[36mTeacher Load (0.4ms)[0m  [1m[34mSELECT "teachers".* FROM "teachers" WHERE "teachers"."user_id" = $1 LIMIT $2[0m  [["user_id", 26], ["LIMIT", 1]]
+  ↳ app/controllers/concerns/user_profile.rb:20:in `set_user_profile'
+  [1m[36mCollege Load (0.4ms)[0m  [1m[34mSELECT "colleges".* FROM "colleges" WHERE "colleges"."id" = $1 LIMIT $2[0m  [["id", 136], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:10:in `set_current_college'
+  [1m[36mCollege Load (0.4ms)[0m  [1m[34mSELECT "colleges".* FROM "colleges" WHERE "colleges"."slug" = $1 LIMIT $2[0m  [["slug", "whole-freckle"], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:11:in `set_current_college'
+  Rendering layout layouts/admin.html.haml
+  Rendering teachers/books/index.html.haml within layouts/admin
+  [1m[36mBook Load (1.1ms)[0m  [1m[34mSELECT "books".* FROM "books" WHERE "books"."college_id" = $1 ORDER BY "books"."name" ASC[0m  [["college_id", 136]]
+  ↳ app/views/teachers/books/index.html.haml:17
+  Rendered teachers/books/index.html.haml within layouts/admin (Duration: 37.0ms | Allocations: 19586)
+  Rendered layouts/admin/_header.html.haml (Duration: 10.2ms | Allocations: 9065)
+  Rendered layouts/admin/_sidebar.html.haml (Duration: 24.5ms | Allocations: 11039)
+  Rendered common/_notification.html.haml (Duration: 9.3ms | Allocations: 2810)
+  Rendered layout layouts/admin.html.haml (Duration: 111.3ms | Allocations: 58530)
+Completed 200 OK in 226ms (Views: 112.5ms | ActiveRecord: 28.0ms | Allocations: 85126)
+
+
+Started GET "/colleges/whole-freckle/teachers/books/1" for ::1 at 2025-11-20 13:53:28 +0530
+Processing by Teachers::BooksController#show as HTML
+  Parameters: {"college_slug"=>"whole-freckle", "slug"=>"1"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 26], ["LIMIT", 1]]
+  ↳ app/controllers/concerns/user_profile.rb:14:in `set_user_profile'
+  [1m[36mTeacher Load (0.5ms)[0m  [1m[34mSELECT "teachers".* FROM "teachers" WHERE "teachers"."user_id" = $1 LIMIT $2[0m  [["user_id", 26], ["LIMIT", 1]]
+  ↳ app/controllers/concerns/user_profile.rb:20:in `set_user_profile'
+Redirected to http://localhost:3001/
+Filter chain halted as :authorize_action! rendered or redirected
+Completed 302 Found in 8ms (ActiveRecord: 0.7ms | Allocations: 1927)
+
+
+Started GET "/" for ::1 at 2025-11-20 13:53:28 +0530
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 26], ["LIMIT", 1]]
+Processing by DashboardController#index as HTML
+  [1m[36mTeacher Load (0.3ms)[0m  [1m[34mSELECT "teachers".* FROM "teachers" WHERE "teachers"."user_id" = $1 LIMIT $2[0m  [["user_id", 26], ["LIMIT", 1]]
+  ↳ app/controllers/concerns/user_profile.rb:20:in `set_user_profile'
+  [1m[36mCollege Load (0.3ms)[0m  [1m[34mSELECT "colleges".* FROM "colleges" WHERE "colleges"."id" = $1 LIMIT $2[0m  [["id", 136], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:10:in `set_current_college'
+  Rendering layout layouts/admin.html.haml
+  Rendering dashboard/index.html.haml within layouts/admin
+  Rendered dashboard/index.html.haml within layouts/admin (Duration: 4.9ms | Allocations: 3753)
+  Rendered layouts/admin/_header.html.haml (Duration: 0.2ms | Allocations: 76)
+  Rendered layouts/admin/_sidebar.html.haml (Duration: 0.8ms | Allocations: 747)
+  Rendered common/_notification.html.haml (Duration: 0.1ms | Allocations: 30)
+  Rendered layout layouts/admin.html.haml (Duration: 7.7ms | Allocations: 5236)
+Completed 200 OK in 21ms (Views: 8.3ms | ActiveRecord: 0.7ms | Allocations: 7055)
+
+
+Started GET "/" for ::1 at 2025-11-20 13:53:58 +0530
+  [1m[36mActiveRecord::SchemaMigration Load (1.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mUser Load (0.8ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 26], ["LIMIT", 1]]
+Processing by DashboardController#index as HTML
+  [1m[36mTeacher Load (0.6ms)[0m  [1m[34mSELECT "teachers".* FROM "teachers" WHERE "teachers"."user_id" = $1 LIMIT $2[0m  [["user_id", 26], ["LIMIT", 1]]
+  ↳ app/controllers/concerns/user_profile.rb:20:in `set_user_profile'
+  [1m[36mCollege Load (0.4ms)[0m  [1m[34mSELECT "colleges".* FROM "colleges" WHERE "colleges"."id" = $1 LIMIT $2[0m  [["id", 136], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:10:in `set_current_college'
+  Rendering layout layouts/admin.html.haml
+  Rendering dashboard/index.html.haml within layouts/admin
+  Rendered dashboard/index.html.haml within layouts/admin (Duration: 17.5ms | Allocations: 9363)
+  Rendered layouts/admin/_header.html.haml (Duration: 10.8ms | Allocations: 9137)
+  Rendered layouts/admin/_sidebar.html.haml (Duration: 12.9ms | Allocations: 11191)
+  Rendered common/_notification.html.haml (Duration: 5.3ms | Allocations: 2887)
+  Rendered layout layouts/admin.html.haml (Duration: 65.2ms | Allocations: 49151)
+Completed 200 OK in 139ms (Views: 71.2ms | ActiveRecord: 12.8ms | Allocations: 69738)
+
+
+Started GET "/colleges/whole-freckle/teachers/exams" for ::1 at 2025-11-20 13:54:01 +0530
+Processing by Teachers::ExamsController#index as HTML
+  Parameters: {"college_slug"=>"whole-freckle"}
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 26], ["LIMIT", 1]]
+  ↳ app/controllers/concerns/user_profile.rb:14:in `set_user_profile'
+  [1m[36mTeacher Load (0.5ms)[0m  [1m[34mSELECT "teachers".* FROM "teachers" WHERE "teachers"."user_id" = $1 LIMIT $2[0m  [["user_id", 26], ["LIMIT", 1]]
+  ↳ app/controllers/concerns/user_profile.rb:20:in `set_user_profile'
+  [1m[36mCollege Load (0.4ms)[0m  [1m[34mSELECT "colleges".* FROM "colleges" WHERE "colleges"."id" = $1 LIMIT $2[0m  [["id", 136], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:10:in `set_current_college'
+  [1m[36mCollege Load (0.4ms)[0m  [1m[34mSELECT "colleges".* FROM "colleges" WHERE "colleges"."slug" = $1 LIMIT $2[0m  [["slug", "whole-freckle"], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:11:in `set_current_college'
+  Rendering layout layouts/admin.html.haml
+  Rendering teachers/exams/index.html.haml within layouts/admin
+  [1m[36mExam Load (5.9ms)[0m  [1m[34mSELECT "exams".* FROM "exams" WHERE "exams"."college_id" = $1 AND "exams"."course_id" = $2 ORDER BY "exams"."scheduled_at" DESC[0m  [["college_id", 136], ["course_id", 1521]]
+  ↳ app/views/teachers/exams/index.html.haml:17
+  [1m[36mCourse Load (2.6ms)[0m  [1m[34mSELECT "courses".* FROM "courses" WHERE "courses"."id" = $1[0m  [["id", 1521]]
+  ↳ app/views/teachers/exams/index.html.haml:17
+  Rendered teachers/exams/index.html.haml within layouts/admin (Duration: 98.5ms | Allocations: 30172)
+  Rendered layouts/admin/_header.html.haml (Duration: 0.3ms | Allocations: 65)
+  Rendered layouts/admin/_sidebar.html.haml (Duration: 2.8ms | Allocations: 743)
+  Rendered common/_notification.html.haml (Duration: 0.1ms | Allocations: 30)
+  Rendered layout layouts/admin.html.haml (Duration: 105.0ms | Allocations: 31631)
+Completed 200 OK in 140ms (Views: 92.7ms | ActiveRecord: 19.3ms | Allocations: 40008)
+
+
+Started GET "/colleges/whole-freckle/teachers/books" for ::1 at 2025-11-20 13:54:01 +0530
+Processing by Teachers::BooksController#index as HTML
+  Parameters: {"college_slug"=>"whole-freckle"}
+  [1m[36mUser Load (0.9ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 26], ["LIMIT", 1]]
+  ↳ app/controllers/concerns/user_profile.rb:14:in `set_user_profile'
+  [1m[36mTeacher Load (0.5ms)[0m  [1m[34mSELECT "teachers".* FROM "teachers" WHERE "teachers"."user_id" = $1 LIMIT $2[0m  [["user_id", 26], ["LIMIT", 1]]
+  ↳ app/controllers/concerns/user_profile.rb:20:in `set_user_profile'
+  [1m[36mCollege Load (0.4ms)[0m  [1m[34mSELECT "colleges".* FROM "colleges" WHERE "colleges"."id" = $1 LIMIT $2[0m  [["id", 136], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:10:in `set_current_college'
+  [1m[36mCollege Load (0.9ms)[0m  [1m[34mSELECT "colleges".* FROM "colleges" WHERE "colleges"."slug" = $1 LIMIT $2[0m  [["slug", "whole-freckle"], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:11:in `set_current_college'
+  Rendering layout layouts/admin.html.haml
+  Rendering teachers/books/index.html.haml within layouts/admin
+  [1m[36mBook Load (0.4ms)[0m  [1m[34mSELECT "books".* FROM "books" WHERE "books"."college_id" = $1 ORDER BY "books"."name" ASC[0m  [["college_id", 136]]
+  ↳ app/views/teachers/books/index.html.haml:17
+  Rendered teachers/books/index.html.haml within layouts/admin (Duration: 44.3ms | Allocations: 21620)
+  Rendered layout layouts/admin.html.haml (Duration: 44.8ms | Allocations: 21705)
+Completed 500 Internal Server Error in 81ms (ActiveRecord: 6.9ms | Allocations: 27436)
+
+
+  
+ActionView::Template::Error (undefined method `new_college_teachers_book_issue_path' for #<ActionView::Base:0x00000000034c88>):
+    44:                         - if can_access?(:books, :destroy)
+    45:                           = link_to raw("<i class='fa fa-trash-o'></i>"), college_teachers_book_path(current_college.slug, book), method: :delete, data: { confirm: 'Are you sure you want to delete this book?' }, class: 'btn-sm btn-danger px-2 py-1 ml-1', title: 'Delete Book'
+    46:                         - if can_access?(:book_issues, :new)
+    47:                           = link_to raw("<i class='fa fa-exchange'></i> Issue Book"), new_college_teachers_book_issue_path(current_college.slug, book_id: book.id), class: 'btn-sm btn-success px-2 py-1 ml-1', title: 'Issue Book'
+    48: 
+    49:           - else
+    50:             %center
+  
+app/views/teachers/books/index.html.haml:47
+app/views/teachers/books/index.html.haml:28
+Started GET "/colleges/whole-freckle/teachers/books" for ::1 at 2025-11-20 13:54:40 +0530
+Processing by Teachers::BooksController#index as HTML
+  Parameters: {"college_slug"=>"whole-freckle"}
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 26], ["LIMIT", 1]]
+  ↳ app/controllers/concerns/user_profile.rb:14:in `set_user_profile'
+  [1m[36mTeacher Load (0.4ms)[0m  [1m[34mSELECT "teachers".* FROM "teachers" WHERE "teachers"."user_id" = $1 LIMIT $2[0m  [["user_id", 26], ["LIMIT", 1]]
+  ↳ app/controllers/concerns/user_profile.rb:20:in `set_user_profile'
+  [1m[36mCollege Load (0.5ms)[0m  [1m[34mSELECT "colleges".* FROM "colleges" WHERE "colleges"."id" = $1 LIMIT $2[0m  [["id", 136], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:10:in `set_current_college'
+  [1m[36mCollege Load (0.5ms)[0m  [1m[34mSELECT "colleges".* FROM "colleges" WHERE "colleges"."slug" = $1 LIMIT $2[0m  [["slug", "whole-freckle"], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:11:in `set_current_college'
+  Rendering layout layouts/admin.html.haml
+  Rendering teachers/books/index.html.haml within layouts/admin
+  [1m[36mBook Load (0.4ms)[0m  [1m[34mSELECT "books".* FROM "books" WHERE "books"."college_id" = $1 ORDER BY "books"."name" ASC[0m  [["college_id", 136]]
+  ↳ app/views/teachers/books/index.html.haml:17
+  Rendered teachers/books/index.html.haml within layouts/admin (Duration: 45.8ms | Allocations: 19740)
+  Rendered layout layouts/admin.html.haml (Duration: 46.2ms | Allocations: 19826)
+Completed 500 Internal Server Error in 136ms (ActiveRecord: 22.4ms | Allocations: 46387)
+
+
+  
+ActionView::Template::Error (undefined method `new_college_teachers_book_issue_path' for #<ActionView::Base:0x0000000005b590>):
+    44:                         - if can_access?(:books, :destroy)
+    45:                           = link_to raw("<i class='fa fa-trash-o'></i>"), college_teachers_book_path(current_college.slug, book), method: :delete, data: { confirm: 'Are you sure you want to delete this book?' }, class: 'btn-sm btn-danger px-2 py-1 ml-1', title: 'Delete Book'
+    46:                         - if can_access?(:book_issues, :new)
+    47:                           = link_to raw("<i class='fa fa-exchange'></i> Issue Book"), new_college_teachers_book_issue_path(current_college.slug, book_id: book.id), class: 'btn-sm btn-success px-2 py-1 ml-1', title: 'Issue Book'
+    48: 
+    49:           - else
+    50:             %center
+  
+app/views/teachers/books/index.html.haml:47
+app/views/teachers/books/index.html.haml:28
+Started GET "/rails/info/routes" for ::1 at 2025-11-20 13:54:50 +0530
+Processing by Rails::InfoController#routes as HTML
+  Rendering layout /usr/local/rvm/gems/ruby-3.2.0/gems/railties-7.1.5.2/lib/rails/templates/layouts/application.html.erb
+  Rendering /usr/local/rvm/gems/ruby-3.2.0/gems/railties-7.1.5.2/lib/rails/templates/rails/info/routes.html.erb within layouts/application
+  Rendered collection of /usr/local/rvm/gems/ruby-3.2.0/gems/actionpack-7.1.5.2/lib/action_dispatch/middleware/templates/routes/_route.html.erb [374 times] (Duration: 253.9ms | Allocations: 110843)
+  Rendered /usr/local/rvm/gems/ruby-3.2.0/gems/actionpack-7.1.5.2/lib/action_dispatch/middleware/templates/routes/_table.html.erb (Duration: 2.6ms | Allocations: 908)
+  Rendered /usr/local/rvm/gems/ruby-3.2.0/gems/railties-7.1.5.2/lib/rails/templates/rails/info/routes.html.erb within layouts/application (Duration: 308.9ms | Allocations: 145420)
+  Rendered layout /usr/local/rvm/gems/ruby-3.2.0/gems/railties-7.1.5.2/lib/rails/templates/layouts/application.html.erb (Duration: 310.3ms | Allocations: 145694)
+Completed 200 OK in 317ms (Views: 314.3ms | ActiveRecord: 0.0ms | Allocations: 146838)
+
+
+Started GET "/colleges/whole-freckle/teachers/books" for ::1 at 2025-11-20 13:55:05 +0530
+Processing by Teachers::BooksController#index as HTML
+  Parameters: {"college_slug"=>"whole-freckle"}
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 26], ["LIMIT", 1]]
+  ↳ app/controllers/concerns/user_profile.rb:14:in `set_user_profile'
+  [1m[36mTeacher Load (0.7ms)[0m  [1m[34mSELECT "teachers".* FROM "teachers" WHERE "teachers"."user_id" = $1 LIMIT $2[0m  [["user_id", 26], ["LIMIT", 1]]
+  ↳ app/controllers/concerns/user_profile.rb:20:in `set_user_profile'
+  [1m[36mCollege Load (0.8ms)[0m  [1m[34mSELECT "colleges".* FROM "colleges" WHERE "colleges"."id" = $1 LIMIT $2[0m  [["id", 136], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:10:in `set_current_college'
+  [1m[36mCollege Load (0.4ms)[0m  [1m[34mSELECT "colleges".* FROM "colleges" WHERE "colleges"."slug" = $1 LIMIT $2[0m  [["slug", "whole-freckle"], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:11:in `set_current_college'
+  Rendering layout layouts/admin.html.haml
+  Rendering teachers/books/index.html.haml within layouts/admin
+  [1m[36mBook Load (0.5ms)[0m  [1m[34mSELECT "books".* FROM "books" WHERE "books"."college_id" = $1 ORDER BY "books"."name" ASC[0m  [["college_id", 136]]
+  ↳ app/views/teachers/books/index.html.haml:17
+  Rendered teachers/books/index.html.haml within layouts/admin (Duration: 107.0ms | Allocations: 19808)
+  Rendered layout layouts/admin.html.haml (Duration: 107.5ms | Allocations: 19894)
+Completed 500 Internal Server Error in 257ms (ActiveRecord: 28.0ms | Allocations: 46436)
+
+
+  
+ActionView::Template::Error (No route matches {:action=>"index", :book_id=>1, :college_slug=>"whole-freckle", :controller=>"teachers/book_issues"}, missing required keys: [:book_slug]):
+    44:                         - if can_access?(:books, :destroy)
+    45:                           = link_to raw("<i class='fa fa-trash-o'></i>"), college_teachers_book_path(current_college.slug, book), method: :delete, data: { confirm: 'Are you sure you want to delete this book?' }, class: 'btn-sm btn-danger px-2 py-1 ml-1', title: 'Delete Book'
+    46:                         - if can_access?(:book_issues, :new)
+    47:                           = link_to raw("<i class='fa fa-exchange'></i> Issue Book"), college_teachers_book_book_issues_path(current_college.slug, book_id: book.id), class: 'btn-sm btn-success px-2 py-1 ml-1', title: 'Issue Book'
+    48: 
+    49:           - else
+    50:             %center
+  
+app/views/teachers/books/index.html.haml:47
+app/views/teachers/books/index.html.haml:28
+Started GET "/colleges/whole-freckle/teachers/books" for ::1 at 2025-11-20 13:55:19 +0530
+Processing by Teachers::BooksController#index as HTML
+  Parameters: {"college_slug"=>"whole-freckle"}
+  [1m[36mUser Load (3.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 26], ["LIMIT", 1]]
+  ↳ app/controllers/concerns/user_profile.rb:14:in `set_user_profile'
+  [1m[36mTeacher Load (0.5ms)[0m  [1m[34mSELECT "teachers".* FROM "teachers" WHERE "teachers"."user_id" = $1 LIMIT $2[0m  [["user_id", 26], ["LIMIT", 1]]
+  ↳ app/controllers/concerns/user_profile.rb:20:in `set_user_profile'
+  [1m[36mCollege Load (0.6ms)[0m  [1m[34mSELECT "colleges".* FROM "colleges" WHERE "colleges"."id" = $1 LIMIT $2[0m  [["id", 136], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:10:in `set_current_college'
+  [1m[36mCollege Load (0.5ms)[0m  [1m[34mSELECT "colleges".* FROM "colleges" WHERE "colleges"."slug" = $1 LIMIT $2[0m  [["slug", "whole-freckle"], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:11:in `set_current_college'
+  Rendering layout layouts/admin.html.haml
+  Rendering teachers/books/index.html.haml within layouts/admin
+  [1m[36mBook Load (0.5ms)[0m  [1m[34mSELECT "books".* FROM "books" WHERE "books"."college_id" = $1 ORDER BY "books"."name" ASC[0m  [["college_id", 136]]
+  ↳ app/views/teachers/books/index.html.haml:17
+  Rendered teachers/books/index.html.haml within layouts/admin (Duration: 35.7ms | Allocations: 19636)
+  Rendered layouts/admin/_header.html.haml (Duration: 19.9ms | Allocations: 9065)
+  Rendered layouts/admin/_sidebar.html.haml (Duration: 17.8ms | Allocations: 11039)
+  Rendered common/_notification.html.haml (Duration: 6.3ms | Allocations: 2810)
+  Rendered layout layouts/admin.html.haml (Duration: 109.6ms | Allocations: 58580)
+Completed 200 OK in 231ms (Views: 129.9ms | ActiveRecord: 34.0ms | Allocations: 85123)
+
+
+Started GET "/colleges/whole-freckle/teachers/books/jia/book_issues" for ::1 at 2025-11-20 13:55:22 +0530
+  
+ActionController::RoutingError (uninitialized constant Teachers::BookIssuesController):
+  
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT pg_try_advisory_lock(8252447801498554185)[0m
+  [1m[36mActiveRecord::SchemaMigration Load (7.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Load (5.9ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "environment"]]
+Migrating to CreateDoorkeeperTables (20260317035947)
+  [1m[36mTRANSACTION (2.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (62.9ms)[0m  [1m[35mCREATE TABLE "oauth_applications" ("id" bigserial primary key, "name" character varying NOT NULL, "uid" character varying NOT NULL, "secret" character varying NOT NULL, "redirect_uri" text NOT NULL, "scopes" character varying DEFAULT '' NOT NULL, "confidential" boolean DEFAULT TRUE NOT NULL, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (7.3ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_oauth_applications_on_uid" ON "oauth_applications" ("uid")[0m
+  [1m[35m (20.3ms)[0m  [1m[35mCREATE TABLE "oauth_access_grants" ("id" bigserial primary key, "resource_owner_id" bigint NOT NULL, "application_id" bigint NOT NULL, "token" character varying NOT NULL, "expires_in" integer NOT NULL, "redirect_uri" text NOT NULL, "scopes" character varying DEFAULT '' NOT NULL, "created_at" timestamp(6) NOT NULL, "revoked_at" timestamp(6))[0m
+  [1m[35m (10.8ms)[0m  [1m[35mCREATE INDEX "index_oauth_access_grants_on_resource_owner_id" ON "oauth_access_grants" ("resource_owner_id")[0m
+  [1m[35m (17.0ms)[0m  [1m[35mCREATE INDEX "index_oauth_access_grants_on_application_id" ON "oauth_access_grants" ("application_id")[0m
+  [1m[35m (12.4ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_oauth_access_grants_on_token" ON "oauth_access_grants" ("token")[0m
+  [1m[35m (7.7ms)[0m  [1m[35mALTER TABLE "oauth_access_grants" ADD CONSTRAINT "fk_rails_b4b53e07b8"
+FOREIGN KEY ("application_id")
+  REFERENCES "oauth_applications" ("id")
+[0m
+  [1m[35m (16.9ms)[0m  [1m[35mCREATE TABLE "oauth_access_tokens" ("id" bigserial primary key, "resource_owner_id" bigint, "application_id" bigint NOT NULL, "token" character varying NOT NULL, "refresh_token" character varying, "expires_in" integer, "scopes" character varying, "created_at" timestamp(6) NOT NULL, "revoked_at" timestamp(6), "previous_refresh_token" character varying DEFAULT '' NOT NULL)[0m
+  [1m[35m (5.0ms)[0m  [1m[35mCREATE INDEX "index_oauth_access_tokens_on_resource_owner_id" ON "oauth_access_tokens" ("resource_owner_id")[0m
+  [1m[35m (10.7ms)[0m  [1m[35mCREATE INDEX "index_oauth_access_tokens_on_application_id" ON "oauth_access_tokens" ("application_id")[0m
+  [1m[35m (10.5ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_oauth_access_tokens_on_token" ON "oauth_access_tokens" ("token")[0m
+  [1m[35m (16.2ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_oauth_access_tokens_on_refresh_token" ON "oauth_access_tokens" ("refresh_token")[0m
+  [1m[35m (2.0ms)[0m  [1m[35mALTER TABLE "oauth_access_tokens" ADD CONSTRAINT "fk_rails_732cb83ab7"
+FOREIGN KEY ("application_id")
+  REFERENCES "oauth_applications" ("id")
+[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.6ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20260317035947') RETURNING "version"[0m
+  [1m[36mTRANSACTION (3.6ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT pg_advisory_unlock(8252447801498554185)[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mDoorkeeper::Application Exists? (2.0ms)[0m  [1m[34mSELECT 1 AS one FROM "oauth_applications" WHERE "oauth_applications"."uid" = $1 LIMIT $2[0m  [["uid", "frontend-app"], ["LIMIT", 1]]
+  [1m[36mDoorkeeper::Application Create (1.1ms)[0m  [1m[32mINSERT INTO "oauth_applications" ("name", "uid", "secret", "redirect_uri", "scopes", "confidential", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["name", "School Management Frontend"], ["uid", "frontend-app"], ["secret", "[FILTERED]"], ["redirect_uri", "http://localhost:3000"], ["scopes", "read write"], ["confidential", true], ["created_at", "2026-03-17 04:12:40.960638"], ["updated_at", "2026-03-17 04:12:40.960638"]]
+  [1m[36mTRANSACTION (23.1ms)[0m  [1m[35mCOMMIT[0m

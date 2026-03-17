@@ -37,6 +37,11 @@ gem 'sprockets', '~> 4.2'
 gem 'activerecord-import'
 gem 'sidekiq'
 
+# API gems
+gem 'rack-cors'
+gem 'jwt'
+gem 'doorkeeper'
+gem 'fast_jsonapi'
 gem 'blamer'
 gem 'csv'
 gem 'paper_trail'
